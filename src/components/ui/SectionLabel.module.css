@@ -1,0 +1,33 @@
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: var(--radius-pill);
+  box-shadow: inset 0 0 0 1.2px var(--color-border);
+  color: var(--color-muted);
+  font-size: var(--fs-small);
+  line-height: 24px;
+  font-variation-settings: var(--fvs-display);
+}
+
+.sparkle {
+  color: var(--color-sparkle);
+  flex-shrink: 0;
+}
+
+.dark {
+  box-shadow: inset 0 0 0 1.2px rgb(255 255 255 / 24%);
+  color: var(--color-on-dark);
+}
+
+/* On cream backgrounds (Training, Benefits, Partners). */
+.warm {
+  box-shadow: inset 0 0 0 1.2px #ddd8d2;
+}
+
+/* Over photography (Video): Paper drops the outline. */
+.plain {
+  box-shadow: none;
+  color: var(--color-border);
+}

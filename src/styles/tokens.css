@@ -1,0 +1,62 @@
+/*
+ * Design tokens. Values come from the Paper file "IFEN Website" (page "Final Home Page")
+ * via get_computed_styles / get_jsx. Names describe role, not hue.
+ */
+:root {
+  /* Brand */
+  --color-ink: #0b3941; /* primary text on light, button label */
+  --color-deep: #072a30; /* utility bar */
+  --color-accent: #ffc18c; /* apricot CTA */
+  --color-sparkle: #cec075; /* section-label sparkle */
+  --color-tint-teal: #94d2bd1f; /* training image wash */
+
+  /* Neutrals */
+  --color-white: #ffffff;
+  --color-cream: #f8f4e3; /* Training, Benefits, Partners */
+  --color-mist: #f9fafb; /* Certification */
+  --color-heading: #4a5565;
+  --color-muted: #6a7282;
+  --color-subtle: #99a1af;
+  --color-on-dark: #d1d5dc;
+  --color-border: #e5e7eb;
+  --color-border-soft: #f3f4f6;
+  --color-overlay: #020618a3; /* hero scrim */
+  --color-overlay-soft: #02061852;
+
+  /* Type */
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  /* Inter Display is Inter's 32pt optical size; Inter text is 14pt. */
+  --fvs-display: "opsz" 32;
+  --fvs-text: "opsz" 14;
+
+  --fs-hero: clamp(2rem, 0.75rem + 5.56vw, 5.75rem); /* 92px at 1440, ~34px at 390 */
+  --lh-hero: 0.957; /* 88/92 */
+  --ls-hero: -0.022em; /* -2px at 92px */
+  --fs-h2: clamp(1.875rem, 1.45rem + 1.25vw, 2.625rem); /* 42px at 1440 */
+  --lh-h2: 1.238; /* 52/42 */
+  --ls-h2: -0.015em;
+  --fs-body: 1rem;
+  --fs-small: 0.875rem;
+  --fs-xs: 0.75rem;
+
+  /* Layout */
+  --content-max: 81rem; /* 1296px */
+  --gutter: clamp(1rem, 5vw, 4.5rem); /* 72px at 1440 */
+  --section-pad: clamp(4rem, 1rem + 7vw, 7rem); /* 112px at 1440 */
+
+  /* Shape */
+  --radius-button: 2px;
+  --radius-pill: 100px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-fast: 180ms;
+  --dur-base: 320ms;
+
+  /* Card hover reveals: decisive start, long controlled settle, no overshoot. */
+  --ease-reveal: cubic-bezier(0.48, 0.002, 0.035, 0.996);
+  --dur-reveal: 250ms;
+
+  /* Focus */
+  --focus-ring: 0 0 0 2px var(--color-white), 0 0 0 4px var(--color-ink);
+}

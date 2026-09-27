@@ -1,0 +1,58 @@
+.cta {
+  --cta-bg: var(--color-accent);
+  --cta-fg: var(--color-ink);
+  display: inline-flex;
+  gap: 4px;
+  font-size: var(--fs-body);
+  line-height: 24px;
+  font-weight: 600;
+  font-variation-settings: var(--fvs-display);
+  color: var(--cta-fg);
+}
+
+.ink {
+  --cta-bg: var(--color-ink);
+  --cta-fg: var(--color-white);
+}
+
+.light {
+  --cta-bg: var(--color-white);
+  --cta-fg: var(--color-ink);
+}
+
+.label,
+.arrow {
+  display: inline-flex;
+  align-items: center;
+  background: var(--cta-bg);
+  border-radius: var(--radius-button);
+  transition: transform var(--dur-fast) var(--ease-out), filter var(--dur-fast) var(--ease-out);
+}
+
+.label {
+  padding: 16px 24px;
+}
+
+.arrow {
+  padding: 16px;
+}
+
+.arrow svg {
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .cta:hover .label,
+  .cta:hover .arrow {
+    filter: brightness(1.04);
+  }
+
+  .cta:hover .arrow svg {
+    transform: translateX(3px);
+  }
+}
+
+.cta:active .label,
+.cta:active .arrow {
+  transform: translateY(1px);
+}

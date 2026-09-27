@@ -1,0 +1,303 @@
+/*
+ * Paper: 1440×1204. Photo (2141×1204, shifted 227px right) under a navy scrim;
+ * CTA block from y 220; cream footer card 1296 wide from y 710 to the bottom.
+ */
+.stage {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  background: var(--color-deep);
+}
+
+/* 40px taller than the stage for the parallax travel. */
+.bg {
+  position: absolute;
+  inset: -40px 0;
+  z-index: -2;
+}
+
+/* Paper's crop starts 17% into the photo's spare width, keeping the practitioner in view. */
+.bgImage {
+  object-fit: cover;
+  object-position: 17% 50%;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--color-overlay);
+}
+
+/* ---------- CTA ---------- */
+
+.cta {
+  padding-inline: var(--gutter);
+  padding-block: clamp(6rem, 15.3vw, 13.75rem); /* 220 above, ~218 below at 1440 */
+}
+
+.ctaInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+/* 24px between heading and button in Paper (16px flex gap + 8). */
+.ctaInner > :last-child {
+  margin-top: 8px;
+}
+
+/* Paper: 52/64 bold, -1.5%, #F9FAFB. */
+.cta .heading {
+  font-size: clamp(2rem, 0.9rem + 2.6vw, 3.25rem);
+  line-height: 1.231;
+  font-weight: 700;
+  color: var(--color-mist);
+}
+
+.line {
+  display: block;
+}
+
+/* ---------- Footer card ---------- */
+
+.footer {
+  position: relative;
+  overflow: clip;
+  width: min(100% - 2 * var(--gutter), var(--content-max));
+  margin-inline: auto;
+  padding: clamp(3rem, 5.56vw, 5rem) clamp(1.25rem, 5vw, 4.5rem) clamp(2.5rem, 4.44vw, 4rem);
+  border-radius: 4px 4px 0 0;
+  background: var(--color-cream);
+  color: var(--color-ink);
+}
+
+/* Paper's dotted brain, 400px, hanging off the top-right corner. */
+.brain {
+  position: absolute;
+  top: -218px;
+  right: -128px;
+  width: 25rem;
+  aspect-ratio: 1;
+  background: #f3edd2;
+  mask: url("/svg/dotted-brain.svg") center / contain no-repeat;
+  pointer-events: none;
+}
+
+.top {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.brand {
+  flex: 0 1 18.25rem; /* 292px */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 24px;
+}
+
+.logo {
+  display: block;
+}
+
+.logo img {
+  width: 124px;
+  height: 47px;
+}
+
+.blurb {
+  font-size: var(--fs-small);
+  line-height: 18px;
+  font-variation-settings: var(--fvs-display);
+  color: var(--color-muted);
+}
+
+.badges {
+  display: flex;
+  gap: 16px;
+}
+
+.badge {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+}
+
+/* ---------- Link columns ---------- */
+
+.columns {
+  display: flex;
+  gap: 32px;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Paper: 16/20 bold caps, 1.5px tracking, teal 24px rule 8px below. */
+.title {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: var(--fs-body);
+  line-height: 20px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-variation-settings: var(--fvs-display);
+  color: var(--color-ink);
+}
+
+.title::after {
+  content: "";
+  width: 24px;
+  height: 1px;
+  background: #0f9fa9;
+}
+
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.links > li {
+  display: flex;
+}
+
+.link {
+  font-size: var(--fs-small);
+  line-height: 18px;
+  font-variation-settings: var(--fvs-display);
+  color: var(--color-muted);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 3px;
+  transition:
+    color var(--dur-fast) var(--ease-out),
+    text-decoration-color var(--dur-fast) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .link:hover {
+    color: var(--color-ink);
+    text-decoration-color: currentColor;
+  }
+}
+
+/* ---------- Bottom bar ---------- */
+
+.bottom {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px 24px;
+  margin-top: 52px;
+  padding-top: 24px;
+  border-top: 1px solid #ddd8d2;
+}
+
+.copyright {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--fs-small);
+  line-height: 1.2;
+  font-variation-settings: var(--fvs-display);
+  color: var(--color-muted);
+}
+
+.copyIcon {
+  width: 16px;
+  height: 16px;
+  padding: 1.6px;
+}
+
+.socials {
+  display: flex;
+  gap: 20px;
+}
+
+.social {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 2px;
+  color: var(--color-ink);
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .social:hover {
+    background: #0b394110;
+  }
+}
+
+/* ---------- Below 1200: brand block above the columns ---------- */
+
+@media (max-width: 74.99rem) {
+  .top {
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .brand {
+    flex: none;
+    max-width: 26rem;
+  }
+
+  .nav {
+    width: 100%;
+  }
+
+  .columns {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 40px 32px;
+  }
+}
+
+/* Four across only fits from ~1024; 2×2 below avoids a lone orphan column. */
+@media (max-width: 63.99rem) {
+  .columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 47.99rem) {
+  .columns {
+    gap: 40px 20px;
+  }
+
+  .column {
+    gap: 24px;
+  }
+
+  .title {
+    font-size: var(--fs-small);
+    letter-spacing: 1.2px;
+  }
+
+  .links {
+    gap: 14px;
+  }
+
+  .bottom {
+    margin-top: 40px;
+  }
+
+  .brain {
+    width: 16rem;
+    top: -120px;
+    right: -100px;
+  }
+}

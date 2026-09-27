@@ -1,0 +1,233 @@
+/* Paper: cream, 112/72 padding, 416px intro beside an 856px grid (3 × 272, 20px gaps). */
+.partners {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  background: var(--color-cream);
+  padding-block: var(--section-pad);
+}
+
+/* Paper's network graphic, 384px wide, off the top-right and bottom-left corners. */
+.network {
+  position: absolute;
+  z-index: -1;
+  width: 24rem; /* 384px */
+  aspect-ratio: 383.76 / 328.24;
+  background: #f3edd2;
+  mask: url("/svg/partners-network.svg") center / contain no-repeat;
+  pointer-events: none;
+}
+
+.networkTop {
+  left: calc(50% + 456px);
+  top: -161px;
+}
+
+.networkBottom {
+  right: calc(50% + 549px);
+  top: 617px;
+}
+
+.inner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px; /* the 1296 − 416 − 856 left over in Paper */
+}
+
+/* ---------- Intro ---------- */
+
+.intro {
+  flex: 0 1 26rem; /* 416px */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 32px;
+}
+
+.line {
+  display: block;
+}
+
+/* Paper: 14/18 muted, 16px under the heading (32px flex gap minus 16). */
+.text {
+  margin-top: -16px;
+  font-size: 0.875rem;
+  line-height: 18px;
+  letter-spacing: -0.015em;
+  color: var(--color-muted);
+}
+
+/* ---------- Grid ---------- */
+
+/* Flex rather than grid so a short last row centres, as in Paper. */
+.grid {
+  flex: 0 1 53.5rem; /* 856px */
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.item {
+  --cols: 3;
+  flex: 0 0 calc((100% - (var(--cols) - 1) * 20px) / var(--cols));
+  display: flex;
+}
+
+.card {
+  --ease-hover: cubic-bezier(0.48, 0.002, 0.035, 0.996);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  min-height: 12rem; /* 192px */
+  padding: 16px;
+  border: 1px solid #ddd8d2;
+  border-radius: 4px;
+  background: var(--color-white);
+  box-shadow:
+    0 1px 2px #00000008,
+    0 1px 3px #0000000a;
+  transition:
+    border-color 0.25s var(--ease-hover),
+    box-shadow 0.25s var(--ease-hover);
+}
+
+.logo {
+  position: relative;
+  flex-shrink: 0;
+  width: 72px; /* Paper's 92×68 slot includes each export's own padding */
+  height: 54px;
+}
+
+.logoImage {
+  object-fit: contain;
+}
+
+/* Paper: 18/22 medium, centred. */
+.name {
+  max-width: 15rem;
+  font-size: clamp(0.9375rem, 0.85rem + 0.3vw, 1.125rem);
+  line-height: 1.22;
+  font-weight: 500;
+  font-variation-settings: var(--fvs-display);
+  text-align: center;
+  text-wrap: balance;
+  color: var(--color-ink);
+}
+
+/* Arrow tab, top-right. Hidden below its slot, lifts in on hover (Board timing). */
+.arrow {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: grid;
+  place-items: center;
+  padding: 8px;
+  border-radius: var(--radius-button);
+  background: var(--color-accent);
+  color: var(--color-ink);
+  opacity: 0;
+  translate: 0 8px;
+  transition:
+    opacity 0.25s var(--ease-hover),
+    translate 0.25s var(--ease-hover);
+}
+
+.arrow svg {
+  width: 16px;
+  height: 16px;
+}
+
+@media (hover: hover) {
+  .card:hover {
+    border-color: #c9c2b9;
+    box-shadow:
+      0 2px 4px #0000000a,
+      0 8px 24px #0b39410f;
+  }
+
+  .card:hover .arrow {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+.card:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.card:focus-visible .arrow {
+  opacity: 1;
+  translate: 0 0;
+}
+
+/* ---------- Below 1200: stack, so the grid keeps three roomy columns ---------- */
+
+@media (max-width: 74.99rem) {
+  .inner {
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .intro,
+  .grid {
+    flex: none;
+    width: 100%;
+  }
+
+  .intro {
+    max-width: 36rem;
+  }
+
+  .networkTop {
+    left: auto;
+    right: -180px;
+  }
+
+  .networkBottom {
+    right: auto;
+    left: -200px;
+    top: auto;
+    bottom: -120px;
+  }
+}
+
+@media (max-width: 47.99rem) {
+  /* 8 cards in 2 columns leave no short row, so a grid can give every row one height. */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-auto-rows: 1fr;
+    gap: 12px;
+  }
+
+  .card {
+    min-height: 10.5rem;
+    padding: 12px;
+    gap: 12px;
+  }
+
+  .logo {
+    width: 60px;
+    height: 46px;
+  }
+
+  .arrow {
+    top: 8px;
+    right: 8px;
+    padding: 6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .arrow {
+    translate: 0 0;
+  }
+}

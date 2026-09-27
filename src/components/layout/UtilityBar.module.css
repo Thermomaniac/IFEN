@@ -1,0 +1,115 @@
+.bar {
+  background: var(--color-deep);
+  color: var(--color-subtle);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 34px;
+  padding: 8px clamp(1rem, 4.44vw, 4rem);
+}
+
+.contact {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: var(--fs-xs);
+  line-height: 16px;
+}
+
+.contactLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color var(--dur-fast);
+}
+
+.contactLink svg {
+  flex-shrink: 0;
+}
+
+.contact > li,
+.langs > li {
+  display: flex;
+}
+
+.divider {
+  width: 1px;
+  height: 15px;
+  background: rgb(255 255 255 / 32%);
+}
+
+.langs {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: var(--fs-small);
+  line-height: 18px;
+}
+
+.lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color var(--dur-fast);
+}
+
+.langActive {
+  color: var(--color-white);
+}
+
+.flag {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+@media (hover: hover) {
+  .contactLink:hover,
+  .lang:hover {
+    color: var(--color-white);
+  }
+}
+
+.bar :focus-visible {
+  box-shadow: 0 0 0 2px var(--color-accent);
+}
+
+/* Phones: keep the icons tappable, drop the long email text. */
+@media (max-width: 47.99rem) {
+  .email {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  .langs {
+    gap: 10px;
+  }
+}
+
+@media (max-width: 26rem) {
+  .contact {
+    gap: 10px;
+  }
+
+  .contactLink span {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  /* Icon-only here: pad the hit area to 32px without moving anything. */
+  .contactLink {
+    padding: 9px;
+    margin: -9px;
+  }
+}

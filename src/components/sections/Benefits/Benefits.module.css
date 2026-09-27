@@ -1,0 +1,229 @@
+.benefits {
+  background: var(--color-cream);
+  padding-block: var(--section-pad);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(4rem, 11.4vw, 10.25rem); /* 164px at 1440 */
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+/* Paper breaks after "Also"; greedy wrap at 60rem reproduces it, balance does not. */
+.header .heading {
+  max-width: 60rem;
+  text-wrap: pretty;
+}
+
+/* Paper: 746px list + 526×556 card, space-between, vertically centred. */
+.body {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+}
+
+.list {
+  flex: 0 1 46.625rem; /* 746px */
+  min-width: 0;
+}
+
+/* ---------- Accordion row ---------- */
+
+.row {
+  --slot: 64px; /* icon slot; text column starts at slot + 16px */
+  background: var(--color-cream);
+  border-bottom: 1px solid #ddd8d2;
+  padding: 24px 24px 32px;
+  transition: background-color var(--dur-base) var(--ease-reveal);
+}
+
+.row[data-open="true"] {
+  background: var(--color-white);
+}
+
+.title {
+  font-size: clamp(1.5rem, 1.1rem + 1.1vw, 2rem); /* 32px at 1440 */
+  line-height: 1.25;
+  font-weight: 500;
+  font-variation-settings: var(--fvs-display);
+  text-transform: uppercase;
+  color: var(--color-ink);
+}
+
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  text-align: start;
+  font: inherit;
+  color: inherit;
+  text-transform: inherit;
+  letter-spacing: inherit;
+  border-radius: var(--radius-button);
+  cursor: pointer;
+}
+
+.trigger:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.icon {
+  flex-shrink: 0;
+  width: var(--slot);
+  height: var(--slot);
+  padding: calc(var(--slot) * 0.109); /* 50px glyph inside the 64px slot */
+}
+
+/* The cross turns into the open-state ×; the circle stays put. */
+.icon path:last-child {
+  transform-box: fill-box;
+  transform-origin: center;
+  transition: rotate var(--dur-base) var(--ease-reveal);
+}
+
+.row[data-open="true"] .icon path:last-child {
+  rotate: 45deg;
+}
+
+/* Height animates through grid rows, so no JS measuring and no fixed max-height. */
+.panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--dur-base) var(--ease-reveal);
+}
+
+.row[data-open="true"] .panel {
+  grid-template-rows: 1fr;
+}
+
+.panelInner {
+  min-height: 0;
+  overflow: clip;
+}
+
+/* 24px gap under the title + 10px extra bottom space on the open row (Paper: 42 vs 32). */
+.text {
+  max-width: calc(27rem + var(--slot) + 16px);
+  padding: 24px 0 10px calc(var(--slot) + 16px);
+  font-size: var(--fs-body);
+  line-height: 1.25;
+  color: var(--color-heading);
+  opacity: 0;
+  translate: 0 -6px;
+  transition:
+    opacity var(--dur-base) var(--ease-reveal),
+    translate var(--dur-base) var(--ease-reveal);
+}
+
+.row[data-open="true"] .text {
+  opacity: 1;
+  translate: 0 0;
+}
+
+@media (hover: hover) {
+  .row:not([data-open="true"]):hover {
+    background: color-mix(in srgb, var(--color-white) 45%, var(--color-cream));
+  }
+}
+
+/* ---------- Arrow card ---------- */
+
+.cardWrap {
+  flex: 0 1 32.875rem; /* 526px */
+  min-width: 0;
+}
+
+.card {
+  width: 100%;
+}
+
+.cardInner {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 526 / 556;
+  overflow: clip;
+  border-radius: 4px;
+  background: var(--color-ink);
+}
+
+/* Paper: 300px brain at -182/-124 and 400px brain at 310/372 inside the 526×556 card. */
+.brain {
+  position: absolute;
+  aspect-ratio: 1;
+  background: #0b4750;
+  mask: url("/svg/dotted-brain.svg") center / contain no-repeat;
+  pointer-events: none;
+}
+
+.brainTop {
+  width: 57%;
+  left: -34.6%;
+  top: -22.3%;
+}
+
+.brainBottom {
+  width: 76%;
+  left: 58.9%;
+  top: 66.9%;
+}
+
+.arrow {
+  position: relative;
+  width: 50.2%; /* 264px */
+  height: auto;
+}
+
+/* ---------- Tablet and below: stack ---------- */
+
+@media (max-width: 63.99rem) {
+  .body {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 40px;
+  }
+
+  .list,
+  .cardWrap {
+    flex: none;
+  }
+
+  .cardInner {
+    aspect-ratio: 16 / 10;
+  }
+
+  .arrow {
+    width: min(34%, 264px);
+  }
+}
+
+@media (max-width: 47.99rem) {
+  .row {
+    --slot: 48px;
+    padding: 20px 16px 24px;
+  }
+
+  .text {
+    padding-top: 16px;
+  }
+
+  .cardInner {
+    aspect-ratio: 1;
+  }
+
+  .arrow {
+    width: 50%;
+  }
+}

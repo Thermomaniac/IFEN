@@ -1,0 +1,195 @@
+.training {
+  --brain-w: clamp(20rem, 41.667vw, 37.5rem); /* 600px at 1440 */
+  position: relative;
+  overflow: clip;
+  background: var(--color-cream);
+  padding-block: var(--section-pad);
+}
+
+/* Paper: 600×600 dotted brain at x 1187 / y 1244, mostly clipped by the section's bottom-right corner. */
+.brain {
+  position: absolute;
+  right: calc(var(--brain-w) * -0.578);
+  bottom: calc(var(--brain-w) * -0.373);
+  width: var(--brain-w);
+  aspect-ratio: 1;
+  background: #f3edd2;
+  mask: url("/svg/dotted-brain.svg") center / contain no-repeat;
+  pointer-events: none;
+}
+
+.inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(4rem, 11.4vw, 10.25rem);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.lower {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(3rem, 5.7vw, 5.125rem);
+  width: 100%;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 30rem));
+  column-gap: 24px;
+  row-gap: clamp(2.5rem, 4.3vw, 3.875rem);
+  width: 100%;
+  justify-content: center;
+}
+
+/* Card geometry is in % of card width so the overlap scales (Paper card 480 wide). */
+.card {
+  container-type: inline-size;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  transition: translate var(--dur-reveal) var(--ease-reveal);
+}
+
+.media {
+  position: relative;
+  z-index: 1;
+  width: 67.5%;
+  margin-left: 16.25%;
+  aspect-ratio: 324 / 298;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--color-tint-teal);
+}
+
+.photo {
+  object-fit: cover;
+  transition: scale var(--dur-reveal) var(--ease-reveal);
+}
+
+.panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 16px;
+  aspect-ratio: 480 / 264;
+  margin-top: -23.333%;
+  padding: 24px;
+  /* Reserve the photo overlap (112/480) so the text never slides under it; aspect-ratio then acts as a minimum. */
+  padding-top: calc(23.333cqi + 16px);
+  border-radius: 4px;
+  background: var(--color-ink);
+  box-shadow: 0 2px 8px #1f0f110f;
+  transition: box-shadow var(--dur-reveal) var(--ease-reveal);
+}
+
+.title {
+  max-width: 27rem;
+  padding-right: 3rem;
+  color: var(--color-white);
+  font-size: clamp(1.25rem, 1rem + 0.6vw, 1.5rem);
+  line-height: 1.25;
+  letter-spacing: -0.5px;
+  font-weight: 400;
+}
+
+/* Stretched link covers the whole card: the panel is the containing block, so reach up over the photo (186/480 of card width). */
+.link::after {
+  content: "";
+  position: absolute;
+  inset: -38.75cqi 0 0;
+  z-index: 2;
+  border-radius: 4px;
+}
+
+.link:focus-visible {
+  box-shadow: none;
+}
+
+.link:focus-visible::after {
+  box-shadow: var(--focus-ring);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  color: var(--color-subtle);
+  font-size: 13px;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.meta li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.arrow {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  padding: 16px;
+  border-radius: var(--radius-button);
+  background: rgb(255 255 255 / 10%);
+  color: var(--color-white);
+  transition: background-color var(--dur-fast) var(--ease-reveal), color var(--dur-fast) var(--ease-reveal);
+}
+
+@media (hover: hover) {
+  .card:hover {
+    translate: 0 -4px;
+  }
+
+  .card:hover .panel {
+    box-shadow: 0 12px 28px #0b394126;
+  }
+
+  .card:hover .photo {
+    scale: 1.04;
+  }
+
+  .card:hover .arrow {
+    background: var(--color-accent);
+    color: var(--color-ink);
+  }
+}
+
+.card:focus-within .arrow {
+  background: var(--color-accent);
+  color: var(--color-ink);
+}
+
+@media (max-width: 47.99rem) {
+  .grid {
+    grid-template-columns: minmax(0, 30rem);
+  }
+}
+
+@media (max-width: 23.99rem) {
+  .panel {
+    padding: calc(23.333cqi + 16px) 16px 16px;
+  }
+
+  .arrow {
+    padding: 12px;
+  }
+}

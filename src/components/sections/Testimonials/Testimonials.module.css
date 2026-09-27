@@ -1,0 +1,282 @@
+/* Paper: white, 112 top / 164 bottom, header 164px above a full-bleed 640px card field. */
+.testimonials {
+  overflow: clip;
+  background: var(--color-white);
+  padding-block: var(--section-pad) clamp(5rem, 11.4vw, 10.25rem);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.line {
+  display: block;
+}
+
+/* ---------- Marquee ---------- */
+
+.marquee {
+  --card-w: 20rem; /* 320px */
+  --gap: 20px;
+  --dur: calc(var(--n) * 9s); /* ~38px/s at desktop size */
+  position: relative;
+  margin-top: clamp(4rem, 11.4vw, 10.25rem); /* 164px at 1440 */
+}
+
+/*
+ * Cursor spotlight: one white wash over the whole field, clear around the
+ * pointer (--spot-x/--spot-y, set on pointermove) and fading in on hover.
+ */
+.field {
+  --spot-x: 50%;
+  --spot-y: 50%;
+  position: relative;
+}
+
+.field::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: radial-gradient(
+    30rem circle at var(--spot-x) var(--spot-y),
+    rgb(255 255 255 / 0%) 11rem,
+    rgb(255 255 255 / 62%) 100%
+  );
+  opacity: 0;
+  transition: opacity 450ms var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .field:hover::after {
+    opacity: 1;
+  }
+}
+
+/*
+ * Paper fades the outer ~400px into the white ground on both sides. The
+ * padding gives hovered cards room to lift without the mask cutting them.
+ */
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  padding-block: 16px;
+  margin-block: -16px;
+  overflow-x: clip;
+  mask-image: linear-gradient(90deg, transparent 6%, #000 27%, #000 73%, transparent 94%);
+}
+
+.track {
+  display: flex;
+  width: max-content;
+  animation: drift var(--dur) linear infinite;
+  animation-play-state: paused;
+}
+
+.marquee[data-running="true"] .track {
+  animation-play-state: running;
+}
+
+/*
+ * Middle row sits half a card over, as in Paper. All rows share direction and
+ * speed on purpose: the rotations stay 4 cards apart, so no quote repeats in
+ * the unfaded middle band (opposite directions made rows collide there).
+ */
+.row:nth-child(2) .track {
+  animation-delay: calc(var(--dur) * -0.5 / var(--n));
+}
+
+/* Each copy is exactly n × (card + gap), so −50% lands on the seam. */
+@keyframes drift {
+  to {
+    translate: -50% 0;
+  }
+}
+
+.item {
+  display: flex;
+  flex-shrink: 0;
+  width: var(--card-w);
+  margin-inline-end: var(--gap);
+}
+
+/* ---------- Card ---------- */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  width: 100%;
+  min-height: 12.5rem; /* 200px */
+  padding: 24px;
+  border-radius: 4px;
+  background: var(--color-white);
+  box-shadow:
+    inset 0 0 0 1px var(--color-border),
+    0 8px 8px #1f0f1108;
+  transition:
+    translate var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+
+/* Hover: a small lift and a deeper shadow, no scaling. */
+@media (hover: hover) and (pointer: fine) {
+  .card:hover {
+    translate: 0 -4px;
+    box-shadow:
+      inset 0 0 0 1px #d1d5dc,
+      0 14px 24px -6px #0b39411f;
+  }
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: #f1ecd7;
+  color: var(--color-ink);
+  font-size: 0.75rem;
+  line-height: 16px;
+  font-weight: 500;
+  font-variation-settings: var(--fvs-display);
+}
+
+.who {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.name {
+  font-size: 1rem;
+  line-height: 16px;
+  font-weight: 500;
+  font-variation-settings: var(--fvs-display);
+  color: var(--color-ink);
+}
+
+.role {
+  font-size: 0.75rem;
+  line-height: 16px;
+  color: var(--color-subtle);
+}
+
+.quote {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 20px;
+  color: var(--color-muted);
+}
+
+/* ---------- Pause control (WCAG 2.2.2), in the bottom padding so height matches Paper ---------- */
+
+.toggle {
+  position: absolute;
+  top: calc(100% + 24px);
+  right: var(--gutter);
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-white);
+  box-shadow: inset 0 0 0 1px var(--color-border);
+  color: var(--color-ink);
+  transition: box-shadow var(--dur-fast) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .toggle:hover {
+    box-shadow: inset 0 0 0 1px var(--color-subtle);
+  }
+}
+
+.toggle:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 47.99rem) {
+  .marquee {
+    --card-w: 17rem; /* 272px */
+    --gap: 12px;
+  }
+
+  .rows {
+    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  }
+
+  .card {
+    padding: 20px;
+    gap: 20px;
+  }
+
+  .quote {
+    font-size: 0.9375rem;
+  }
+}
+
+/* ---------- Reduced motion: still rows the visitor can swipe ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  .rows {
+    mask-image: none;
+    overflow-x: visible;
+  }
+
+  .row {
+    overflow-x: auto;
+    scrollbar-width: none;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--gutter);
+  }
+
+  .track {
+    animation: none;
+    padding-inline: var(--gutter);
+  }
+
+  .item {
+    scroll-snap-align: start;
+  }
+
+  .copy {
+    display: none;
+  }
+
+  .toggle {
+    display: none;
+  }
+
+  /* No spotlight or lift; the shadow change alone marks the hovered card. */
+  .field::after {
+    display: none;
+  }
+
+  .card {
+    transition: box-shadow var(--dur-base) var(--ease-out);
+  }
+
+  .card:hover {
+    translate: none;
+  }
+}

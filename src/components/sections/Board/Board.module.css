@@ -1,0 +1,358 @@
+.board {
+  --brain-w: clamp(20rem, 41.667vw, 37.5rem); /* 600px at 1440 */
+  position: relative;
+  overflow: clip;
+  background: var(--color-white);
+  padding-block: var(--section-pad);
+}
+
+/* Paper: 600×600 dotted brain at x -352 / y -332, only its bottom-right corner shows. */
+.brain {
+  position: absolute;
+  left: calc(var(--brain-w) * -0.587);
+  top: calc(var(--brain-w) * -0.553);
+  width: var(--brain-w);
+  aspect-ratio: 1;
+  background: var(--color-border-soft);
+  mask: url("/svg/dotted-brain.svg") center / contain no-repeat;
+  pointer-events: none;
+}
+
+.inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(4rem, 11.4vw, 10.25rem);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.heading {
+  max-width: 44rem;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  width: 100%;
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rule {
+  flex: 1;
+  height: 1px;
+  margin-right: 22px;
+  background: repeating-linear-gradient(90deg, #d1d5db 0 6px, transparent 6px 12px);
+}
+
+.nav {
+  display: flex;
+  padding: 16px;
+  border-radius: var(--radius-button);
+  background: var(--color-ink);
+  color: var(--color-white);
+  transition: background-color var(--dur-fast) var(--ease-out), color var(--dur-fast) var(--ease-out);
+}
+
+.nav:disabled {
+  background: var(--color-border-soft);
+  color: var(--color-subtle);
+  cursor: default;
+}
+
+@media (hover: hover) {
+  .nav:not(:disabled):hover {
+    background: var(--color-deep);
+  }
+}
+
+/* Clips the track; its width is the unit every card size is derived from. */
+.viewport {
+  container-type: inline-size;
+  overflow: clip;
+}
+
+/*
+ * Desktop: three cards in view at Paper proportions (1296 row: 562×624 featured,
+ * 343×412 collapsed). Cards before the featured one are always collapsed, so the
+ * track offset is a whole number of collapsed cards. Sizes only change when the
+ * arrows move the track, never on hover.
+ */
+.list {
+  --gap: 24px;
+  --unit: calc((100cqi - 2 * var(--gap)) / 1248);
+  --card-w: calc(var(--unit) * 343);
+  --dur-slide: 500ms;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--gap);
+  translate: calc(var(--start) * (var(--card-w) + var(--gap)) * -1) 0;
+  transition: translate var(--dur-slide) var(--ease-reveal);
+}
+
+.card {
+  position: relative;
+  flex: none;
+  width: var(--card-w);
+  height: calc(var(--unit) * 412);
+  overflow: clip;
+  border-radius: 4px;
+  background: #edf5c4;
+  transition:
+    width var(--dur-slide) var(--ease-reveal),
+    height var(--dur-slide) var(--ease-reveal);
+}
+
+.card[data-featured="true"] {
+  width: calc(var(--unit) * 562);
+  height: calc(var(--unit) * 624);
+}
+
+.media {
+  position: absolute;
+  inset: 0;
+  overflow: clip;
+}
+
+.photo {
+  object-fit: cover;
+  object-position: 50% 30%;
+  transition: scale var(--dur-reveal) var(--ease-reveal);
+}
+
+/*
+ * Brief reveal, transform only. .clip is a fixed box inset 16px from the card edges.
+ * .slide is exactly the brief's height and rests at translateY(100%), i.e. fully
+ * below the clip edge; the name bar hangs above it (bottom: 100%), so at rest only
+ * the name shows, 16px off the card bottom. Revealing moves the slide to 0: the
+ * brief rises out of the photo and pushes the name bar up with it.
+ */
+.clip {
+  position: absolute;
+  inset: 16px;
+  overflow: clip;
+}
+
+.slide {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  translate: 0 100%;
+  transition: translate var(--dur-reveal) var(--ease-reveal);
+}
+
+.card[data-featured="true"] .slide,
+.card:focus-within .slide {
+  translate: 0 0;
+}
+
+.name {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  padding: 16px;
+  background: var(--color-white);
+  color: var(--color-ink);
+  font-size: 1.25rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  font-weight: 500;
+  font-variation-settings: var(--fvs-display);
+}
+
+.card[data-featured="true"] .name {
+  font-size: clamp(1.5rem, 0.9rem + 1.4vw, 2rem);
+  line-height: 1.25;
+}
+
+.role {
+  display: none;
+}
+
+.card[data-featured="true"] .role {
+  display: inline;
+}
+
+.brief {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 16px 16px;
+  background: var(--color-white);
+}
+
+/* Paper: 72px between the featured name and its bio (name bar already pads 16). */
+.card[data-featured="true"] .brief {
+  padding-top: calc(clamp(1.5rem, 11.54vw - 5.875rem, 4.5rem) - 16px);
+}
+
+.bio {
+  max-width: 23.875rem;
+  color: var(--color-muted);
+  font-size: var(--fs-body);
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  font-variation-settings: var(--fvs-display);
+}
+
+/* Collapsed cards are narrow: keep their brief to three lines so it never outgrows the card. */
+.card:not([data-featured="true"]) .bio {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  font-size: var(--fs-small);
+  line-height: 1.35;
+}
+
+.link {
+  display: flex;
+  flex-shrink: 0;
+  padding: 16px;
+  border-radius: var(--radius-button);
+  background: var(--color-accent);
+  color: var(--color-ink);
+  transition:
+    background-color 200ms var(--ease-reveal),
+    color 200ms var(--ease-reveal);
+}
+
+.link svg {
+  transition: translate 200ms var(--ease-reveal);
+}
+
+.card:focus-within .photo {
+  scale: 1.05;
+}
+
+.link:focus-visible {
+  background: var(--color-ink);
+  color: var(--color-accent);
+}
+
+@media (hover: hover) {
+  .card:hover .slide {
+    translate: 0 0;
+  }
+
+  .card:hover .photo {
+    scale: 1.05;
+  }
+
+  .card:hover .link {
+    background: var(--color-ink);
+    color: var(--color-accent);
+  }
+
+  .card:hover .link svg {
+    translate: 3px 0;
+  }
+}
+
+/*
+ * Below 1024 there is no hover to lean on: every card stacks photo over text
+ * with its brief always shown, two per view on tablet and one on mobile.
+ */
+@media (max-width: 63.99rem) {
+  .list {
+    --gap: 16px;
+    --per-view: 2;
+    --card-w: calc((100cqi - (var(--per-view) - 1) * var(--gap)) / var(--per-view));
+    align-items: stretch;
+  }
+
+  .card,
+  .card[data-featured="true"] {
+    display: flex;
+    flex-direction: column;
+    width: var(--card-w);
+    height: auto;
+    background: var(--color-white);
+    border: 1px solid var(--color-border-soft);
+  }
+
+  .media {
+    position: relative;
+    inset: auto;
+    aspect-ratio: 343 / 360;
+    background: #edf5c4;
+  }
+
+  .clip,
+  .slide {
+    position: static;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    overflow: visible;
+  }
+
+  .slide,
+  .card[data-featured="true"] .slide {
+    translate: none;
+    transition: none;
+  }
+
+  .name,
+  .card[data-featured="true"] .name {
+    position: static;
+    padding: 20px 16px 0;
+    font-size: 1.375rem;
+    line-height: 1.25;
+  }
+
+  .role,
+  .card[data-featured="true"] .role {
+    display: block;
+    margin-top: 4px;
+    color: var(--color-muted);
+    font-size: var(--fs-small);
+    font-weight: 400;
+    letter-spacing: 0;
+  }
+
+  .sep {
+    display: none;
+  }
+
+  .brief,
+  .card[data-featured="true"] .brief {
+    flex: 1;
+    align-items: flex-end;
+    padding: 16px;
+  }
+
+  .bio,
+  .card:not([data-featured="true"]) .bio {
+    display: block;
+    overflow: visible;
+    font-size: var(--fs-small);
+    line-height: 1.4;
+  }
+
+  .link {
+    padding: 12px;
+  }
+}
+
+@media (max-width: 47.99rem) {
+  .list {
+    --per-view: 1;
+  }
+}

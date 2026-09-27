@@ -1,0 +1,21 @@
+.heading {
+  font-size: var(--fs-h2);
+  line-height: var(--lh-h2);
+  letter-spacing: var(--ls-h2);
+  font-weight: 500;
+  font-variation-settings: var(--fvs-display);
+  color: var(--color-heading);
+  text-wrap: balance;
+}
+
+.center {
+  text-align: center;
+}
+
+.start {
+  text-align: start;
+}
+
+.dark {
+  color: var(--color-white);
+}

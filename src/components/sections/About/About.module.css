@@ -1,0 +1,165 @@
+.about {
+  background: var(--color-white);
+  padding-block: var(--section-pad);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(4rem, 11.4vw, 10.25rem); /* 164px at 1440 */
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  max-width: 61.3rem; /* 981px */
+}
+
+.lower {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(3rem, 5.7vw, 5.125rem); /* 82px at 1440 */
+  width: 100%;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 25.9375rem)); /* 415px */
+  justify-content: center;
+  gap: 24px;
+  width: 100%;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;
+  aspect-ratio: 415 / 524;
+  padding: 32px;
+  border-radius: 4px;
+  overflow: clip;
+  color: var(--color-ink);
+}
+
+.lime {
+  --tile-bg: #edf5c4;
+  --brain: #e3eab8;
+  background: var(--tile-bg);
+}
+
+.sand {
+  --tile-bg: #fbecca;
+  --brain: #f2e1bb;
+  background: var(--tile-bg);
+}
+
+/* Dotted brain illustration; masked so each tone can tint it. Offsets are Paper's, as % of the 415px card. */
+.brain {
+  position: absolute;
+  width: 144.6%; /* 600px */
+  aspect-ratio: 1;
+  background: var(--brain);
+  mask: url("/svg/dotted-brain.svg") center / contain no-repeat;
+  pointer-events: none;
+}
+
+.lime .brain {
+  left: 43.9%; /* 182px */
+  top: -15.6%; /* -82px of 524 */
+}
+
+.sand .brain {
+  left: -88.2%; /* -366px */
+  top: -20.6%; /* -108px */
+  rotate: 180deg;
+}
+
+.iconTile {
+  position: relative;
+  display: inline-flex;
+  align-self: flex-start;
+  padding: 20px;
+  background: var(--color-white);
+}
+
+.body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.value {
+  font-size: clamp(2.75rem, 2rem + 2.2vw, 4rem);
+  line-height: 1;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  font-variation-settings: var(--fvs-display);
+}
+
+.text {
+  max-width: 22rem;
+  font-weight: 500;
+  line-height: 24px;
+  font-variation-settings: var(--fvs-display);
+}
+
+.media {
+  padding: 0;
+  background: var(--color-deep);
+}
+
+.photo {
+  object-fit: cover;
+  object-position: top;
+}
+
+/* Tablet: two stat cards side by side, photo full width below. */
+@media (max-width: 63.99rem) {
+  .cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .card {
+    aspect-ratio: auto;
+    min-height: 22rem;
+  }
+
+  .media {
+    grid-column: 1 / -1;
+    order: 1;
+    aspect-ratio: 16 / 9;
+    min-height: 0;
+  }
+
+  .photo {
+    object-position: 30% 12%;
+  }
+}
+
+@media (max-width: 39.99rem) {
+  .cards {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .card {
+    min-height: 20rem;
+    padding: 24px;
+  }
+
+  .media {
+    aspect-ratio: 4 / 5;
+  }
+
+  .photo {
+    object-position: top;
+  }
+}

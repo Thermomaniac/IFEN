@@ -1,0 +1,270 @@
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgb(255 255 255 / 96%);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  border-bottom: 1px solid var(--color-border-soft);
+  transition: box-shadow var(--dur-base) var(--ease-out);
+}
+
+.header[data-scrolled] {
+  box-shadow: 0 6px 24px -12px rgb(2 6 24 / 18%);
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 69px;
+  padding: 12px var(--gutter);
+}
+
+.logo {
+  flex: 0 0 187px;
+  display: flex;
+}
+
+.logo img {
+  width: 92px;
+  height: auto;
+}
+
+.desktopNav {
+  display: none;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: var(--fs-small);
+  line-height: 18px;
+  color: var(--color-muted);
+  white-space: nowrap;
+  padding-block: 8px;
+  transition: color var(--dur-fast);
+}
+
+.link[aria-current="page"] {
+  color: var(--color-ink);
+  letter-spacing: 0.3px;
+}
+
+.chevron {
+  flex-shrink: 0;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.chevron[data-open] {
+  transform: rotate(180deg);
+}
+
+.dropdown {
+  position: relative;
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: -16px;
+  min-width: 220px;
+  padding: 8px;
+  background: var(--color-white);
+  border: 1px solid var(--color-border-soft);
+  border-radius: 4px;
+  box-shadow: 0 16px 40px -16px rgb(2 6 24 / 22%);
+}
+
+/* Bridge the gap so the pointer can travel from trigger to menu. */
+.menu::before {
+  content: "";
+  position: absolute;
+  inset: -10px 0 auto;
+  height: 10px;
+}
+
+.menuLink {
+  display: block;
+  padding: 10px 12px;
+  border-radius: var(--radius-button);
+  font-size: var(--fs-small);
+  line-height: 18px;
+  color: var(--color-heading);
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+
+.actions {
+  display: none;
+  align-items: center;
+  gap: 20px;
+}
+
+.login,
+.register {
+  font-size: var(--fs-body);
+  line-height: 24px;
+  font-weight: 500;
+  font-variation-settings: var(--fvs-display);
+  color: var(--color-ink);
+  white-space: nowrap;
+}
+
+.register {
+  padding: 9.5px 20px;
+  border: 1px solid var(--color-ink);
+  border-radius: var(--radius-button);
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+
+.menuButton {
+  display: inline-grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  margin-right: -10px;
+  color: var(--color-ink);
+}
+
+@media (hover: hover) {
+  .link:hover,
+  .menuLink:hover {
+    color: var(--color-ink);
+  }
+
+  .menuLink:hover {
+    background: var(--color-mist);
+  }
+
+  .register:hover {
+    background: var(--color-ink);
+    color: var(--color-white);
+  }
+}
+
+/* Desktop nav only once every link fits on one line. */
+@media (min-width: 70rem) {
+  .desktopNav {
+    display: block;
+  }
+
+  .actions {
+    display: flex;
+    flex: 0 0 auto;
+    justify-content: flex-end;
+    min-width: 187px;
+  }
+
+  .menuButton {
+    display: none;
+  }
+}
+
+@media (min-width: 70rem) and (max-width: 84rem) {
+  .logo {
+    flex-basis: auto;
+  }
+
+  .actions {
+    min-width: 0;
+  }
+
+  .links {
+    gap: 18px;
+  }
+}
+
+/* Mobile drawer */
+.drawerRoot {
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+}
+
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgb(2 6 24 / 48%);
+}
+
+.drawer {
+  position: absolute;
+  inset: 0 0 0 auto;
+  width: min(100%, 24rem);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 12px var(--gutter) 32px;
+  background: var(--color-white);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.drawerTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 44px;
+}
+
+.drawerLinks > li {
+  border-bottom: 1px solid var(--color-border-soft);
+}
+
+.drawerLink {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 0;
+  font-size: 1.125rem;
+  line-height: 24px;
+  font-weight: 500;
+  font-variation-settings: var(--fvs-display);
+  color: var(--color-heading);
+  text-align: start;
+}
+
+.drawerLink[aria-current="page"] {
+  color: var(--color-ink);
+}
+
+.drawerSub {
+  overflow: hidden;
+}
+
+.drawerSubLink {
+  display: block;
+  padding: 10px 0 10px 16px;
+  color: var(--color-muted);
+  font-size: var(--fs-body);
+}
+
+.drawerSub > li:last-child .drawerSubLink {
+  padding-bottom: 18px;
+}
+
+.drawerActions {
+  display: grid;
+  gap: 12px;
+  margin-top: auto;
+  text-align: center;
+}
+
+.drawerActions .register {
+  background: var(--color-ink);
+  color: var(--color-white);
+  padding-block: 14px;
+}
+
+.drawerActions .login {
+  padding-block: 12px;
+}

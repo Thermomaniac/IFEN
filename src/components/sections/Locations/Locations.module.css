@@ -1,0 +1,203 @@
+/* Paper: white, 112/72 padding, header / map / button stacked with 164px gaps. */
+.locations {
+  background: var(--color-white);
+  padding-block: var(--section-pad);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(3.5rem, 11.4vw, 10.25rem); /* 164px at 1440 */
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.line {
+  display: block;
+}
+
+/* ---------- Map ---------- */
+
+/*
+ * 532×657 in Paper. Pins and cards are placed in % of this box and sized in
+ * cqi, so the whole map scales as one piece down to phone widths.
+ */
+.map {
+  --ease-hover: cubic-bezier(0.48, 0.002, 0.035, 0.996);
+  position: relative;
+  width: min(100%, 33.25rem);
+  aspect-ratio: 532 / 657;
+  container-type: inline-size;
+}
+
+.dots {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  fill: #ffead9;
+}
+
+/* Rows fill in top to bottom, ~35ms apart. */
+.dots circle {
+  opacity: 0;
+  scale: 0.4;
+  transform-box: fill-box;
+  transform-origin: center;
+  transition:
+    opacity 480ms var(--ease-out),
+    scale 480ms var(--ease-reveal);
+  transition-delay: calc(var(--row) * 35ms);
+}
+
+.map[data-inview="true"] .dots circle {
+  opacity: 1;
+  scale: 1;
+}
+
+.pins {
+  position: absolute;
+  inset: 0;
+}
+
+/* Zero-size anchor on the city's dot centre; dot and card hang off it. */
+.pin {
+  --land: calc(760ms + var(--i) * 140ms);
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: 0;
+  height: 0;
+}
+
+.cityDot {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4.89cqi; /* 26px at 532 */
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #ffba8c;
+  translate: -50% -50%;
+  opacity: 0;
+  scale: 0;
+  transition:
+    opacity 360ms var(--ease-out) var(--land),
+    scale 520ms cubic-bezier(0.34, 1.56, 0.64, 1) var(--land);
+}
+
+/* Slow ring so the four cities read as live against the pale dots. */
+.cityDot::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: 0 0 0 2px #ffba8c;
+  opacity: 0;
+}
+
+.map[data-inview="true"] .cityDot {
+  opacity: 1;
+  scale: 1;
+}
+
+.map[data-inview="true"] .cityDot::after {
+  animation: ring 2.6s var(--ease-out) infinite;
+  animation-delay: calc(var(--land) + 600ms + var(--i) * 400ms);
+}
+
+@keyframes ring {
+  from {
+    scale: 1;
+    opacity: 0.9;
+  }
+  to {
+    scale: 2.2;
+    opacity: 0;
+  }
+}
+
+/* Paper card: #EDF5C4, 16/20 padding, 24px pin + 24/30 semibold at -1.5px. */
+.card {
+  --gap-below: calc(2.45cqi + 0.5em);
+  position: absolute;
+  left: 0;
+  bottom: var(--gap-below);
+  display: flex;
+  align-items: center;
+  gap: 0.333em;
+  padding: 0.667em 0.833em;
+  border-radius: 4px;
+  background: #edf5c4;
+  color: var(--color-ink);
+  font-size: clamp(0.8125rem, 4.51cqi, 1.5rem);
+  line-height: 1.25;
+  font-weight: 600;
+  font-variation-settings: var(--fvs-display);
+  letter-spacing: -0.0625em;
+  white-space: nowrap;
+  translate: -50% 0.75em;
+  opacity: 0;
+  transition:
+    opacity 420ms var(--ease-out) calc(var(--land) + 120ms),
+    translate 520ms var(--ease-reveal) calc(var(--land) + 120ms);
+}
+
+/* Small notch pointing down at the city dot. */
+.card::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 100%;
+  border: 0.3em solid transparent;
+  border-top-color: #edf5c4;
+  translate: -50% 0;
+}
+
+.cardIcon {
+  flex-shrink: 0;
+  width: 1em;
+  height: 1em;
+}
+
+.map[data-inview="true"] .card {
+  opacity: 1;
+  translate: -50% 0;
+}
+
+@media (hover: hover) {
+  /* Once landed, hover uses the Board timing and never shifts layout. */
+  .map[data-inview="true"] .pin:hover .card {
+    translate: -50% -4px;
+    transition: translate 0.25s var(--ease-hover);
+  }
+
+  .map[data-inview="true"] .pin:hover .cityDot {
+    scale: 1.3;
+    transition: scale 0.25s var(--ease-hover);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dots circle,
+  .cityDot,
+  .card {
+    transition: none;
+    opacity: 1;
+    scale: 1;
+  }
+
+  .card {
+    translate: -50% 0;
+  }
+
+  .map[data-inview="true"] .cityDot::after {
+    animation: none;
+  }
+}
