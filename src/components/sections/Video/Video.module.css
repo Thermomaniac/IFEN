@@ -16,22 +16,19 @@
 }
 
 /*
- * Paper shows the whole 16:9 still in a 1820×1024 box shifted 84px left of
- * centre. Same geometry here, 40px taller for the parallax travel. The section
- * is always at least 71.11vw tall, so the 16:9 box is always wider than it.
+ * Full-bleed cover at every width (2560 included), 40px taller for the parallax
+ * travel. Paper frames the still 84px left of centre in a 1820px box at 1440;
+ * object-position 68% keeps that framing while the image always spans the section.
  */
 .bg {
   position: absolute;
-  top: -20px;
-  bottom: -20px;
-  left: calc(50% - 5.83%);
-  aspect-ratio: 16 / 9;
-  translate: -50% 0;
+  inset: -20px 0;
   z-index: -2;
 }
 
 .bgImage {
   object-fit: cover;
+  object-position: 68% 50%;
 }
 
 .scrim {

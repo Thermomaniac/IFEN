@@ -82,7 +82,8 @@ export type CertModule = { title: string; icon: "brain" | "pulse" | "chip" };
 
 export const certification = {
   label: "Your Path to Certification",
-  heading: "How to Become A Certified Neurofeedback Therapist",
+  // Two phrases that wrap as units, so the break lands after "Certified" without a <br>.
+  headingLines: ["How to Become a Certified", "Neurofeedback Therapist"],
   // Paper spells module 2 "Practicium"; corrected to "Practicum".
   modules: [
     { title: "Intensive Course", icon: "brain" },

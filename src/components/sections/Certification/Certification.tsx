@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { ModuleBrainIcon, ModuleChipIcon, ModulePulseIcon } from "@/components/icons";
 import { Reveal, RevealItem } from "@/components/motion/Reveal";
 import { Container } from "@/components/ui/Container";
@@ -61,7 +62,12 @@ export function Certification() {
           </RevealItem>
           <RevealItem>
             <SectionHeading id="certification-title" className={styles.heading}>
-              {certification.heading}
+              {certification.headingLines.map((line, i) => (
+                <Fragment key={line}>
+                  {i > 0 && " "}
+                  <span className={styles.phrase}>{line}</span>
+                </Fragment>
+              ))}
             </SectionHeading>
           </RevealItem>
         </Reveal>

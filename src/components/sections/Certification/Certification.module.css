@@ -34,7 +34,12 @@
 }
 
 .heading {
-  max-width: 33rem;
+  max-width: 36rem;
+}
+
+/* Each phrase is an atomic inline box: lines break between them, or inside one only when it alone is too wide. */
+.phrase {
+  display: inline-block;
 }
 
 .path {

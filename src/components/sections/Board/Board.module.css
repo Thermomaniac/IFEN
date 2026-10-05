@@ -98,6 +98,8 @@
   display: flex;
   align-items: flex-start;
   gap: var(--gap);
+  /* Reserve the featured height so the row never dips while two cards swap size. */
+  min-height: calc(var(--unit) * 624);
   translate: calc(var(--start) * (var(--card-w) + var(--gap)) * -1) 0;
   transition: translate var(--dur-slide) var(--ease-reveal);
 }
@@ -275,6 +277,7 @@
     --per-view: 2;
     --card-w: calc((100cqi - (var(--per-view) - 1) * var(--gap)) / var(--per-view));
     align-items: stretch;
+    min-height: 0;
   }
 
   .card,
