@@ -176,18 +176,28 @@ export const presentation = {
   video: { src: "/video/presentation.mp4", lang: "de", title: "Neurofeedback-Ausbildung: zertifizierter Neurofeedback-Therapeut IFEN" },
 };
 
-export type LocationCity = { name: string; /** Index into germanyDots, nearest dot to the real lat/lon. */ dot: number };
+export type LocationCity = {
+  name: string;
+  /** Index into germanyDots, nearest dot to the real lat/lon. */
+  dot: number;
+  /** Photo for the stamp; null renders a neutral placeholder. */
+  photo: string | null;
+  /** Stamp's top-left in the 796×694.5 map stage (Paper stamp slots, map at 132,20). */
+  slot: readonly [number, number];
+};
 
 // Paper reads "Our Training location’s Are"; apostrophe removed. Paper also doubles
-// the Berlin and Munich pins, so each city now has one pin at its real position.
+// the Berlin and Munich stamps (spelled "Munic") and scatters 8 pins, so each city
+// now has one pin at its real position and takes the Paper stamp slot nearest to it.
+// Hamburg's photo is broken in Paper: placeholder until IFEN supplies one.
 export const locations = {
   label: "Our Locations",
   headingLines: ["Our Training Locations Are", "Across 16 States In Germany"],
   cities: [
-    { name: "Hamburg", dot: 18 },
-    { name: "Berlin", dot: 60 },
-    { name: "Cologne", dot: 110 },
-    { name: "Munich", dot: 198 },
+    { name: "Hamburg", dot: 18, photo: null, slot: [188, 0] },
+    { name: "Berlin", dot: 60, photo: "/locations/berlin.jpg", slot: [542, 45] },
+    { name: "Cologne", dot: 110, photo: "/locations/cologne.jpg", slot: [0, 210.5] },
+    { name: "Munich", dot: 198, photo: "/locations/munich.jpg", slot: [524, 626.5] },
   ] satisfies LocationCity[],
   cta: { label: "View All Venues", href: "#" },
 };
