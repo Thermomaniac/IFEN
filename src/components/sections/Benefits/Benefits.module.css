@@ -180,10 +180,20 @@
   top: 66.9%;
 }
 
-.arrow {
+/* Fixed square stage (264px at 1440): icons stack inside it, so swaps never move layout. */
+.stage {
   position: relative;
-  width: 50.2%; /* 264px */
-  height: auto;
+  width: 50.2%;
+  aspect-ratio: 1;
+}
+
+.icon3d {
+  position: absolute;
+  inset: 6%;
+}
+
+.icon3dImage {
+  object-fit: contain;
 }
 
 /* ---------- Tablet and below: stack ---------- */
@@ -204,7 +214,7 @@
     aspect-ratio: 16 / 10;
   }
 
-  .arrow {
+  .stage {
     width: min(34%, 264px);
   }
 }
@@ -223,7 +233,7 @@
     aspect-ratio: 1;
   }
 
-  .arrow {
+  .stage {
     width: 50%;
   }
 }

@@ -1,24 +1,40 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
+import Image from "next/image";
 import { useId, useRef, useState } from "react";
 import { CirclePlusIcon } from "@/components/icons";
-import { Reveal, RevealItem } from "@/components/motion/Reveal";
+import { EASE, Reveal, RevealItem } from "@/components/motion/Reveal";
 import { useParallax } from "@/components/motion/useParallax";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { benefits } from "@/data/site";
-import { BenefitsArrow } from "./BenefitsArrow";
 import styles from "./Benefits.module.css";
 
+// Vertical swiper for the 3D icon: the outgoing icon leaves upward, the
+// incoming one rises from below. Waiting icons jump to "below" instantly.
+const iconVariants: Variants = {
+  show: { y: "0%", opacity: 1, transition: { duration: 0.6, ease: EASE } },
+  above: { y: "-35%", opacity: 0, transition: { duration: 0.45, ease: EASE } },
+  below: { y: "35%", opacity: 0, transition: { duration: 0 } },
+};
+
 /**
- * Discount benefits: single-open accordion beside the arrow card from Paper.
+ * Discount benefits: single-open accordion beside the 3D icon card from Paper.
  * Clicking the open row closes it. Rows animate height via grid-template-rows,
- * so text is never measured in JS.
+ * so text is never measured in JS. The card shows the icon of the open row,
+ * or keeps the last one when every row is closed.
  */
 export function Benefits() {
   const [open, setOpen] = useState<string | null>(benefits.items[0].id);
+  const [shown, setShown] = useState({ current: benefits.items[0].id, previous: null as string | null });
+
+  const toggle = (id: string) => {
+    const next = open === id ? null : id;
+    setOpen(next);
+    if (next && next !== shown.current) setShown({ current: next, previous: shown.current });
+  };
   const baseId = useId();
   const card = useRef<HTMLDivElement>(null);
   const brainY = useParallax(card, 60);
@@ -53,7 +69,7 @@ export function Benefits() {
                         className={styles.trigger}
                         aria-expanded={isOpen}
                         aria-controls={panelId}
-                        onClick={() => setOpen(isOpen ? null : item.id)}
+                        onClick={() => toggle(item.id)}
                       >
                         <CirclePlusIcon className={styles.icon} />
                         {item.title}
@@ -81,7 +97,19 @@ export function Benefits() {
               <div ref={card} className={styles.cardInner}>
                 <motion.span className={`${styles.brain} ${styles.brainTop}`} style={{ y: brainY }} aria-hidden="true" />
                 <motion.span className={`${styles.brain} ${styles.brainBottom}`} style={{ y: brainY }} aria-hidden="true" />
-                <BenefitsArrow className={styles.arrow} />
+                <div className={styles.stage} aria-hidden="true">
+                  {benefits.items.map((item) => (
+                    <motion.div
+                      key={item.id}
+                      className={styles.icon3d}
+                      variants={iconVariants}
+                      initial={false}
+                      animate={item.id === shown.current ? "show" : item.id === shown.previous ? "above" : "below"}
+                    >
+                      <Image src={`/svg/benefits/${item.id}.svg`} alt="" fill sizes="264px" className={styles.icon3dImage} />
+                    </motion.div>
+                  ))}
+                </div>
               </div>
             </RevealItem>
           </Reveal>

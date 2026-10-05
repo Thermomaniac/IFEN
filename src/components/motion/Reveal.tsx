@@ -3,7 +3,7 @@
 import { motion, type Variants } from "framer-motion";
 import type { ReactNode } from "react";
 
-const EASE = [0.22, 1, 0.36, 1] as const;
+export const EASE = [0.22, 1, 0.36, 1] as const;
 
 export const revealItem: Variants = {
   hidden: { opacity: 0, y: 24 },
