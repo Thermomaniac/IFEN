@@ -109,3 +109,68 @@ export const course = {
     action: { label: "Register For Booking", href: `${REGISTER_PATH}/participant` },
   },
 };
+
+// ---------- Registration flow ----------
+
+export const LMS_PATH = "/lms";
+
+export type PaymentMethodId = "transfer" | "card" | "stripe" | "paypal";
+
+export const paymentMethods: { id: PaymentMethodId; label: string }[] = [
+  { id: "transfer", label: "Transfer" },
+  { id: "card", label: "Card" },
+  { id: "stripe", label: "Stripe" },
+  { id: "paypal", label: "PayPal" },
+];
+
+export function isPaymentMethod(value: unknown): value is PaymentMethodId {
+  return paymentMethods.some((m) => m.id === value);
+}
+
+export function getPaymentMethod(id: string | undefined) {
+  return paymentMethods.find((m) => m.id === id) ?? paymentMethods[1];
+}
+
+/** Two decimals for the order summary and pay button, as drawn in Paper ("150.00 EUR"). */
+export function formatAmount(amount: number) {
+  return `${amount.toFixed(2)} EUR`;
+}
+
+export const registration = {
+  heading: "Register for the Webinar",
+  steps: [
+    { slug: "participant", label: "Participant", title: "Insert Your Info" },
+    { slug: "billing", label: "Billing", title: "Insert Your Billing Info" },
+    { slug: "review", label: "Review & Pay", title: "Review & Confirm" },
+  ] as const,
+  // Placeholder from Paper; the real course number comes from the booking system.
+  courseNumber: "WEB-120726-EH",
+  salutations: ["Ms.", "Mr.", "Mx.", "Dr.", "Prof."],
+  countries: [
+    "Austria (AT)",
+    "Belgium (BE)",
+    "Czechia (CZ)",
+    "Denmark (DK)",
+    "Finland (FI)",
+    "France (FR)",
+    "Germany (DE)",
+    "Ireland (IE)",
+    "Italy (IT)",
+    "Luxembourg (LU)",
+    "Netherlands (NL)",
+    "Norway (NO)",
+    "Poland (PL)",
+    "Portugal (PT)",
+    "Romania (RO)",
+    "Spain (ES)",
+    "Sweden (SE)",
+    "Switzerland (CH)",
+    "United Kingdom (GB)",
+    "United States (US)",
+  ],
+  defaultCountry: "Germany (DE)",
+  notesHint:
+    "When booking an internship or supervision, please let us know the date and the instructor. To redeem a discount code, enter it here.",
+};
+
+export type StepSlug = (typeof registration.steps)[number]["slug"];

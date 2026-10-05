@@ -1,0 +1,96 @@
+/* Paper: pills 124 wide, radius 100, 1.2px #E5E7EB outline, padding 8 24 8 8, gap 8, label 14/18 medium. */
+.steps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 7px 24px 7px 7px;
+  border-radius: var(--radius-pill);
+  box-shadow: inset 0 0 0 1.2px var(--color-border);
+  background: var(--color-white);
+  color: var(--color-muted);
+  font-size: var(--fs-small);
+  line-height: 18px;
+  font-weight: 500;
+  font-variation-settings: var(--fvs-display);
+  white-space: nowrap;
+}
+
+a.pill {
+  transition: box-shadow var(--dur-fast) var(--ease-out);
+}
+
+a.pill:focus-visible {
+  border-radius: var(--radius-pill);
+  box-shadow: var(--focus-ring);
+}
+
+@media (hover: hover) {
+  a.pill:hover {
+    box-shadow: inset 0 0 0 1.2px var(--color-subtle);
+  }
+}
+
+.marker {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--color-cream);
+  color: var(--color-muted);
+  font-size: var(--fs-xs);
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #edf5c4;
+}
+
+.step[data-state="current"] .pill,
+.step[data-state="done"] .pill {
+  color: var(--color-ink);
+}
+
+.step[data-state="current"] .marker,
+.step[data-state="done"] .marker {
+  background: var(--color-ink);
+  color: #edf5c4;
+}
+
+@media (max-width: 29.99rem) {
+  .steps {
+    gap: 8px;
+  }
+
+  .pill {
+    min-height: 44px;
+    padding-block: 9px;
+  }
+
+  .step:not([data-state="current"]) .pill {
+    padding-left: 9px;
+    padding-right: 9px;
+  }
+
+  .step:not([data-state="current"]) .label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+}

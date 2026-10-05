@@ -1,0 +1,16 @@
+.page {
+  display: grid;
+  place-items: center;
+  min-height: 100dvh;
+  padding: var(--gutter);
+  background: var(--color-white);
+}
+
+.title {
+  font-size: clamp(2rem, 1.4rem + 2.2vw, 3rem);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  text-align: center;
+  font-variation-settings: var(--fvs-display);
+}

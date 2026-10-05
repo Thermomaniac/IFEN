@@ -1,0 +1,495 @@
+/*
+ * Registration form pieces. Paper: #F9FAFB card, radius 4, padding 32, rows 28 apart;
+ * fields 16 apart at 264 (three per row) or 404 (two per row); label Inter SemiBold
+ * 16/20; input 52 tall with a 2px #E5E7EB bottom rule; placeholder #99A1AF.
+ */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: clamp(20px, 2.5vw, 32px);
+  border: 0;
+  border-radius: 4px;
+  background: var(--color-mist);
+  min-width: 0;
+}
+
+.cardTitle {
+  float: left; /* lets a <legend> sit inside the card padding like a heading */
+  width: 100%;
+  color: var(--color-muted);
+  font-size: var(--fs-xs);
+  line-height: 16px;
+  letter-spacing: 0.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-variation-settings: var(--fvs-display);
+}
+
+.cardTitle + * {
+  clear: both;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px 16px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1 1 16.5rem; /* 264 */
+  min-width: 0;
+}
+
+.field[data-size="half"] {
+  flex-basis: 25.25rem; /* 404 */
+}
+
+.field[data-size="full"] {
+  flex-basis: 100%;
+}
+
+.label {
+  font-size: var(--fs-body);
+  line-height: 20px;
+  font-weight: 600;
+}
+
+.optional {
+  color: var(--color-muted);
+  font-weight: 400;
+}
+
+.hint {
+  margin-top: -2px;
+  color: var(--color-muted);
+  font-size: var(--fs-small);
+  line-height: 20px;
+}
+
+.input {
+  width: 100%;
+  height: 52px;
+  padding: 0;
+  border: 0;
+  border-bottom: 2px solid var(--color-border);
+  border-radius: 0;
+  background: transparent;
+  color: var(--color-ink);
+  font: inherit;
+  font-size: var(--fs-body);
+  line-height: 20px;
+  font-variation-settings: var(--fvs-display);
+  transition: border-color var(--dur-fast) var(--ease-out);
+}
+
+.input::placeholder {
+  color: var(--color-subtle);
+  opacity: 1;
+}
+
+@media (hover: hover) {
+  .input:hover {
+    border-bottom-color: var(--color-subtle);
+  }
+}
+
+/* Paper: #009BA7 on focus; the rule thickens and a ring marks it for keyboard users. */
+.input:focus {
+  outline: none;
+  border-bottom-color: #009ba7;
+}
+
+.input:focus-visible {
+  box-shadow: 0 2px 0 0 #009ba7;
+  border-radius: 0;
+}
+
+.field[data-invalid] .input {
+  border-bottom-color: #c0262d;
+}
+
+.textarea {
+  height: auto;
+  min-height: 52px;
+  padding-block: 15px;
+  resize: vertical;
+}
+
+.selectWrap {
+  position: relative;
+}
+
+.selectWrap .input {
+  appearance: none;
+  padding-right: 32px;
+  cursor: pointer;
+}
+
+.selectWrap .input[data-empty] {
+  color: var(--color-subtle);
+}
+
+.selectWrap option {
+  color: var(--color-ink);
+}
+
+.chevron {
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  translate: 0 -50%;
+  width: 16px;
+  height: 16px;
+  color: var(--color-ink);
+  pointer-events: none;
+}
+
+.error {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  color: #b4232a;
+  font-size: var(--fs-small);
+  line-height: 20px;
+  font-weight: 500;
+}
+
+.errorIcon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 18px;
+  height: 18px;
+  margin-top: 1px;
+  border-radius: 50%;
+  background: #b4232a;
+  color: var(--color-white);
+  font-size: 0.75rem;
+  line-height: 1;
+  font-weight: 700;
+}
+
+/* ---------- Error summary ---------- */
+
+.summary {
+  padding: 20px 24px;
+  border-left: 4px solid #b4232a;
+  border-radius: 4px;
+  background: #fdf2f2;
+}
+
+.summary:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
+.summaryTitle {
+  font-size: 1.125rem;
+  line-height: 24px;
+  font-weight: 700;
+  font-variation-settings: var(--fvs-display);
+}
+
+.summaryList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.summaryList a {
+  color: #b4232a;
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---------- Option cards: package and payment method ---------- */
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 11rem), 1fr));
+  gap: 12px;
+}
+
+.options[data-kind="package"] {
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr));
+  gap: 16px;
+}
+
+.option {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 56px;
+  padding: 16px;
+  border-radius: 4px;
+  background: var(--color-white);
+  box-shadow: inset 0 0 0 2px var(--color-border);
+  cursor: pointer;
+  transition:
+    box-shadow var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out);
+}
+
+.optionInput {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.optionBody {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  font-size: var(--fs-small);
+  line-height: 18px;
+  font-weight: 500;
+  font-variation-settings: var(--fvs-display);
+}
+
+.optionStack {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.optionLabel {
+  color: var(--color-muted);
+  font-size: var(--fs-xs);
+  line-height: 16px;
+  font-weight: 600;
+  font-variation-settings: var(--fvs-display);
+}
+
+.optionPrice {
+  font-size: 1.25rem;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  font-variation-settings: var(--fvs-display);
+}
+
+.optionCheck {
+  flex: none;
+  opacity: 0;
+  scale: 0.6;
+  transition:
+    opacity var(--dur-fast) var(--ease-out),
+    scale var(--dur-base) var(--ease-out);
+}
+
+.option:has(.optionInput:checked) {
+  background: #edf5c4;
+  box-shadow: inset 0 0 0 2px #e3eab8;
+}
+
+.option:has(.optionInput:checked) .optionLabel {
+  color: var(--color-ink);
+}
+
+.option:has(.optionInput:checked) .optionCheck {
+  opacity: 1;
+  scale: 1;
+}
+
+.option:has(.optionInput:focus-visible) {
+  box-shadow:
+    inset 0 0 0 2px var(--color-ink),
+    var(--focus-ring);
+}
+
+@media (hover: hover) {
+  .option:not(:has(.optionInput:checked)):hover {
+    box-shadow: inset 0 0 0 2px var(--color-subtle);
+  }
+}
+
+.logo {
+  height: 17px;
+  width: auto;
+}
+
+/* ---------- Actions ---------- */
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.actions[data-single] {
+  justify-content: flex-end;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px 24px;
+  border-radius: var(--radius-button);
+  box-shadow: inset 0 0 0 1px var(--color-ink);
+  font-size: var(--fs-body);
+  line-height: 24px;
+  font-weight: 500;
+  font-variation-settings: var(--fvs-display);
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+
+.back:focus-visible {
+  box-shadow:
+    inset 0 0 0 1px var(--color-ink),
+    var(--focus-ring);
+}
+
+@media (hover: hover) {
+  .back:hover {
+    background: var(--color-border-soft);
+  }
+}
+
+/* The submit is a <button> wearing CtaButton's look; reset its native box. */
+.submit {
+  padding: 0;
+  text-align: left;
+}
+
+.submit:focus-visible {
+  border-radius: var(--radius-button);
+}
+
+.submit:disabled {
+  cursor: progress;
+}
+
+/* Phones: primary action first and full width, Back underneath. */
+@media (max-width: 39.99rem) {
+  .actions {
+    flex-direction: column-reverse;
+    align-items: stretch;
+  }
+
+  .back,
+  .submit {
+    width: 100%;
+  }
+
+  .submit > span:first-child {
+    flex: 1;
+    justify-content: center;
+  }
+}
+
+/* ---------- Review ---------- */
+
+.reviewCard {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: clamp(20px, 2.5vw, 32px);
+  border-radius: 4px;
+  background: var(--color-border-soft);
+}
+
+.reviewSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.reviewHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.reviewHead h3 {
+  color: var(--color-muted);
+  font-size: var(--fs-xs);
+  line-height: 16px;
+  letter-spacing: 0.5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-variation-settings: var(--fvs-display);
+}
+
+/* Padding grows the hit area to 44px; the negative margin keeps it where Paper draws it. */
+.edit {
+  display: inline-block;
+  padding: 12px 8px;
+  margin: -12px -8px;
+  color: var(--color-ink);
+  font-size: var(--fs-small);
+  line-height: 20px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.items {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px;
+}
+
+.item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 16px;
+  border-radius: 4px;
+  background: var(--color-white);
+  min-width: 0;
+}
+
+.item[data-wide] {
+  grid-column: 1 / -1;
+}
+
+.item dt {
+  color: var(--color-muted);
+  font-size: var(--fs-small);
+  line-height: 18px;
+  font-weight: 500;
+  font-variation-settings: var(--fvs-display);
+}
+
+.item dd {
+  font-size: var(--fs-body);
+  line-height: 22px;
+  font-weight: 500;
+  font-variation-settings: var(--fvs-display);
+  overflow-wrap: anywhere;
+}
+
+.item dd[data-empty] {
+  color: var(--color-muted);
+}
+
+@media (max-width: 29.99rem) {
+  .items {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

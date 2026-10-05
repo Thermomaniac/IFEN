@@ -1,0 +1,97 @@
+/*
+ * Paper: white body, padding 56 / 72 / 72, form column 888 and summary 360, 48
+ * apart. The summary's top lines up with the form card, under the step title.
+ * Below 1024 the summary moves between the stepper and the form.
+ */
+.body {
+  background: var(--color-white);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas:
+    "head"
+    "aside"
+    "main";
+  gap: 24px;
+  max-width: calc(var(--content-max) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding: clamp(2rem, 3.9vw, 3.5rem) var(--gutter) var(--section-pad-sm);
+}
+
+@media (min-width: 64rem) {
+  .inner {
+    grid-template-columns: minmax(0, 55.5rem) 22.5rem; /* 888 / 360 */
+    grid-template-areas:
+      "head ."
+      "main aside";
+    justify-content: space-between;
+    column-gap: 48px;
+  }
+
+  .aside {
+    position: sticky;
+    top: 24px;
+    align-self: start;
+  }
+}
+
+.head {
+  grid-area: head;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.titles {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.count {
+  color: var(--color-muted);
+  font-size: var(--fs-body);
+  line-height: 20px;
+  font-variation-settings: var(--fvs-display);
+}
+
+.title {
+  font-size: 1.75rem;
+  line-height: 32px;
+  letter-spacing: -0.015em;
+  font-weight: 700;
+  font-variation-settings: var(--fvs-display);
+}
+
+.title:focus-visible {
+  box-shadow: none;
+  outline: 2px solid var(--color-ink);
+  outline-offset: 4px;
+}
+
+.aside {
+  grid-area: aside;
+  min-width: 0;
+}
+
+.main {
+  grid-area: main;
+  min-width: 0;
+}
+
+.enter {
+  animation: step-in var(--dur-base) var(--ease-out) both;
+}
+
+.placeholder {
+  min-height: 480px;
+}
+
+@keyframes step-in {
+  from {
+    opacity: 0;
+    translate: 0 8px;
+  }
+}

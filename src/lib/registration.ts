@@ -82,3 +82,17 @@ export function clearRegistration() {
     window.sessionStorage.removeItem(KEY);
   } catch {}
 }
+
+const noop = () => () => {};
+
+/**
+ * False during the server render and hydration, true afterwards. Forms wait for
+ * it so their initial values come from sessionStorage, not the empty server state.
+ */
+export function useHydrated() {
+  return useSyncExternalStore(
+    noop,
+    () => true,
+    () => false,
+  );
+}
