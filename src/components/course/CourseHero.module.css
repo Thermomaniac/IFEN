@@ -1,0 +1,385 @@
+/*
+ * Paper: 1440 wide, #0B3941, padding 80 / 72, intro column 552 and booking panel
+ * 494 pushed apart. Four thick #0B4750 strokes sit behind both (1528×1262 at
+ * x -59 / y -422), scaled with the viewport.
+ */
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  background: var(--color-ink);
+  color: var(--color-white);
+}
+
+.lines {
+  position: absolute;
+  z-index: -1;
+  left: -4.1vw;
+  top: -29.3vw;
+  width: max(106.1vw, 68rem);
+  height: auto;
+  color: #0b4750;
+  pointer-events: none;
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  width: 100%;
+  max-width: calc(var(--content-max) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding: clamp(2.5rem, 5.56vw, 5rem) var(--gutter) clamp(3rem, 5vw, 4.5rem);
+}
+
+@media (min-width: 64rem) {
+  .inner {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 48px;
+  }
+}
+
+/* ---------- Intro ---------- */
+
+.intro {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+}
+
+.breadcrumb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  color: var(--color-subtle);
+  font-size: 0.8125rem;
+  line-height: 16px;
+}
+
+.crumb {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.crumb [aria-current] {
+  color: var(--color-on-dark);
+}
+
+.crumbLink {
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .crumbLink:hover {
+    color: var(--color-white);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
+
+.titleBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.badge {
+  padding: 4px 8px;
+  border-radius: var(--radius-button);
+  background: var(--color-overlay-soft);
+  font-size: var(--fs-xs);
+  line-height: 16px;
+  text-transform: uppercase;
+  font-variation-settings: var(--fvs-display);
+}
+
+.title {
+  font-size: clamp(2rem, 1.2rem + 2.5vw, 3.25rem); /* 52 at 1440 */
+  line-height: 1.12;
+  letter-spacing: -0.015em;
+  font-weight: 700;
+  font-variation-settings: var(--fvs-display);
+  text-wrap: pretty;
+  background: linear-gradient(138.82deg, #fff 24.72%, oklab(96.6% -0.002 0.023) 83.85%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* Paper: 14/24 on #D1D5DC; 16px below 768 so long copy stays readable on phones. */
+.description {
+  margin-top: 8px;
+  color: var(--color-on-dark);
+  font-size: var(--fs-small);
+  line-height: 24px;
+  font-variation-settings: var(--fvs-display);
+}
+
+.highlights {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.highlight {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.highlightValue {
+  color: #b8a85e;
+  font-size: 1.25rem;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  font-variation-settings: var(--fvs-display);
+}
+
+.highlightLabel {
+  color: var(--color-subtle);
+  font-size: var(--fs-xs);
+  line-height: 16px;
+  font-weight: 500;
+  font-variation-settings: var(--fvs-display);
+}
+
+.divider {
+  width: 1px;
+  height: 32px;
+  background: rgb(255 255 255 / 32%);
+}
+
+/* ---------- Booking panel ---------- */
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+  padding: 24px;
+  border-radius: 4px;
+  background: var(--color-white);
+  box-shadow:
+    inset 0 0 0 1px #ddd8d2,
+    0 1px 2px #00000008,
+    0 1px 3px #0000000a;
+  color: var(--color-ink);
+}
+
+@media (min-width: 64rem) {
+  .intro {
+    flex: 0 1 34.5rem; /* 552 */
+  }
+
+  .panel {
+    flex: 0 1 30.875rem; /* 494 */
+    min-width: 26rem;
+  }
+}
+
+.panelHead {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.eyebrow {
+  color: var(--color-subtle);
+  font-size: var(--fs-xs);
+  line-height: 16px;
+  letter-spacing: 1px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.from {
+  font-size: 2rem;
+  line-height: 40px;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  font-variation-settings: var(--fvs-display);
+}
+
+.rule span {
+  display: block;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.plans {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 4px;
+  border: 0;
+  min-width: 0;
+}
+
+.plan {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 6px;
+  min-height: 80px;
+  padding: 16px;
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 2px var(--color-border);
+  cursor: pointer;
+  transition:
+    box-shadow var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out);
+}
+
+/* The radio stays in the accessibility tree and keyboard order; the card is its visual. */
+.planInput {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.planLabel {
+  color: var(--color-muted);
+  font-size: var(--fs-xs);
+  line-height: 16px;
+  font-weight: 600;
+  font-variation-settings: var(--fvs-display);
+}
+
+.planPrice {
+  font-size: 1.25rem;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  font-variation-settings: var(--fvs-display);
+}
+
+/* Paper has no selected state: ink outline on the brand lime wash, matching the category hover. */
+.plan:has(.planInput:checked) {
+  background: #edf5c4;
+  box-shadow: inset 0 0 0 2px var(--color-ink);
+}
+
+.plan:has(.planInput:checked) .planLabel {
+  color: var(--color-ink);
+}
+
+.plan:has(.planInput:focus-visible) {
+  box-shadow:
+    inset 0 0 0 2px var(--color-ink),
+    var(--focus-ring);
+}
+
+@media (hover: hover) {
+  .plan:not(:has(.planInput:checked)):hover {
+    box-shadow: inset 0 0 0 2px var(--color-subtle);
+  }
+}
+
+.facts {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+  border-radius: 4px;
+  background: var(--color-border-soft);
+}
+
+.factRow {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.factRule {
+  height: 1px;
+  background: var(--color-border);
+}
+
+.fact {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.factIcon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--color-deep);
+  color: var(--color-white);
+}
+
+.factText {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.factLabel {
+  color: var(--color-muted);
+  font-size: 0.6875rem;
+  line-height: 14px;
+  font-weight: 600;
+}
+
+.factValue {
+  font-size: var(--fs-small);
+  line-height: 18px;
+  font-weight: 600;
+  font-variation-settings: var(--fvs-display);
+}
+
+.cta {
+  display: flex;
+  width: 100%;
+}
+
+.cta > span:first-child {
+  flex: 1;
+  justify-content: center;
+}
+
+@media (max-width: 47.99rem) {
+  .description {
+    font-size: var(--fs-body);
+    line-height: 26px;
+  }
+
+  .panel {
+    padding: 20px;
+  }
+}
+
+/* Plans stack on narrow phones; three 100px cards cannot hold "With Prof. Chiarenza". */
+@media (max-width: 29.99rem) {
+  .plans {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  .plan {
+    flex-direction: row;
+    align-items: center;
+    min-height: 56px;
+  }
+
+  .planLabel {
+    font-size: var(--fs-small);
+  }
+
+  .factRow {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

@@ -1,0 +1,118 @@
+/* Paper: white band with hairlines, padding 72; 3×2 grid of 182px cards, gap 16. */
+.section {
+  background: var(--color-white);
+  border-block: 1px solid var(--color-border-soft);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: calc(var(--content-max) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding: var(--section-pad-sm) var(--gutter);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+  height: 100%;
+  min-height: 182px;
+  padding: 24px;
+  border-radius: 4px;
+  background: var(--color-white);
+  box-shadow: inset 0 0 0 2px var(--color-border);
+  filter: drop-shadow(0 1px 1px #0000000f);
+  transition:
+    background-color var(--dur-base) var(--ease-out),
+    box-shadow var(--dur-base) var(--ease-out);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  height: 42px;
+  color: var(--color-ink);
+}
+
+.glyph {
+  width: 42px;
+  height: 42px;
+}
+
+.flag {
+  width: 42px;
+  object-fit: contain;
+}
+
+.title {
+  font-size: 1.25rem;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  font-variation-settings: var(--fvs-display);
+  text-wrap: balance;
+}
+
+.card:focus-visible {
+  background: #edf5c4;
+  box-shadow:
+    inset 0 0 0 2px #e3eab8,
+    var(--focus-ring);
+}
+
+@media (hover: hover) {
+  .card:hover {
+    background: #edf5c4;
+    box-shadow: inset 0 0 0 2px #e3eab8;
+  }
+}
+
+@media (max-width: 63.99rem) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .card {
+    min-height: 152px;
+  }
+}
+
+@media (max-width: 29.99rem) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+
+  .card {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+    min-height: 0;
+    padding: 20px;
+  }
+
+  .icon {
+    flex: none;
+  }
+
+  .title {
+    font-size: 1.125rem;
+  }
+}

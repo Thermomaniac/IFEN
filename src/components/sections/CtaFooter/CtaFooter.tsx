@@ -20,7 +20,13 @@ const socialIcons = { facebook: FacebookIcon, x: XLogoIcon, instagram: Instagram
  * the bottom of the same photo. Both share one backdrop, so they live in one
  * wrapper after <main>: the CTA is a labelled region, the card the page footer.
  */
-export function CtaFooter() {
+type CtaContent = {
+  label: string;
+  headingLines: string[];
+  action: { label: string; href: string };
+};
+
+export function CtaFooter({ content = cta }: { content?: CtaContent }) {
   const stage = useRef<HTMLDivElement>(null);
   const bgY = useParallax(stage, 60);
 
@@ -34,11 +40,11 @@ export function CtaFooter() {
       <section className={styles.cta} aria-labelledby="cta-title">
         <Reveal as="header" className={styles.ctaInner}>
           <RevealItem>
-            <SectionLabel tone="plain">{cta.label}</SectionLabel>
+            <SectionLabel tone="plain">{content.label}</SectionLabel>
           </RevealItem>
           <RevealItem>
             <SectionHeading id="cta-title" tone="dark" className={styles.heading}>
-              {cta.headingLines.map((line, i) => (
+              {content.headingLines.map((line, i) => (
                 <span key={line} className={styles.line}>
                   {i > 0 && " "}
                   {line}
@@ -47,7 +53,7 @@ export function CtaFooter() {
             </SectionHeading>
           </RevealItem>
           <RevealItem>
-            <CtaButton href={cta.action.href}>{cta.action.label}</CtaButton>
+            <CtaButton href={content.action.href}>{content.action.label}</CtaButton>
           </RevealItem>
         </Reveal>
       </section>

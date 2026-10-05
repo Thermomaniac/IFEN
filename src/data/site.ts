@@ -22,28 +22,28 @@ export const navLinks: NavLink[] = [
   { label: "Home", href: "/" },
   {
     label: "Course Booking",
-    href: "#training",
+    href: "/#training",
     children: [
-      { label: "Course Dates", href: "#training" },
-      { label: "Certification Path", href: "#certification" },
-      { label: "Training Locations", href: "#locations" },
+      { label: "Course Dates", href: "/#training" },
+      { label: "Certification Path", href: "/#certification" },
+      { label: "Training Locations", href: "/#locations" },
     ],
   },
   {
     label: "Neurofeedback",
-    href: "#about",
+    href: "/#about",
     children: [
-      { label: "What Is Neurofeedback", href: "#about" },
-      { label: "Benefits", href: "#benefits" },
+      { label: "What Is Neurofeedback", href: "/#about" },
+      { label: "Benefits", href: "/#benefits" },
     ],
   },
   {
     label: "IFEN",
-    href: "#board",
+    href: "/#board",
     children: [
-      { label: "Board Members", href: "#board" },
-      { label: "Partners", href: "#partners" },
-      { label: "Testimonials", href: "#testimonials" },
+      { label: "Board Members", href: "/#board" },
+      { label: "Partners", href: "/#partners" },
+      { label: "Testimonials", href: "/#testimonials" },
     ],
   },
   { label: "Shop", href: "#" },
@@ -110,7 +110,13 @@ export const training = {
   heading: "Upcoming Training & Education Dates",
   courses: [
     { title: "MODULE 1 — Certified Neurofeedback Therapist", duration: "5 Days", location: "Munich", href: "#", image: courseImage },
-    { title: "MODULE 1 — Certified Neurofeedback Therapist", duration: "5 Days", location: "Munich", href: "#", image: courseImage },
+    {
+      title: "BCIA Mentoring, QEEG Mentoring for QEEG-D Certification",
+      duration: "Flexible",
+      location: "After Election", // Paper copy; likely means "by arrangement"
+      href: "/courses/bcia-qeeg-mentoring",
+      image: courseImage,
+    },
     { title: "MODULE 1 — Certified Neurofeedback Therapist", duration: "5 Days", location: "Munich", href: "#", image: courseImage },
     { title: "MODULE 1 — Certified Neurofeedback Therapist", duration: "5 Days", location: "Munich", href: "#", image: courseImage },
   ] satisfies Course[],
@@ -301,9 +307,9 @@ export const footer = {
       links: [
         { label: "CE Credits & Points", href: "#" },
         { label: "Funding Opportunities", href: "#" },
-        { label: "Workshop Places Germany", href: "#locations" },
-        { label: "Repeater Discount details", href: "#benefits" },
-        { label: "Accreditation guidelines", href: "#certification" },
+        { label: "Workshop Places Germany", href: "/#locations" },
+        { label: "Repeater Discount details", href: "/#benefits" },
+        { label: "Accreditation guidelines", href: "/#certification" },
       ],
     },
     {
@@ -320,10 +326,10 @@ export const footer = {
       title: "My IFEN",
       links: [
         { label: "Login portal", href: "#" },
-        { label: "About the institute", href: "#about" },
-        { label: "Lecturers overview", href: "#board" },
-        { label: "Advisory Board members", href: "#board" },
-        { label: "Research partnerships", href: "#partners" },
+        { label: "About the institute", href: "/#about" },
+        { label: "Lecturers overview", href: "/#board" },
+        { label: "Advisory Board members", href: "/#board" },
+        { label: "Research partnerships", href: "/#partners" },
       ],
     },
   ] satisfies FooterColumn[],

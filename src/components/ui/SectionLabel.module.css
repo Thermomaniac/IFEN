@@ -31,3 +31,7 @@
   box-shadow: none;
   color: var(--color-border);
 }
+
+.sm {
+  padding: 8px 16px;
+}

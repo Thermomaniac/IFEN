@@ -43,6 +43,7 @@
   --content-max: 81rem; /* 1296px */
   --gutter: clamp(1rem, 5vw, 4.5rem); /* 72px at 1440 */
   --section-pad: clamp(4rem, 1rem + 7vw, 7rem); /* 112px at 1440 */
+  --section-pad-sm: clamp(3rem, 0.75rem + 4.5vw, 4.5rem); /* 72px at 1440, course pages */
 
   /* Shape */
   --radius-button: 2px;
