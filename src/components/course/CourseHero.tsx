@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { Fragment } from "react";
 import {
@@ -11,7 +9,6 @@ import {
 import { Reveal, RevealItem } from "@/components/motion/Reveal";
 import { CtaButton } from "@/components/ui/CtaButton";
 import { course, formatPrice, plans, REGISTER_PATH, type CourseFact } from "@/data/course";
-import { setPlan, useRegistration } from "@/lib/registration";
 import styles from "./CourseHero.module.css";
 
 const factIcons: Record<CourseFact["icon"], typeof UsersIcon> = {
@@ -25,11 +22,10 @@ const fromPrice = Math.min(...plans.map((p) => p.price));
 
 /**
  * Webinar hero: breadcrumb, badge, title and highlights on the left, the booking
- * panel on the right. The plan picker is a native radio group, so arrow keys and
- * screen readers work as expected; the choice is kept for the registration steps.
+ * panel on the right. The plans are a static price list; the package is chosen
+ * in the registration flow.
  */
 export function CourseHero() {
-  const { plan } = useRegistration();
   const factRows = [course.facts.slice(0, 2), course.facts.slice(2, 4)];
 
   return (
@@ -120,22 +116,14 @@ export function CourseHero() {
           </RevealItem>
 
           <RevealItem>
-            <fieldset className={styles.plans} aria-labelledby="plan-legend">
+            <ul className={styles.plans} aria-labelledby="plan-legend">
               {plans.map((p) => (
-                <label key={p.id} className={styles.plan}>
-                  <input
-                    type="radio"
-                    name="plan"
-                    value={p.id}
-                    checked={plan === p.id}
-                    onChange={() => setPlan(p.id)}
-                    className={styles.planInput}
-                  />
+                <li key={p.id} className={styles.plan}>
                   <span className={styles.planLabel}>{p.label}</span>
                   <span className={styles.planPrice}>{formatPrice(p.price)}</span>
-                </label>
+                </li>
               ))}
-            </fieldset>
+            </ul>
           </RevealItem>
 
           <RevealItem className={styles.facts}>
