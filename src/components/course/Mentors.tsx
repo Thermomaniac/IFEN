@@ -30,8 +30,8 @@ function usePerView() {
 /**
  * Speaker carousel, same mechanics as the homepage Board: the arrows slide the
  * track one card at a time with the shared reveal easing. Every card links to
- * the speaker's page; hovering or focusing one zooms the photo and turns the
- * arrow chip ink, as on the Board cards. Off-screen cards are inert; a live
+ * the speaker's page; hovering or focusing one zooms the photo and reveals the
+ * small apricot register arrow (Paper's hover state). Off-screen cards are inert; a live
  * region reports the position.
  */
 export function Mentors() {
@@ -108,7 +108,7 @@ export function Mentors() {
                       <p className={styles.role}>{m.role}</p>
                     </div>
                     <span className={styles.go} aria-hidden="true">
-                      <ArrowCornerIcon />
+                      <ArrowCornerIcon width={16} height={16} />
                     </span>
                   </div>
                 </a>
