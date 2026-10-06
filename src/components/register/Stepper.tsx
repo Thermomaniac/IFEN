@@ -4,8 +4,8 @@ import { REGISTER_PATH, registration } from "@/data/course";
 import styles from "./Stepper.module.css";
 
 /**
- * Three pills: done (ink circle + tick, links back), current (ink circle + lime
- * dot, aria-current="step"), upcoming (cream circle + number). On phones only the
+ * Three pills: done (ink circle + tick, links back), current (ink ring around a
+ * lime dot, aria-current="step"), upcoming (cream circle + number). On phones only the
  * current pill keeps its label; the others shrink to their circle.
  */
 export function Stepper({ current }: { current: number }) {
@@ -15,11 +15,7 @@ export function Stepper({ current }: { current: number }) {
         const state = i < current ? "done" : i === current ? "current" : "upcoming";
         const marker = (
           <span className={styles.marker} aria-hidden="true">
-            {state === "done" ? <CheckIcon /> : state === "current" ? (
-              <span className={styles.dot} />
-            ) : (
-              <span className={styles.number}>{i + 1}</span>
-            )}
+            {state === "done" ? <CheckIcon /> : state === "upcoming" && <span className={styles.number}>{i + 1}</span>}
           </span>
         );
         const label = (
