@@ -24,8 +24,8 @@ function PaymentMark({ id, label }: { id: PaymentMethodId; label: string }) {
 }
 
 /**
- * Radio cards for package and payment method. Nothing is preselected: a hint
- * says a choice is needed, and a missed choice shows the field error under the
+ * Radio cards for package and payment method. Nothing is preselected: an optional
+ * hint says a choice is needed, and a missed choice shows the field error under the
  * cards. The first radio carries the field id so the error summary can focus it.
  */
 function OptionGroup({
@@ -41,7 +41,7 @@ function OptionGroup({
 }: {
   name: string;
   title: string;
-  hint: string;
+  hint?: string;
   kind?: "package";
   value: string | undefined;
   error?: string;
@@ -53,14 +53,16 @@ function OptionGroup({
   return (
     <fieldset
       className={styles.card}
-      aria-describedby={[`${id}-hint`, error && `${id}-error`].filter(Boolean).join(" ")}
+      aria-describedby={[hint && `${id}-hint`, error && `${id}-error`].filter(Boolean).join(" ") || undefined}
       data-invalid={error ? "" : undefined}
     >
       <legend className={styles.cardTitle}>{title}</legend>
       <div className={styles.group}>
-        <p id={`${id}-hint`} className={styles.hint}>
-          {hint}
-        </p>
+        {hint && (
+          <p id={`${id}-hint`} className={styles.hint}>
+            {hint}
+          </p>
+        )}
         <div className={styles.options} data-kind={kind}>
           {options.map((o, i) => (
             <label key={o.id} className={styles.option}>
@@ -113,7 +115,6 @@ export function BillingForm() {
         <OptionGroup
           name="plan"
           title="Choose Your Package"
-          hint="Select one package to continue."
           kind="package"
           value={values.plan}
           error={errors.plan}
