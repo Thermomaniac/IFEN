@@ -25,7 +25,18 @@ export function formatPrice(amount: number) {
 
 export type CourseFact = { label: string; value: string; icon: "start" | "end" | "level" | "location" };
 
-export type Mentor = { id: string; name: string; role: string; image?: string };
+export type Mentor = {
+  id: string;
+  name: string;
+  role: string;
+  image: string;
+  /** Short intro paragraphs for the speaker page. */
+  bio: string[];
+  /** What the speaker covers in the mentoring programme. */
+  focus: string[];
+};
+
+export const SPEAKERS_PATH = `${COURSE_PATH}/speakers`;
 
 export type Category = {
   id: string;
@@ -71,17 +82,98 @@ export const course = {
   mentors: {
     label: "Your Mentors",
     heading: "Speaker / Instructors",
-    // Mark Thompson's photo is missing from Paper; the card shows a tinted placeholder.
+    // The first four are from Paper. The last four are fictitious placeholders until IFEN
+    // supplies its real speaker list; their photos are free-licence Unsplash images
+    // (photo-1758691461530, -1758685848602, -1739484264725, -1573496527892).
     people: [
-      { id: "mark-thompson", name: "Mark Thompson", role: "Licensed Clinical Psychologist" },
-      { id: "sarah-lee", name: "Sarah Lee", role: "Behavioral Health Specialist", image: "/mentors/sarah-lee.jpg" },
+      {
+        id: "mark-thompson",
+        name: "Mark Thompson",
+        role: "Licensed Clinical Psychologist",
+        image: "/mentors/mark-thompson.jpg",
+        bio: [
+          "Mark has worked with qEEG-guided neurofeedback in outpatient psychology for over fifteen years, mostly with adults living with anxiety, attention difficulties and sleep problems.",
+          "In the mentoring programme, Mark reviews case histories with participants and shows how assessment findings turn into a protocol a client can actually follow.",
+        ],
+        focus: ["Clinical intake and case formulation", "Protocol planning from qEEG findings", "Tracking progress across sessions"],
+      },
+      {
+        id: "sarah-lee",
+        name: "Sarah Lee",
+        role: "Behavioral Health Specialist",
+        image: "/mentors/sarah-lee.jpg",
+        bio: [
+          "Sarah combines neurofeedback with behavioural therapy in an integrated care team, working with children, adolescents and their families.",
+          "Mentoring with Sarah covers session structure, client communication and how to set realistic training goals with families.",
+        ],
+        focus: ["Neurofeedback with children and adolescents", "Working with parents and care teams", "Session structure and goal setting"],
+      },
       {
         id: "james-rodriguez",
         name: "James Rodriguez",
         role: "Certified BCIA Mentor & Therapist",
         image: "/mentors/james-rodriguez.jpg",
+        bio: [
+          "James is a BCIA-certified mentor who has guided many practitioners through their certification hours, alongside his own therapy practice.",
+          "The sessions focus on the practical requirements of BCIA certification and on building confidence with live recordings.",
+        ],
+        focus: ["BCIA mentoring hours and documentation", "Live recording practice", "Artifact recognition"],
       },
-      { id: "lena", name: "Lena", role: "Cognitive Behavioral Therapist", image: "/mentors/lena.jpg" },
+      {
+        id: "lena",
+        name: "Lena",
+        role: "Cognitive Behavioral Therapist",
+        image: "/mentors/lena.jpg",
+        bio: [
+          "Lena is a cognitive behavioural therapist who uses neurofeedback as part of structured treatment plans for mood and stress-related conditions.",
+          "She helps participants connect neurofeedback training with established therapeutic frameworks.",
+        ],
+        focus: ["Integrating neurofeedback with CBT", "Stress and mood regulation", "Client psychoeducation"],
+      },
+      {
+        id: "klaus-brenner",
+        name: "Dr. Klaus Brenner",
+        role: "Neurologist & qEEG Supervisor",
+        image: "/mentors/klaus-brenner.jpg",
+        bio: [
+          "Klaus is a neurologist with a long clinical background in EEG diagnostics who now supervises qEEG interpretation for practitioners in training.",
+          "Klaus walks participants through brain maps line by line, with an emphasis on medical red flags and when to refer.",
+        ],
+        focus: ["Clinical EEG and qEEG interpretation", "Recognising findings that need referral", "Medication effects on the EEG"],
+      },
+      {
+        id: "anna-lindqvist",
+        name: "Dr. Anna Lindqvist",
+        role: "Neuroscience Researcher",
+        image: "/mentors/anna-lindqvist.jpg",
+        bio: [
+          "Anna researches brain oscillations and learning, and teaches the scientific foundations behind neurofeedback.",
+          "In mentoring, Anna helps participants read the research critically and explain the evidence base to clients and colleagues.",
+        ],
+        focus: ["Neurophysiology of brain rhythms", "Reading and evaluating research", "Normative databases and their limits"],
+      },
+      {
+        id: "henrik-albers",
+        name: "Prof. Henrik Albers",
+        role: "Clinical Neurophysiologist",
+        image: "/mentors/henrik-albers.jpg",
+        bio: [
+          "Henrik has taught clinical neurophysiology for many years and has trained generations of EEG technicians and clinicians.",
+          "Henrik leads the advanced sessions on source analysis, connectivity measures and complex case reviews.",
+        ],
+        focus: ["Connectivity and source analysis", "Advanced case reviews", "QEEG-D board preparation"],
+      },
+      {
+        id: "amara-okafor",
+        name: "Dr. Amara Okafor",
+        role: "Neurofeedback Practitioner",
+        image: "/mentors/amara-okafor.jpg",
+        bio: [
+          "Amara runs a neurofeedback practice and mentors newly certified practitioners as they set up their own clinical work.",
+          "The sessions cover the practical side of everyday practice, from equipment and electrode placement to documentation.",
+        ],
+        focus: ["Electrode placement and signal quality", "Setting up a neurofeedback practice", "Documentation and reporting"],
+      },
     ] satisfies Mentor[],
   },
 
@@ -109,6 +201,10 @@ export const course = {
     action: { label: "Register For Booking", href: `${REGISTER_PATH}/participant` },
   },
 };
+
+export function getMentor(id: string) {
+  return course.mentors.people.find((m) => m.id === id);
+}
 
 // ---------- Registration flow ----------
 

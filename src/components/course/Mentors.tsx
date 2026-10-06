@@ -6,7 +6,7 @@ import { ArrowCornerBackIcon, ArrowCornerIcon } from "@/components/icons";
 import { Reveal, RevealItem } from "@/components/motion/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { course } from "@/data/course";
+import { course, SPEAKERS_PATH } from "@/data/course";
 import styles from "./Mentors.module.css";
 
 // Cards per view; must match --per-view in Mentors.module.css.
@@ -27,18 +27,12 @@ function usePerView() {
   );
 }
 
-function initials(name: string) {
-  return name
-    .split(" ")
-    .map((part) => part[0])
-    .join("")
-    .slice(0, 2);
-}
-
 /**
- * Mentor carousel. Every card has the same structure and the row stretches to
- * the tallest one, so sliding never changes the section height. Off-screen
- * cards are inert; a live region reports the position.
+ * Speaker carousel, same mechanics as the homepage Board: the arrows slide the
+ * track one card at a time with the shared reveal easing. Every card links to
+ * the speaker's page; hovering or focusing one zooms the photo and turns the
+ * arrow chip ink, as on the Board cards. Off-screen cards are inert; a live
+ * region reports the position.
  */
 export function Mentors() {
   const { mentors } = course;
@@ -50,7 +44,7 @@ export function Mentors() {
   const end = Math.min(start + perView, people.length);
 
   return (
-    <section className={styles.section} aria-labelledby="mentors-title">
+    <section id="speakers" className={styles.section} aria-labelledby="mentors-title">
       <div className={styles.inner}>
         <div className={styles.head}>
           <Reveal as="header" className={styles.header}>
@@ -71,7 +65,7 @@ export function Mentors() {
                 className={styles.nav}
                 onClick={() => setStart(start - 1)}
                 disabled={start === 0}
-                aria-label="Previous mentors"
+                aria-label="Previous speakers"
               >
                 <ArrowCornerBackIcon />
               </button>
@@ -82,7 +76,7 @@ export function Mentors() {
                 className={styles.nav}
                 onClick={() => setStart(start + 1)}
                 disabled={start === maxStart}
-                aria-label="Next mentors"
+                aria-label="Next speakers"
               >
                 <ArrowCornerIcon />
               </button>
@@ -91,34 +85,33 @@ export function Mentors() {
         </div>
 
         <p className="sr-only" aria-live="polite">
-          {`Showing ${start + 1}${end - start > 1 ? `–${end}` : ""} of ${people.length} mentors`}
+          {`Showing ${start + 1}${end - start > 1 ? `–${end}` : ""} of ${people.length} speakers`}
         </p>
 
         <Reveal className={styles.viewport}>
           <ul className={styles.list} style={{ "--start": start } as CSSProperties}>
             {people.map((m, i) => (
               <RevealItem as="li" key={m.id} className={styles.card}>
-                <div className={styles.cardInner} inert={i < start || i >= end}>
+                <a href={`${SPEAKERS_PATH}/${m.id}`} className={styles.cardInner} inert={i < start || i >= end}>
                   <div className={styles.media}>
-                    {m.image ? (
-                      <Image
-                        src={m.image}
-                        alt={`Portrait of ${m.name}`}
-                        fill
-                        sizes="(min-width: 64rem) 312px, (min-width: 48rem) 50vw, 100vw"
-                        className={styles.photo}
-                      />
-                    ) : (
-                      <span className={styles.placeholder} aria-hidden="true">
-                        {initials(m.name)}
-                      </span>
-                    )}
+                    <Image
+                      src={m.image}
+                      alt=""
+                      fill
+                      sizes="(min-width: 64rem) 312px, (min-width: 48rem) 50vw, 100vw"
+                      className={styles.photo}
+                    />
                   </div>
                   <div className={styles.body}>
-                    <h3 className={styles.name}>{m.name}</h3>
-                    <p className={styles.role}>{m.role}</p>
+                    <div className={styles.text}>
+                      <h3 className={styles.name}>{m.name}</h3>
+                      <p className={styles.role}>{m.role}</p>
+                    </div>
+                    <span className={styles.go} aria-hidden="true">
+                      <ArrowCornerIcon />
+                    </span>
                   </div>
-                </div>
+                </a>
               </RevealItem>
             ))}
           </ul>
