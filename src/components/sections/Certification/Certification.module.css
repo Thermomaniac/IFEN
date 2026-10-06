@@ -18,15 +18,15 @@
   pointer-events: none;
 }
 
-/* Ambient dot field: behind the content, never interactive, faded top and bottom. */
-.particles {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
+/* Once the canvas has drawn the dots, it replaces the static SVG underneath. */
+.brain[data-live] {
+  background: none;
+}
+
+.brainCanvas {
+  display: block;
   width: 100%;
   height: 100%;
-  pointer-events: none;
-  mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 78%, transparent);
 }
 
 .inner {

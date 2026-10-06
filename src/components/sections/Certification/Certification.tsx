@@ -7,7 +7,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { certification } from "@/data/site";
 import styles from "./Certification.module.css";
-import { Particles } from "./Particles";
+import { BrainParticles } from "./BrainParticles";
 
 const icons = { brain: ModuleBrainIcon, pulse: ModulePulseIcon, chip: ModuleChipIcon };
 
@@ -55,8 +55,7 @@ export function Certification() {
   const { modules, final } = certification;
   return (
     <section id="certification" className={styles.certification} aria-labelledby="certification-title">
-      <span className={styles.brain} aria-hidden="true" />
-      <Particles />
+      <BrainParticles />
       <Container className={styles.inner}>
         <Reveal as="header" className={styles.header}>
           <RevealItem>
