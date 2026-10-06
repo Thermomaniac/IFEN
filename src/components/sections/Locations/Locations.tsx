@@ -3,7 +3,6 @@
 import { useInView } from "framer-motion";
 import Image from "next/image";
 import { useRef, type CSSProperties } from "react";
-import { MapPinFillIcon } from "@/components/icons";
 import { Reveal, RevealItem } from "@/components/motion/Reveal";
 import { Container } from "@/components/ui/Container";
 import { CtaButton } from "@/components/ui/CtaButton";
@@ -16,16 +15,16 @@ import styles from "./Locations.module.css";
 const ROW_PITCH = 33.3; // vertical dot spacing in the Paper map
 const TILE = 25; // Paper tile size; rounded squares on the dot centres
 
-// Map stage: the 532×657 map plus the stamp slots around it, centred on the map.
-const STAGE_W = 796;
+// Map stage: the 532×657 map plus the six stamp slots around it, centred on the map.
+const STAGE_W = 877;
 const STAGE_H = 694.5;
-const MAP_X = 132;
+const MAP_X = 172.5;
 const MAP_Y = 20;
 
 /**
- * Tile map of Germany with one pin per training city. The tiles fill in top to
- * bottom once the map scrolls into view, then each city pin lands and its photo
- * stamp drops in. Stamps sit in Paper's slots around the map and the whole stage
+ * Tile map of Germany with Paper's training pins. The tiles fill in top to
+ * bottom once the map scrolls into view, then the pins land and the photo
+ * stamps drop in. Stamps sit in Paper's slots around the map and the whole stage
  * scales as one unit; on phones they move into a grid under the map.
  */
 export function Locations() {
@@ -74,14 +73,13 @@ export function Locations() {
               ))}
             </svg>
 
-            {locations.cities.map((city, i) => {
-              const [x, y] = germanyDots[city.dot];
+            {locations.pins.map(([x, y], i) => {
               const pos = {
                 "--x": `${(x / MAP_WIDTH) * 100}%`,
                 "--y": `${(y / MAP_HEIGHT) * 100}%`,
                 "--i": i,
               } as CSSProperties;
-              return <span key={city.name} className={styles.cityDot} style={pos} aria-hidden="true" />;
+              return <span key={`${x}-${y}`} className={styles.cityDot} style={pos} aria-hidden="true" />;
             })}
           </div>
 
@@ -93,13 +91,9 @@ export function Locations() {
                 "--i": i,
               } as CSSProperties;
               return (
-                <li key={city.name} className={styles.stamp} style={pos}>
+                <li key={city.photo} className={styles.stamp} style={pos}>
                   <span className={styles.photo}>
-                    {city.photo ? (
-                      <Image src={city.photo} alt="" fill sizes="96px" className={styles.photoImage} />
-                    ) : (
-                      <MapPinFillIcon className={styles.photoPlaceholder} />
-                    )}
+                    <Image src={city.photo} alt="" fill sizes="96px" className={styles.photoImage} />
                   </span>
                   {city.name}
                 </li>

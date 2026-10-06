@@ -184,11 +184,8 @@ export const presentation = {
 
 export type LocationCity = {
   name: string;
-  /** Index into germanyDots, nearest dot to the real lat/lon. */
-  dot: number;
-  /** Photo for the stamp; null renders a neutral placeholder. */
-  photo: string | null;
-  /** Stamp's top-left in the 796×694.5 map stage (Paper stamp slots, map at 132,20). */
+  photo: string;
+  /** Stamp's top-left in the 877×694.5 map stage (Paper stamp slots, map at 172.5,20). */
   slot: readonly [number, number];
 };
 
@@ -196,15 +193,30 @@ export type LocationCity = {
 // the Berlin and Munich stamps (spelled "Munic") and scatters 8 pins, so each city
 // now has one pin at its real position and takes the Paper stamp slot nearest to it.
 // Hamburg's photo is broken in Paper: placeholder until IFEN supplies one.
+// Paper shows six stamps: Berlin and Munich appear twice, each with a different landmark.
+// Kept as designed (Paper's "Munic" corrected); order is top to bottom for the drop-in stagger.
 export const locations = {
   label: "Our Locations",
   headingLines: ["Our Training Locations Are", "Across 16 States In Germany"],
   cities: [
-    { name: "Hamburg", dot: 18, photo: null, slot: [188, 0] },
-    { name: "Berlin", dot: 60, photo: "/locations/berlin.jpg", slot: [542, 45] },
-    { name: "Cologne", dot: 110, photo: "/locations/cologne.jpg", slot: [0, 210.5] },
-    { name: "Munich", dot: 198, photo: "/locations/munich.jpg", slot: [524, 626.5] },
+    { name: "Berlin", photo: "/locations/berlin-cathedral.jpg", slot: [228.5, 0] },
+    { name: "Munich", photo: "/locations/munich.jpg", slot: [582.5, 45] },
+    { name: "Cologne", photo: "/locations/cologne.jpg", slot: [40.5, 210.5] },
+    { name: "Berlin", photo: "/locations/berlin.jpg", slot: [715, 360] },
+    { name: "Munich", photo: "/locations/munich-town-hall.jpg", slot: [86.5, 548.5] },
+    { name: "Hamburg", photo: "/locations/hamburg.jpg", slot: [564.5, 626.5] },
   ] satisfies LocationCity[],
+  /** Paper's pins, centre in the 532×657 map. */
+  pins: [
+    [233, 145],
+    [297, 179],
+    [393, 245],
+    [138, 278],
+    [234, 278],
+    [329, 312],
+    [170, 412],
+    [361, 512],
+  ] as const,
   cta: { label: "View All Venues", href: "#" },
 };
 
