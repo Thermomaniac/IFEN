@@ -13,10 +13,9 @@ export const plans: Plan[] = [
   { id: "chiarenza", label: "With Prof. Chiarenza", price: 200 },
 ];
 
-export const DEFAULT_PLAN: PlanId = "standard";
-
-export function getPlan(id: PlanId) {
-  return plans.find((p) => p.id === id) ?? plans[0];
+/** The chosen package, or undefined while none is picked. */
+export function getPlan(id: string | undefined) {
+  return plans.find((p) => p.id === id);
 }
 
 export function formatPrice(amount: number) {
@@ -224,7 +223,7 @@ export function isPaymentMethod(value: unknown): value is PaymentMethodId {
 }
 
 export function getPaymentMethod(id: string | undefined) {
-  return paymentMethods.find((m) => m.id === id) ?? paymentMethods[1];
+  return paymentMethods.find((m) => m.id === id);
 }
 
 /** Two decimals for the order summary and pay button, as drawn in Paper ("150.00 EUR"). */

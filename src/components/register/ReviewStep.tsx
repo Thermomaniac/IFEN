@@ -50,8 +50,10 @@ export function ReviewStep() {
   const reg = useRegistration();
   const p = reg.participant;
   const b = { ...billingDefaults, ...reg.billing };
-  const plan = getPlan(reg.plan);
+  // StepLayout only renders this step once both are chosen; the fallbacks are for type safety.
+  const plan = getPlan(b.plan);
   const method = getPaymentMethod(b.payment);
+  const price = plan?.price ?? 0;
   const [paying, setPaying] = useState(false);
 
   const contact = [p.salutation, p.firstName, p.lastName].filter(Boolean).join(" ");
@@ -63,8 +65,8 @@ export function ReviewStep() {
         <Section title="Course Summary" edit="billing">
           <Item label="Date" value={startDate} />
           <Item label="Course No" value={registration.courseNumber} />
-          <Item label="Package" value={`${plan.label}, ${formatAmount(plan.price)}`} />
-          <Item label="Payment Method" value={method.label} />
+          <Item label="Package" value={plan && `${plan.label}, ${formatAmount(plan.price)}`} />
+          <Item label="Payment Method" value={method?.label} />
         </Section>
 
         <Section title="Billing Info" edit="billing">
@@ -95,7 +97,8 @@ export function ReviewStep() {
           Go Back
         </Link>
         <SubmitButton type="button" onClick={() => setPaying(true)} disabled={paying}>
-          Pay {formatAmount(plan.price)} With {method.label}
+          Pay {formatAmount(price)}
+          {method && ` With ${method.label}`}
         </SubmitButton>
       </div>
 

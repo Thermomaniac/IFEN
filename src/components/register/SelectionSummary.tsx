@@ -19,11 +19,12 @@ const factIcons: Record<CourseFact["icon"], typeof UsersIcon> = {
 
 /**
  * "Your Selection" card beside the form. Steps 1 and 2 list the course facts;
- * the review step swaps them for the order total of the chosen package.
+ * the review step swaps them for the order total of the chosen package. Until
+ * a package is picked on the billing step the card says so instead of a price.
  */
 export function SelectionSummary({ variant }: { variant: "facts" | "totals" }) {
-  const { plan } = useRegistration();
-  const selected = getPlan(plan);
+  const selected = getPlan(useRegistration().billing.plan);
+  const price = selected?.price ?? 0;
 
   return (
     <aside className={styles.card} aria-labelledby="selection-title">
@@ -33,7 +34,7 @@ export function SelectionSummary({ variant }: { variant: "facts" | "totals" }) {
         </p>
         <p className={styles.course}>{course.title}</p>
         <p className={styles.plan}>
-          Package: <span>{selected.label}</span>
+          Package: {selected ? <span>{selected.label}</span> : <span data-empty="">Not selected yet</span>}
         </p>
       </div>
 
@@ -63,7 +64,7 @@ export function SelectionSummary({ variant }: { variant: "facts" | "totals" }) {
             </div>
             <div className={styles.line}>
               <dt>Subtotal</dt>
-              <dd>{formatAmount(selected.price)}</dd>
+              <dd>{formatAmount(price)}</dd>
             </div>
             <div className={styles.line}>
               <dt>Discount</dt>
@@ -72,7 +73,7 @@ export function SelectionSummary({ variant }: { variant: "facts" | "totals" }) {
           </dl>
           <dl className={styles.total}>
             <dt>Total</dt>
-            <dd>{formatAmount(selected.price)}</dd>
+            <dd>{formatAmount(price)}</dd>
           </dl>
         </div>
       )}

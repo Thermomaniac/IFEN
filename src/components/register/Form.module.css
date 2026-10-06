@@ -325,6 +325,17 @@
   }
 }
 
+/* Hint, cards and error of one choice. Nothing starts selected; a missed choice turns the card outlines red. */
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card[data-invalid] .option:not(:has(.optionInput:focus-visible)) {
+  box-shadow: inset 0 0 0 2px #c0262d;
+}
+
 .logo {
   height: 17px;
   width: auto;

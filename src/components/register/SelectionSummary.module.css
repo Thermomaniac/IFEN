@@ -70,6 +70,12 @@
   font-weight: 600;
 }
 
+.plan span[data-empty] {
+  color: var(--color-on-dark);
+  font-weight: 400;
+  font-style: italic;
+}
+
 /* ---------- Facts (steps 1 and 2) ---------- */
 
 .facts {

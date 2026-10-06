@@ -3,9 +3,8 @@
 import Link from "next/link";
 import { BankIcon, CardIcon, CheckCircleFillIcon } from "@/components/icons";
 import { formatPrice, paymentMethods, plans, REGISTER_PATH, registration, type PaymentMethodId } from "@/data/course";
-import { setPlan, useRegistration } from "@/lib/registration";
 import { billingDefaults, billingRules } from "@/lib/registrationForm";
-import { ErrorSummary, SelectField, TextAreaField, TextField } from "./Fields";
+import { ErrorSummary, fieldId, SelectField, TextAreaField, TextField } from "./Fields";
 import { markStepNavigation } from "./StepLayout";
 import { SubmitButton } from "./SubmitButton";
 import { useStepForm } from "./useStepForm";
@@ -24,8 +23,77 @@ function PaymentMark({ id, label }: { id: PaymentMethodId; label: string }) {
   );
 }
 
+/**
+ * Radio cards for package and payment method. Nothing is preselected: a hint
+ * says a choice is needed, and a missed choice shows the field error under the
+ * cards. The first radio carries the field id so the error summary can focus it.
+ */
+function OptionGroup({
+  name,
+  title,
+  hint,
+  kind,
+  value,
+  error,
+  onChange,
+  options,
+  children,
+}: {
+  name: string;
+  title: string;
+  hint: string;
+  kind?: "package";
+  value: string | undefined;
+  error?: string;
+  onChange: (name: string, value: string) => void;
+  options: { id: string; content: React.ReactNode }[];
+  children?: React.ReactNode;
+}) {
+  const id = fieldId(name);
+  return (
+    <fieldset
+      className={styles.card}
+      aria-describedby={[`${id}-hint`, error && `${id}-error`].filter(Boolean).join(" ")}
+      data-invalid={error ? "" : undefined}
+    >
+      <legend className={styles.cardTitle}>{title}</legend>
+      <div className={styles.group}>
+        <p id={`${id}-hint`} className={styles.hint}>
+          {hint}
+        </p>
+        <div className={styles.options} data-kind={kind}>
+          {options.map((o, i) => (
+            <label key={o.id} className={styles.option}>
+              <input
+                id={i === 0 ? id : undefined}
+                type="radio"
+                name={name}
+                value={o.id}
+                checked={value === o.id}
+                required
+                onChange={() => onChange(name, o.id)}
+                className={styles.optionInput}
+              />
+              {o.content}
+              <CheckCircleFillIcon className={styles.optionCheck} />
+            </label>
+          ))}
+        </div>
+        {error && (
+          <p id={`${id}-error`} className={styles.error}>
+            <span aria-hidden="true" className={styles.errorIcon}>
+              !
+            </span>
+            {error}
+          </p>
+        )}
+      </div>
+      {children}
+    </fieldset>
+  );
+}
+
 export function BillingForm() {
-  const { plan } = useRegistration();
   const { values, errors, onChange, onBlur, onSubmit, summaryRef } = useStepForm(
     "billing",
     billingRules,
@@ -42,28 +110,24 @@ export function BillingForm() {
           Fields marked with an asterisk are required.
         </p>
 
-        <fieldset className={styles.card}>
-          <legend className={styles.cardTitle}>Choose Your Package</legend>
-          <div className={styles.options} data-kind="package">
-            {plans.map((p) => (
-              <label key={p.id} className={styles.option}>
-                <input
-                  type="radio"
-                  name="plan"
-                  value={p.id}
-                  checked={plan === p.id}
-                  onChange={() => setPlan(p.id)}
-                  className={styles.optionInput}
-                />
-                <span className={styles.optionStack}>
-                  <span className={styles.optionLabel}>{p.label}</span>
-                  <span className={styles.optionPrice}>{formatPrice(p.price)}</span>
-                </span>
-                <CheckCircleFillIcon className={styles.optionCheck} />
-              </label>
-            ))}
-          </div>
-        </fieldset>
+        <OptionGroup
+          name="plan"
+          title="Choose Your Package"
+          hint="Select one package to continue."
+          kind="package"
+          value={values.plan}
+          error={errors.plan}
+          onChange={onChange}
+          options={plans.map((p) => ({
+            id: p.id,
+            content: (
+              <span className={styles.optionStack}>
+                <span className={styles.optionLabel}>{p.label}</span>
+                <span className={styles.optionPrice}>{formatPrice(p.price)}</span>
+              </span>
+            ),
+          }))}
+        />
 
         <fieldset className={styles.card}>
           <legend className={styles.cardTitle}>Billing Details</legend>
@@ -100,26 +164,22 @@ export function BillingForm() {
           </div>
         </fieldset>
 
-        <fieldset className={styles.card}>
-          <legend className={styles.cardTitle}>Payment Method</legend>
-          <div className={styles.options}>
-            {paymentMethods.map((m) => (
-              <label key={m.id} className={styles.option}>
-                <input
-                  type="radio"
-                  name="payment"
-                  value={m.id}
-                  checked={values.payment === m.id}
-                  onChange={() => onChange("payment", m.id)}
-                  className={styles.optionInput}
-                />
-                <span className={styles.optionBody}>
-                  <PaymentMark id={m.id} label={m.label} />
-                </span>
-                <CheckCircleFillIcon className={styles.optionCheck} />
-              </label>
-            ))}
-          </div>
+        <OptionGroup
+          name="payment"
+          title="Payment Method"
+          hint="Select how you would like to pay."
+          value={values.payment}
+          error={errors.payment}
+          onChange={onChange}
+          options={paymentMethods.map((m) => ({
+            id: m.id,
+            content: (
+              <span className={styles.optionBody}>
+                <PaymentMark id={m.id} label={m.label} />
+              </span>
+            ),
+          }))}
+        >
           <TextAreaField
             {...field("notes")}
             size="full"
@@ -127,7 +187,7 @@ export function BillingForm() {
             hint={registration.notesHint}
             placeholder="e.g. P^24%wr"
           />
-        </fieldset>
+        </OptionGroup>
       </div>
 
       <div className={styles.actions}>

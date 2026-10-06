@@ -1,3 +1,4 @@
+import { getPaymentMethod, getPlan } from "@/data/course";
 import type { Fields } from "@/lib/registration";
 
 /**
@@ -8,6 +9,8 @@ export type FieldRule = {
   name: string;
   label: string;
   required?: boolean;
+  /** Message when a required value is missing; defaults to "<label> is required." */
+  missing?: string;
   /** Returns an error message, or nothing when the value is fine. */
   check?: (value: string) => string | undefined;
 };
@@ -28,6 +31,13 @@ export const participantRules: FieldRule[] = [
 ];
 
 export const billingRules: FieldRule[] = [
+  {
+    name: "plan",
+    label: "Package",
+    required: true,
+    missing: "Choose a package to continue.",
+    check: (v) => (getPlan(v) ? undefined : "Choose a package to continue."),
+  },
   { name: "company", label: "Company / Institution" },
   { name: "street", label: "Street Address", required: true },
   { name: "houseNo", label: "House No.", required: true },
@@ -48,7 +58,13 @@ export const billingRules: FieldRule[] = [
         ? undefined
         : "Enter a phone number using digits, e.g. +49 30 1234567.",
   },
-  { name: "payment", label: "Payment Method", required: true },
+  {
+    name: "payment",
+    label: "Payment Method",
+    required: true,
+    missing: "Choose a payment method to continue.",
+    check: (v) => (getPaymentMethod(v) ? undefined : "Choose a payment method to continue."),
+  },
   { name: "notes", label: "Discount code or special instructions" },
 ];
 
@@ -59,7 +75,7 @@ export function validate(rules: FieldRule[], values: Fields): Errors {
   for (const rule of rules) {
     const value = (values[rule.name] ?? "").trim();
     if (!value) {
-      if (rule.required) errors[rule.name] = `${rule.label} is required.`;
+      if (rule.required) errors[rule.name] = rule.missing ?? `${rule.label} is required.`;
       continue;
     }
     const message = rule.check?.(value);
@@ -72,5 +88,8 @@ export function isComplete(rules: FieldRule[], values: Fields) {
   return Object.keys(validate(rules, values)).length === 0;
 }
 
-/** Pre-filled choices on the billing step (Paper shows Germany and Card selected). */
-export const billingDefaults: Fields = { country: "Germany (DE)", payment: "card" };
+/**
+ * Pre-filled choices on the billing step. Paper shows Card selected, but package
+ * and payment method start empty on purpose: the visitor has to choose both.
+ */
+export const billingDefaults: Fields = { country: "Germany (DE)" };
