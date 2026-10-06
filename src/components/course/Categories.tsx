@@ -9,15 +9,7 @@ import styles from "./Categories.module.css";
 function CategoryIcon({ icon }: { icon: Category["icon"] }) {
   if (icon.kind === "cap") return <GraduationCapIcon className={styles.glyph} />;
   if (icon.kind === "users") return <UsersIcon width={42} height={42} className={styles.glyph} />;
-  return (
-    <Image
-      src={icon.src}
-      alt=""
-      width={42}
-      height={icon.square ? 42 : 32}
-      className={styles.flag}
-    />
-  );
+  return <Image src={icon.src} alt="" width={42} height={32} className={styles.flag} />;
 }
 
 /** Six category links; hover and focus wash the card lime as drawn in Paper. */

@@ -41,7 +41,7 @@ export type Category = {
   id: string;
   title: string;
   /** A glyph from the icon set, or a flag image. */
-  icon: { kind: "cap" } | { kind: "users" } | { kind: "flag"; src: string; square?: boolean };
+  icon: { kind: "cap" } | { kind: "users" } | { kind: "flag"; src: string };
   href: string;
 };
 
@@ -184,12 +184,7 @@ export const course = {
       { id: "mentoring", title: "Supervision / Internship / Mentoring", icon: { kind: "users" }, href: "/#training" },
       { id: "es", title: "Spanish In-Person Training", icon: { kind: "flag", src: "/categories/es.png" }, href: "/#training" },
       { id: "de", title: "German In-Person Training", icon: { kind: "flag", src: "/categories/de.png" }, href: "/#training" },
-      {
-        id: "en",
-        title: "English On-Site Training",
-        icon: { kind: "flag", src: "/categories/us.png", square: true },
-        href: "/#training",
-      },
+      { id: "en", title: "English On-Site Training", icon: { kind: "flag", src: "/categories/us.svg" }, href: "/#training" },
       { id: "ro", title: "Romanian In-Person Training", icon: { kind: "flag", src: "/categories/ro.png" }, href: "/#training" },
     ] satisfies Category[],
   },
