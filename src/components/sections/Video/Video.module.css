@@ -200,6 +200,59 @@
   background: #000;
 }
 
+/* Buffering and failure sit over the poster; the native controls stay reachable underneath. */
+.spinner {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 48px;
+  height: 48px;
+  border: 3px solid rgb(255 255 255 / 25%);
+  border-top-color: var(--color-white);
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes spin {
+  to {
+    rotate: 1turn;
+  }
+}
+
+.failed {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px;
+  border-radius: 4px;
+  background: rgb(2 6 24 / 80%);
+  color: var(--color-white);
+  text-align: center;
+  font-size: var(--fs-body);
+  line-height: 24px;
+}
+
+.retry {
+  padding: 12px 24px;
+  border-radius: var(--radius-button);
+  background: var(--color-white);
+  color: var(--color-ink);
+  font-weight: 500;
+  font-variation-settings: var(--fvs-display);
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .retry:hover {
+    background: var(--color-border-soft);
+  }
+}
+
 .close {
   position: absolute;
   bottom: calc(100% + 12px);
@@ -225,6 +278,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation-duration: 2.4s;
+  }
+
   .play::after {
     animation: none;
     opacity: 0;
