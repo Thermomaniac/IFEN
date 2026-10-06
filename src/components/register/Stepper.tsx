@@ -15,7 +15,11 @@ export function Stepper({ current }: { current: number }) {
         const state = i < current ? "done" : i === current ? "current" : "upcoming";
         const marker = (
           <span className={styles.marker} aria-hidden="true">
-            {state === "done" ? <CheckIcon /> : state === "current" ? <span className={styles.dot} /> : i + 1}
+            {state === "done" ? <CheckIcon /> : state === "current" ? (
+              <span className={styles.dot} />
+            ) : (
+              <span className={styles.number}>{i + 1}</span>
+            )}
           </span>
         );
         const label = (
