@@ -124,7 +124,7 @@
 .body {
   display: flex;
   flex: 1;
-  align-items: flex-start;
+  align-items: flex-end;
   justify-content: space-between;
   gap: 6px;
   padding: 16px;

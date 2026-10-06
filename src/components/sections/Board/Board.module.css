@@ -267,6 +267,36 @@
   }
 }
 
+/* Paper hover state of the small cards: a 32px apricot chip, bottom-aligned with the bio, staying apricot. */
+@media (min-width: 64rem) {
+  .card:not([data-featured="true"]) .brief {
+    align-items: flex-end;
+    gap: 24px;
+  }
+
+  .card:not([data-featured="true"]) .link {
+    padding: 8px;
+    border-radius: 2px;
+  }
+
+  .card:not([data-featured="true"]) .link svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .card:not([data-featured="true"]) .link:focus-visible {
+    background: var(--color-accent);
+    color: var(--color-ink);
+  }
+}
+
+@media (min-width: 64rem) and (hover: hover) {
+  .card:not([data-featured="true"]):hover .link {
+    background: var(--color-accent);
+    color: var(--color-ink);
+  }
+}
+
 /*
  * Below 1024 there is no hover to lean on: every card stacks photo over text
  * with its brief always shown, two per view on tablet and one on mobile.
