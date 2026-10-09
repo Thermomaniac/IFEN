@@ -18,6 +18,17 @@ export function Outcome({ children }: { children: string }) {
   );
 }
 
+/** Outcome rows in the white bordered list, for reuse across course sections. */
+export function OutcomeList({ items }: { items: string[] }) {
+  return (
+    <ul className={styles.list}>
+      {items.map((text) => (
+        <Outcome key={text}>{text}</Outcome>
+      ))}
+    </ul>
+  );
+}
+
 export function ProgramDetails() {
   const { program } = course;
   return (

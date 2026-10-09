@@ -18,6 +18,8 @@ const tags = {
   header: motion.header,
   p: motion.p,
   h2: motion.h2,
+  h3: motion.h3,
+  article: motion.article,
   span: motion.span,
 };
 type Tag = keyof typeof tags;

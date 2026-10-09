@@ -287,3 +287,130 @@ export function ArrowCircleLeftIcon(props: IconProps) {
     </svg>
   );
 }
+
+// Phase 3 additions: stroked 20px glyphs on the same 2px stroke as CheckIcon / ArrowCircleLeftIcon.
+const stroke = { fill: "none", stroke: "currentColor", strokeWidth: 1.75, strokeLinecap: "round", strokeLinejoin: "round" } as const;
+
+/** Course list: table view. */
+export function RowsIcon(props: IconProps) {
+  return (
+    <svg {...base} width="20" height="20" viewBox="0 0 20 20" {...stroke} {...props}>
+      <rect x="2.5" y="3.5" width="15" height="13" rx="1.5" />
+      <path d="M2.5 8h15M2.5 12.25h15M7.5 8v8.5" />
+    </svg>
+  );
+}
+
+/** Course list: card view. */
+export function CardsIcon(props: IconProps) {
+  return (
+    <svg {...base} width="20" height="20" viewBox="0 0 20 20" {...stroke} {...props}>
+      <rect x="2.5" y="2.5" width="6.5" height="6.5" rx="1" />
+      <rect x="11" y="2.5" width="6.5" height="6.5" rx="1" />
+      <rect x="2.5" y="11" width="6.5" height="6.5" rx="1" />
+      <rect x="11" y="11" width="6.5" height="6.5" rx="1" />
+    </svg>
+  );
+}
+
+export function SearchIcon(props: IconProps) {
+  return (
+    <svg {...base} width="20" height="20" viewBox="0 0 20 20" {...stroke} {...props}>
+      <circle cx="9" cy="9" r="5.75" />
+      <path d="m13.25 13.25 4 4" />
+    </svg>
+  );
+}
+
+export function ClockIcon(props: IconProps) {
+  return (
+    <svg {...base} width="20" height="20" viewBox="0 0 20 20" {...stroke} {...props}>
+      <circle cx="10" cy="10" r="7.5" />
+      <path d="M10 6v4l2.75 1.75" />
+    </svg>
+  );
+}
+
+/** Course language. */
+export function GlobeIcon(props: IconProps) {
+  return (
+    <svg {...base} width="20" height="20" viewBox="0 0 20 20" {...stroke} {...props}>
+      <circle cx="10" cy="10" r="7.5" />
+      <path d="M2.5 10h15M10 2.5c2 2.1 3 4.6 3 7.5s-1 5.4-3 7.5c-2-2.1-3-4.6-3-7.5s1-5.4 3-7.5Z" />
+    </svg>
+  );
+}
+
+/** Online / live format. */
+export function MonitorIcon(props: IconProps) {
+  return (
+    <svg {...base} width="20" height="20" viewBox="0 0 20 20" {...stroke} {...props}>
+      <rect x="2.5" y="3.5" width="15" height="10" rx="1.5" />
+      <path d="M7 17h6M10 13.5V17" />
+    </svg>
+  );
+}
+
+/** Reset filters. */
+export function ResetIcon(props: IconProps) {
+  return (
+    <svg {...base} width="20" height="20" viewBox="0 0 20 20" {...stroke} {...props}>
+      <path d="M3.5 10a6.5 6.5 0 1 0 1.9-4.6M3.5 3.5v3.75h3.75" />
+    </svg>
+  );
+}
+
+/** Clear filter. */
+export function XCircleIcon(props: IconProps) {
+  return (
+    <svg {...base} width="16" height="16" viewBox="0 0 20 20" {...stroke} {...props}>
+      <circle cx="10" cy="10" r="7.5" />
+      <path d="m12.5 7.5-5 5M7.5 7.5l5 5" />
+    </svg>
+  );
+}
+
+/** Price chip. */
+export function EuroIcon(props: IconProps) {
+  return (
+    <svg {...base} width="16" height="16" viewBox="0 0 20 20" {...stroke} {...props}>
+      <path d="M14.5 5.2A5.5 5.5 0 0 0 6 10a5.5 5.5 0 0 0 8.5 4.8M3.5 8.5h7M3.5 11.5h7" />
+    </svg>
+  );
+}
+
+/** QEEG format: reached step. */
+export function CheckBoldIcon(props: IconProps) {
+  return (
+    <svg {...base} width="20" height="20" viewBox="-1.875 -4.25 20 20" fill="currentColor" {...props}>
+      <path d="M15.978 1.602 5.978 11.602a.94.94 0 0 1-1.328 0L.275 7.227a.94.94 0 0 1 1.328-1.328l3.712 3.711L14.652.275a.94.94 0 0 1 1.328 1.328Z" />
+    </svg>
+  );
+}
+
+/** QEEG format: video masterclass. */
+export function VideoLessonIcon(props: IconProps) {
+  return (
+    <svg {...base} width="20" height="20" viewBox="-1.5625 -2.8125 20 20" fill="currentColor" {...props}>
+      <path d="M15.313 0H1.563A1.563 1.563 0 0 0 0 1.563v8.125a1.563 1.563 0 0 0 1.563 1.562h13.75a1.563 1.563 0 0 0 1.562-1.562V1.563A1.563 1.563 0 0 0 15.313 0ZM15 9.375H1.875v-7.5H15v7.5Zm1.875 4.063a.94.94 0 0 1-.937.937h-15a.938.938 0 0 1 0-1.875h15a.94.94 0 0 1 .937.938ZM6.563 7.188V4.063a.94.94 0 0 1 1.434-.796l2.5 1.563a.94.94 0 0 1 0 1.59l-2.5 1.563a.94.94 0 0 1-1.434-.795Z" />
+    </svg>
+  );
+}
+
+/** QEEG format: expert-led. */
+export function StarIcon(props: IconProps) {
+  return (
+    <svg {...base} width="20" height="20" viewBox="-0.9375 -0.9375 20 20" fill="currentColor" {...props}>
+      <path d="M18.048 6.562a1.62 1.62 0 0 0-1.386-1.094l-4.421-.357L10.534.986a1.6 1.6 0 0 0-2.942 0L5.887 5.112l-4.421.356A1.62 1.62 0 0 0 .555 8.272l3.374 2.909-1.031 4.352a1.6 1.6 0 0 0 2.382 1.732l3.783-2.329 3.784 2.329a1.6 1.6 0 0 0 2.382-1.73l-1.031-4.352 3.373-2.909a1.62 1.62 0 0 0 .477-1.712Zm-5.506 3.571a.94.94 0 0 0-.3.926l1.007 4.253-3.694-2.272a.94.94 0 0 0-.983 0l-3.695 2.272 1.007-4.25a.94.94 0 0 0-.3-.926L2.282 7.284l4.328-.349a.94.94 0 0 0 .791-.577l1.662-4.023 1.662 4.023a.94.94 0 0 0 .791.577l4.328.349-3.302 2.849Z" />
+    </svg>
+  );
+}
+
+/** QEEG format: lifetime access. */
+export function CalendarDotsIcon(props: IconProps) {
+  return (
+    <svg {...base} width="20" height="20" viewBox="-2.1875 -0.9375 20 20" fill="currentColor" {...props}>
+      <path d="M14.063 1.25H12.5V.938a.938.938 0 0 0-1.875 0v.312H5V.938a.938.938 0 0 0-1.875 0v.312H1.563A1.563 1.563 0 0 0 0 2.813v12.5a1.563 1.563 0 0 0 1.563 1.562h12.5a1.563 1.563 0 0 0 1.562-1.562v-12.5a1.563 1.563 0 0 0-1.562-1.563ZM3.125 3.125a.938.938 0 0 0 1.875 0h5.625a.938.938 0 0 0 1.875 0h1.25V5H1.875V3.125h1.25ZM1.875 15V6.875H13.75V15H1.875Zm7.188-5.937a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0Zm3.75 0a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0Zm-7.5 3.75a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0Zm3.75 0a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0Zm3.75 0a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0Z" />
+    </svg>
+  );
+}

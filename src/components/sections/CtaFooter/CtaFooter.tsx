@@ -10,6 +10,7 @@ import { useParallax } from "@/components/motion/useParallax";
 import { CtaButton } from "@/components/ui/CtaButton";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SectionLabel } from "@/components/ui/SectionLabel";
+import type { CtaContent } from "@/data/coursePage";
 import { cta, footer } from "@/data/site";
 import styles from "./CtaFooter.module.css";
 
@@ -19,13 +20,8 @@ const socialIcons = { facebook: FacebookIcon, x: XLogoIcon, instagram: Instagram
  * Closing call to action over a photo, with the cream footer card rising into
  * the bottom of the same photo. Both share one backdrop, so they live in one
  * wrapper after <main>: the CTA is a labelled region, the card the page footer.
+ * Course pages may add a line of supporting text and a secondary action.
  */
-type CtaContent = {
-  label: string;
-  headingLines: string[];
-  action: { label: string; href: string };
-};
-
 export function CtaFooter({ content = cta }: { content?: CtaContent }) {
   const stage = useRef<HTMLDivElement>(null);
   const bgY = useParallax(stage, 60);
@@ -52,8 +48,18 @@ export function CtaFooter({ content = cta }: { content?: CtaContent }) {
               ))}
             </SectionHeading>
           </RevealItem>
-          <RevealItem>
+          {content.text && (
+            <RevealItem as="p" className={styles.text}>
+              {content.text}
+            </RevealItem>
+          )}
+          <RevealItem className={styles.actions}>
             <CtaButton href={content.action.href}>{content.action.label}</CtaButton>
+            {content.secondary && (
+              <CtaButton href={content.secondary.href} variant="light">
+                {content.secondary.label}
+              </CtaButton>
+            )}
           </RevealItem>
         </Reveal>
       </section>

@@ -1,6 +1,8 @@
 // Content for the Webinar Details page. Copy is taken from the Paper file
 // (artboard "Webinar Details Page").
 
+import type { CourseHeroContent, SpeakersContent } from "./coursePage";
+
 export type PlanId = "standard" | "feiner" | "chiarenza";
 export type Plan = { id: PlanId; label: string; price: number };
 
@@ -19,7 +21,7 @@ export function getPlan(id: string | undefined) {
 }
 
 export function formatPrice(amount: number) {
-  return `${amount} EUR`;
+  return `${amount.toLocaleString("en-US")} EUR`;
 }
 
 export type CourseFact = { label: string; value: string; icon: "start" | "end" | "level" | "location" };
@@ -41,7 +43,7 @@ export type Category = {
   id: string;
   title: string;
   /** A glyph from the icon set, or a flag image. */
-  icon: { kind: "cap" } | { kind: "users" } | { kind: "flag"; src: string };
+  icon: { kind: "cap" } | { kind: "users" } | { kind: "brain" } | { kind: "pulse" } | { kind: "flag"; src: string };
   href: string;
 };
 
@@ -194,6 +196,33 @@ export const course = {
     headingLines: ["Ready to Start Your QEEG-D", "Certification Journey?"],
     action: { label: "Register For Booking", href: `${REGISTER_PATH}/participant` },
   },
+};
+
+/** Hero content in the shared course page shape. */
+export const courseHero: CourseHeroContent = {
+  title: course.title,
+  breadcrumb: course.breadcrumb,
+  badge: course.badge,
+  description: course.description,
+  highlights: course.highlights,
+  booking: {
+    prices: plans.map((p) => ({ label: p.label, amount: p.price })),
+    facts: course.facts,
+    cta: course.cta.action,
+  },
+};
+
+/** Speaker cards for the carousel; every BCIA mentor has a page. */
+export const courseSpeakers: SpeakersContent = {
+  label: course.mentors.label,
+  heading: course.mentors.heading,
+  people: course.mentors.people.map(({ id, name, role, image }) => ({
+    id,
+    name,
+    role,
+    image,
+    href: `${SPEAKERS_PATH}/${id}`,
+  })),
 };
 
 export function getMentor(id: string) {

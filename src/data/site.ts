@@ -94,7 +94,7 @@ export const certification = {
     title: "Examination & Certification",
     text: "Conducted online or in person. Upon successful completion, you receive the accredited certificate as a Certified Neurofeedback Therapist.",
   },
-  cta: { label: "Check Module 1", href: "#training" },
+  cta: { label: "Check Module 1", href: "/courses/module-1" },
 };
 
 export type Course = { title: string; duration: string; location: string; href: string; image: { src: string; alt: string } };
@@ -109,7 +109,7 @@ export const training = {
   label: "Our Latest Courses & Webinars", // Paper: "Our Lates Courses & Webiners"
   heading: "Upcoming Training & Education Dates",
   courses: [
-    { title: "MODULE 1 — Certified Neurofeedback Therapist", duration: "5 Days", location: "Munich", href: "#", image: courseImage },
+    { title: "MODULE 1 — Certified Neurofeedback Therapist", duration: "5 Days", location: "Munich", href: "/courses/module-1", image: courseImage },
     {
       title: "BCIA Mentoring, QEEG Mentoring for QEEG-D Certification",
       duration: "Flexible",
@@ -117,10 +117,22 @@ export const training = {
       href: "/courses/bcia-qeeg-mentoring",
       image: courseImage,
     },
-    { title: "MODULE 1 — Certified Neurofeedback Therapist", duration: "5 Days", location: "Munich", href: "#", image: courseImage },
-    { title: "MODULE 1 — Certified Neurofeedback Therapist", duration: "5 Days", location: "Munich", href: "#", image: courseImage },
+    {
+      title: "Webinar: Stress, Pain and the Nervous System",
+      duration: "60 Minutes",
+      location: "Online",
+      href: "/courses/webinar-stress-pain",
+      image: courseImage,
+    },
+    {
+      title: "QEEG for Your Practice",
+      duration: "20+ Hours",
+      location: "Online",
+      href: "/courses/qeeg-for-your-practice",
+      image: courseImage,
+    },
   ] satisfies Course[],
-  cta: { label: "View All Dates", href: "#" },
+  cta: { label: "View All Dates", href: "/courses" },
 };
 
 export type BoardMember = {

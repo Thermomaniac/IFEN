@@ -1,0 +1,102 @@
+/* Paper "Designed for clinicians": 400×500 photo cards, 8px apart, centred lime label. */
+.viewport {
+  /* Runs edge to edge of the band; the first card starts on the content edge. */
+  margin-inline: calc(var(--gutter) * -1);
+  overflow: clip;
+}
+
+.track {
+  display: flex;
+  gap: 8px;
+  width: max-content;
+  padding-inline: var(--gutter);
+  will-change: transform;
+}
+
+.set {
+  display: flex;
+  gap: 8px;
+}
+
+.card {
+  position: relative;
+  flex-shrink: 0;
+  width: 260px;
+  aspect-ratio: 4 / 5;
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--color-border-soft);
+  outline: none;
+}
+
+.card:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
+.photo {
+  object-fit: cover;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: var(--color-overlay-soft);
+}
+
+/* Centred tag; on hover or focus it grows to cover the whole card. */
+.label {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: calc(100% - 32px);
+  padding: 12px 16px;
+  border-radius: 2px;
+  background: #edf5c4;
+  translate: -50% -50%;
+}
+
+.label[data-open] {
+  inset: 0;
+  max-width: none;
+  border-radius: 4px;
+  translate: none;
+}
+
+.name {
+  display: block;
+  color: var(--color-ink);
+  font-size: 1.375rem;
+  line-height: 26px;
+  letter-spacing: -0.015em;
+  font-weight: 700;
+  font-variation-settings: var(--fvs-display);
+  text-align: center;
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+
+@media (min-width: 48rem) {
+  .card {
+    width: 400px;
+  }
+
+  .name {
+    font-size: 1.75rem;
+    line-height: 32px;
+  }
+}
+
+/* Reduced motion: no loop, the row scrolls by hand. */
+.viewport[data-static] {
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+}
+
+.viewport[data-static] .card {
+  scroll-snap-align: start;
+  scroll-margin-inline: var(--gutter);
+}

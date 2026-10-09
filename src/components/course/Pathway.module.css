@@ -1,0 +1,218 @@
+/* Steps sit on one track: a faint line with a dark fill driven by --progress (0..1). */
+.track {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+  padding-block: 8px;
+}
+
+.line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  margin-left: -1px;
+  background: rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.fill {
+  position: absolute;
+  inset: 0;
+  background: var(--color-ink);
+  transform: scaleY(var(--progress, 0));
+  transform-origin: top;
+}
+
+.step {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+/* The badge starts tucked beneath the card and slides up into place above it. */
+.badge {
+  position: relative;
+  z-index: 0;
+  padding: 4px 8px;
+  border-radius: 2px;
+  background: #edf5c4;
+  color: var(--color-ink);
+  font-size: var(--fs-xs);
+  line-height: 16px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.card {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+  padding: 24px;
+  border-radius: 4px;
+  background: var(--color-mist);
+  box-shadow: inset 0 0 0 1px var(--color-border-soft);
+  transition:
+    background-color 400ms var(--ease-out),
+    box-shadow 400ms var(--ease-out),
+    padding 500ms var(--ease-out),
+    gap 500ms var(--ease-out);
+}
+
+.number {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--color-border-soft);
+  color: var(--color-subtle);
+  font-size: var(--fs-body);
+  line-height: 24px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  transition:
+    background-color 400ms var(--ease-out),
+    color 400ms var(--ease-out),
+    width 500ms var(--ease-out),
+    height 500ms var(--ease-out);
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.heading {
+  color: var(--color-subtle);
+  font-size: 1.25rem;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  font-variation-settings: var(--fvs-display);
+  text-wrap: balance;
+  hyphens: auto;
+  overflow-wrap: break-word;
+  transition: color 400ms var(--ease-out);
+}
+
+.detail {
+  color: var(--color-subtle);
+  font-size: var(--fs-small);
+  line-height: 20px;
+  text-wrap: pretty;
+  transition: color 400ms var(--ease-out);
+}
+
+.step[data-active] .card {
+  background: var(--color-white);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.06);
+}
+
+.step[data-active] .number {
+  background: var(--color-cream);
+  color: var(--color-ink);
+}
+
+.step[data-active] .heading {
+  color: var(--color-ink);
+}
+
+.step[data-active] .detail {
+  color: var(--color-muted);
+}
+
+/* Modules 2 and 3 can run in any order, so once the path is complete they tighten up
+   into a horizontal card. Every line of copy stays. */
+.step[data-compact] .card {
+  flex-direction: row;
+  align-items: center;
+  gap: 16px;
+  padding-block: 16px;
+}
+
+.step[data-compact] .number {
+  width: 32px;
+  height: 32px;
+  font-size: var(--fs-small);
+}
+
+.note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  align-self: center;
+  max-width: 100%;
+  padding: 12px 20px;
+  border-radius: 4px;
+  background: var(--color-border-soft);
+  color: var(--color-heading);
+  font-size: var(--fs-small);
+  line-height: 20px;
+  font-weight: 500;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.spark {
+  flex: none;
+  color: var(--color-ink);
+}
+
+@media (min-width: 64rem) {
+  .track {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    align-items: stretch;
+    margin-top: 48px;
+    padding-block: 0;
+  }
+
+  .line {
+    top: calc(50% + 18px);
+    bottom: auto;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: 2px;
+    margin: -1px 0 0;
+  }
+
+  .fill {
+    transform: scaleX(var(--progress, 0));
+    transform-origin: left;
+  }
+
+  /* Equal heights keep the badges on one row while the middle steps tighten. */
+  .card {
+    flex: 1;
+  }
+}
+
+@media (max-width: 47.99rem) {
+  .card {
+    padding: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .number,
+  .heading,
+  .detail {
+    transition: none;
+  }
+}

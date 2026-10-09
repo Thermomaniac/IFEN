@@ -5,7 +5,7 @@ import { Mentors } from "@/components/course/Mentors";
 import { ProgramDetails } from "@/components/course/ProgramDetails";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { CtaFooter } from "@/components/sections/CtaFooter/CtaFooter";
-import { course } from "@/data/course";
+import { course, courseHero, courseSpeakers } from "@/data/course";
 
 export const metadata: Metadata = {
   title: "BCIA & QEEG-D Mentoring | IFEN",
@@ -17,10 +17,10 @@ export default function CoursePage() {
     <>
       <SiteHeader currentHref="" />
       <main id="main">
-        <CourseHero />
+        <CourseHero content={courseHero} />
         <ProgramDetails />
-        <Mentors />
-        <Categories />
+        <Mentors content={courseSpeakers} />
+        <Categories content={course.categories} />
       </main>
       <CtaFooter content={course.cta} />
     </>

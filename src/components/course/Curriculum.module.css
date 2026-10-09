@@ -1,0 +1,126 @@
+/* One white bordered list, like the Program Details outcomes, with a row per day. */
+.days {
+  border-radius: 4px;
+  background: var(--color-white);
+  box-shadow:
+    inset 0 0 0 1px var(--color-border),
+    0 1px 2px #0000000f;
+}
+
+.day {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+  padding: 32px;
+}
+
+.day + .day {
+  border-top: 1px solid var(--color-border);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+}
+
+.label {
+  color: #b8a85e;
+  font-size: 1.25rem;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+  font-weight: 500;
+  font-variation-settings: var(--fvs-display);
+}
+
+.tag {
+  padding: 4px 8px;
+  border-radius: var(--radius-button);
+  background: #edf5c4;
+  font-size: var(--fs-xs);
+  line-height: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-variation-settings: var(--fvs-display);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.heading {
+  font-size: 1.25rem;
+  line-height: 28px;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  font-variation-settings: var(--fvs-display);
+  text-wrap: balance;
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+
+.topics {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 10px 32px;
+}
+
+.topic {
+  position: relative;
+  padding-left: 20px;
+  color: var(--color-muted);
+  font-size: var(--fs-body);
+  line-height: 24px;
+  font-variation-settings: var(--fvs-display);
+  text-wrap: pretty;
+}
+
+/* Teal tick from the outcome mark, reduced to a dot so long lists stay calm. */
+.topic::before {
+  content: "";
+  position: absolute;
+  top: 9px;
+  left: 2px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #009ba7;
+}
+
+@media (min-width: 48rem) {
+  .topics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 64rem) {
+  .day {
+    grid-template-columns: 12rem minmax(0, 1fr);
+    gap: 40px;
+    padding: 40px;
+  }
+
+  .meta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .topic {
+    font-size: var(--fs-small);
+    line-height: 22px;
+  }
+
+  .topic::before {
+    top: 8px;
+  }
+}
+
+@media (max-width: 47.99rem) {
+  .day {
+    padding: 24px 20px;
+  }
+}

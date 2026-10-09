@@ -60,6 +60,22 @@
   display: block;
 }
 
+.text {
+  max-width: 40rem;
+  color: var(--color-on-dark);
+  font-size: var(--fs-body);
+  line-height: 26px;
+  text-align: center;
+  text-wrap: pretty;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+
 /* ---------- Footer card ---------- */
 
 .footer {

@@ -1,0 +1,102 @@
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 40px;
+}
+
+.prose {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.heading {
+  font-size: 1.5rem;
+  line-height: 30px;
+  letter-spacing: -0.5px;
+  font-weight: 600;
+  font-variation-settings: var(--fvs-display);
+  text-wrap: balance;
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+
+.text {
+  color: var(--color-muted);
+  font-size: var(--fs-small);
+  line-height: 20px;
+  font-variation-settings: var(--fvs-display);
+  text-wrap: pretty;
+}
+
+.text + .text {
+  margin-top: -4px;
+}
+
+.topics {
+  min-width: 0;
+}
+
+/* Five rows tall; the edges fade out so rows enter and leave without a hard cut. */
+.viewport {
+  position: relative;
+  height: 280px;
+  overflow: hidden;
+  border-radius: 4px;
+  mask-image: linear-gradient(to bottom, transparent, #000 22%, #000 78%, transparent);
+}
+
+.viewport:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.track {
+  will-change: transform;
+}
+
+/* Fixed-height rows keep the loop maths exact; two lines fit when a topic wraps. */
+.row {
+  --focus: 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 56px;
+  color: color-mix(in srgb, var(--color-ink) calc(var(--focus) * 100%), var(--color-muted));
+  font-size: 1.25rem;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  font-variation-settings: var(--fvs-display);
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+
+.icon {
+  flex: none;
+}
+
+.viewport[data-static] {
+  height: auto;
+  mask-image: none;
+}
+
+.viewport[data-static] .row[data-focus] {
+  --focus: 1;
+}
+
+@media (min-width: 64rem) {
+  .split {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: center;
+    gap: 96px;
+  }
+}
+
+@media (max-width: 47.99rem) {
+  .row {
+    font-size: 1.0625rem;
+    line-height: 22px;
+  }
+}

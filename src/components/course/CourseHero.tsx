@@ -1,14 +1,10 @@
 import Link from "next/link";
-import { Fragment } from "react";
-import {
-  CalendarSlashIcon,
-  CalendarTickIcon,
-  MapPinFillIcon,
-  UsersIcon,
-} from "@/components/icons";
+import { Fragment, type CSSProperties } from "react";
+import { CalendarSlashIcon, CalendarTickIcon, MapPinFillIcon, UsersIcon } from "@/components/icons";
 import { Reveal, RevealItem } from "@/components/motion/Reveal";
 import { CtaButton } from "@/components/ui/CtaButton";
-import { course, formatPrice, plans, REGISTER_PATH, type CourseFact } from "@/data/course";
+import { formatPrice, type CourseFact } from "@/data/course";
+import type { CourseHeroContent } from "@/data/coursePage";
 import styles from "./CourseHero.module.css";
 
 const factIcons: Record<CourseFact["icon"], typeof UsersIcon> = {
@@ -18,15 +14,14 @@ const factIcons: Record<CourseFact["icon"], typeof UsersIcon> = {
   location: MapPinFillIcon,
 };
 
-const fromPrice = Math.min(...plans.map((p) => p.price));
-
 /**
- * Webinar hero: breadcrumb, badge, title and highlights on the left, the booking
- * panel on the right. The plans are a static price list; the package is chosen
- * in the registration flow.
+ * Course hero: breadcrumb, badge, title and highlights on the left, the booking
+ * panel on the right. The prices are a static list; the package is chosen in the
+ * registration flow. Without `booking` (listing pages) only the intro renders.
  */
-export function CourseHero() {
-  const factRows = [course.facts.slice(0, 2), course.facts.slice(2, 4)];
+export function CourseHero({ content }: { content: CourseHeroContent }) {
+  const { booking } = content;
+  const paragraphs = Array.isArray(content.description) ? content.description : [content.description];
 
   return (
     <section className={styles.hero} aria-labelledby="course-title">
@@ -56,7 +51,7 @@ export function CourseHero() {
           <RevealItem>
             <nav aria-label="Breadcrumb">
               <ol className={styles.breadcrumb}>
-                {course.breadcrumb.map((crumb, i) => (
+                {content.breadcrumb.map((crumb, i) => (
                   <li key={crumb.label} className={styles.crumb}>
                     {i > 0 && (
                       <span className={styles.slash} aria-hidden="true">
@@ -78,85 +73,112 @@ export function CourseHero() {
 
           <div className={styles.titleBlock}>
             <RevealItem as="p" className={styles.badge}>
-              {course.badge}
+              {content.badge}
             </RevealItem>
             <RevealItem>
               <h1 id="course-title" className={styles.title}>
-                {course.title}
+                {content.title}
               </h1>
             </RevealItem>
-            <RevealItem as="p" className={styles.description}>
-              {course.description}
-            </RevealItem>
+            {paragraphs.map((text) => (
+              <RevealItem key={text} as="p" className={styles.description}>
+                {text}
+              </RevealItem>
+            ))}
           </div>
 
-          <RevealItem as="ul" className={styles.highlights}>
-            {course.highlights.map((h, i) => (
-              <Fragment key={h.label}>
-                {i > 0 && <li className={styles.divider} aria-hidden="true" />}
-                <li className={styles.highlight}>
-                  <span className={styles.highlightValue}>{h.value}</span>
-                  <span className={styles.highlightLabel}>{h.label}</span>
-                </li>
-              </Fragment>
-            ))}
-          </RevealItem>
-        </Reveal>
-
-        <Reveal className={styles.panel} delay={0.15}>
-          <RevealItem className={styles.panelHead}>
-            <p className={styles.eyebrow} id="plan-legend">
-              Select your plan
-            </p>
-            <p className={styles.from}>From {formatPrice(fromPrice)}</p>
-          </RevealItem>
-
-          <RevealItem className={styles.rule}>
-            <span />
-          </RevealItem>
-
-          <RevealItem>
-            <ul className={styles.plans} aria-labelledby="plan-legend">
-              {plans.map((p) => (
-                <li key={p.id} className={styles.plan}>
-                  <span className={styles.planLabel}>{p.label}</span>
-                  <span className={styles.planPrice}>{formatPrice(p.price)}</span>
-                </li>
+          {content.highlights.length > 0 && (
+            <RevealItem as="ul" className={styles.highlights}>
+              {content.highlights.map((h, i) => (
+                <Fragment key={h.label}>
+                  {i > 0 && <li className={styles.divider} aria-hidden="true" />}
+                  <li className={styles.highlight}>
+                    <span className={styles.highlightValue}>{h.value}</span>
+                    <span className={styles.highlightLabel}>{h.label}</span>
+                  </li>
+                </Fragment>
               ))}
-            </ul>
-          </RevealItem>
-
-          <RevealItem className={styles.facts}>
-            {factRows.map((row, r) => (
-              <Fragment key={r}>
-                {r > 0 && <span className={styles.factRule} aria-hidden="true" />}
-                <dl className={styles.factRow}>
-                  {row.map((fact) => {
-                    const Icon = factIcons[fact.icon];
-                    return (
-                      <div key={fact.label} className={styles.fact}>
-                        <span className={styles.factIcon}>
-                          <Icon width={16} height={16} />
-                        </span>
-                        <div className={styles.factText}>
-                          <dt className={styles.factLabel}>{fact.label}</dt>
-                          <dd className={styles.factValue}>{fact.value}</dd>
-                        </div>
-                      </div>
-                    );
-                  })}
-                </dl>
-              </Fragment>
-            ))}
-          </RevealItem>
-
-          <RevealItem>
-            <CtaButton href={`${REGISTER_PATH}/participant`} className={styles.cta}>
-              Register For Booking
-            </CtaButton>
-          </RevealItem>
+            </RevealItem>
+          )}
         </Reveal>
+
+        {booking && <BookingPanel booking={booking} />}
       </div>
     </section>
+  );
+}
+
+function BookingPanel({ booking }: { booking: NonNullable<CourseHeroContent["booking"]> }) {
+  const { prices, facts } = booking;
+  const multiple = prices.length > 1;
+  const fromPrice = Math.min(...prices.map((p) => p.amount));
+  const factRows = [facts.slice(0, 2), facts.slice(2, 4)].filter((row) => row.length > 0);
+
+  return (
+    <Reveal className={styles.panel} delay={0.15}>
+      <RevealItem className={styles.panelHead}>
+        <div className={styles.headRow}>
+          <p className={styles.eyebrow} id="plan-legend">
+            {multiple ? "Select your plan" : "Course fee"}
+          </p>
+          {booking.code && <p className={styles.code}>{booking.code}</p>}
+        </div>
+        <p className={styles.from}>
+          {multiple ? "From " : ""}
+          {formatPrice(fromPrice)}
+        </p>
+      </RevealItem>
+
+      <RevealItem className={styles.rule}>
+        <span />
+      </RevealItem>
+
+      {multiple && (
+        <RevealItem>
+          <ul
+            className={styles.plans}
+            style={{ "--plans": prices.length } as CSSProperties}
+            aria-labelledby="plan-legend"
+          >
+            {prices.map((p) => (
+              <li key={p.label} className={styles.plan}>
+                <span className={styles.planLabel}>{p.label}</span>
+                <span className={styles.planPrice}>{formatPrice(p.amount)}</span>
+              </li>
+            ))}
+          </ul>
+        </RevealItem>
+      )}
+
+      <RevealItem className={styles.facts}>
+        {factRows.map((row, r) => (
+          <Fragment key={r}>
+            {r > 0 && <span className={styles.factRule} aria-hidden="true" />}
+            <dl className={styles.factRow}>
+              {row.map((fact) => {
+                const Icon = factIcons[fact.icon];
+                return (
+                  <div key={fact.label} className={styles.fact}>
+                    <span className={styles.factIcon}>
+                      <Icon width={16} height={16} />
+                    </span>
+                    <div className={styles.factText}>
+                      <dt className={styles.factLabel}>{fact.label}</dt>
+                      <dd className={styles.factValue}>{fact.value}</dd>
+                    </div>
+                  </div>
+                );
+              })}
+            </dl>
+          </Fragment>
+        ))}
+      </RevealItem>
+
+      <RevealItem>
+        <CtaButton href={booking.cta.href} className={styles.cta}>
+          {booking.cta.label}
+        </CtaButton>
+      </RevealItem>
+    </Reveal>
   );
 }

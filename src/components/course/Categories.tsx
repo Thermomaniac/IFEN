@@ -1,20 +1,22 @@
 import Image from "next/image";
-import { GraduationCapIcon, UsersIcon } from "@/components/icons";
+import { GraduationCapIcon, ModuleBrainIcon, ModulePulseIcon, UsersIcon } from "@/components/icons";
 import { Reveal, RevealItem } from "@/components/motion/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { course, type Category } from "@/data/course";
+import type { Category } from "@/data/course";
+import type { CategoriesContent } from "@/data/coursePage";
 import styles from "./Categories.module.css";
 
 function CategoryIcon({ icon }: { icon: Category["icon"] }) {
   if (icon.kind === "cap") return <GraduationCapIcon className={styles.glyph} />;
   if (icon.kind === "users") return <UsersIcon width={42} height={42} className={styles.glyph} />;
+  if (icon.kind === "brain") return <ModuleBrainIcon width={42} height={42} className={styles.glyph} />;
+  if (icon.kind === "pulse") return <ModulePulseIcon width={42} height={42} className={styles.glyph} />;
   return <Image src={icon.src} alt="" width={42} height={32} className={styles.flag} />;
 }
 
-/** Six category links; hover and focus wash the card lime as drawn in Paper. */
-export function Categories() {
-  const { categories } = course;
+/** Category links; hover and focus wash the card lime as drawn in Paper. */
+export function Categories({ content: categories }: { content: CategoriesContent }) {
   return (
     <section className={styles.section} aria-labelledby="categories-title">
       <div className={styles.inner}>

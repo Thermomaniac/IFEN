@@ -1,0 +1,49 @@
+/* Shared course band; values match ProgramDetails, Mentors and Categories. */
+.section {
+  scroll-margin-top: 80px;
+}
+
+.mist {
+  background: var(--color-mist);
+  border-block: 1px solid var(--color-border-soft);
+}
+
+.cream {
+  background: var(--color-cream);
+}
+
+.white {
+  background: var(--color-white);
+  border-block: 1px solid var(--color-border-soft);
+}
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: calc(var(--content-max) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding: var(--section-pad-sm) var(--gutter);
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  max-width: 52rem;
+}
+
+/* Long German compounds must break rather than overflow. */
+.header h2 {
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+
+.intro {
+  color: var(--color-muted);
+  font-size: var(--fs-body);
+  line-height: 26px;
+  font-variation-settings: var(--fvs-display);
+  text-wrap: pretty;
+}
