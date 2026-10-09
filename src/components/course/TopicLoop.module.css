@@ -22,10 +22,11 @@
   overflow-wrap: break-word;
 }
 
+/* Figma: Regular 16/auto, paragraphs 12px apart. */
 .text {
   color: var(--color-muted);
-  font-size: var(--fs-small);
-  line-height: 20px;
+  font-size: var(--fs-body);
+  line-height: 1.2;
   font-variation-settings: var(--fvs-display);
   text-wrap: pretty;
 }

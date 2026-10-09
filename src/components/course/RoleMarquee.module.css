@@ -1,15 +1,20 @@
 /* Paper "Designed for clinicians": 400×500 photo cards, 8px apart, centred lime label. */
 .viewport {
-  /* Runs edge to edge of the band; the first card starts on the content edge. */
-  margin-inline: calc(var(--gutter) * -1);
+  /* Full bleed at every width: out of the content column to both edges of the band.
+     cqw is the band's own width (CourseSection makes a band holding a bleed a size
+     container), so a classic scrollbar adds nothing and the page never scrolls
+     sideways. Only this strip clips; cards and labels sit well inside it. */
+  --edge: max(var(--gutter), (100cqw - var(--content-max)) / 2);
+  margin-inline: calc(50% - 50cqw);
   overflow: clip;
 }
 
+/* The first card starts on the content edge, then the loop runs window to window. */
 .track {
   display: flex;
   gap: 8px;
   width: max-content;
-  padding-inline: var(--gutter);
+  padding-inline: var(--edge);
   will-change: transform;
 }
 
@@ -111,7 +116,7 @@
 
 .viewport[data-static] .card {
   scroll-snap-align: start;
-  scroll-margin-inline: var(--gutter);
+  scroll-margin-inline: var(--edge);
 }
 
 /* Reduced motion: the lime fades in instead of spreading. */

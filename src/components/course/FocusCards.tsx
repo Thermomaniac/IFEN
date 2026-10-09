@@ -26,7 +26,7 @@ function cardsHeight(split: HTMLDivElement) {
 
 /**
  * A photo beside stacked cards. The split pins under the nav with the first card in
- * the gray active fill; scrolling on hands the fill to each next card while the one
+ * the sage active fill; scrolling on hands the fill to each next card while the one
  * before returns to its outline, and the split releases after the last. Where the
  * split does not fit the viewport it scrolls normally and the same progress follows it.
  * With reduced motion all three cards sit outlined, with equal weight.

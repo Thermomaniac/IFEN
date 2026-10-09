@@ -69,11 +69,12 @@
   text-wrap: pretty;
 }
 
+/* Figma: the button pair sits 16px apart. */
 .actions {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 12px;
+  gap: 16px;
 }
 
 /* ---------- Footer card ---------- */

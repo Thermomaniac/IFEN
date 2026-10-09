@@ -20,6 +20,7 @@
   --color-on-dark: #d1d5dc;
   --color-border: #e5e7eb;
   --color-border-soft: #f3f4f6;
+  --color-hover-tint: #f1fafa; /* secondary button hover */
   --color-overlay: #020618a3; /* hero scrim */
   --color-overlay-soft: #02061852;
 

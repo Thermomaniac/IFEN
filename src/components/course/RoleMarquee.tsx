@@ -143,6 +143,7 @@ export function RoleMarquee({ id, tone, content }: { id: string; tone: Tone; con
       <div
         ref={viewportRef}
         className={styles.viewport}
+        data-bleed=""
         data-static={reduce || undefined}
         onPointerEnter={(e) => e.pointerType === "mouse" && setHovered(true)}
         onPointerLeave={(e) => e.pointerType === "mouse" && setHovered(false)}

@@ -82,7 +82,7 @@ export const qeeg = {
 
   format: {
     label: "The format",
-    heading: "Expert QEEG training that fits your schedule",
+    heading: "Expert QEEG Training That Fits Your Schedule",
     items: [
       { heading: "100% Asynchronous", text: "Learn whenever it fits your schedule.", icon: "clock" },
       { heading: "4-Day Video Masterclass", text: "More than 20 hours of expert instruction.", icon: "video" },
@@ -93,7 +93,7 @@ export const qeeg = {
 
   beyond: {
     label: "Beyond the brain map",
-    heading: "QEEG data is only valuable when you know how to interpret it",
+    heading: "QEEG Data Is Only Valuable When You Know How to Interpret It",
     intro: [
       "Move beyond symptoms and isolated numbers. Learn how experienced clinicians recognize meaningful patterns and translate findings into better-informed clinical decisions.",
     ],
@@ -116,7 +116,7 @@ export const qeeg = {
 
   develop: {
     label: "What you will develop",
-    heading: "See more. Interpret better. Decide with confidence.",
+    heading: "See More. Interpret Better. Decide With Confidence.",
     image: {
       src: "/course/qeeg-clinician.jpg",
       alt: "A clinician studying QEEG brain maps at her desk in the evening.",
@@ -178,7 +178,7 @@ export const qeeg = {
 
   audience: {
     label: "Who it is for",
-    heading: "Designed for clinicians who want to master QEEG interpretation.",
+    heading: "Designed for Clinicians Who Want to Master QEEG Interpretation.",
     roles: [
       { name: "Psychiatrists", image: "/hero/hero-poster.jpg" },
       { name: "Psychologists", image: "/course/program.jpg" },

@@ -29,7 +29,9 @@ export function CourseHero({ content }: { content: CourseHeroContent }) {
     <section className={`${styles.hero} ${content.image ? styles.photoHero : ""}`} aria-labelledby="course-title">
       {content.image ? (
         <>
-          <Image src={content.image} alt="" fill priority sizes="100vw" className={styles.photo} />
+          <span className={styles.media}>
+            <Image src={content.image} alt="" fill priority sizes="100vw" className={styles.photo} />
+          </span>
           <span className={styles.fade} aria-hidden="true" />
         </>
       ) : (

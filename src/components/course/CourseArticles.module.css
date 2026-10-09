@@ -189,7 +189,7 @@
   flex-direction: column;
   gap: 12px;
   color: var(--color-muted);
-  font-size: var(--fs-small);
+  font-size: var(--fs-body);
   line-height: 1.2;
   font-variation-settings: var(--fvs-display);
 }
@@ -240,11 +240,11 @@
   min-width: 0;
 }
 
+/* Figma: Regular 16/auto. */
 .rowText {
   color: var(--color-muted);
   font-size: var(--fs-body);
-  line-height: 24px;
-  font-weight: 500;
+  line-height: 1.2;
   font-variation-settings: var(--fvs-display);
   overflow-wrap: break-word;
 }

@@ -7,6 +7,7 @@ import { useRef } from "react";
 import { CopyrightIcon, FacebookIcon, InstagramIcon, XLogoIcon } from "@/components/icons";
 import { Reveal, RevealItem } from "@/components/motion/Reveal";
 import { useParallax } from "@/components/motion/useParallax";
+import { Button } from "@/components/ui/Button";
 import { CtaButton } from "@/components/ui/CtaButton";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SectionLabel } from "@/components/ui/SectionLabel";
@@ -20,7 +21,8 @@ const socialIcons = { facebook: FacebookIcon, x: XLogoIcon, instagram: Instagram
  * Closing call to action over a photo, with the cream footer card rising into
  * the bottom of the same photo. Both share one backdrop, so they live in one
  * wrapper after <main>: the CTA is a labelled region, the card the page footer.
- * Course pages may add a line of supporting text and a secondary action.
+ * Course pages may add a line of supporting text and a secondary action; a pair renders
+ * as the Figma primary and secondary buttons, a lone action keeps the arrow CtaButton.
  */
 export function CtaFooter({ content = cta }: { content?: CtaContent }) {
   const stage = useRef<HTMLDivElement>(null);
@@ -54,11 +56,15 @@ export function CtaFooter({ content = cta }: { content?: CtaContent }) {
             </RevealItem>
           )}
           <RevealItem className={styles.actions}>
-            <CtaButton href={content.action.href}>{content.action.label}</CtaButton>
-            {content.secondary && (
-              <CtaButton href={content.secondary.href} variant="light">
-                {content.secondary.label}
-              </CtaButton>
+            {content.secondary ? (
+              <>
+                <Button href={content.action.href}>{content.action.label}</Button>
+                <Button href={content.secondary.href} variant="secondary">
+                  {content.secondary.label}
+                </Button>
+              </>
+            ) : (
+              <CtaButton href={content.action.href}>{content.action.label}</CtaButton>
             )}
           </RevealItem>
         </Reveal>

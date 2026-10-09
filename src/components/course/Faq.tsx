@@ -1,15 +1,15 @@
-import { ChevronDownIcon, MailIcon } from "@/components/icons";
+import { MailIcon } from "@/components/icons";
 import { Reveal, RevealItem } from "@/components/motion/Reveal";
 import type { FaqContent } from "@/data/coursePage";
 import { SectionHeader, type Tone } from "./CourseSection";
 import sectionStyles from "./CourseSection.module.css";
+import { FaqAccordion } from "./FaqAccordion";
 import styles from "./Faq.module.css";
 
 /**
- * Split FAQ: heading and a contact card on the left, native disclosure rows on the
- * right, so answers work without JavaScript and with find-in-page. As in Figma the
- * first answer starts open. The split lives on its own element so the band's column
- * layout can never override it, whatever order the stylesheets load in.
+ * Split FAQ: heading and a contact card on the left, the accordion on the right. As in
+ * Figma the first answer starts open. The split lives on its own element so the band's
+ * column layout can never override it, whatever order the stylesheets load in.
  */
 export function Faq({ id, tone, content }: { id: string; tone: Tone; content: FaqContent }) {
   return (
@@ -30,21 +30,7 @@ export function Faq({ id, tone, content }: { id: string; tone: Tone; content: Fa
             </Reveal>
           </div>
 
-          <Reveal className={styles.list} stagger={0.05}>
-            {content.items.map((item, i) => (
-              <RevealItem key={item.question} className={styles.item}>
-                <details className={styles.details} open={i === 0}>
-                  <summary className={styles.summary}>
-                    <span>{item.question}</span>
-                    <span className={styles.chevron} aria-hidden="true">
-                      <ChevronDownIcon />
-                    </span>
-                  </summary>
-                  <p className={styles.answer}>{item.answer}</p>
-                </details>
-              </RevealItem>
-            ))}
-          </Reveal>
+          <FaqAccordion items={content.items} />
         </div>
       </div>
     </section>

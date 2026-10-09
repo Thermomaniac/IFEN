@@ -217,7 +217,7 @@ export const module1 = {
 
   pathway: {
     label: "Certification",
-    heading: "The IFEN certificate pathway",
+    heading: "The IFEN Certificate Pathway",
     intro: [
       "Module 1 is the first step in the IFEN certification process. The certificate is awarded once all required components are completed.",
       "The training is aimed at specialists with an appropriate basic qualification and accompanies their entry into professional neurofeedback application.",
@@ -259,7 +259,7 @@ export const module1 = {
 
   booking: {
     label: "Before you book",
-    heading: "Participation, requirements and venue",
+    heading: "Participation, Requirements and Venue",
     items: [
       {
         heading: "Suitable for repeat participants",

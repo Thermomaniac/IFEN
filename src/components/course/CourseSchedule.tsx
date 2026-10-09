@@ -107,7 +107,7 @@ export function CourseSchedule({
     <CourseSection
       id="dates"
       tone="mist"
-      head={{ label: "Course dates", heading: "Find your next training date" }}
+      head={{ label: "Course dates", heading: "Find Your Next Training Date" }}
       headExtra={
         <ul className={styles.notes}>
           {notes.map((note) => (
@@ -122,7 +122,10 @@ export function CourseSchedule({
         <div className={styles.results}>
           <h3 className={styles.resultsTitle}>Our Offerings</h3>
           <p className={styles.count} aria-live="polite">
-            Showing {shown.length} of {source.length} {noun}
+            Showing{" "}
+            <strong>
+              {shown.length} of {source.length} {noun}
+            </strong>
           </p>
           <div className={styles.toggle} role="group" aria-label="Display">
             <button type="button" aria-pressed={view === "table"} onClick={() => setView("table")}>

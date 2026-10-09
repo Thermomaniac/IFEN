@@ -4,6 +4,11 @@
   scroll-margin-top: 80px;
 }
 
+/* A full-bleed strip inside the band (RoleMarquee) measures the band's width in cqw. */
+.section:has([data-bleed]) {
+  container-type: inline-size;
+}
+
 .mist {
   background: var(--color-mist);
   border-block: 1px solid var(--color-border-soft);

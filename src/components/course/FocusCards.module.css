@@ -40,8 +40,9 @@
     box-shadow var(--dur-step) var(--ease-glide);
 }
 
+/* Figma: the active card takes the sage fill its badge already uses. */
 .card[data-active] {
-  background: var(--color-border-soft);
+  background: #edf5c4;
   box-shadow: inset 0 0 0 1.5px transparent;
 }
 

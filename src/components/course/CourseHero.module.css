@@ -11,21 +11,31 @@
   color: var(--color-white);
 }
 
+/* The global `svg { max-width: 100% }` reset would clamp the pattern to the hero width and
+   shrink it, so it is lifted here. The offsets follow the pattern's own width, keeping the
+   strokes where Figma puts them when the 68rem floor applies on smaller screens. */
 .lines {
+  --w: max(106.1vw, 68rem);
   position: absolute;
   z-index: -1;
-  left: -4.1vw;
-  top: -29.3vw;
-  width: max(106.1vw, 68rem);
+  left: calc(var(--w) * -0.0386);
+  top: calc(var(--w) * -0.2762);
+  width: var(--w);
+  max-width: none;
   height: auto;
   color: #0b4750;
   pointer-events: none;
 }
 
-/* Figma listing hero: the photo's right 70% fills the band, under an elliptical ink fade
+/* Figma listing hero: the photo's right side fills the band, under an elliptical ink fade
    that is solid behind the copy and clear at the right edge. 464 tall at 1440. */
-.photo {
+.media {
+  position: absolute;
+  inset: 0;
   z-index: -2;
+}
+
+.photo {
   object-fit: cover;
   object-position: right center;
 }
@@ -42,15 +52,39 @@
   );
 }
 
-/* Stacked, the copy runs the full width, so the fade stays dense across it. */
+/* Stacked, the copy runs the full width and would sit on both faces, and a band this
+   narrow cannot show both at once. The photo drops to a strip under the copy instead,
+   wide enough to hold the two faces, fading up into the ink. */
 @media (max-width: 63.99rem) {
+  .photoHero {
+    --strip: clamp(13rem, 46vw, 20rem);
+  }
+
+  .media {
+    inset: auto 0 0;
+    height: var(--strip);
+  }
+
+  .media::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, var(--color-ink), rgb(11 57 65 / 0%) 45%);
+  }
+
   .fade {
-    background: linear-gradient(90deg, var(--color-ink) 25%, rgb(11 57 65 / 86%) 60%, rgb(11 57 65 / 62%));
+    display: none;
+  }
+
+  .photoHero .inner {
+    padding-bottom: calc(var(--strip) - 1.5rem);
   }
 }
 
-.photoHero .inner {
-  padding-bottom: clamp(3rem, 5.56vw, 5rem);
+@media (min-width: 64rem) {
+  .photoHero .inner {
+    padding-bottom: clamp(3rem, 5.56vw, 5rem);
+  }
 }
 
 .inner {

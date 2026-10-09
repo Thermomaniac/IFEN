@@ -12,6 +12,7 @@ import {
   UserIcon,
 } from "@/components/icons";
 import { Reveal, RevealItem } from "@/components/motion/Reveal";
+import { Button } from "@/components/ui/Button";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import type { FactIcon, OverviewContent } from "@/data/coursePage";
@@ -63,14 +64,9 @@ export function CourseOverview({ content, decor = false }: { content: OverviewCo
             ))}
             <RevealItem className={styles.actions}>
               {content.actions.map((action, i) => (
-                <a
-                  key={action.href}
-                  href={action.href}
-                  className={styles.button}
-                  data-variant={i === 0 ? "primary" : "secondary"}
-                >
+                <Button key={action.href} href={action.href} variant={i === 0 ? "primary" : "secondary"}>
                   {action.label}
-                </a>
+                </Button>
               ))}
             </RevealItem>
           </Reveal>
