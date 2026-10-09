@@ -1,0 +1,19 @@
+/* Scroll budget per item while pinned. Long enough to read, short enough not to trap. */
+.track {
+  --pin-step: 45svh;
+  position: relative;
+}
+
+.track[data-pinned] {
+  height: calc(100svh - var(--nav-h) + var(--pin-count, 1) * var(--pin-step));
+}
+
+/* Fills the viewport under the sticky nav; content is centred in it. */
+.track[data-pinned] > .stage {
+  position: sticky;
+  top: var(--nav-h);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: calc(100svh - var(--nav-h));
+}

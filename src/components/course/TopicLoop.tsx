@@ -1,7 +1,8 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { useAnimationFrame, useInView, useReducedMotion } from "framer-motion";
+import { useAnimationFrame, useInView } from "framer-motion";
+import { usePrefersReducedMotion } from "@/components/motion/usePrefersReducedMotion";
 import { CheckCircleIcon } from "@/components/icons";
 import { Reveal, RevealItem } from "@/components/motion/Reveal";
 import type { ArticlesContent } from "@/data/coursePage";
@@ -27,7 +28,7 @@ export function TopicLoop({ id, tone, content }: { id: string; tone: Tone; conte
   const topics = content.items.find((item) => item.list);
   const items = topics?.list ?? [];
 
-  const reduce = useReducedMotion();
+  const reduce = usePrefersReducedMotion();
   const viewRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLUListElement>(null);
   const inView = useInView(viewRef);

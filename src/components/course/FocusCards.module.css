@@ -36,8 +36,8 @@
   background: var(--color-white);
   box-shadow: inset 0 0 0 1.5px var(--color-border);
   transition:
-    background-color 0.45s var(--ease-out),
-    box-shadow 0.45s var(--ease-out);
+    background-color var(--dur-step) var(--ease-glide),
+    box-shadow var(--dur-step) var(--ease-glide);
 }
 
 .card[data-active] {
@@ -90,6 +90,17 @@
   .media {
     aspect-ratio: auto;
     min-height: 40rem;
+  }
+
+  /* Pinned: the split fills the stage under the nav less the hook's 48px reserve,
+     capped so tall screens keep the design's proportions. */
+  .split[data-pinned] {
+    height: min(calc(100% - 48px), 52rem);
+    margin-top: 0;
+  }
+
+  .split[data-pinned] .media {
+    min-height: 0;
   }
 }
 

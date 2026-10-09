@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
+import { PinStage } from "@/components/motion/PinStage";
 import { Reveal, RevealItem } from "@/components/motion/Reveal";
+import type { PinnedSteps } from "@/components/motion/usePinnedSteps";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import type { SectionHead } from "@/data/coursePage";
@@ -16,6 +18,8 @@ export function CourseSection({
   tone,
   head,
   headExtra,
+  pin,
+  narrow,
   children,
 }: {
   /** Prefix for the section and heading ids. */
@@ -24,16 +28,23 @@ export function CourseSection({
   head: SectionHead;
   /** Anything that sits under the intro, e.g. a contact card. */
   headExtra?: ReactNode;
+  /** Pins the whole band (header and content) as one scroll-driven stage. */
+  pin?: PinnedSteps<HTMLDivElement>;
+  /** Caps the heading at 600px so it wraps as in the design. */
+  narrow?: boolean;
   children: ReactNode;
 }) {
+  const inner = (
+    <div ref={pin?.contentRef} className={styles.inner} data-pinned={pin?.pinned || undefined}>
+      <SectionHeader id={id} tone={tone} head={head} className={narrow ? styles.narrow : undefined}>
+        {headExtra}
+      </SectionHeader>
+      {children}
+    </div>
+  );
   return (
     <section id={id} className={`${styles.section} ${styles[tone]}`} aria-labelledby={`${id}-title`}>
-      <div className={styles.inner}>
-        <SectionHeader id={id} tone={tone} head={head}>
-          {headExtra}
-        </SectionHeader>
-        {children}
-      </div>
+      {pin ? <PinStage pin={pin}>{inner}</PinStage> : inner}
     </section>
   );
 }

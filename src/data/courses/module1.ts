@@ -216,7 +216,7 @@ export const module1 = {
       { label: "Module 1", heading: "Intensive course", text: "5 days, hybrid", current: true },
       { label: "Module 2", heading: "Internship", text: "At least 5 hours, also possible online" },
       { label: "Module 3", heading: "Supervision", text: "5-hour session with a certified expert" },
-      { label: "Module 4", heading: "Examination" },
+      { label: "Module 4", heading: "Examination", text: "Take examination & become expert" },
     ],
     note: "Module 2 and Module 3 can be completed in any order.",
   } satisfies PathwayContent,

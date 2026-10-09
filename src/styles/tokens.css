@@ -44,6 +44,7 @@
   --gutter: clamp(1rem, 5vw, 4.5rem); /* 72px at 1440 */
   --section-pad: clamp(4rem, 1rem + 7vw, 7rem); /* 112px at 1440 */
   --section-pad-sm: clamp(3rem, 0.75rem + 4.5vw, 4.5rem); /* 72px at 1440, course pages */
+  --nav-h: 70px; /* sticky main nav incl. its hairline; pinned stages sit under it */
 
   /* Shape */
   --radius-button: 2px;
@@ -53,6 +54,10 @@
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --dur-fast: 180ms;
   --dur-base: 320ms;
+
+  /* Scroll-driven steps: slow, soft landing. */
+  --ease-glide: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-step: 700ms;
 
   /* Card hover reveals: decisive start, long controlled settle, no overshoot. */
   --ease-reveal: cubic-bezier(0.48, 0.002, 0.035, 0.996);

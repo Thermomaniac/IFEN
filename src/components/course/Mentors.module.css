@@ -58,12 +58,10 @@
 
 .viewport {
   container-type: inline-size;
-  overflow: clip;
-  /* Room for the focus ring of the first card's content. */
-  padding: 4px;
-  margin: -4px;
 }
 
+/* Native horizontal scroll, snapping card by card; the scrollbar stays hidden since the
+   arrows and swiping carry it. 4px of padding leaves room for the focus ring. */
 .list {
   --gap: 16px;
   --per-view: 4;
@@ -71,13 +69,24 @@
   display: flex;
   align-items: stretch;
   gap: var(--gap);
-  translate: calc(var(--start) * (var(--card-w) + var(--gap)) * -1) 0;
-  transition: translate 500ms var(--ease-reveal);
+  margin: -4px;
+  padding: 4px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: 4px;
+  scrollbar-width: none;
+  outline: none;
+}
+
+.list::-webkit-scrollbar {
+  display: none;
 }
 
 .card {
   flex: none;
   width: var(--card-w);
+  scroll-snap-align: start;
 }
 
 .cardInner {
@@ -113,6 +122,28 @@
 
 .media::after {
   transition: opacity var(--dur-reveal) var(--ease-reveal);
+}
+
+/* Open seat: plain photo area and muted copy, so it never reads as a real person. */
+.tba {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--color-muted);
+  font-size: var(--fs-xs);
+  line-height: 16px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.cardInner[data-placeholder] .media::after {
+  content: none;
+}
+
+.cardInner[data-placeholder] .name {
+  color: var(--color-muted);
 }
 
 .photo {
@@ -197,9 +228,10 @@
   }
 }
 
+/* Phones: one card and a peek of the next, so the row reads as swipeable. */
 @media (max-width: 47.99rem) {
   .list {
-    --per-view: 1;
+    --per-view: 1.15;
   }
 
   .role {
