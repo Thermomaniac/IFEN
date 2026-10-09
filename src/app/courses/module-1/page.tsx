@@ -20,12 +20,12 @@ export default function Module1Page() {
       <main id="main">
         <CourseHero content={module1.hero} />
         <CourseOverview content={module1.overview} />
-        <CourseArticles id="audience" tone="white" content={module1.audience} />
+        <CourseArticles id="audience" tone="white" variant="panels" content={module1.audience} />
         <FeatureGrid id="why" tone="cream" content={module1.why} />
         <Curriculum id="curriculum" tone="white" content={module1.curriculum} />
         <Pathway id="pathway" tone="mist" content={module1.pathway} />
-        <CourseArticles id="practical" tone="white" content={module1.practical} />
-        <CourseArticles id="booking-info" tone="mist" content={module1.booking} />
+        <CourseArticles id="practical" tone="white" variant="columns" content={module1.practical} />
+        <CourseArticles id="booking-info" tone="mist" variant="rows" content={module1.booking} />
         <Mentors content={module1.speakers} />
         <Categories content={module1.categories} />
       </main>

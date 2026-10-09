@@ -58,23 +58,23 @@ export const module1 = {
 
   overview: {
     label: "Overview",
-    heading: "Module 1: Fundamentals of professional neurofeedback application",
+    heading: "Fundamentals of Professional Neurofeedback Application",
     paragraphs: [
       "Module 1 is the 5-day intensive course that starts the IFEN certification programme. You learn the fundamentals of EEG, biofeedback and neurofeedback, get to know the methods and carry out first practical exercises under guidance.",
       "The course combines sound theory with practical application and is aimed at professionals who want to integrate neurofeedback responsibly into their existing professional context.",
     ],
     actions: [
-      { label: "Reserve space", href: BOOK.href },
-      { label: "Request a consultation", href: CONSULTATION_URL },
+      { label: "Reserve Space", href: BOOK.href },
+      { label: "Request a Consultation", href: CONSULTATION_URL },
     ],
     aside: {
       heading: "Next appointment",
       rows: [
-        { label: "Online", value: "5, 6 and 7 October 2026" },
-        { label: "In person", value: "16 and 17 October 2026" },
-        { label: "Course times", value: "9:00 to 18:00" },
-        { label: "Language", value: "German" },
-        { label: "Format", value: "Hybrid" },
+        { label: "Online", value: "5, 6 and 7 October 2026", icon: "online" },
+        { label: "In person", value: "16 and 17 October 2026", icon: "inPerson" },
+        { label: "Course times", value: "9:00 to 18:00", icon: "time" },
+        { label: "Language", value: "German", icon: "language" },
+        { label: "Format", value: "Hybrid", icon: "format" },
       ],
       note: {
         heading: "Questions about participation?",
@@ -89,17 +89,27 @@ export const module1 = {
     heading: "Is Module 1 right for you?",
     items: [
       {
-        heading: "Who is this module suitable for?",
+        heading: "Who is this for?",
         paragraphs: [
-          "This module is aimed at professionals who want to integrate neurofeedback soundly into their medical, psychological, therapeutic, educational or consulting work, with a secure introduction to the basics of EEG, training methods and practical application.",
-          "It is particularly suitable for doctors, psychologists, psychotherapists, alternative practitioners (Heilpraktiker), occupational therapists, speech therapists and other specialists with an appropriate basic qualification.",
+          "For qualified professionals in healthcare, therapy, education or consulting, including other appropriately qualified specialists.",
+        ],
+        list: [
+          "Medical professionals (Doctors, Specialists)",
+          "Psychologists & Psychotherapists",
+          "Alternative practitioners (Heilpraktiker)",
+          "Occupational & Speech Therapists",
         ],
       },
       {
-        heading: "Your competencies after Module 1",
+        heading: "After Module 1",
         paragraphs: [
-          "After Module 1 you have a solid foundation for the rest of the IFEN certification process. You understand the key terms, procedures and technical fundamentals of neurofeedback, can place them professionally and carry out first practical exercises under guidance.",
-          "You understand the basics of EEG, biofeedback and neurofeedback, and know the most important brainwaves, the 10-20 system, classic training procedures and Z-score or database training. You also receive first guidance on signal quality, technical application and responsible use in your professional context.",
+          "Your foundation for the IFEN certification pathway, with first practical exercises under guidance.",
+        ],
+        list: [
+          "Key terms & technical fundamentals of neurofeedback",
+          "Basics of EEG, biofeedback & brainwaves",
+          "10–20 system, classic & Z-score/database training",
+          "First guidance on signal quality, technology & responsible use",
         ],
       },
     ],
@@ -252,7 +262,8 @@ export const module1 = {
     heading: "Participation, requirements and venue",
     items: [
       {
-        heading: "Also suitable for repeat participants",
+        heading: "Suitable for repeat participants",
+        icon: "repeat",
         paragraphs: [
           "The repeat participant price is 875 EUR. It applies to former Module 1 participants who want to update their knowledge, learn new content and refresh their practical skills.",
           "We particularly recommend repeating if your last participation was more than 5 years ago, as technology, software, training methods and application practice keep developing.",
@@ -260,6 +271,7 @@ export const module1 = {
       },
       {
         heading: "Requirements",
+        icon: "list",
         paragraphs: [
           "Participation requires basic medical, psychological, therapeutic, educational or comparable professional knowledge. Module 1 does not replace basic vocational training and does not on its own qualify participants to practise medicine or therapy.",
           "Neurofeedback is applied within the framework of your existing professional qualification.",
@@ -268,6 +280,7 @@ export const module1 = {
       },
       {
         heading: "Venue",
+        icon: "venue",
         address: {
           name: "Institute for EEG-Neurofeedback",
           lines: ["Karl-Böhm-Strasse 50", "85598 Baldham (Vaterstetten)"],

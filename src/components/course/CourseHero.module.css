@@ -22,6 +22,37 @@
   pointer-events: none;
 }
 
+/* Figma listing hero: the photo's right 70% fills the band, under an elliptical ink fade
+   that is solid behind the copy and clear at the right edge. 464 tall at 1440. */
+.photo {
+  z-index: -2;
+  object-fit: cover;
+  object-position: right center;
+}
+
+.fade {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(
+    109.24% 364.6% at -9.24% 42.55%,
+    var(--color-ink) 34%,
+    rgb(11 57 65 / 70%) 62.6%,
+    rgb(11 57 65 / 0%) 91.7%
+  );
+}
+
+/* Stacked, the copy runs the full width, so the fade stays dense across it. */
+@media (max-width: 63.99rem) {
+  .fade {
+    background: linear-gradient(90deg, var(--color-ink) 25%, rgb(11 57 65 / 86%) 60%, rgb(11 57 65 / 62%));
+  }
+}
+
+.photoHero .inner {
+  padding-bottom: clamp(3rem, 5.56vw, 5rem);
+}
+
 .inner {
   display: flex;
   flex-direction: column;
@@ -57,7 +88,10 @@
   gap: 12px;
   color: var(--color-subtle);
   font-size: 0.8125rem;
-  line-height: 16px;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+  font-variation-settings: var(--fvs-display);
 }
 
 .crumb {
@@ -96,7 +130,6 @@
   font-size: var(--fs-xs);
   line-height: 16px;
   text-transform: uppercase;
-  font-variation-settings: var(--fvs-display);
 }
 
 .title {
@@ -178,9 +211,9 @@
     flex: 0 1 34.5rem; /* 552 */
   }
 
-  /* Listing heroes have no panel; the intro takes a wider measure. */
+  /* Listing heroes have no panel; Figma keeps the same 552 measure. */
   .intro:only-child {
-    flex-basis: 48rem;
+    flex-basis: 34.5rem;
   }
 
   .panel {

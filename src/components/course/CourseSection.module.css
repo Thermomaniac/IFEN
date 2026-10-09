@@ -41,6 +41,7 @@
   max-width: 52rem;
 }
 
+/* Figma's 600px headers break greedily; balance would wrap them a line early. */
 .narrow {
   max-width: 37.5rem;
 }
@@ -49,6 +50,14 @@
 .header h2 {
   hyphens: auto;
   overflow-wrap: break-word;
+}
+
+/* At Figma's measure the narrow heading wraps greedily without hyphens; phones keep the balanced wrap. */
+@media (min-width: 48rem) {
+  .narrow h2 {
+    text-wrap: wrap;
+    hyphens: manual;
+  }
 }
 
 .intro {

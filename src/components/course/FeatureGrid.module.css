@@ -34,10 +34,10 @@
 }
 
 .index {
-  color: #b8a85e;
-  font-size: 1.25rem;
-  line-height: 24px;
-  letter-spacing: -0.02em;
+  color: #d1d5dc;
+  font-size: 2.625rem;
+  line-height: 52px;
+  letter-spacing: -0.015em;
   font-weight: 500;
   font-variation-settings: var(--fvs-display);
   font-variant-numeric: tabular-nums;
@@ -60,6 +60,31 @@
   line-height: 22px;
   font-variation-settings: var(--fvs-display);
   text-wrap: pretty;
+}
+
+/* Numbered (Figma "Module Benefit"): borderless white cards 8px apart; the index sits
+   12px above the title. */
+.numbered {
+  gap: 8px;
+}
+
+.numbered .card {
+  box-shadow: none;
+  filter: none;
+}
+
+.numbered .top {
+  margin-bottom: 0;
+}
+
+.numbered .heading {
+  color: var(--color-ink);
+  line-height: 24px;
+  text-wrap: wrap;
+}
+
+.numbered .text {
+  line-height: 1.2;
 }
 
 /* Check variant (Paper: Advanced learning): plain white cards on mist, check on top. */
@@ -150,7 +175,8 @@
     line-height: 26px;
   }
 
-  .text {
+  .text,
+  .numbered .text {
     font-size: var(--fs-body);
     line-height: 24px;
   }

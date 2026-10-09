@@ -50,19 +50,19 @@ export const webinar = {
 
   overview: {
     label: "Overview",
-    heading: "Stress, pain and the nervous system: biofeedback and neurofeedback in practice",
+    heading: "Stress, Pain and The Nervous System: Biofeedback & Neurofeedback In Practice",
     paragraphs: [
       "A practical overview of how biofeedback and neurofeedback support self-regulation and what role both methods can play in everyday clinical practice.",
     ],
-    actions: [{ label: "Register now", href: BOOK.href }],
+    actions: [{ label: "Book Your Place", href: BOOK.href }],
     aside: {
-      heading: "At a glance",
+      heading: "IFEN · Institute for EEG-Neurofeedback",
       rows: [
-        { label: "Date", value: "Mon, 19.10.2026, 19:00 to 20:00" },
-        { label: "Format", value: "Online · Live" },
-        { label: "Duration", value: "60 minutes" },
-        { label: "Language", value: "German" },
-        { label: "Fee", value: "40 EUR" },
+        { label: "Date", value: "Mon, 19.10.2026, 19:00 to 20:00", icon: "date" },
+        { label: "Format", value: "Online · Live", icon: "format" },
+        { label: "Duration", value: "60 minutes", icon: "duration" },
+        { label: "Language", value: "German", icon: "language" },
+        { label: "Fee", value: "40 EUR", icon: "fee" },
       ],
     },
   } satisfies OverviewContent,

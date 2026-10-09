@@ -63,10 +63,9 @@ export const LANGUAGE_LABELS: Record<Language, string> = {
 export const scheduleIntro = {
   title: "Training & other offers",
   badge: "All trainings at a glance",
-  description: [
-    "Do you want to start training as a neurofeedback therapist or build on the experience you already have? Would you like to specialise in particular areas of neurofeedback and learn from the best in the field? Then you have come to the right place.",
-    "IFEN offers an extensive training programme: workshops on topics such as quantitative EEG (QEEG), Infra Slow Fluctuation (ISF), EEG neuromeditation, neuropsychology and cognitive evaluation, webinars you can join from anywhere, and crash and refresher courses with our popular speakers.",
-  ],
+  // Figma's condensed hero copy (Phase 3).
+  description:
+    "Want to start or advance as a neurofeedback therapist? Specialise in areas like QEEG, ISF, neuromeditation, neuropsychology, and cognitive evaluation. IFEN offers workshops, webinars, and refresher courses with top experts.",
   notes: [
     {
       text: "For training units without fixed dates, such as internships, supervision and mentoring, you can register",
@@ -761,6 +760,7 @@ export const listingPage: { meta: Metadata; hero: CourseHeroContent; cta: CtaCon
     breadcrumb: [{ label: "Course Booking" }],
     badge: scheduleIntro.badge,
     description: scheduleIntro.description,
+    image: "/training/listing-hero.jpg",
     highlights: [
       { value: String(scheduleDates.length), label: "Upcoming dates" },
       { value: "4", label: "Languages" },

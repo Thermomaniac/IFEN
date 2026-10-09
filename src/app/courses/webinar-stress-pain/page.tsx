@@ -16,7 +16,7 @@ export default function WebinarPage() {
       <SiteHeader currentHref="" />
       <main id="main">
         <CourseHero content={webinar.hero} />
-        <CourseOverview content={webinar.overview} />
+        <CourseOverview content={webinar.overview} decor />
         <TopicLoop id="content" tone="white" content={webinar.content} />
         <Mentors content={webinar.speakers} />
         <Categories content={webinar.categories} />

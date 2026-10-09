@@ -14,6 +14,8 @@ export type CourseHeroContent = {
   /** One or more paragraphs under the title. */
   description: string | string[];
   highlights: { value: string; label: string }[];
+  /** Photo on the right under an ink fade, in place of the line pattern (listing hero). */
+  image?: string;
   /** The white panel. Omitted on listing pages, which use the hero alone. */
   booking?: {
     /** Course number from the booking system, e.g. "M1-051026-EN". */
@@ -48,20 +50,38 @@ export const LISTING_PATH = "/courses";
 /** Label pill, heading and optional intro paragraphs above every section. */
 export type SectionHead = { label: string; heading: string; intro?: string[] };
 
+/** Glyph in the lime circle of an overview fact row. */
+export type FactIcon =
+  | "format"
+  | "duration"
+  | "access"
+  | "instructor"
+  | "institution"
+  | "online"
+  | "inPerson"
+  | "time"
+  | "language"
+  | "date"
+  | "fee";
+
 export type OverviewContent = SectionHead & {
   paragraphs: string[];
   actions: Link[];
   aside: {
     heading: string;
-    rows: { label: string; value: string }[];
+    rows: { label: string; value: string; icon: FactIcon }[];
     /** Contact prompt under the rows. */
     note?: { heading: string; text: string; email: string };
   };
 };
 
+export type ArticleIcon = "repeat" | "list" | "venue";
+
 export type Article = {
   /** Optional when the section heading already names the block. */
   heading?: string;
+  /** Leads the heading in the `rows` layout. */
+  icon?: ArticleIcon;
   paragraphs?: string[];
   /** Rendered as check rows. */
   list?: string[];

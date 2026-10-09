@@ -5,7 +5,6 @@ import { REGISTER_PATH } from "../course";
 import {
   CONTACT_EMAIL,
   LISTING_PATH,
-  type ArticlesContent,
   type CategoriesContent,
   type CourseHeroContent,
   type CtaContent,
@@ -63,20 +62,20 @@ export const qeeg = {
     label: "QEEG Masterclass",
     heading: "Master the Art of QEEG Interpretation",
     paragraphs: [
-      "Transform complex brain data into clinically meaningful decisions with an expert-led, on-demand QEEG masterclass.",
+      "Unlock the power of complex brain data with our expert-led, on-demand QEEG masterclass. Learn how to analyze quantitative EEG results effectively and translate them into clinically meaningful decisions to enhance patient care and outcomes.",
     ],
     actions: [
-      { label: "Book your place", href: BOOK.href },
+      { label: "Book Your Place", href: BOOK.href },
       { label: "View FAQ", href: "#faq" },
     ],
     aside: {
       heading: "IFEN · Institute for EEG-Neurofeedback",
       rows: [
-        { label: "Format", value: "4-Day Video Masterclass" },
-        { label: "Duration", value: "20+ Hours" },
-        { label: "Access", value: "Lifetime Access" },
-        { label: "Instructor", value: "Dr. Ismael Castillo Reyes, Ph.D. in Neuroscience" },
-        { label: "Institution", value: "Ponce Health Sciences University · Puerto Rico" },
+        { label: "Format", value: "4-Day Video Masterclass", icon: "format" },
+        { label: "Duration", value: "20+ Hours", icon: "duration" },
+        { label: "Access", value: "Lifetime", icon: "access" },
+        { label: "Instructor", value: "Dr. Ismael Castillo Reyes, Ph.D. in Neuroscience", icon: "instructor" },
+        { label: "Institution", value: "Ponce Health Sciences University · Puerto Rico", icon: "institution" },
       ],
     },
   } satisfies OverviewContent,
@@ -94,21 +93,26 @@ export const qeeg = {
 
   beyond: {
     label: "Beyond the brain map",
-    heading: "QEEG data is only valuable when you know how to interpret it.",
+    heading: "QEEG data is only valuable when you know how to interpret it",
     intro: [
       "Move beyond symptoms and isolated numbers. Learn how experienced clinicians recognize meaningful patterns and translate findings into better-informed clinical decisions.",
     ],
+    numbered: true,
     items: [
       {
-        heading: "From signals to clinical meaning.",
-        paragraphs: [
-          "Build a structured understanding of EEG activity, brain maps and clinically relevant QEEG patterns.",
-          "From recording brain activity to understanding what the data may reveal about brain function.",
-          "The masterclass includes the complete recordings of IFEN's intensive four-day QEEG workshop, structured as an on-demand course that can be studied entirely at the learner's own pace.",
-        ],
+        heading: "EEG Activity and QEEG Patterns",
+        text: "Build a structured understanding of EEG activity, brain maps and clinically relevant QEEG patterns.",
+      },
+      {
+        heading: "Brain Activity Basics",
+        text: "From recording brain activity to understanding what the data may reveal about brain function.",
+      },
+      {
+        heading: "Neuroplasticity and Cognitive Ethics",
+        text: "You delve into complex topics such as neuroplasticity, cognitive enhancement, and the ethical implications of neurofeedback.",
       },
     ],
-  } satisfies ArticlesContent,
+  } satisfies FeaturesContent,
 
   develop: {
     label: "What you will develop",

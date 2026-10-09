@@ -78,6 +78,205 @@
   font-variation-settings: var(--fvs-display);
 }
 
+/* Figma "panels": two mist cards with faint arcs, a heading group and grey check rows. */
+.panels {
+  display: grid;
+  gap: 24px;
+}
+
+.panelsItem {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 42px;
+  min-width: 0;
+  padding: 24px;
+  overflow: clip;
+  border-radius: 4px;
+  background: var(--color-mist);
+}
+
+.panelArcs {
+  position: absolute;
+  top: -204px;
+  left: 237px;
+  width: 774px;
+  height: auto;
+  color: var(--color-border-soft);
+  pointer-events: none;
+}
+
+.panelHead {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.panelHeading {
+  color: #101828;
+  font-size: 1.25rem;
+  line-height: 24px;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  font-variation-settings: var(--fvs-display);
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+
+/* Figma breaks the description by hand around 420px. */
+.panelText {
+  max-width: 26.5rem;
+  color: var(--color-muted);
+  font-size: var(--fs-small);
+  line-height: 1.2;
+  font-variation-settings: var(--fvs-display);
+}
+
+.checks {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.check {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: #1e2939;
+  font-size: var(--fs-body);
+  line-height: 24px;
+  font-weight: 500;
+  font-variation-settings: var(--fvs-display);
+  overflow-wrap: break-word;
+}
+
+.checkIcon {
+  flex: none;
+  width: 20px;
+  height: 20px;
+  margin-top: 2px;
+  color: var(--color-subtle);
+}
+
+/* Figma "columns": open text column beside the bordered outcome rows. */
+.columns {
+  display: grid;
+  gap: 48px;
+}
+
+.columnsItem {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.columnHeading {
+  color: var(--color-ink);
+  font-size: 1.5rem;
+  line-height: 32px;
+  letter-spacing: -0.5px;
+  font-weight: 600;
+  font-variation-settings: var(--fvs-display);
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+
+.columnText {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  color: var(--color-muted);
+  font-size: var(--fs-small);
+  line-height: 1.2;
+  font-variation-settings: var(--fvs-display);
+}
+
+/* Figma "rows": 2px rules above each row, icon and heading left, copy right. */
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding-top: 40px;
+  border-top: 2px solid var(--color-border);
+}
+
+.rowsItem {
+  display: grid;
+  align-items: start;
+  gap: 16px;
+  min-width: 0;
+}
+
+.rowsItem + .rowsItem {
+  padding-top: 40px;
+  border-top: 2px solid var(--color-border);
+}
+
+.rowHead {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.rowIcon {
+  display: grid;
+  flex: none;
+  color: #c8b100;
+}
+
+.rowIcon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.rowBody {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
+.rowText {
+  color: var(--color-muted);
+  font-size: var(--fs-body);
+  line-height: 24px;
+  font-weight: 500;
+  font-variation-settings: var(--fvs-display);
+  overflow-wrap: break-word;
+}
+
+.rowAddress {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 16px 20px;
+  border-left: 2px solid #ddd8d2;
+  background: var(--color-border-soft);
+  color: var(--color-muted);
+  font-style: normal;
+  font-size: var(--fs-xs);
+  line-height: 16px;
+  font-weight: 500;
+  font-variation-settings: var(--fvs-display);
+}
+
+.rowAddress strong {
+  margin-bottom: 2px;
+  color: var(--color-ink);
+  font-size: var(--fs-small);
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+/* The city line sits a little apart from the street. */
+.rowAddress span + span {
+  margin-top: 8px;
+}
+
 @media (min-width: 48rem) {
   .cols2,
   .cols3 {
@@ -86,6 +285,31 @@
 }
 
 @media (min-width: 64rem) {
+  .panels {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .columns {
+    grid-template-columns: minmax(0, 600fr) minmax(0, 632fr);
+    gap: 64px;
+    margin-top: 80px;
+  }
+
+  .rows {
+    gap: 64px;
+    padding-top: 64px;
+    margin-top: 80px;
+  }
+
+  .rowsItem {
+    grid-template-columns: minmax(0, 560fr) minmax(0, 624fr);
+    gap: 112px;
+  }
+
+  .rowsItem + .rowsItem {
+    padding-top: 64px;
+  }
+
   .cols3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }

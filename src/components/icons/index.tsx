@@ -414,3 +414,73 @@ export function CalendarDotsIcon(props: IconProps) {
     </svg>
   );
 }
+
+// Overview facts card: 20px glyphs in a lime circle, same stroke as the Phase 3 set.
+
+/** Format. */
+export function InfoCircleIcon(props: IconProps) {
+  return (
+    <svg {...base} width="20" height="20" viewBox="0 0 20 20" {...stroke} {...props}>
+      <circle cx="10" cy="10" r="7.5" />
+      <path d="M10 9.25v4.25M10 6.6v.05" />
+    </svg>
+  );
+}
+
+/** Instructor, in-person dates. */
+export function UserIcon(props: IconProps) {
+  return (
+    <svg {...base} width="20" height="20" viewBox="0 0 20 20" {...stroke} {...props}>
+      <circle cx="10" cy="7" r="3.5" />
+      <path d="M3.75 17c.9-2.9 3.3-4.75 6.25-4.75s5.35 1.85 6.25 4.75" />
+    </svg>
+  );
+}
+
+/** Lifetime access. */
+export function AccessIcon(props: IconProps) {
+  return (
+    <svg {...base} width="20" height="20" viewBox="0 0 20 20" {...stroke} {...props}>
+      <circle cx="10" cy="10" r="7.5" />
+      <path d="M6.5 8.25 10 9l3.5-.75M10 9v2.25l-1.75 3M10 11.25l1.75 3M10 6.1v.05" />
+    </svg>
+  );
+}
+
+/** Online dates. */
+export function TargetIcon(props: IconProps) {
+  return (
+    <svg {...base} width="20" height="20" viewBox="0 0 20 20" {...stroke} {...props}>
+      <circle cx="10" cy="10" r="7.5" />
+      <circle cx="10" cy="10" r="3.5" />
+    </svg>
+  );
+}
+
+/** Module 1 booking info: repeat participants. */
+export function RepeatIcon(props: IconProps) {
+  return (
+    <svg {...base} width="32" height="32" viewBox="0 0 32 32" {...stroke} strokeWidth={2.25} {...props}>
+      <path d="M4 15.5v-1A5.5 5.5 0 0 1 9.5 9H27M23 5l4 4-4 4M28 16.5v1a5.5 5.5 0 0 1-5.5 5.5H5M9 27l-4-4 4-4" />
+    </svg>
+  );
+}
+
+/** Module 1 booking info: requirements. */
+export function ListBulletsIcon(props: IconProps) {
+  return (
+    <svg {...base} width="32" height="32" viewBox="0 0 32 32" {...stroke} strokeWidth={2.25} {...props}>
+      <path d="M11 8h17M11 16h17M11 24h17M4.5 8h1M4.5 16h1M4.5 24h1" />
+    </svg>
+  );
+}
+
+/** Module 1 booking info: venue. */
+export function MapPinIcon(props: IconProps) {
+  return (
+    <svg {...base} width="32" height="32" viewBox="0 0 32 32" {...stroke} strokeWidth={2.25} {...props}>
+      <path d="M16 29s9.5-7.2 9.5-15.5a9.5 9.5 0 0 0-19 0C6.5 21.8 16 29 16 29Z" />
+      <circle cx="16" cy="13.5" r="3.5" />
+    </svg>
+  );
+}
