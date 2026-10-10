@@ -760,7 +760,7 @@ export const listingPage: { meta: Metadata; hero: CourseHeroContent; cta: CtaCon
     breadcrumb: [{ label: "Course Booking" }],
     badge: scheduleIntro.badge,
     description: scheduleIntro.description,
-    image: "/training/listing-hero.jpg",
+    image: "/training/training-offers-hero.jpg",
     highlights: [
       { value: String(scheduleDates.length), label: "Upcoming dates" },
       { value: "4", label: "Languages" },

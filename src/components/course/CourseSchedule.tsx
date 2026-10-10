@@ -402,10 +402,17 @@ function Lang({ item }: { item: ScheduleItem }) {
   );
 }
 
+/**
+ * Rows and cards whose course has a redesigned page here open it from anywhere on their
+ * surface: the title link stretches over the whole row or card, and the booking button and
+ * location link sit above it. Live-site entries keep their title link only.
+ */
+const hasDetail = (item: ScheduleItem) => item.href.startsWith("/");
+
 function CourseCell({ item }: { item: ScheduleItem }) {
   return (
     <>
-      <a href={item.href} className={styles.title}>
+      <a href={item.href} className={`${styles.title} ${hasDetail(item) ? styles.stretch : ""}`}>
         {item.title}
       </a>
       <span className={styles.sub}>{TYPE_LABELS[item.type]}</span>
@@ -476,7 +483,7 @@ function BookLink({ item, label }: { item: ScheduleItem; label: string }) {
 
 function Row({ item }: { item: ScheduleItem }) {
   return (
-    <tr>
+    <tr data-linked={hasDetail(item) || undefined}>
       <td className={styles.course}>
         <CourseCell item={item} />
       </td>
@@ -501,7 +508,7 @@ function Row({ item }: { item: ScheduleItem }) {
 
 function InterestRow({ item }: { item: ScheduleItem }) {
   return (
-    <tr>
+    <tr data-linked={hasDetail(item) || undefined}>
       <td className={styles.course}>
         <CourseCell item={item} />
       </td>
@@ -523,7 +530,7 @@ function DateCard({ item, interest = false }: { item: ScheduleItem; interest?: b
   const span = formatSpan(item);
   const format = FORMAT_LABELS[item.format];
   return (
-    <article className={styles.card}>
+    <article className={styles.card} data-linked={hasDetail(item) || undefined}>
       <div className={styles.dateBlock} aria-hidden>
         {parts ? (
           <>
@@ -546,7 +553,9 @@ function DateCard({ item, interest = false }: { item: ScheduleItem; interest?: b
           {item.isNew && <span className={styles.new}>New</span>}
         </p>
         <h4 className={styles.cardTitle}>
-          <a href={item.href}>{item.title}</a>
+          <a href={item.href} className={hasDetail(item) ? styles.stretch : undefined}>
+            {item.title}
+          </a>
         </h4>
         <ul className={styles.meta}>
           {!interest && (

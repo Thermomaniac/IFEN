@@ -51,17 +51,31 @@
   }
 }
 
-/* Figma listing hero: the photo's right side fills the band, under an elliptical ink fade
-   that is solid behind the copy and clear at the right edge. 464 tall at 1440. */
+/*
+ * Figma listing hero: the photo's right side fills the band, under an elliptical ink fade
+ * that is solid behind the copy and clear at the right edge. 464 tall at 1440.
+ *
+ * The photo is 2880×928, the same shape as the 1440×464 band, so at 1440 it shows whole.
+ * Wide rows never scale it past the band's height, which would crop both heads and the
+ * man's chin: the frame stays as tall as the band and as wide as that height allows,
+ * pinned right, and its left edge melts into the ink. Narrower desktops make the band
+ * taller than 1/3.1 of its width, so the frame runs past the left edge instead and slides
+ * up to 50px right, trimming the man's shoulder so the woman's face clears the copy.
+ */
 .media {
   position: absolute;
-  inset: 0;
+  top: 0;
+  right: 0;
   z-index: -2;
+  height: 100%;
+  aspect-ratio: 2880 / 928;
+  transform: translateX(clamp(0px, (90rem - 100vw) * 0.12, 50px));
+  mask-image: linear-gradient(90deg, transparent, #000 28%);
 }
 
 .photo {
   object-fit: cover;
-  object-position: right center;
+  object-position: 100% 30%;
 }
 
 .fade {
@@ -87,13 +101,16 @@
   .media {
     inset: auto 0 0;
     height: var(--strip);
+    aspect-ratio: auto;
+    transform: none;
+    mask-image: none;
   }
 
   .media::after {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, var(--color-ink), rgb(11 57 65 / 0%) 45%);
+    background: linear-gradient(180deg, var(--color-ink), rgb(11 57 65 / 0%) 34%);
   }
 
   .fade {

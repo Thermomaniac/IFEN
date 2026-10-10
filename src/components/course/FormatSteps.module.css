@@ -88,7 +88,8 @@
   text-wrap: pretty;
 }
 
-/* Grey hairline; the ink fill follows the scroll position, so line and column move together. */
+/* Grey hairline; the ink fill follows the scroll position, so line and column move together.
+   Line i draws over progress i to i + 1, so every line is empty until the sequence starts. */
 .line {
   position: relative;
   display: block;
@@ -103,7 +104,7 @@
   inset: 0;
   background: var(--color-ink);
   transform-origin: left center;
-  transform: scaleX(clamp(0, calc(var(--progress, 0) - var(--i) + 1), 1));
+  transform: scaleX(clamp(0, calc(var(--progress, 0) - var(--i)), 1));
 }
 
 @media (min-width: 48rem) {

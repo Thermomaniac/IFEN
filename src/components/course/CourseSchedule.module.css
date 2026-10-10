@@ -795,3 +795,34 @@
     padding: 12px;
   }
 }
+
+/* ---------- Full-area links ---------- */
+
+/* Rows and cards with a detail page here: the title link covers the whole surface, the
+   booking button and location link stay on top of it, and the title underlines with the
+   wash so it is clear what the click opens. */
+.table tbody tr[data-linked],
+.card[data-linked] {
+  position: relative;
+  cursor: pointer;
+}
+
+.stretch::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+[data-linked] .bookBtn,
+[data-linked] .place {
+  position: relative;
+  z-index: 2;
+}
+
+@media (hover: hover) {
+  [data-linked]:hover .stretch {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+}
