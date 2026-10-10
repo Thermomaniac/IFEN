@@ -156,7 +156,7 @@ const BOARD_REPEATS = 3;
 
 export const board = {
   label: "Our Board Members",
-  heading: "Management and clinical-scientific advisory board of the IFEN",
+  heading: "Management and Clinical-Scientific Advisory Board of the IFEN",
   members: Array.from({ length: BOARD_REPEATS }, (_, round) =>
     boardPeople.map(
       (p): BoardMember => ({

@@ -62,8 +62,8 @@ export function FeatureGrid({
   );
 }
 
-/** Faint brush arcs behind the check cards (Paper) and the Module 1 audience panels (Figma). */
-export function Arcs({ className = styles.arcs }: { className?: string }) {
+/** Faint brush arcs behind the check cards (Paper). */
+function Arcs({ className = styles.arcs }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 774 639.41" aria-hidden="true" focusable="false">
       <g fill="none" stroke="currentColor">

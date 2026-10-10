@@ -61,7 +61,7 @@ export const LANGUAGE_LABELS: Record<Language, string> = {
 };
 
 export const scheduleIntro = {
-  title: "Training & other offers",
+  title: "Training & Other Offers",
   badge: "All trainings at a glance",
   // Figma's condensed hero copy (Phase 3).
   description:
@@ -751,7 +751,7 @@ export const interestList: ScheduleItem[] = [
 
 export const listingPage: { meta: Metadata; hero: CourseHeroContent; cta: CtaContent } = {
   meta: {
-    title: "Training & other offers | IFEN Neurofeedback",
+    title: "Training & Other Offers | IFEN Neurofeedback",
     description:
       "All IFEN neurofeedback trainings, webinars, workshops and mentoring dates at a glance, with prices, languages and places.",
   },
@@ -769,7 +769,7 @@ export const listingPage: { meta: Metadata; hero: CourseHeroContent; cta: CtaCon
   },
   cta: {
     label: "Personal advice",
-    headingLines: ["Not sure which training", "suits you best?"],
+    headingLines: ["Not Sure Which Training", "Suits You Best?"],
     text: "Book a free 30 minute call and we will help you choose the right next step.",
     action: { label: "Book a consultation", href: CONSULTATION_URL },
     secondary: { label: "Write to us", href: `mailto:${CONTACT_EMAIL}` },

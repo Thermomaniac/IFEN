@@ -81,7 +81,7 @@ export default async function SpeakerPage({ params }: Props) {
                   ))}
                 </RevealItem>
                 <RevealItem>
-                  <h2 className={styles.focusTitle}>In the programme</h2>
+                  <h2 className={styles.focusTitle}>In the Programme</h2>
                   <ul className={styles.list}>
                     {mentor.focus.map((f) => (
                       <Outcome key={f}>{f}</Outcome>

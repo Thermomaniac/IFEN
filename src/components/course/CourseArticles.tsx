@@ -4,7 +4,6 @@ import { Reveal, RevealItem } from "@/components/motion/Reveal";
 import type { Article, ArticleIcon, ArticlesContent } from "@/data/coursePage";
 import { CourseSection, type Tone } from "./CourseSection";
 import styles from "./CourseArticles.module.css";
-import { Arcs } from "./FeatureGrid";
 import { OutcomeList } from "./ProgramDetails";
 
 const ICONS: Record<ArticleIcon, ReactNode> = {
@@ -19,7 +18,7 @@ type Variant = "panels" | "columns" | "rows";
  * Text-led content blocks: a heading, then paragraphs, check rows, chips or an address.
  * By default they sit in white cards, two or three columns depending on the count; a
  * single card puts its heading beside the copy on wide screens. The Figma layouts:
- * - `panels`: mist cards with faint arcs and a grey check list (Module 1 audience).
+ * - `panels`: white stroked cards with a grey check list (Module 1 audience).
  * - `columns`: open columns, a list renders as the bordered outcome rows (equipment).
  * - `rows`: full-width rows between rules, icon and heading left, copy right (venue).
  */
@@ -98,7 +97,6 @@ function Address({ address, className = styles.address }: { address: NonNullable
 function Panel({ item }: { item: Article }) {
   return (
     <>
-      <Arcs className={styles.panelArcs} />
       <div className={styles.panelHead}>
         {item.heading && <h3 className={styles.panelHeading}>{item.heading}</h3>}
         {item.paragraphs?.map((text) => (

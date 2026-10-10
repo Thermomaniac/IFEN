@@ -86,7 +86,7 @@ export const module1 = {
 
   audience: {
     label: "Who it is for",
-    heading: "Is Module 1 right for you?",
+    heading: "Is Module 1 Right for You?",
     items: [
       {
         heading: "Who is this for?",
@@ -117,7 +117,7 @@ export const module1 = {
 
   why: {
     label: "Why start here",
-    heading: "Why this module is the ideal starting point",
+    heading: "Why This Module Is the Ideal Starting Point",
     numbered: true,
     items: [
       {
@@ -137,7 +137,7 @@ export const module1 = {
 
   curriculum: {
     label: "Curriculum",
-    heading: "Five days, from the basics to clinical practice",
+    heading: "Five Days, From the Basics to Clinical Practice",
     days: [
       {
         label: "Day 1",
@@ -233,7 +233,7 @@ export const module1 = {
 
   practical: {
     label: "Practical information",
-    heading: "Equipment and technical setup",
+    heading: "Equipment and Technical Setup",
     items: [
       {
         heading: "Equipment during the course",
@@ -335,7 +335,7 @@ export const module1 = {
 
   cta: {
     label: "Start Your Certification",
-    headingLines: ["Reserve your place", "in Module 1 now"],
+    headingLines: ["Reserve Your Place", "in Module 1 Now"],
     text: "Start with a sound, practical introduction to EEG, neurofeedback training and professional application.",
     action: { label: "Reserve space", href: BOOK.href },
     secondary: { label: "Request a consultation", href: CONSULTATION_URL },

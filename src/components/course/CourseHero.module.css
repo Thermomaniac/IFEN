@@ -1,7 +1,7 @@
 /*
  * Paper: 1440 wide, #0B3941, padding 80 / 72, intro column 552 and booking panel
- * 494 pushed apart. Four thick #0B4750 strokes sit behind both (1528×1262 at
- * x -59 / y -422), scaled with the viewport.
+ * 494 pushed apart and centred on each other. Four thick #0B4750 strokes sit behind
+ * both (1528×1262 at x -59 / y -422).
  */
 .hero {
   position: relative;
@@ -11,20 +11,44 @@
   color: var(--color-white);
 }
 
-/* The global `svg { max-width: 100% }` reset would clamp the pattern to the hero width and
-   shrink it, so it is lifted here. The offsets follow the pattern's own width, keeping the
-   strokes where Figma puts them when the 68rem floor applies on smaller screens. */
-.lines {
-  --w: max(106.1vw, 68rem);
+/*
+ * The pattern has open path ends inside its box: three near the top edge, one near the
+ * bottom-left and one at (1032, 869), which Paper hides behind the booking panel. Sizing
+ * it from the viewport alone let taller and stacked heroes show those ends and the box's
+ * cut-off bottom. The box below is a size container, so the pattern is placed from the
+ * hero's own width and height:
+ * - one unit is 1/1440 of the hero width (Paper), never below the 68rem floor;
+ * - the top never rises past unit 420, so the ends near the top stay out of view;
+ * - on wide rows the (1032, 869) end follows the panel, which sits at the hero's middle;
+ * - stacked, the hero is narrower than 930 units, so that end falls past the right edge;
+ * - below unit 1100 (Paper's hero ends at 1099) the strokes fade out instead of stopping.
+ * The global `svg { max-width: 100% }` reset would clamp the pattern, so it is lifted.
+ */
+.linesBox {
   position: absolute;
+  inset: 0;
   z-index: -1;
-  left: calc(var(--w) * -0.0386);
-  top: calc(var(--w) * -0.2762);
-  width: var(--w);
+  container-type: size;
+  pointer-events: none;
+}
+
+.lines {
+  --u: max(100cqw / 930, 0.0445rem);
+  position: absolute;
+  left: calc(var(--u) * -59);
+  top: calc(var(--u) * -422);
+  width: calc(var(--u) * 1528);
   max-width: none;
   height: auto;
   color: #0b4750;
-  pointer-events: none;
+  mask-image: linear-gradient(#000 87.1%, transparent 97.1%);
+}
+
+@media (min-width: 64rem) {
+  .lines {
+    --u: max(100cqw / 1440, 0.0445rem);
+    top: min(var(--u) * -420, 50cqh + 144px - var(--u) * 869);
+  }
 }
 
 /* Figma listing hero: the photo's right side fills the band, under an elliptical ink fade
@@ -100,7 +124,7 @@
 @media (min-width: 64rem) {
   .inner {
     flex-direction: row;
-    align-items: flex-start;
+    align-items: center;
     justify-content: space-between;
     gap: 48px;
   }

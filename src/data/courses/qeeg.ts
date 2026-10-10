@@ -142,7 +142,7 @@ export const qeeg = {
 
   flexible: {
     label: "Flexible professional learning",
-    heading: "Advanced learning, without the timetable.",
+    heading: "Advanced Learning, Without the Timetable.",
     intro: [
       "A focused learning experience for clinicians who want to deepen their QEEG knowledge without depending on fixed dates or live attendance.",
     ],
@@ -281,7 +281,7 @@ export const qeeg = {
 
   cta: {
     label: "20+ Hours · On-Demand Learning · Lifetime Access",
-    headingLines: ["Master QEEG interpretation", "at your own pace"],
+    headingLines: ["Master QEEG Interpretation", "at Your Own Pace"],
     action: { label: "Book your place", href: BOOK.href },
     secondary: { label: "View FAQ", href: "#faq" },
   } satisfies CtaContent,

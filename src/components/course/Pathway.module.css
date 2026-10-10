@@ -26,14 +26,13 @@
   overflow: hidden;
 }
 
-/* --fill (0..1) is where the dark line ends for the current step; it glides between steps. */
+/* --fill (0..1) is where the dark line ends. It follows the scroll, so it has no transition of its own. */
 .fill {
   position: absolute;
   inset: 0;
   background: var(--color-ink);
   transform: scaleY(var(--fill, 0));
   transform-origin: top;
-  transition: transform 1.1s var(--ease-glide);
 }
 
 .step {
@@ -146,9 +145,9 @@
   padding: 16px 20px;
   border-radius: 4px;
   background: var(--color-border-soft);
-  color: var(--color-heading);
+  color: #4a5565;
   font-size: var(--fs-body);
-  line-height: 24px;
+  line-height: 20px;
   text-align: center;
   text-wrap: balance;
 }
@@ -202,7 +201,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .fill,
   .card,
   .number,
   .heading,

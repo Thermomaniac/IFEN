@@ -50,7 +50,7 @@ export const webinar = {
 
   overview: {
     label: "Overview",
-    heading: "Stress, Pain and The Nervous System: Biofeedback & Neurofeedback In Practice",
+    heading: "Stress, Pain and the Nervous System: Biofeedback & Neurofeedback in Practice",
     paragraphs: [
       "A practical overview of how biofeedback and neurofeedback support self-regulation and what role both methods can play in everyday clinical practice.",
     ],
@@ -69,7 +69,7 @@ export const webinar = {
 
   content: {
     label: "About the webinar",
-    heading: "What you will take away",
+    heading: "What You Will Take Away",
     items: [
       {
         heading: "Understanding stress, pain and self-regulation",
@@ -126,7 +126,7 @@ export const webinar = {
 
   cta: {
     label: "Live Webinar",
-    headingLines: ["Join the live webinar", "on stress and pain"],
+    headingLines: ["Join the Live Webinar", "on Stress and Pain"],
     text: "Get a compact overview of biofeedback, neurofeedback and their importance for self-regulation, with time for questions and discussion.",
     action: { label: "Register now", href: BOOK.href },
   } satisfies CtaContent,

@@ -67,7 +67,7 @@ export const course = {
 
   program: {
     label: "Program Details",
-    heading: "Customized learning path to master advanced clinical qEEG and bioregulation metrics.",
+    heading: "Customized Learning Path to Master Advanced Clinical qEEG and Bioregulation Metrics.",
     outcomes: [
       "Personalized 1-on-1 and group mentoring sessions tailored to your pace.",
       "Complete alignment with standard BCIA requirements and qEEG-D board guidelines.",

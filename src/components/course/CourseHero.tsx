@@ -100,29 +100,31 @@ export function CourseHero({ content }: { content: CourseHeroContent }) {
   );
 }
 
-/** Four thick strokes behind the intro and the panel, scaled with the viewport. */
+/** Four thick strokes behind the intro and the panel, placed from the hero's own size. */
 function Lines() {
   return (
-    <svg className={styles.lines} viewBox="0 0 1528 1262.29" fill="none" aria-hidden="true">
-      <g stroke="currentColor" strokeWidth="84">
-        <path
-          transform="matrix(0.975 0.221 0.221 -0.975 612.898 518.824)"
-          d="M0 126.934C0 126.934 149.43 -29.241 247.153 4.873C355.606 42.734 415.12 152.867 481.566 343.315C505.31 411.372 532.525 531.955 532.525 531.955"
-        />
-        <path
-          transform="matrix(1 0 0 1 0 820.293)"
-          d="M0 99.265C0 99.265 114.207 -22.867 188.895 3.811C271.784 33.419 317.269 119.545 368.053 268.48C386.2 321.701 407 416 407 416"
-        />
-        <path
-          transform="matrix(-1 0 0 1 1032 745.293)"
-          d="M0 123.366C0 123.366 203.44 -28.419 336.483 4.736C484.136 41.533 565.16 148.57 655.622 333.663C687.948 399.806 725 517 725 517"
-        />
-        <path
-          transform="matrix(-1 0 0 -1 1528 745.293)"
-          d="M0 88.05C0 88.05 111.12 -20.284 183.789 3.38C264.438 29.643 308.694 106.039 358.105 238.147C375.762 285.355 396 369 396 369"
-        />
-      </g>
-    </svg>
+    <span className={styles.linesBox} aria-hidden="true">
+      <svg className={styles.lines} viewBox="0 0 1528 1262.29" fill="none">
+        <g stroke="currentColor" strokeWidth="84">
+          <path
+            transform="matrix(0.975 0.221 0.221 -0.975 612.898 518.824)"
+            d="M0 126.934C0 126.934 149.43 -29.241 247.153 4.873C355.606 42.734 415.12 152.867 481.566 343.315C505.31 411.372 532.525 531.955 532.525 531.955"
+          />
+          <path
+            transform="matrix(1 0 0 1 0 820.293)"
+            d="M0 99.265C0 99.265 114.207 -22.867 188.895 3.811C271.784 33.419 317.269 119.545 368.053 268.48C386.2 321.701 407 416 407 416"
+          />
+          <path
+            transform="matrix(-1 0 0 1 1032 745.293)"
+            d="M0 123.366C0 123.366 203.44 -28.419 336.483 4.736C484.136 41.533 565.16 148.57 655.622 333.663C687.948 399.806 725 517 725 517"
+          />
+          <path
+            transform="matrix(-1 0 0 -1 1528 745.293)"
+            d="M0 88.05C0 88.05 111.12 -20.284 183.789 3.38C264.438 29.643 308.694 106.039 358.105 238.147C375.762 285.355 396 369 396 369"
+          />
+        </g>
+      </svg>
+    </span>
   );
 }
 

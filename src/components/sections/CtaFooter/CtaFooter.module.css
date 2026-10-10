@@ -157,7 +157,7 @@
   gap: 32px;
 }
 
-/* Paper: 16/20 bold caps, 1.5px tracking, teal 24px rule 8px below. */
+/* Paper: 16/20 bold Title Case, 1.5px tracking, teal 24px rule 8px below. */
 .title {
   display: flex;
   flex-direction: column;
@@ -165,7 +165,6 @@
   font-size: var(--fs-body);
   line-height: 20px;
   letter-spacing: 1.5px;
-  text-transform: uppercase;
   font-weight: 700;
   font-variation-settings: var(--fvs-display);
   color: var(--color-ink);
