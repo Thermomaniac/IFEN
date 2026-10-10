@@ -13,9 +13,12 @@ const icons = { brain: ModuleBrainIcon, pulse: ModulePulseIcon, chip: ModuleChip
 
 // Connector paths from Paper, in a 670×286 box: module 1 and module 3 curve in to the
 // centre, module 2 drops straight down. All three run top to bottom, towards module 4.
+// The curves mirror each other about x 335 and end on the stem's own end point, (335, 286).
+// Their last segment leaves the previous one on its tangent and finishes vertical, so each
+// curve settles onto the stem instead of crossing it at an angle.
 const connectorPaths = [
-  "M0 0C0 0 53.948 144.993 147.467 189.442C201.761 215.248 281.256 179.223 317.903 219.237C336.287 239.309 333.898 286 333.898 286",
-  "M670 0C670 0 615.931 144.993 522.202 189.442C467.785 215.248 384.468 179.578 347.739 219.591C329.313 239.664 334.748 286 334.748 286",
+  "M0 0C0 0 53.948 144.993 147.467 189.442C201.761 215.248 281.256 179.223 317.903 219.237C335 237.905 335 262 335 286",
+  "M670 0C670 0 616.052 144.993 522.533 189.442C468.239 215.248 388.744 179.223 352.097 219.237C335 237.905 335 262 335 286",
   "M335 0V286",
 ];
 
