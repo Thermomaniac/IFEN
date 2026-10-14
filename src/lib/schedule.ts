@@ -79,7 +79,9 @@ export const PRICE_LABELS: Record<PriceFilter, string> = {
   reduced: "With reduced rates",
 };
 
-export const isFiltered = (f: Filters) => Object.values(f).some(Boolean);
+/** Number of filters in use, for "Clear Filter (n)". A blank search does not count. */
+export const activeFilters = (f: Filters) =>
+  (Object.entries(f) as [keyof Filters, string][]).filter(([k, v]) => (k === "query" ? v.trim() : v)).length;
 
 /** Lower case without accents, so "modulo" finds "MÓDULO" and "prufung" finds "Prüfung". */
 const fold = (text: string) => text.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();

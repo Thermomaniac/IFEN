@@ -85,3 +85,53 @@ export function useHydrated() {
     () => false,
   );
 }
+
+/**
+ * Outcome of a finished booking, kept apart from the form data above: the
+ * registration can be complete while the payment is still pending (bank
+ * transfer). Session-only until a booking backend exists; the Offers page reads
+ * it to show the pending notice.
+ */
+export type BookingStatus = {
+  course: string;
+  registration: "complete";
+  payment: "paid" | "pending";
+  method: string;
+  /** Set until the Offers page has cleared the finished form data once. */
+  fresh?: boolean;
+  /** The visitor closed the pending notice; the status itself stays. */
+  dismissed?: boolean;
+};
+
+const STATUS_KEY = "ifen:booking-status";
+let statusCache: BookingStatus | null | undefined;
+const statusListeners = new Set<() => void>();
+
+function loadStatus(): BookingStatus | null {
+  try {
+    const raw = window.sessionStorage.getItem(STATUS_KEY);
+    return raw ? (JSON.parse(raw) as BookingStatus) : null;
+  } catch {
+    return null;
+  }
+}
+
+export function saveBookingStatus(status: BookingStatus | null) {
+  statusCache = status;
+  try {
+    if (status) window.sessionStorage.setItem(STATUS_KEY, JSON.stringify(status));
+    else window.sessionStorage.removeItem(STATUS_KEY);
+  } catch {}
+  statusListeners.forEach((l) => l());
+}
+
+export function useBookingStatus() {
+  return useSyncExternalStore(
+    (onChange) => {
+      statusListeners.add(onChange);
+      return () => statusListeners.delete(onChange);
+    },
+    () => (statusCache === undefined ? (statusCache = loadStatus()) : statusCache),
+    () => null,
+  );
+}

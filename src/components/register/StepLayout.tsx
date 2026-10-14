@@ -24,23 +24,38 @@ function firstIncomplete(reg: ReturnType<typeof useRegistration>) {
 }
 
 /**
+ * Another routed flow using this frame (mentor booking): its steps and route base,
+ * its own first incomplete step, the card beside the form and the stepper's name.
+ */
+export type StepFlow = {
+  steps: readonly { slug: string; label: string; title: string }[];
+  basePath: string;
+  missing: number | null;
+  aside: ReactNode;
+  label?: string;
+};
+
+/**
  * Shared frame of a registration step: "Step n of 3", title and stepper, the
  * selection card and the step's form. Opening a later step with earlier data
  * missing (a bookmark, a fresh tab) sends the visitor back to that step.
+ * Defaults to the course registration; `flow` reuses the frame for another booking.
  */
-export function StepLayout({ step, children }: { step: number; children: ReactNode }) {
+export function StepLayout({ step, flow, children }: { step: number; flow?: StepFlow; children: ReactNode }) {
   const reg = useRegistration();
   const hydrated = useHydrated();
   const router = useRouter();
   const headingRef = useRef<HTMLHeadingElement>(null);
-  const { title } = registration.steps[step];
+  const steps = flow?.steps ?? registration.steps;
+  const basePath = flow?.basePath ?? REGISTER_PATH;
+  const { title } = steps[step];
 
-  const missing = hydrated ? firstIncomplete(reg) : null;
+  const missing = hydrated ? (flow ? flow.missing : firstIncomplete(reg)) : null;
   const blocked = missing !== null && missing < step;
 
   useEffect(() => {
-    if (blocked) router.replace(`${REGISTER_PATH}/${registration.steps[missing].slug}`);
-  }, [blocked, missing, router]);
+    if (blocked) router.replace(`${basePath}/${steps[missing].slug}`);
+  }, [blocked, missing, router, basePath, steps]);
 
   useEffect(() => {
     if (!focusNextHeading) return;
@@ -54,21 +69,25 @@ export function StepLayout({ step, children }: { step: number; children: ReactNo
         <div className={styles.head}>
           <div className={styles.titles}>
             <p className={styles.count}>
-              Step {step + 1} of {registration.steps.length}
+              Step {step + 1} of {steps.length}
             </p>
             <h2 ref={headingRef} tabIndex={-1} className={styles.title}>
               {title}
             </h2>
           </div>
-          <Stepper current={step} />
+          <Stepper current={step} steps={steps} basePath={basePath} label={flow?.label} />
         </div>
 
         <div className={styles.aside}>
-          <SelectionSummary variant={step === 2 ? "totals" : "facts"} />
+          {flow ? flow.aside : <SelectionSummary variant={step === 2 ? "totals" : "facts"} />}
         </div>
 
         <div className={styles.main}>
-          {hydrated && !blocked ? <div className={styles.enter}>{children}</div> : <div className={styles.placeholder} aria-hidden="true" />}
+          {hydrated && !blocked ? (
+            <div className={styles.enter}>{children}</div>
+          ) : (
+            <div className={styles.placeholder} aria-hidden="true" />
+          )}
         </div>
       </div>
     </div>

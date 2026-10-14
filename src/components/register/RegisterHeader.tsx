@@ -3,8 +3,19 @@ import { ArrowCircleLeftIcon } from "@/components/icons";
 import { COURSE_PATH, registration } from "@/data/course";
 import styles from "./RegisterHeader.module.css";
 
-/** Ink band above the registration steps: back to the course, page title, four thick strokes. */
-export function RegisterHeader() {
+/**
+ * Ink band above the registration steps: back link, page title, four thick strokes.
+ * Defaults to the course registration; the mentor booking passes its own back link and title.
+ */
+export function RegisterHeader({
+  backHref = COURSE_PATH,
+  backLabel = "Back to course details",
+  title = registration.heading,
+}: {
+  backHref?: string;
+  backLabel?: string;
+  title?: string;
+} = {}) {
   return (
     <header className={styles.band}>
       <svg className={styles.lines} viewBox="0 0 1440 136" preserveAspectRatio="xMidYMid slice" fill="none" aria-hidden="true">
@@ -29,10 +40,10 @@ export function RegisterHeader() {
       </svg>
 
       <div className={styles.inner}>
-        <Link href={COURSE_PATH} className={styles.back} aria-label="Back to course details">
+        <Link href={backHref} className={styles.back} aria-label={backLabel}>
           <ArrowCircleLeftIcon />
         </Link>
-        <h1 className={styles.title}>{registration.heading}</h1>
+        <h1 className={styles.title}>{title}</h1>
       </div>
     </header>
   );

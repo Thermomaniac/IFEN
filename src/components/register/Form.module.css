@@ -438,6 +438,11 @@
   background: var(--color-border-soft);
 }
 
+/* Cards that share a step with the review card (payment, consent) take its grey. */
+.cards:has(> .reviewCard) > .card {
+  background: var(--color-border-soft);
+}
+
 .reviewSection {
   display: flex;
   flex-direction: column;

@@ -70,3 +70,24 @@
     opacity: 0;
   }
 }
+
+/* Success state (Paper): 490 wide, the result block carries its own padding. */
+.dialog[data-done] {
+  width: min(490px, calc(100% - 32px));
+  padding: 0;
+}
+
+.dialog[data-done]::backdrop {
+  background: #0a0f1ea6;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dialog,
+  .dialog::backdrop {
+    animation: none;
+  }
+
+  .spinner {
+    animation-duration: 3s;
+  }
+}

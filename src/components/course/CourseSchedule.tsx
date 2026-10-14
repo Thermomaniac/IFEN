@@ -1,13 +1,13 @@
 "use client";
 
-import { useId, useMemo, useState, type KeyboardEvent } from "react";
+import { useEffect, useId, useMemo, useState, type KeyboardEvent } from "react";
 import {
   CalendarCheckIcon,
   CardsIcon,
-  ChevronDownIcon,
   ClockIcon,
   EuroIcon,
   GlobeIcon,
+  InfoCircleIcon,
   MonitorIcon,
   PinIcon,
   ResetIcon,
@@ -25,18 +25,20 @@ import {
   type Language,
   type ScheduleItem,
 } from "@/data/schedule";
+import { clearRegistration, saveBookingStatus, useBookingStatus } from "@/lib/registration";
 import {
   EMPTY_FILTERS,
   PRICE_LABELS,
   dateParts,
   formatDay,
   formatSpan,
-  isFiltered,
+  activeFilters,
   matches,
   type Filters,
   type PriceFilter,
 } from "@/lib/schedule";
 import { CourseSection } from "./CourseSection";
+import { FilterSelect, type FilterOption } from "./FilterSelect";
 import styles from "./CourseSchedule.module.css";
 
 type View = "table" | "cards";
@@ -48,13 +50,18 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "interest", label: "Interest Lists" },
 ];
 
-const options = <K extends string>(labels: Record<K, string>) =>
+const options = <K extends string>(labels: Record<K, string>): FilterOption[] =>
   (Object.entries(labels) as [K, string][]).map(([value, label]) => ({ value, label }));
 
 /** Only offer filter values that occur in the data, so no option leads to an empty list. */
 function present<K extends string>(labels: Record<K, string>, used: Set<string>) {
   return options(labels).filter((o) => used.has(o.value));
 }
+
+/** Paper: "Showing Dates [50]". Lists longer than the page size grow with "Show more". */
+const PAGE_SIZES = [10, 25, 50, 100];
+const DEFAULT_PAGE_SIZE = 50;
+const PAGE_SIZE_OPTIONS = PAGE_SIZES.map((n) => ({ value: String(n), label: String(n) }));
 
 /**
  * Course listing: one filter box drives two tabs, the dated appointments and the
@@ -79,27 +86,46 @@ export function CourseSchedule({
   const choices = useMemo(
     () => ({
       type: present<CourseType>(TYPE_LABELS, new Set(all.map((i) => i.type))),
-      language: present<Language>(LANGUAGE_LABELS, new Set(all.map((i) => i.language ?? ""))),
+      language: present<Language>(LANGUAGE_LABELS, new Set(all.map((i) => i.language ?? ""))).map((o) => ({
+        ...o,
+        icon: <Flag language={o.value as Language} />,
+      })),
       format: present<CourseFormat>(FORMAT_LABELS, new Set(all.map((i) => i.format))),
       price: options<PriceFilter>(PRICE_LABELS),
     }),
     [all],
   );
 
+  const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
+  const [pages, setPages] = useState(1);
+
   const source = tab === "dates" ? dates : interest;
-  const shown = source.filter((i) => matches(i, filters));
-  const filtered = isFiltered(filters);
-  const set = <K extends keyof Filters>(key: K, value: Filters[K]) =>
+  const matching = source.filter((i) => matches(i, filters));
+  const limit = pageSize * pages;
+  const shown = matching.slice(0, limit);
+  const active = activeFilters(filters);
+  // Any change to what is listed starts again from the first page.
+  const set = <K extends keyof Filters>(key: K, value: Filters[K]) => {
     setFilters((f) => ({ ...f, [key]: value }));
-  const reset = () => setFilters(EMPTY_FILTERS);
+    setPages(1);
+  };
+  const reset = () => {
+    setFilters(EMPTY_FILTERS);
+    setPages(1);
+  };
+  const switchTab = (next: Tab) => {
+    setTab(next);
+    setPages(1);
+  };
   const noun = tab === "dates" ? "dates" : "lists";
+  const Noun = tab === "dates" ? "Dates" : "Lists";
 
   // Arrow keys move between the two tabs, as in the WAI tabs pattern.
   const onTabKey = (e: KeyboardEvent<HTMLButtonElement>) => {
     if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
     e.preventDefault();
     const next = tab === "dates" ? "interest" : "dates";
-    setTab(next);
+    switchTab(next);
     document.getElementById(`${uid}-tab-${next}`)?.focus();
   };
 
@@ -119,14 +145,25 @@ export function CourseSchedule({
       }
     >
       <div className={styles.offerings}>
+        <PendingNotice />
         <div className={styles.results}>
           <h3 className={styles.resultsTitle}>Our Offerings</h3>
-          <p className={styles.count} aria-live="polite">
-            Showing{" "}
-            <strong>
-              {shown.length} of {source.length} {noun}
-            </strong>
-          </p>
+          <div className={styles.count}>
+            <span aria-hidden="true">Showing {Noun}</span>
+            <FilterSelect
+              compact
+              label={`${Noun} per page`}
+              value={String(pageSize)}
+              options={PAGE_SIZE_OPTIONS}
+              onChange={(v) => {
+                setPageSize(Number(v));
+                setPages(1);
+              }}
+            />
+            <p className="sr-only" aria-live="polite">
+              Showing {shown.length} of {matching.length} matching {noun}
+            </p>
+          </div>
           <div className={styles.toggle} role="group" aria-label="Display">
             <button type="button" aria-pressed={view === "table"} onClick={() => setView("table")}>
               <RowsIcon aria-hidden />
@@ -151,7 +188,7 @@ export function CourseSchedule({
                 aria-controls={`${uid}-panel`}
                 tabIndex={tab === t.id ? 0 : -1}
                 className={styles.tab}
-                onClick={() => setTab(t.id)}
+                onClick={() => switchTab(t.id)}
                 onKeyDown={onTabKey}
               >
                 {t.label}
@@ -168,10 +205,10 @@ export function CourseSchedule({
             <form className={styles.filters} role="search" onSubmit={(e) => e.preventDefault()}>
               <div className={styles.filterHead}>
                 <p className={styles.filterTitle}>Categories</p>
-                {filtered ? (
+                {active > 0 ? (
                   <button type="button" className={styles.clear} onClick={reset}>
                     <XCircleIcon aria-hidden />
-                    Clear Filter
+                    Clear Filter ({active})
                   </button>
                 ) : (
                   <p className={styles.filterState}>No filter is applied</p>
@@ -187,38 +224,34 @@ export function CourseSchedule({
                     className={styles.input}
                     data-active={filters.query ? "" : undefined}
                     type="search"
-                    placeholder="Search course or place"
+                    placeholder="Course, code or place"
                     value={filters.query}
                     onChange={(e) => set("query", e.target.value)}
                   />
                   <SearchIcon className={styles.fieldIcon} aria-hidden />
                 </div>
-                <Select
-                  id={`${uid}-type`}
+                <FilterSelect
                   label="Course type"
                   value={filters.type}
                   all="All types"
                   options={choices.type}
                   onChange={(v) => set("type", v as Filters["type"])}
                 />
-                <Select
-                  id={`${uid}-lang`}
+                <FilterSelect
                   label="Language"
                   value={filters.language}
                   all="All languages"
                   options={choices.language}
                   onChange={(v) => set("language", v as Filters["language"])}
                 />
-                <Select
-                  id={`${uid}-format`}
+                <FilterSelect
                   label="Format"
                   value={filters.format}
                   all="All formats"
                   options={choices.format}
                   onChange={(v) => set("format", v as Filters["format"])}
                 />
-                <Select
-                  id={`${uid}-price`}
+                <FilterSelect
                   label="Price"
                   value={filters.price}
                   all="Paid & free"
@@ -313,49 +346,21 @@ export function CourseSchedule({
                 </ul>
               </>
             )}
+
+            {matching.length > shown.length && (
+              <div className={styles.more}>
+                <button type="button" className={styles.reset} onClick={() => setPages((n) => n + 1)}>
+                  Show {Math.min(pageSize, matching.length - shown.length)} more {noun}
+                </button>
+                <span className={styles.moreCount}>
+                  {shown.length} of {matching.length}
+                </span>
+              </div>
+            )}
           </div>
         </div>
       </div>
     </CourseSection>
-  );
-}
-
-function Select({
-  id,
-  label,
-  value,
-  all,
-  options,
-  onChange,
-}: {
-  id: string;
-  label: string;
-  value: string;
-  all: string;
-  options: { value: string; label: string }[];
-  onChange: (value: string) => void;
-}) {
-  return (
-    <div className={styles.field}>
-      <label className="sr-only" htmlFor={id}>
-        {label}
-      </label>
-      <select
-        id={id}
-        className={`${styles.input} ${styles.select}`}
-        data-active={value ? "" : undefined}
-        value={value}
-        onChange={(e) => onChange(e.target.value)}
-      >
-        <option value="">{all}</option>
-        {options.map((o) => (
-          <option key={o.value} value={o.value}>
-            {o.label}
-          </option>
-        ))}
-      </select>
-      <ChevronDownIcon className={styles.fieldIcon} aria-hidden />
-    </div>
   );
 }
 
@@ -621,6 +626,43 @@ function DateCard({ item, interest = false }: { item: ScheduleItem; interest?: b
         </div>
       </div>
     </article>
+  );
+}
+
+/**
+ * Paper notice above the results after a bank-transfer booking: the registration
+ * is complete while the payment is still pending. It sizes to its text and the X
+ * hides it for the rest of the session. The first visit after the booking
+ * also clears the finished form data, as the LMS screen does for online payments.
+ */
+function PendingNotice() {
+  const status = useBookingStatus();
+
+  useEffect(() => {
+    if (!status?.fresh) return;
+    clearRegistration();
+    saveBookingStatus({ ...status, fresh: false });
+  }, [status]);
+
+  if (status?.payment !== "pending" || status.dismissed) return null;
+  return (
+    <p className={styles.pending} role="status">
+      <InfoCircleIcon aria-hidden />
+      Registration is Complete. Payment Status is Pending.
+      <button
+        type="button"
+        className={styles.pendingClose}
+        aria-label="Dismiss payment notice"
+        onClick={() => saveBookingStatus({ ...status, dismissed: true })}
+      >
+        <svg viewBox="0 0 10.5 10.5" aria-hidden="true" focusable="false">
+          <path
+            d="M10.28 9.22a.75.75 0 1 1-1.06 1.06L5.25 6.32l-3.97 3.96a.75.75 0 0 1-1.06-1.06l3.97-3.97L.22 1.28A.75.75 0 0 1 1.28.22l3.97 3.97L9.22.22a.75.75 0 1 1 1.06 1.06L6.31 5.25l3.97 3.97Z"
+            fill="currentColor"
+          />
+        </svg>
+      </button>
+    </p>
   );
 }
 

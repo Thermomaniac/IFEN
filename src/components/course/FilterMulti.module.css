@@ -1,0 +1,110 @@
+/*
+ * Paper multi-select (Qualifications, Expert Level Status). Menu 312 wide; rows carry a
+ * 24px icon, a Medium 14/18 label and a 20px checkbox, checked = ink fill, white tick.
+ * Chosen field: sage with an ink count badge (Medium 12/16 white) before the chevron.
+ */
+.root .menu {
+  right: auto;
+  width: max(100%, 312px);
+  max-width: calc(100vw - 32px);
+  max-height: min(400px, 60dvh);
+}
+
+.root[data-align="end"] .menu {
+  left: auto;
+  right: 0;
+}
+
+.root[data-chosen] :global(button[role="combobox"]) {
+  padding-right: 40px;
+}
+
+.badge {
+  display: grid;
+  place-items: center;
+  flex: none;
+  min-width: 20px;
+  height: 20px;
+  margin-left: auto;
+  padding: 0 6px;
+  border-radius: 10px;
+  background: var(--color-ink);
+  color: var(--color-white);
+  font-size: var(--fs-xs);
+  line-height: 16px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+
+.option {
+  gap: 12px;
+  align-items: center;
+}
+
+.icon {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 24px;
+  height: 24px;
+}
+
+.icon img,
+.icon svg {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.label {
+  flex: 1 1 auto;
+  min-width: 0;
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+
+.box {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 1.5px var(--color-border);
+  background: var(--color-white);
+  color: var(--color-white);
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.option[aria-selected="true"] .box {
+  background: var(--color-ink);
+  box-shadow: none;
+}
+
+.box svg {
+  width: 12px;
+  height: 12px;
+}
+
+.option[aria-disabled="true"] {
+  cursor: default;
+  color: var(--color-subtle);
+}
+
+.option[aria-disabled="true"][data-active] {
+  background: none;
+}
+
+.option[aria-disabled="true"] .icon {
+  opacity: 0.5;
+}
+
+.hint {
+  flex: none;
+  color: var(--color-subtle);
+  font-size: var(--fs-xs);
+  line-height: 16px;
+  white-space: nowrap;
+}

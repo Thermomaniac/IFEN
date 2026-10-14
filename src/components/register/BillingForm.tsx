@@ -10,7 +10,7 @@ import { SubmitButton } from "./SubmitButton";
 import { useStepForm } from "./useStepForm";
 import styles from "./Form.module.css";
 
-function PaymentMark({ id, label }: { id: PaymentMethodId; label: string }) {
+export function PaymentMark({ id, label }: { id: PaymentMethodId; label: string }) {
   if (id === "transfer") return <><BankIcon />{label}</>;
   if (id === "card") return <><CardIcon />{label}</>;
   // Brand logos carry the name visually; the text stays for screen readers.
@@ -28,7 +28,7 @@ function PaymentMark({ id, label }: { id: PaymentMethodId; label: string }) {
  * hint says a choice is needed, and a missed choice shows the field error under the
  * cards. The first radio carries the field id so the error summary can focus it.
  */
-function OptionGroup({
+export function OptionGroup({
   name,
   title,
   hint,

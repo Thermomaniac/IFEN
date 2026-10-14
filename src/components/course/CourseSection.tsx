@@ -3,6 +3,7 @@ import { PinStage } from "@/components/motion/PinStage";
 import { Reveal, RevealItem } from "@/components/motion/Reveal";
 import type { PinnedSteps } from "@/components/motion/usePinnedSteps";
 import { SectionHeading } from "@/components/ui/SectionHeading";
+import { LineBreaks } from "@/components/ui/LineBreaks";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import type { SectionHead } from "@/data/coursePage";
 import styles from "./CourseSection.module.css";
@@ -72,7 +73,7 @@ export function SectionHeader({
       </RevealItem>
       <RevealItem>
         <SectionHeading id={`${id}-title`} align="start">
-          {head.heading}
+          <LineBreaks text={head.heading} />
         </SectionHeading>
       </RevealItem>
       {head.intro?.map((text) => (

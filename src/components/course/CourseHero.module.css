@@ -198,6 +198,11 @@
   gap: 16px;
 }
 
+/* Shrink-to-fit children would otherwise size to their longest word and overflow. */
+.titleBlock > * {
+  max-width: 100%;
+}
+
 .badge {
   padding: 4px 8px;
   border-radius: var(--radius-button);
@@ -214,10 +219,61 @@
   font-weight: 700;
   font-variation-settings: var(--fvs-display);
   text-wrap: pretty;
+  overflow-wrap: break-word; /* long practice names and German compounds */
+  hyphens: auto;
   background: linear-gradient(138.82deg, #fff 24.72%, oklab(96.6% -0.002 0.023) 83.85%);
   background-clip: text;
   -webkit-background-clip: text;
   color: transparent;
+}
+
+/* Figma therapist hero: portrait 92×100 radius 4, 24 to the name column (gap 6). */
+.person {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+}
+
+.portrait {
+  flex: none;
+  width: 92px;
+  height: 100px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.personText {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.subline {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-on-dark);
+  font-size: var(--fs-body);
+  line-height: 24px;
+  font-weight: 500;
+  font-variation-settings: var(--fvs-display);
+}
+
+.sublineDot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #d9d9d9;
+}
+
+.flag {
+  width: 24px;
+  height: 18px;
+  border-radius: 2px;
+  object-fit: cover;
 }
 
 /* Paper: 14/24 on #D1D5DC; 16px below 768 so long copy stays readable on phones. */
@@ -289,6 +345,10 @@
   /* Listing heroes have no panel; Figma keeps the same 552 measure. */
   .intro:only-child {
     flex-basis: 34.5rem;
+  }
+
+  .intro.wide {
+    flex-basis: 37.4375rem; /* 599 */
   }
 
   .panel {
@@ -483,6 +543,16 @@
 }
 
 @media (max-width: 29.99rem) {
+  .person {
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .portrait {
+    width: 64px;
+    height: 70px;
+  }
+
   .factRow {
     grid-template-columns: minmax(0, 1fr);
   }

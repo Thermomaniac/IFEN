@@ -24,7 +24,11 @@ export function formatPrice(amount: number) {
   return `${amount.toLocaleString("en-US")} EUR`;
 }
 
-export type CourseFact = { label: string; value: string; icon: "start" | "end" | "level" | "location" };
+export type CourseFact = {
+  label: string;
+  value: string;
+  icon: "start" | "end" | "level" | "location" | "schedule" | "duration" | "format" | "languages";
+};
 
 export type Mentor = {
   id: string;
@@ -249,6 +253,19 @@ export function isPaymentMethod(value: unknown): value is PaymentMethodId {
 export function getPaymentMethod(id: string | undefined) {
   return paymentMethods.find((m) => m.id === id);
 }
+
+/** IFEN's transfer account and terms, as shown in the Paper bank-transfer modal. */
+export const bankTransfer = {
+  account: [
+    { label: "Transfer to", value: "Raiffeisenbank Regenstauf" },
+    { label: "Account holder", value: "IFEN Thomas Feiner" },
+    { label: "Account number", value: "700003301" },
+    { label: "Bank code", value: "75061851" },
+    { label: "IBAN", value: "DE73 7506 1851 0700 0033 01" },
+  ],
+  terms:
+    "Transfer payment at least 10 working days before the course. Early bird discounts need earlier payment—see course details and Terms. By registering, you agree to terms and waive cancellation if the course starts within 14 days. Details in your booking confirmation.",
+};
 
 /** Two decimals for the order summary and pay button, as drawn in Paper ("150.00 EUR"). */
 export function formatAmount(amount: number) {

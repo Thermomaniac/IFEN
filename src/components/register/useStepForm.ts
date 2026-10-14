@@ -7,19 +7,41 @@ import { saveStep, useRegistration, type Fields } from "@/lib/registration";
 import { validate, type Errors, type FieldRule } from "@/lib/registrationForm";
 import { markStepNavigation } from "./StepLayout";
 
+/** Another booking's store (mentor booking): its values, how to save them and its route base. */
+export type StepStore = {
+  values: Fields;
+  save: (values: Fields) => void;
+  basePath: string;
+};
+
 /**
  * Values live in the registration store and are saved on every keystroke, so
  * Go Back, the browser back button or a reload never lose what was typed.
  * Errors appear on submit, or on blur once a field has content; fixing a field
  * clears its message straight away.
+ *
+ * `step` names the course registration step, or passes another flow's store.
+ * `next` is the step slug to open after a valid submit, or a function to run instead
+ * (a last step that pays rather than navigates).
  */
 export function useStepForm(
-  step: "participant" | "billing",
+  step: "participant" | "billing" | StepStore,
   rules: FieldRule[],
-  next: string,
+  next: string | (() => void),
   defaults: Fields = {},
 ) {
-  const stored = useRegistration()[step];
+  const registration = useRegistration();
+  const {
+    values: stored,
+    save,
+    basePath,
+  }: StepStore = typeof step === "string"
+    ? {
+        values: registration[step],
+        save: (fields) => saveStep(step, fields),
+        basePath: REGISTER_PATH,
+      }
+    : step;
   const values: Fields = { ...defaults, ...stored };
   const [errors, setErrors] = useState<Errors>({});
   const [attempted, setAttempted] = useState(false);
@@ -39,7 +61,7 @@ export function useStepForm(
 
   const onChange = (name: string, value: string) => {
     const nextValues = { ...values, [name]: value };
-    saveStep(step, nextValues);
+    save(nextValues);
     if (errors[name]) recheck(name, nextValues);
   };
 
@@ -57,9 +79,10 @@ export function useStepForm(
       requestAnimationFrame(() => summaryRef.current?.focus());
       return;
     }
-    saveStep(step, values);
+    save(values);
+    if (typeof next === "function") return next();
     markStepNavigation();
-    router.push(`${REGISTER_PATH}/${next}`);
+    router.push(`${basePath}/${next}`);
   };
 
   return { values, errors, onChange, onBlur, onSubmit, summaryRef };

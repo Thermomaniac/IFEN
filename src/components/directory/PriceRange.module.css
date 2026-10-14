@@ -1,0 +1,107 @@
+/*
+ * Paper: label SemiBold 14/16 ink, centred, 16 above the slider. Thumbs 32px squares,
+ * white, 2px ink border, radius 4. Track 4px #F3F4F6, selected span ink.
+ */
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.label {
+  color: var(--color-ink);
+  font-size: var(--fs-small);
+  line-height: 16px;
+  font-weight: 600;
+  font-variation-settings: var(--fvs-display);
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}
+
+/* The thumbs travel inside 16px insets so their centres meet the track ends. */
+.slider {
+  position: relative;
+  height: 32px;
+}
+
+.track {
+  position: absolute;
+  left: 16px;
+  right: 16px;
+  top: 14px;
+  height: 4px;
+  background: linear-gradient(
+    to right,
+    var(--color-border-soft) var(--from),
+    var(--color-ink) var(--from) var(--to),
+    var(--color-border-soft) var(--to)
+  );
+}
+
+.input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 32px;
+  margin: 0;
+  background: none;
+  appearance: none;
+  pointer-events: none;
+}
+
+.input::-webkit-slider-runnable-track {
+  height: 32px;
+  background: none;
+}
+
+.input::-moz-range-track {
+  height: 32px;
+  background: none;
+}
+
+.input::-webkit-slider-thumb {
+  width: 32px;
+  height: 32px;
+  border: 2px solid var(--color-ink);
+  border-radius: 4px;
+  background: var(--color-white);
+  appearance: none;
+  cursor: grab;
+  pointer-events: auto;
+  transition: box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.input::-moz-range-thumb {
+  box-sizing: border-box;
+  width: 32px;
+  height: 32px;
+  border: 2px solid var(--color-ink);
+  border-radius: 4px;
+  background: var(--color-white);
+  cursor: grab;
+  pointer-events: auto;
+}
+
+.input:active::-webkit-slider-thumb {
+  cursor: grabbing;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.input:focus-visible::-webkit-slider-thumb {
+  box-shadow: var(--focus-ring);
+}
+
+.input:focus-visible::-moz-range-thumb {
+  box-shadow: var(--focus-ring);
+}
+
+.note {
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border);
+  color: var(--color-muted);
+  font-size: var(--fs-xs);
+  line-height: 16px;
+}

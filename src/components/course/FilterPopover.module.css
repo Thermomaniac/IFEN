@@ -1,0 +1,14 @@
+/* Paper price popover: 312 wide, white, 1px #E5E7EB, radius 4, padding 16. */
+.root .panel {
+  right: auto;
+  width: max(100%, 312px);
+  max-width: calc(100vw - 32px);
+  max-height: none;
+  padding: 16px;
+  overflow: visible;
+}
+
+.root[data-align="end"] .panel {
+  left: auto;
+  right: 0;
+}

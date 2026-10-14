@@ -1,0 +1,151 @@
+/*
+ * Square search button (42px, the filter-field outline) that grows in flow to the
+ * Training & Other Offers search width (one of five columns, ~240 at 1440); the
+ * dropdowns beside it shrink. Field and overlay match that search.
+ */
+.root {
+  position: relative;
+  flex: 0 0 42px;
+  min-width: 0;
+  height: 42px;
+  transition: flex-basis var(--dur-base) var(--ease-out);
+}
+
+.root[data-open] {
+  z-index: 40;
+  flex-basis: min(240px, 60%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .root {
+    transition: none;
+  }
+}
+
+.button {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 0;
+  border-radius: 4px;
+  outline: 1px solid var(--color-border);
+  outline-offset: -1px;
+  background: var(--color-white);
+  color: var(--color-ink);
+  cursor: pointer;
+  transition:
+    outline-color var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out);
+}
+
+.button svg {
+  width: 16px;
+  height: 16px;
+}
+
+@media (hover: hover) {
+  .button:hover {
+    outline-color: var(--color-subtle);
+  }
+}
+
+.button[data-active] {
+  outline-color: var(--color-ink);
+  background: #edf5c4;
+}
+
+.button:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  background: #00000014;
+}
+
+.field {
+  position: relative;
+  z-index: 41;
+  width: 100%;
+  height: 42px;
+  border-radius: 4px;
+  background: var(--color-white);
+}
+
+.input {
+  width: 100%;
+  height: 42px;
+  padding: 12px 40px 12px 12px;
+  border: 0;
+  border-radius: 4px;
+  outline: 1px solid var(--color-ink);
+  outline-offset: -1px;
+  background: var(--color-white);
+  color: var(--color-ink);
+  font: inherit;
+  font-size: var(--fs-small);
+  line-height: 18px;
+  font-weight: 500;
+  font-variation-settings: var(--fvs-display);
+  text-overflow: ellipsis;
+}
+
+.input::placeholder {
+  color: var(--color-subtle);
+  opacity: 1;
+}
+
+.input::-webkit-search-cancel-button {
+  display: none;
+}
+
+.input:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
+.icon {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  translate: 0 -50%;
+  width: 16px;
+  height: 16px;
+  color: var(--color-ink);
+  pointer-events: none;
+}
+
+/* The ink clear dot from the chosen filter fields. */
+.clear {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  translate: 0 -50%;
+  display: grid;
+  place-items: center;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--color-ink);
+  color: var(--color-white);
+  cursor: pointer;
+}
+
+.clear::before {
+  content: "";
+  position: absolute;
+  inset: -12px;
+}
+
+.clear svg {
+  width: 8px;
+  height: 8px;
+}
+
+.clear:focus-visible {
+  box-shadow: var(--focus-ring);
+}

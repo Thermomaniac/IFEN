@@ -1,0 +1,305 @@
+/*
+ * Booking outcome modals. Paper: 490 wide, white, radius 4; backdrop #0A0F1EA6.
+ * Result: padding 32, inner block padding-top 32 / gap 24, a 64px #EDF5C4 badge with a
+ * 32px ink check, title 24/30 SemiBold -0.5px, text 14/18 #6A7282, 6 apart.
+ * Bank transfer: ink head (24 padding, 8 gap, dotted brain), body 24 padding / 24 gap.
+ */
+.dialog {
+  width: min(490px, calc(100% - 32px));
+  max-width: none;
+  max-height: calc(100dvh - 32px);
+  margin: auto;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: var(--color-white);
+  color: var(--color-ink);
+  box-shadow:
+    inset 0 0 0 1px var(--color-border),
+    0 4px 8px #0000000a,
+    0 12px 32px -4px #00000014;
+  overflow: auto;
+  overscroll-behavior: contain;
+  animation: dialog-in var(--dur-base) var(--ease-out) both;
+}
+
+.dialog::backdrop {
+  background: #0a0f1ea6;
+  animation: fade-in var(--dur-base) var(--ease-out) both;
+}
+
+/* ---------- Result ---------- */
+
+.result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  padding: 64px 32px 32px;
+  text-align: center;
+}
+
+.resultHead {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.badge {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #edf5c4;
+  color: var(--color-ink);
+  animation: badge-in var(--dur-step) var(--ease-glide) both;
+}
+
+.badge svg {
+  width: 26px;
+  height: 19px;
+}
+
+.texts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.title {
+  font-size: 1.5rem;
+  line-height: 30px;
+  letter-spacing: -0.5px;
+  font-weight: 600;
+  font-variation-settings: var(--fvs-display);
+  text-wrap: balance;
+}
+
+.text {
+  color: var(--color-muted);
+  font-size: var(--fs-small);
+  line-height: 18px;
+  overflow-wrap: anywhere;
+  hyphens: auto;
+}
+
+/* Paper: #FFC18C, radius 4, 10/20 padding, Medium 16/24 ink. */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 10px 20px;
+  border: 0;
+  border-radius: 4px;
+  background: var(--color-accent);
+  color: var(--color-ink);
+  font: inherit;
+  font-size: var(--fs-body);
+  line-height: 24px;
+  font-weight: 500;
+  font-variation-settings: var(--fvs-display);
+  cursor: pointer;
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .button:hover {
+    background: #ffb06b;
+  }
+}
+
+.button:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.button[data-wide] {
+  width: 100%;
+}
+
+/* ---------- Bank transfer ---------- */
+
+.head {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 24px;
+  background: var(--color-ink);
+  color: var(--color-white);
+}
+
+.head::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  left: 362px;
+  top: -85px;
+  width: 200px;
+  height: 200px;
+  background: rgb(148 210 189 / 12%);
+  mask: url("/svg/dotted-brain.svg") center / contain no-repeat;
+  pointer-events: none;
+}
+
+.headText {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.eyebrow {
+  color: var(--color-subtle);
+  font-size: var(--fs-xs);
+  line-height: 16px;
+  letter-spacing: 1px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.headTitle {
+  font-size: 1.125rem;
+  line-height: 22px;
+  font-weight: 700;
+  font-variation-settings: var(--fvs-display);
+}
+
+.close {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 32px;
+  height: 32px;
+  margin: -6px -6px 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: 2px;
+  background: none;
+  color: var(--color-white);
+  cursor: pointer;
+}
+
+.close svg {
+  width: 20px;
+  height: 20px;
+}
+
+.close:focus-visible {
+  outline: 2px solid var(--color-white);
+  outline-offset: 0;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 24px;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Paper: #F3F4F6, radius 4, padding 12, rows 16 apart. */
+.bank {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 12px;
+  border-radius: 4px;
+  background: var(--color-border-soft);
+}
+
+.bank div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 16px;
+}
+
+.bank dt {
+  color: var(--color-muted);
+  font-size: var(--fs-small);
+  line-height: 16px;
+}
+
+.bank dd {
+  color: var(--color-heading);
+  font-size: var(--fs-small);
+  line-height: 16px;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Paper: #F8F4E3, radius 4, padding 12, gap 8, #704D30 icon and text 14/18. */
+.notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 12px;
+  border-radius: 4px;
+  background: var(--color-cream);
+  color: #704d30;
+  font-size: var(--fs-small);
+  line-height: 18px;
+}
+
+.notice svg {
+  flex: none;
+  width: 18px;
+  height: 18px;
+}
+
+@keyframes dialog-in {
+  from {
+    opacity: 0;
+    scale: 0.96;
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes badge-in {
+  from {
+    opacity: 0;
+    scale: 0.6;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dialog,
+  .dialog::backdrop,
+  .badge {
+    animation: none;
+  }
+}
+
+@media (max-width: 30rem) {
+  .result {
+    padding: 48px 20px 24px;
+  }
+
+  .head,
+  .body {
+    padding: 20px;
+  }
+}

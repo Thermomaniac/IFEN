@@ -47,7 +47,7 @@ export const navLinks: NavLink[] = [
     ],
   },
   { label: "Shop", href: "#" },
-  { label: "Therapist List", href: "#" },
+  { label: "Therapist List", href: "/therapists" },
   { label: "Blog", href: "#", children: [{ label: "Latest Articles", href: "#" }] },
 ];
 
@@ -318,7 +318,7 @@ export const footer = {
     {
       title: "Service & Help",
       links: [
-        { label: "Therapist list", href: "#" },
+        { label: "Therapist list", href: "/therapists" },
         { label: "Learning portal", href: "#" },
         { label: "Contact Support", href: "#" },
         { label: "FAQ - Training questions", href: "#" },

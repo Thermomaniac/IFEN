@@ -8,9 +8,16 @@ export type Link = { label: string; href: string };
 export type Price = { label: string; amount: number };
 
 export type CourseHeroContent = {
+  /** "\n" marks the design's line break from 48rem. */
   title: string;
+  /** Paper's 599 measure for a listing hero whose title sets on two lines. */
+  wide?: boolean;
   breadcrumb: Crumb[];
   badge: string;
+  /** Person heroes (therapist profile): a 92×100 portrait beside the title. */
+  portrait?: { src: string; alt: string };
+  /** Line under the title, e.g. practice and country, with an optional flag after it. */
+  subline?: { parts: string[]; flag?: { src: string; alt: string } };
   /** One or more paragraphs under the title. */
   description: string | string[];
   highlights: { value: string; label: string }[];
@@ -20,6 +27,8 @@ export type CourseHeroContent = {
   booking?: {
     /** Course number from the booking system, e.g. "M1-051026-EN". */
     code?: string;
+    /** Replaces "Select your plan" / "Course fee" above the price (therapist profiles). */
+    eyebrow?: string;
     prices: Price[];
     facts: CourseFact[];
     cta: Link;

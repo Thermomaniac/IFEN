@@ -12,6 +12,7 @@ import {
 } from "@/data/course";
 import { useRegistration } from "@/lib/registration";
 import { billingDefaults } from "@/lib/registrationForm";
+import { BankTransferDialog } from "./BankTransferDialog";
 import { ProcessingDialog } from "./ProcessingDialog";
 import { markStepNavigation } from "./StepLayout";
 import { SubmitButton } from "./SubmitButton";
@@ -19,14 +20,25 @@ import styles from "./Form.module.css";
 
 const startDate = course.facts.find((f) => f.icon === "start")?.value ?? "";
 
-function Section({ title, edit, children }: { title: string; edit?: string; children: ReactNode }) {
+/** One review block with an Edit link back to its step. `basePath` serves another flow. */
+export function Section({
+  title,
+  edit,
+  basePath = REGISTER_PATH,
+  children,
+}: {
+  title: string;
+  edit?: string;
+  basePath?: string;
+  children: ReactNode;
+}) {
   const id = `review-${title.toLowerCase().replace(/\W+/g, "-")}`;
   return (
     <section className={styles.reviewSection} aria-labelledby={id}>
       <div className={styles.reviewHead}>
         <h3 id={id}>{title}</h3>
         {edit && (
-          <Link href={`${REGISTER_PATH}/${edit}`} className={styles.edit} onClick={markStepNavigation}>
+          <Link href={`${basePath}/${edit}`} className={styles.edit} onClick={markStepNavigation}>
             Edit<span className="sr-only"> {title.toLowerCase()}</span>
           </Link>
         )}
@@ -36,7 +48,7 @@ function Section({ title, edit, children }: { title: string; edit?: string; chil
   );
 }
 
-function Item({ label, value, wide }: { label: string; value?: string; wide?: boolean }) {
+export function Item({ label, value, wide }: { label: string; value?: string; wide?: boolean }) {
   const text = value?.trim();
   return (
     <div className={styles.item} data-wide={wide ? "" : undefined}>
@@ -55,6 +67,8 @@ export function ReviewStep() {
   const method = getPaymentMethod(b.payment);
   const price = plan?.price ?? 0;
   const [paying, setPaying] = useState(false);
+  // Bank transfer opens the account details and terms; the other methods pay online.
+  const isTransfer = method?.id === "transfer";
 
   const contact = [p.salutation, p.firstName, p.lastName].filter(Boolean).join(" ");
   const street = [b.street, b.houseNo].filter(Boolean).join(" ");
@@ -96,13 +110,18 @@ export function ReviewStep() {
         <Link href={`${REGISTER_PATH}/billing`} className={styles.back} onClick={markStepNavigation}>
           Go Back
         </Link>
-        <SubmitButton type="button" onClick={() => setPaying(true)} disabled={paying}>
+        <SubmitButton type="button" onClick={() => setPaying(true)} disabled={paying && !isTransfer}>
           Pay {formatAmount(price)}
           {method && ` With ${method.label}`}
         </SubmitButton>
       </div>
 
-      {paying && <ProcessingDialog />}
+      {paying &&
+        (isTransfer ? (
+          <BankTransferDialog onClose={() => setPaying(false)} />
+        ) : (
+          <ProcessingDialog method={method?.id ?? ""} />
+        ))}
     </div>
   );
 }

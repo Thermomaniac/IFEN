@@ -1,9 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Fragment, type CSSProperties } from "react";
-import { CalendarSlashIcon, CalendarTickIcon, MapPinFillIcon, UsersIcon } from "@/components/icons";
+import {
+  CalendarSlashIcon,
+  CalendarTickIcon,
+  DurationIcon,
+  GlobeIcon,
+  MapPinFillIcon,
+  UsersIcon,
+} from "@/components/icons";
 import { Reveal, RevealItem } from "@/components/motion/Reveal";
 import { CtaButton } from "@/components/ui/CtaButton";
+import { LineBreaks } from "@/components/ui/LineBreaks";
 import { formatPrice, type CourseFact } from "@/data/course";
 import type { CourseHeroContent } from "@/data/coursePage";
 import styles from "./CourseHero.module.css";
@@ -13,6 +21,10 @@ const factIcons: Record<CourseFact["icon"], typeof UsersIcon> = {
   end: CalendarSlashIcon,
   level: UsersIcon,
   location: MapPinFillIcon,
+  schedule: CalendarTickIcon,
+  duration: DurationIcon,
+  format: UsersIcon,
+  languages: GlobeIcon,
 };
 
 /**
@@ -39,7 +51,7 @@ export function CourseHero({ content }: { content: CourseHeroContent }) {
       )}
 
       <div className={styles.inner}>
-        <Reveal className={styles.intro}>
+        <Reveal className={`${styles.intro} ${content.wide ? styles.wide : ""}`}>
           <RevealItem>
             <nav aria-label="Breadcrumb">
               <ol className={styles.breadcrumb}>
@@ -67,11 +79,30 @@ export function CourseHero({ content }: { content: CourseHeroContent }) {
             <RevealItem as="p" className={styles.badge}>
               {content.badge}
             </RevealItem>
-            <RevealItem>
-              <h1 id="course-title" className={styles.title}>
-                {content.title}
-              </h1>
-            </RevealItem>
+            {content.portrait ? (
+              <RevealItem className={styles.person}>
+                <Image
+                  src={content.portrait.src}
+                  alt={content.portrait.alt}
+                  width={92}
+                  height={100}
+                  priority
+                  className={styles.portrait}
+                />
+                <div className={styles.personText}>
+                  <h1 id="course-title" className={styles.title}>
+                    <LineBreaks text={content.title} />
+                  </h1>
+                  {content.subline && <Subline subline={content.subline} />}
+                </div>
+              </RevealItem>
+            ) : (
+              <RevealItem>
+                <h1 id="course-title" className={styles.title}>
+                  <LineBreaks text={content.title} />
+                </h1>
+              </RevealItem>
+            )}
             {paragraphs.map((text) => (
               <RevealItem key={text} as="p" className={styles.description}>
                 {text}
@@ -97,6 +128,24 @@ export function CourseHero({ content }: { content: CourseHeroContent }) {
         {booking && <BookingPanel booking={booking} />}
       </div>
     </section>
+  );
+}
+
+/** "Practice • From Germany 🇩🇪": parts split by a small dot, flag last. */
+function Subline({ subline }: { subline: NonNullable<CourseHeroContent["subline"]> }) {
+  return (
+    <p className={styles.subline}>
+      {subline.parts.map((part, i) => (
+        <Fragment key={part}>
+          {i > 0 && <span className={styles.sublineDot} aria-hidden="true" />}
+          <span>{part}</span>
+        </Fragment>
+      ))}
+      {subline.flag && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={subline.flag.src} alt={subline.flag.alt} width={24} height={18} className={styles.flag} />
+      )}
+    </p>
   );
 }
 
@@ -139,7 +188,7 @@ function BookingPanel({ booking }: { booking: NonNullable<CourseHeroContent["boo
       <RevealItem className={styles.panelHead}>
         <div className={styles.headRow}>
           <p className={styles.eyebrow} id="plan-legend">
-            {multiple ? "Select your plan" : "Course fee"}
+            {booking.eyebrow ?? (multiple ? "Select your plan" : "Course fee")}
           </p>
           {booking.code && <p className={styles.code}>{booking.code}</p>}
         </div>

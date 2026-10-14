@@ -1,0 +1,12 @@
+/* Paper expanded map: 1296 × 684 at desktop, the full viewport less a 16px margin below that. */
+.dialog {
+  width: min(1296px, calc(100% - 32px));
+  height: min(684px, calc(100dvh - 32px));
+  overflow: hidden;
+}
+
+@media (max-width: 47.99rem) {
+  .dialog {
+    height: calc(100dvh - 32px);
+  }
+}

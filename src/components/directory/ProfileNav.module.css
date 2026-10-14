@@ -1,0 +1,155 @@
+/*
+ * Mobile and tablet: a strip pinned under the main nav. Desktop (64rem+): a sticky card
+ * beside the profile sections: ink header with the dotted brain art, then the links and
+ * the booking CTA on white.
+ */
+.nav {
+  position: sticky;
+  top: var(--nav-h);
+  z-index: 5;
+  margin-inline: calc(var(--gutter) * -1);
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-border-soft);
+}
+
+.title,
+.book {
+  display: none;
+}
+
+.list {
+  display: flex;
+  gap: 24px;
+  padding: 0 var(--gutter);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.list::-webkit-scrollbar {
+  display: none;
+}
+
+.link {
+  position: relative;
+  display: inline-block;
+  padding: 14px 0;
+  color: var(--color-muted);
+  font-size: var(--fs-small);
+  line-height: 20px;
+  font-weight: 500;
+  font-variation-settings: var(--fvs-display);
+  white-space: nowrap;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.link::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 2px;
+  background: var(--color-ink);
+  transform: scaleX(0);
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.link[aria-current] {
+  color: var(--color-ink);
+}
+
+.link[aria-current]::after {
+  transform: scaleX(1);
+}
+
+.link:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: 2px;
+}
+
+@media (hover: hover) {
+  .link:hover {
+    color: var(--color-ink);
+  }
+}
+
+@media (min-width: 64rem) {
+  .nav {
+    top: calc(var(--nav-h) + 24px);
+    margin: 0;
+    overflow: hidden;
+    border-radius: 4px;
+    border: 0;
+    outline: 1px solid var(--color-border);
+    outline-offset: -1px;
+  }
+
+  .title {
+    display: block;
+    padding: 24px;
+    padding-right: 96px;
+    background: var(--color-ink) url("/therapists/dotted-brain.svg") no-repeat right -40px top -64px / 160px;
+    color: var(--color-white);
+    font-size: 1.125rem;
+    line-height: 24px;
+    font-weight: 700;
+    font-variation-settings: var(--fvs-display);
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    padding: 20px;
+  }
+
+  .list {
+    flex-direction: column;
+    padding: 0;
+    gap: 0;
+    overflow: visible;
+  }
+
+  .link {
+    display: block;
+    padding: 6px 12px;
+    white-space: normal;
+    border-left: 2px solid var(--color-border-soft);
+  }
+
+  .link[aria-current] {
+    font-weight: 600;
+  }
+
+  .link::after {
+    inset: 0 auto 0 -2px;
+    width: 2px;
+    height: auto;
+    transform: scaleY(0);
+  }
+
+  .link[aria-current]::after {
+    transform: scaleY(1);
+  }
+
+  .book {
+    display: inline-flex;
+    width: 100%;
+    font-size: var(--fs-small);
+  }
+
+  .book > span:first-child {
+    flex: 1;
+    padding: 12px 16px;
+  }
+
+  .book > span:last-child {
+    padding: 12px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .link,
+  .link::after {
+    transition: none;
+  }
+}
