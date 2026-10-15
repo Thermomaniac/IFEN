@@ -1,6 +1,8 @@
+import Image from "next/image";
 import type { ReactNode } from "react";
-import { CheckCircleIcon, ListBulletsIcon, MapPinIcon, RepeatIcon } from "@/components/icons";
+import { CheckCircleIcon, InfoCircleIcon, ListBulletsIcon, MapPinIcon, RepeatIcon } from "@/components/icons";
 import { Reveal, RevealItem } from "@/components/motion/Reveal";
+import { Button } from "@/components/ui/Button";
 import type { Article, ArticleIcon, ArticlesContent } from "@/data/coursePage";
 import { CourseSection, type Tone } from "./CourseSection";
 import styles from "./CourseArticles.module.css";
@@ -12,7 +14,7 @@ const ICONS: Record<ArticleIcon, ReactNode> = {
   venue: <MapPinIcon />,
 };
 
-type Variant = "panels" | "columns" | "rows";
+type Variant = "panels" | "columns" | "rows" | "media";
 
 /**
  * Text-led content blocks: a heading, then paragraphs, check rows, chips or an address.
@@ -21,6 +23,9 @@ type Variant = "panels" | "columns" | "rows";
  * - `panels`: white stroked cards with a grey check list (Module 1 audience).
  * - `columns`: open columns, a list renders as the bordered outcome rows (equipment).
  * - `rows`: full-width rows between rules, icon and heading left, copy right (venue).
+ *   With `numbered` an index leads each heading instead (Neurofeedback methods).
+ * - `media`: the copy beside `content.image`, for explainers (What Is Neurofeedback).
+ * Any layout takes per-item `links` (secondary buttons) and a highlighted `note` below.
  */
 export function CourseArticles({
   id,
@@ -33,6 +38,36 @@ export function CourseArticles({
   content: ArticlesContent;
   variant?: Variant;
 }) {
+  const note = content.note && <Note text={content.note} />;
+
+  if (variant === "media") {
+    return (
+      <CourseSection id={id} tone={tone} head={content}>
+        <Reveal className={styles.media} stagger={0.06}>
+          <div className={styles.mediaText}>
+            {content.items.map((item, i) => (
+              <RevealItem as="article" key={item.heading ?? i} className={styles.columnsItem}>
+                <Column item={item} />
+              </RevealItem>
+            ))}
+          </div>
+          {content.image && (
+            <RevealItem className={styles.mediaFrame}>
+              <Image
+                src={content.image.src}
+                alt={content.image.alt}
+                fill
+                sizes="(min-width: 64rem) 40vw, 100vw"
+                className={styles.mediaPhoto}
+              />
+            </RevealItem>
+          )}
+        </Reveal>
+        {note}
+      </CourseSection>
+    );
+  }
+
   if (variant) {
     return (
       <CourseSection id={id} tone={tone} head={content}>
@@ -41,10 +76,11 @@ export function CourseArticles({
             <RevealItem as="article" key={item.heading ?? i} className={styles[`${variant}Item`]}>
               {variant === "panels" && <Panel item={item} />}
               {variant === "columns" && <Column item={item} />}
-              {variant === "rows" && <Row item={item} />}
+              {variant === "rows" && <Row item={item} index={content.numbered ? i + 1 : undefined} />}
             </RevealItem>
           ))}
         </Reveal>
+        {note}
       </CourseSection>
     );
   }
@@ -76,10 +112,38 @@ export function CourseArticles({
                 ))}
               </ul>
             )}
+            {item.links && <Links links={item.links} />}
           </RevealItem>
         ))}
       </Reveal>
+      {note}
     </CourseSection>
+  );
+}
+
+function Links({ links }: { links: NonNullable<Article["links"]> }) {
+  return (
+    <ul className={styles.links}>
+      {links.map((link) => (
+        <li key={link.href}>
+          <Button href={link.href} variant="secondary">
+            {link.label}
+          </Button>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/** Highlighted remark: a lime panel with an info glyph. */
+function Note({ text }: { text: string }) {
+  return (
+    <Reveal>
+      <RevealItem as="p" className={styles.note}>
+        <InfoCircleIcon className={styles.noteIcon} aria-hidden="true" />
+        <span>{text}</span>
+      </RevealItem>
+    </Reveal>
   );
 }
 
@@ -115,6 +179,7 @@ function Panel({ item }: { item: Article }) {
           ))}
         </ul>
       )}
+      {item.links && <Links links={item.links} />}
     </>
   );
 }
@@ -132,14 +197,20 @@ function Column({ item }: { item: Article }) {
       )}
       {item.address && <Address address={item.address} />}
       {item.list && <OutcomeList items={item.list} />}
+      {item.links && <Links links={item.links} />}
     </>
   );
 }
 
-function Row({ item }: { item: Article }) {
+function Row({ item, index }: { item: Article; index?: number }) {
   return (
     <>
-      <div className={styles.rowHead}>
+      <div className={`${styles.rowHead} ${index ? styles.rowHeadNumbered : ""}`}>
+        {index && (
+          <span className={styles.rowIndex} aria-hidden="true">
+            {String(index).padStart(2, "0")}
+          </span>
+        )}
         {item.icon && (
           <span className={styles.rowIcon} aria-hidden="true">
             {ICONS[item.icon]}
@@ -155,6 +226,7 @@ function Row({ item }: { item: Article }) {
         ))}
         {item.address && <Address address={item.address} className={styles.rowAddress} />}
         {item.list && <OutcomeList items={item.list} />}
+        {item.links && <Links links={item.links} />}
       </div>
     </>
   );

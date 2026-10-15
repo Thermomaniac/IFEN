@@ -106,7 +106,7 @@ Course sections (`src/components/course/`), all data-driven from `src/data/cours
 | `FormatSteps` | `FeaturesContent` | Pinned columns with icons (clock, video, star, calendar) |
 | `FocusCards` | `FeaturesContent` + image | Pinned photo with eyebrow cards |
 | `Instructor` | `InstructorContent` | Portrait, label, heading, role, paragraphs, credential badges |
-| `CourseArticles` | `ArticlesContent` | Variants panels, columns, rows |
+| `CourseArticles` | `ArticlesContent` | Variants panels, columns, rows, media (copy beside `image`); `numbered` rows; per-item `links` (secondary Buttons); section `note` (highlighted remark) |
 | `Curriculum`, `Pathway`, `RoleMarquee`, `Faq` | matching types | Module 1 / QEEG patterns |
 | `Mentors` | `SpeakersContent` | Carousel; always at least 4 cards, open seats show "To be announced" |
 | `Categories` | `CategoriesContent` | Icon cards (cap, users, brain, pulse, flag) |

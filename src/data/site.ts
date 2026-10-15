@@ -1,5 +1,7 @@
 // Site-wide content. Copy is taken from the Paper file "Final Home Page".
 
+import { APPLICATIONS_PATH, METHODS_PATH, WHAT_IS_PATH } from "./neurofeedback/shared";
+
 export const contact = {
   phone: "+49 (89) 2000 299 66",
   phoneHref: "tel:+4989200029966",
@@ -31,10 +33,12 @@ export const navLinks: NavLink[] = [
   },
   {
     label: "Neurofeedback",
-    href: "/#about",
+    href: WHAT_IS_PATH,
     children: [
-      { label: "What Is Neurofeedback", href: "/#about" },
-      { label: "Benefits", href: "/#benefits" },
+      { label: "What Is Neurofeedback", href: WHAT_IS_PATH },
+      { label: "Applications", href: APPLICATIONS_PATH },
+      { label: "Benefits", href: `${APPLICATIONS_PATH}#effects` },
+      { label: "Methods", href: METHODS_PATH },
     ],
   },
   {

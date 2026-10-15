@@ -97,9 +97,19 @@ export type Article = {
   /** Short labels rendered as chips. */
   tags?: string[];
   address?: { name: string; lines: string[] };
+  /** Further reading and booking links under the copy (content pages). */
+  links?: Link[];
 };
 
-export type ArticlesContent = SectionHead & { items: Article[] };
+export type ArticlesContent = SectionHead & {
+  items: Article[];
+  /** `rows`: lead each row with 01, 02 … in place of an icon. */
+  numbered?: boolean;
+  /** `media`: the photo beside the copy. */
+  image?: { src: string; alt: string };
+  /** A highlighted remark under the blocks. */
+  note?: string;
+};
 
 export type FeatureIcon = "clock" | "video" | "star" | "calendar";
 

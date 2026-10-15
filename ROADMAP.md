@@ -13,7 +13,7 @@ Adapt two live courses to the existing detail-page patterns.
 - Webinar "QEEG und Neurofeedback in der Psychotherapie: sinnvoll, ethisch, praxisnah": `/courses/webinar-qeeg-psychotherapy`. Source: `/termine-kursbuchung-seminare/qeeg-kurse-m/courses/1195-...`
 - "qEEG Workshop: From Recording to Clinical Interpretation": `/courses/qeeg-workshop`. Source: `/termine-kursbuchung-seminare/qeeg-kurse-m/courses/1167-workshop-interpretazione-clinica-avanzata-del-qeeg.html`
 
-## Phase 2: Neurofeedback content pages
+## Phase 2: Neurofeedback content pages (done 2026-10-15)
 
 What Is Neurofeedback, Applications, Topics/Methods. New archetype: long-form editorial content page. Research Mobbin for editorial and explainer layouts first. Build from `CourseSection`, `CourseArticles`, `FeatureGrid`, `FocusCards` and Reveal; extend with optional props before adding components.
 
@@ -36,7 +36,7 @@ Match the Figma hierarchy and point items at local routes as each phase creates 
 | Nav item | Current target | Planned target |
 | --- | --- | --- |
 | Course Booking | `/#training` (Course Dates, Certification Path, Training Locations) | Phase 5 category pages; Course Dates to `/courses` |
-| Neurofeedback | `/#about` (What Is Neurofeedback, Benefits) | Phase 2 pages |
+| Neurofeedback | `/neurofeedback/what-is-neurofeedback` (What Is Neurofeedback, Applications, Benefits, Methods) | Done in Phase 2 |
 | IFEN | `/#board` (Board Members, Partners, Testimonials) | Phase 3 About IFEN and lecturers |
 | Shop | `#` | Unchanged (out of scope) |
 | Therapist List | `/therapists` | Unchanged |
