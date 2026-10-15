@@ -14,7 +14,9 @@ import {
 } from "./coursePage";
 import { MODULE1_PATH } from "./courses/module1";
 import { QEEG_PATH } from "./courses/qeeg";
+import { QEEG_WORKSHOP_PATH } from "./courses/qeegWorkshop";
 import { WEBINAR_PATH } from "./courses/webinar";
+import { WEBINAR_QEEG_PATH } from "./courses/webinarQeegPsychotherapy";
 
 export type CourseType = "certification" | "webinar" | "workshop" | "mentoring" | "event";
 export type CourseFormat = "online" | "in-person" | "hybrid" | "flexible";
@@ -396,7 +398,7 @@ export const scheduleDates: ScheduleItem[] = [
   {
     code: "QEEG-121226-EN",
     title: "qEEG Workshop – From Recording to Clinical Interpretatio",
-    href: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/alle-fortbildungen-im-ueberblick/courses/1167-workshop-interpretazione-clinica-avanzata-del-qeeg.html",
+    href: QEEG_WORKSHOP_PATH,
     isNew: true,
     language: "it",
     start: "2026-12-12T10:00",
@@ -461,7 +463,7 @@ export const scheduleDates: ScheduleItem[] = [
   {
     code: "WEB-080227-DE",
     title: "WEBINAR - QEEG und Neurofeedback in der Psychotherapie: sinnvoll, ethisch, praxisnah",
-    href: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/alle-fortbildungen-im-ueberblick/courses/1195-webinar-qeeg-und-neurofeedback-in-der-psychotherapie-sinnvoll-ethisch-praxisnah.html",
+    href: WEBINAR_QEEG_PATH,
     isNew: true,
     language: "de",
     start: "2027-02-08T19:00",

@@ -26,3 +26,17 @@ Keep content data-driven (`src/data/`), i18n-safe (EN/DE/ES/EL, long German comp
 ## Consistency Rule
 
 Every page uses the same band sequence (ink hero, then mist, cream and white bands), section header (label, heading, intro), card style (4px radius, white, 1px border shadow), CtaButton, form input style and breakpoints (64rem, 48rem, 34rem, 30rem). The same thing must look and behave the same everywhere. If a change to a shared component is needed, check every page that uses it.
+
+## Remaining pages programme
+
+Five-phase redesign of the remaining IFEN pages, one phase per session. At session start, read in this order:
+
+1. `PROGRESS.md`: active phase, what is done, open issues.
+2. `ROADMAP.md`: phase scope, source URLs, nav plan, per-phase conventions.
+3. `DESIGN-SYSTEM.md`: exact type, color, spacing, radius, breakpoint, component and motion values.
+
+Execute only the active phase. Before handoff run `npx eslint .`, `npx tsc --noEmit`, `npm run build`, render at 1440 / 390 / 320, then update `PROGRESS.md`. Work stays on `phase-2`; never push or merge to `main`.
+
+## Staging deploy after every phase
+
+When a phase is finished and its checks pass, commit the phase's files to `phase-2` and push `phase-2` to `origin`. That push deploys staging (ifen-staging.up.railway.app). This is standing approval from the user; no need to ask each time. Commit only the phase's own files, leave unrelated untracked work (e.g. `Research Document/`) out, and never push to `main`.
