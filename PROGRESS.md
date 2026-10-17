@@ -1,6 +1,33 @@
 # IFEN Remaining Pages Progress
 
-Active phase: **Phase 4, Blog** (not started). See `ROADMAP.md`.
+Active phase: **Phase 5, Course Booking content pages** (not started). See `ROADMAP.md`.
+
+## Phase 4: Blog (completed 2026-10-18, pushed to staging)
+
+Pages (data in `src/data/blog/`, routes in `src/app/blog/`). Paths in `src/data/blog/paths.ts`; post list, date format, related cards and CTA in `src/data/blog/shared.ts`.
+
+- `/blog` (`index.ts`). Source: neurofeedback-ifen.com/blog (welcome text, featured Brodmann poster post, the five latest posts); post dates, categories, reading times and the 117-article count from its wp-json API. Photo hero, Featured band (mist) with a wide card, Latest Articles card grid (cream, 3 / 2 / 1 columns) with a "Browse All 117 Articles" link to the German blog, Categories, CtaFooter.
+- `/blog/neurofeedback-evidence-research` (`evidence.ts`). Source: neurofeedback-ifen.com/blog/neurofeedback-evidenz-forschung (Thomas Feiner, published 20 Jul 2026, updated 27 Jul 2026). Full English translation, all nine sections and six sources, nothing trimmed; source dashes set as commas, colons or brackets; bold terms kept. Uses the profile layout: photo hero (author, date, reading time), "On This Page" nav (the source's table of contents, short labels), one card per section, the three objections as boxes, sources with links and a link to the German original.
+- New component `src/components/blog/BlogPosts.tsx` (`FeaturedPost`, `PostGrid`): directory card treatment, Profile badge, date · read-time line, whole-card link with the #FBFFE9 hover wash, "German original" tag on external posts, dotted brain on ink for posts without a photo.
+- `Profile.module.css`: added `.claim`, `.sources`, `.source` and bold styling in `.text` (additive; therapist and lecturer pages unchanged).
+- Nav: Blog and "Latest Articles" now point at `/blog`.
+- Assets: `public/blog/` (header, evidence, biofeedback, neuromeditation, photobiomodulation photos and the Brodmann poster, from the live blog).
+
+Mobbin references: GitBook blog (featured wide card above a grid), Mural (featured post), Passionfroot (date · read-time meta), AngelList (category tag with date and read time) for the index; Codecademy (right-side Contents rail), Hashnode (table-of-contents card), Uxcel (title, author, read time, updated date) for the article.
+
+Verification:
+
+- `npx eslint .` clean; `npx tsc --noEmit` clean; `npm run build` passes (both routes static).
+- Rendered with a production server at 1440, 390 and 320: no horizontal overflow on either page.
+
+Open issues:
+
+- Only the evidence article is translated. The other 116 posts stay in German on the live blog; the index cards and the archive link point there. Decide whether more posts get migrated.
+- Excerpts for the German-linked posts are translations of the source excerpts, which end mid-sentence ("…"); kept as is.
+- The hero welcome text links to www.neurofeedback-info.de on the source; here "see our course dates" is plain text and the CTA footer links the course listing.
+- The Philosophy post has no image on the source; its card uses the dotted brain on ink.
+- No share links (the source has Facebook, Twitter, LinkedIn, Mail) and no previous/next post links.
+
 
 ## Phase 3: IFEN pages (completed 2026-10-18, pushed to staging)
 

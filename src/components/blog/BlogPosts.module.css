@@ -1,0 +1,258 @@
+/*
+ * Blog post cards. The directory card (white, 1px #E5E7EB outline, radius 4) with a 3:2
+ * photo on top, the profile badge, a date · read-time line, title and excerpt. The title
+ * link covers the card; hover and focus wash it #FBFFE9 as on the therapist cards.
+ * Featured: the same card wide, text left and photo right from 48rem.
+ */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 0;
+  overflow: hidden;
+  border-radius: 4px;
+  background: var(--color-white);
+  outline: 1px solid var(--color-border);
+  outline-offset: -1px;
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+
+.card:has(:focus-visible) {
+  background: #fbffe9;
+  box-shadow: var(--focus-ring);
+}
+
+@media (hover: hover) {
+  .card:hover {
+    background: #fbffe9;
+  }
+
+  .card:hover .link {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .card:hover .media img:not(.brain) {
+    transform: scale(1.03);
+  }
+}
+
+.media {
+  position: relative;
+  flex: none;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: var(--color-mist);
+}
+
+.media img {
+  object-fit: cover;
+  transition: transform var(--dur-base) var(--ease-out);
+}
+
+.media[data-empty] {
+  display: grid;
+  place-items: center;
+  background: var(--color-ink);
+}
+
+.brain {
+  width: 40%;
+  height: auto;
+  opacity: 0.9;
+}
+
+.body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+}
+
+/* Profile badge. */
+.badge {
+  display: inline-flex;
+  max-width: 100%;
+  padding: 4px 8px;
+  border-radius: 2px;
+  background: var(--color-border-soft);
+  font-size: var(--fs-xs);
+  line-height: 16px;
+  font-weight: 500;
+  text-transform: uppercase;
+  overflow-wrap: anywhere;
+}
+
+.date {
+  color: var(--color-muted);
+  font-size: var(--fs-small);
+  line-height: 20px;
+  font-weight: 500;
+}
+
+.title {
+  font-size: 1.25rem;
+  line-height: 28px;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  font-variation-settings: var(--fvs-display);
+  overflow-wrap: break-word;
+  hyphens: auto;
+  text-wrap: pretty;
+}
+
+.link {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* The whole card is the link's hit area. */
+.link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.link:focus-visible {
+  outline: none;
+}
+
+.excerpt {
+  color: var(--color-muted);
+  font-size: var(--fs-body);
+  line-height: 26px;
+  overflow-wrap: break-word;
+  text-wrap: pretty;
+}
+
+.lang {
+  align-self: flex-start;
+  margin-top: auto;
+  padding: 2px 8px;
+  border-radius: 2px;
+  box-shadow: inset 0 0 0 1px var(--color-border);
+  color: var(--color-muted);
+  font-size: var(--fs-xs);
+  line-height: 16px;
+  font-weight: 500;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---------- Featured ---------- */
+
+.featured {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.featuredMedia {
+  grid-row: 1;
+}
+
+.featured .media {
+  height: 100%;
+  aspect-ratio: 2 / 1;
+  background: transparent;
+}
+
+/* The poster is a diagram: show all of it. */
+.featured .media img {
+  object-fit: contain;
+}
+
+.featuredBody {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: clamp(20px, 3vw, 32px);
+}
+
+.featured .title {
+  font-size: clamp(1.5rem, 2.4vw, 1.75rem);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+}
+
+.more {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+  color: var(--color-ink);
+  font-size: var(--fs-body);
+  line-height: 24px;
+  font-weight: 600;
+}
+
+.more .lang {
+  margin-top: 0;
+}
+
+@media (min-width: 48rem) {
+  .featured {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+  }
+
+  .featuredMedia {
+    grid-row: auto;
+    grid-column: 2;
+    border-left: 1px solid var(--color-border-soft);
+  }
+
+  .featuredBody {
+    grid-row: 1;
+    grid-column: 1;
+  }
+
+  .featured .media {
+    min-height: 12rem;
+    aspect-ratio: auto;
+  }
+}
+
+/* ---------- Grid ---------- */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.grid > li {
+  min-width: 0;
+}
+
+@media (max-width: 63.99rem) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 47.99rem) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 12px;
+  }
+}
+
+.archive {
+  display: flex;
+}

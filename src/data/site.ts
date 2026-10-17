@@ -1,6 +1,7 @@
 // Site-wide content. Copy is taken from the Paper file "Final Home Page".
 
 import { ABOUT_PATH, LECTURERS_PATH } from "./ifen/paths";
+import { BLOG_PATH } from "./blog/paths";
 import { APPLICATIONS_PATH, METHODS_PATH, WHAT_IS_PATH } from "./neurofeedback/shared";
 
 export const contact = {
@@ -55,7 +56,7 @@ export const navLinks: NavLink[] = [
   },
   { label: "Shop", href: "#" },
   { label: "Therapist List", href: "/therapists" },
-  { label: "Blog", href: "#", children: [{ label: "Latest Articles", href: "#" }] },
+  { label: "Blog", href: BLOG_PATH, children: [{ label: "Latest Articles", href: BLOG_PATH }] },
 ];
 
 export const hero = {
