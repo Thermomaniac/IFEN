@@ -1,5 +1,6 @@
 // Site-wide content. Copy is taken from the Paper file "Final Home Page".
 
+import { ABOUT_PATH, LECTURERS_PATH } from "./ifen/paths";
 import { APPLICATIONS_PATH, METHODS_PATH, WHAT_IS_PATH } from "./neurofeedback/shared";
 
 export const contact = {
@@ -43,8 +44,10 @@ export const navLinks: NavLink[] = [
   },
   {
     label: "IFEN",
-    href: "/#board",
+    href: ABOUT_PATH,
     children: [
+      { label: "About IFEN", href: ABOUT_PATH },
+      { label: "Lecturers", href: LECTURERS_PATH },
       { label: "Board Members", href: "/#board" },
       { label: "Partners", href: "/#partners" },
       { label: "Testimonials", href: "/#testimonials" },
@@ -354,8 +357,8 @@ export const footer = {
       title: "My IFEN",
       links: [
         { label: "Login portal", href: "#" },
-        { label: "About the institute", href: "/#about" },
-        { label: "Lecturers overview", href: "/#board" },
+        { label: "About the institute", href: ABOUT_PATH },
+        { label: "Lecturers overview", href: LECTURERS_PATH },
         { label: "Advisory Board members", href: "/#board" },
         { label: "Research partnerships", href: "/#partners" },
       ],

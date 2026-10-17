@@ -2,6 +2,7 @@
 
 import type { Category } from "../course";
 import { LISTING_PATH, type Speaker } from "../coursePage";
+import { FEINER_PATH } from "../ifen/paths";
 
 export const LIVE = "https://www.neurofeedback-info.de/en";
 
@@ -10,7 +11,7 @@ export const FEINER: Speaker = {
   name: "Thomas Feiner",
   role: "BCIA BCN, QEEG-D",
   image: "/speakers/thomas-feiner.jpg",
-  href: `${LIVE}/ifen-de/dozenten-m/1-thomas-f-feiner-bcia-bcn-qeeg-d.html`,
+  href: FEINER_PATH,
 };
 
 export const ALL_OFFERS: Category = {

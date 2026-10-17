@@ -5,11 +5,12 @@
 
 import type { Metadata } from "next";
 import type { CourseHeroContent, CtaContent } from "./coursePage";
+import { LECTURERS_PATH } from "./ifen/paths";
 import { THERAPISTS } from "./therapists.generated";
 
 export const DIRECTORY_PATH = "/therapists";
 export const LIVE_DIRECTORY_URL = "https://therapeutenliste.neurofeedback-info.de/";
-export const LECTURERS_URL = "https://neurofeedback-info.de/dozenten";
+export const LECTURERS_URL = LECTURERS_PATH;
 export const REGISTRATION_URL = "https://therapeutenliste.neurofeedback-info.de/";
 
 export type QualificationId =

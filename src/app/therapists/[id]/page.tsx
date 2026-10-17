@@ -5,9 +5,10 @@ import { CourseHero } from "@/components/course/CourseHero";
 import { Faq } from "@/components/course/Faq";
 import { LevelIcon } from "@/components/directory/LevelBadge";
 import { ProfileNav } from "@/components/directory/ProfileNav";
+import { ProfileSection } from "@/components/directory/ProfileSection";
 import { CheckCircleIcon, CheckIcon } from "@/components/icons";
 import { SiteHeader } from "@/components/layout/SiteHeader";
-import { Reveal, RevealItem } from "@/components/motion/Reveal";
+import { RevealItem } from "@/components/motion/Reveal";
 import { CtaFooter } from "@/components/sections/CtaFooter/CtaFooter";
 import { LISTING_PATH, type CourseHeroContent, type CtaContent } from "@/data/coursePage";
 import {
@@ -27,7 +28,7 @@ import {
   type ProfileSectionId,
 } from "@/data/therapistProfile";
 import { COUNTRIES, DIRECTORY_PATH, LEVELS, QUALIFICATIONS } from "@/data/therapists";
-import styles from "./page.module.css";
+import styles from "@/components/directory/Profile.module.css";
 
 type Props = PageProps<"/therapists/[id]">;
 
@@ -81,17 +82,12 @@ const cta: CtaContent = {
   secondary: { label: "Back to Therapist List", href: DIRECTORY_PATH },
 };
 
-/** One profile section: a white card with an h2, revealed as the directory cards are. */
+/** One profile section, headed from the shared profile headings. */
 function Section({ id, children }: { id: ProfileSectionId; children: ReactNode }) {
   return (
-    <section id={id} className={styles.section} aria-labelledby={`${id}-title`}>
-      <Reveal className={styles.card}>
-        <RevealItem as="h2" className={styles.heading}>
-          <span id={`${id}-title`}>{profileHeads[id]}</span>
-        </RevealItem>
-        {children}
-      </Reveal>
-    </section>
+    <ProfileSection id={id} heading={profileHeads[id]}>
+      {children}
+    </ProfileSection>
   );
 }
 

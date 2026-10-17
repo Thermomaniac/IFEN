@@ -1,5 +1,5 @@
 /*
- * Therapist profile. A mist band holds one white card per section (the directory card:
+ * Person profile (therapist and lecturer pages). A mist band holds one white card per section (the directory card:
  * white, 1px #E5E7EB outline, radius 4) and, from 64rem, the "On This Page" card on the
  * right. Inside a card: stat boxes, credential rows, badge groups and lists.
  */
@@ -367,4 +367,10 @@
   color: var(--color-muted);
   font-size: var(--fs-small);
   line-height: 20px;
+}
+
+/* Lecturer profile: the schedule's date cards sit straight on the card, without the
+   schedule panel's inset. */
+ul.courses {
+  padding: 0;
 }

@@ -2,8 +2,8 @@ import Image from "next/image";
 import { Reveal, RevealItem } from "@/components/motion/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import type { InstructorContent } from "@/data/coursePage";
-import type { Tone } from "./CourseSection";
+import type { InstructorContent, TeamContent, TeamMember } from "@/data/coursePage";
+import { CourseSection, type Tone } from "./CourseSection";
 import sectionStyles from "./CourseSection.module.css";
 import styles from "./Instructor.module.css";
 
@@ -41,27 +41,69 @@ export function Instructor({ id, tone, content }: { id: string; tone: Tone; cont
               {content.name !== content.heading && <h3 className={styles.name}>{content.name}</h3>}
               <p className={styles.role}>{content.role}</p>
             </RevealItem>
-            <div className={styles.body}>
-              <div className={styles.bio}>
-                {content.paragraphs.map((text) => (
-                  <RevealItem key={text} as="p" className={styles.text}>
-                    {text}
-                  </RevealItem>
-                ))}
-              </div>
-              {content.credentials && (
-                <RevealItem as="ul" className={styles.credentials}>
-                  {content.credentials.map((c) => (
-                    <li key={c} className={styles.credential}>
-                      {c}
-                    </li>
-                  ))}
-                </RevealItem>
-              )}
-            </div>
+            <Bio person={content} />
           </Reveal>
         </div>
       </div>
     </section>
+  );
+}
+
+/** Bio paragraphs and the lime credential badges. */
+function Bio({ person }: { person: TeamMember }) {
+  return (
+    <div className={styles.body}>
+      <div className={styles.bio}>
+        {person.paragraphs.map((text) => (
+          <RevealItem key={text} as="p" className={styles.text}>
+            {text}
+          </RevealItem>
+        ))}
+      </div>
+      {person.credentials && (
+        <RevealItem as="ul" className={styles.credentials}>
+          {person.credentials.map((c) => (
+            <li key={c} className={styles.credential}>
+              {c}
+            </li>
+          ))}
+        </RevealItem>
+      )}
+    </div>
+  );
+}
+
+/**
+ * Several people under one section header (About IFEN): each a white card with a
+ * smaller portrait beside name, role, bio and badges, in the instructor's type.
+ */
+export function Team({ id, tone, content }: { id: string; tone: Tone; content: TeamContent }) {
+  return (
+    <CourseSection id={id} tone={tone} head={content}>
+      <ul className={styles.team}>
+        {content.people.map((person) => (
+          <li key={person.name} className={styles.member}>
+            <Reveal className={styles.memberMedia}>
+              <RevealItem className={`${styles.frame} ${styles.portrait}`}>
+                <Image
+                  src={person.image}
+                  alt=""
+                  fill
+                  sizes="(min-width: 48rem) 280px, 320px"
+                  className={styles.photo}
+                />
+              </RevealItem>
+            </Reveal>
+            <Reveal className={styles.copy} delay={0.1}>
+              <RevealItem className={styles.memberTitle}>
+                <h3 className={styles.name}>{person.name}</h3>
+                <p className={styles.role}>{person.role}</p>
+              </RevealItem>
+              <Bio person={person} />
+            </Reveal>
+          </li>
+        ))}
+      </ul>
+    </CourseSection>
   );
 }

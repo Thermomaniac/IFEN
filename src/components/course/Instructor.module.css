@@ -131,3 +131,64 @@
     line-height: 24px;
   }
 }
+
+/* ---------- Team (About IFEN) ---------- */
+
+.team {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* The card treatment: white, 1px outline, radius 4. */
+.member {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: clamp(20px, 3vw, 32px);
+  border-radius: 4px;
+  background: var(--color-white);
+  outline: 1px solid var(--color-border);
+  outline-offset: -1px;
+}
+
+.memberMedia {
+  flex: none;
+  width: 100%;
+  max-width: 20rem;
+}
+
+.portrait {
+  aspect-ratio: 4 / 5;
+}
+
+.memberTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.memberTitle .name {
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.member .body {
+  margin-top: 24px;
+}
+
+@media (min-width: 48rem) {
+  .member {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 40px;
+  }
+
+  .memberMedia {
+    width: 17.5rem;
+  }
+
+  .member .copy {
+    flex: 1 1 0;
+  }
+}

@@ -1,6 +1,38 @@
 # IFEN Remaining Pages Progress
 
-Active phase: **Phase 3, IFEN pages** (not started). See `ROADMAP.md`.
+Active phase: **Phase 4, Blog** (not started). See `ROADMAP.md`.
+
+## Phase 3: IFEN pages (completed 2026-10-18, pushed to staging)
+
+Pages (data in `src/data/ifen/`, routes in `src/app/ifen/`). Paths, breadcrumb root, related cards and CTA live in `src/data/ifen/shared.ts`; the paths alone in `src/data/ifen/paths.ts` so `courses/shared.ts` can import them without a cycle.
+
+- `/ifen/about` (`about.ts`). Source: neurofeedback-info.de/en/ifen-de/ueber-uns.html. Hero, "What Is IFEN?" `CourseArticles media` with the source photo (mist), director's message as a split card (cream), the six-point IFEN concept `FeatureGrid` (white), the team (Thomas Feiner, Alina Feiner, Maria Donaire, Leidy Cubillos) with full bios (mist), Categories, CtaFooter.
+- `/ifen/lecturers` (`lecturers.ts`). Source: …/ifen-de/dozenten-m.html. Hero, all 25 lecturers in source order as a `Mentors grid` (mist), Categories, CtaFooter.
+- `/ifen/lecturers/thomas-feiner` (`thomasFeiner.ts`). Source: …/dozenten-m/1-thomas-f-feiner-bcia-bcn-qeeg-d.html. The therapist profile layout without booking: hero with portrait, "On This Page" nav (CTA jumps to the courses), five text section cards, then his 18 course dates as the schedule's date cards. Dates are looked up from `scheduleDates` by code and the build fails if one is missing.
+- Shared component changes, all optional props with unchanged defaults:
+  - `Mentors`: `id`, `tone`, `grid` (wrapping grid, no carousel controls or placeholders).
+  - `Instructor.tsx`: new `Team` export for several people with portrait and bio; `TeamContent` / `TeamMember` types in `coursePage.ts`.
+  - `CourseSchedule.tsx`: `CourseCards` export (the date cards alone).
+  - `Reveal`: `amount` (default 0.25). The lecturer grid and the course card pass "some"; a group taller than four viewports never reached 25% and stayed hidden on phones.
+  - Therapist profile CSS moved to `src/components/directory/Profile.module.css` with a shared `ProfileSection`; the therapist page now uses it too, visually unchanged.
+- Links: nav IFEN now points at `/ifen/about` with children About IFEN, Lecturers, Board Members, Partners, Testimonials. Footer "About the institute" and "Lecturers overview" go to the new pages. `FEINER` speaker card (course pages) and `LECTURERS_URL` point at the local pages.
+- Assets: `public/about/ifen-neurofeedback.jpg`, `public/lecturers/*.jpg` (28 portraits from the live site). Feiner's large portraits use the existing `/board/member-1.png`.
+
+Verification:
+
+- `npx eslint .` clean; `npx tsc --noEmit` clean; `npm run build` passes (three routes static).
+- Rendered with a production server at 1440, 390 and 320: no horizontal overflow on the three pages, the therapist profile or Module 1; no console messages.
+
+Open issues:
+
+- The live Feiner "Experience" text ends in an editor placeholder ("developed [a specific method/approach - context needed]. Training programs for children with learning difficulties."). Joined into one sentence ("developed training programs for children with learning difficulties"); confirm with IFEN.
+- Alina Feiner has no role line on the source; "Research, innovation and training concepts at IFEN" is taken from her bio. Confirm.
+- Lecturer cards show only a short role line; each is a summary of the opening sentence of the live profile. Only Thomas Feiner has a local page; the other 24 cards link to their live profiles.
+- Several live portraits are small (Timo Skladny 81×100, Georg Handwerker and Mark Smith 125×156, Hanelore Branga 200×170). Ask IFEN for larger originals.
+- The English Feiner page lists course codes ending in -EN; `schedule.ts` holds the same dates as -DE with German titles, so the course cards show the German titles.
+- Home board cards still link to `#` and carry placeholder bios (from Paper); not changed this phase.
+- `LECTURERS_URL` in `therapists.ts` is no longer used anywhere; kept as the exported constant.
+
 
 ## Phase 2: Neurofeedback content pages (completed 2026-10-15, pushed to staging)
 

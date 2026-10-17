@@ -141,6 +141,11 @@ export type InstructorContent = SectionHead & {
   credentials?: string[];
 };
 
+/** A team member: the instructor profile without its own section header. */
+export type TeamMember = Omit<InstructorContent, keyof SectionHead>;
+
+export type TeamContent = SectionHead & { people: TeamMember[] };
+
 export type FaqContent = SectionHead & {
   items: { question: string; answer: string }[];
   help: { heading: string; text: string; email: string };

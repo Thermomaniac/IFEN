@@ -530,6 +530,19 @@ function InterestRow({ item }: { item: ScheduleItem }) {
   );
 }
 
+/** The schedule's date cards on their own, for pages that list a fixed set of dates. */
+export function CourseCards({ items, className = "" }: { items: ScheduleItem[]; className?: string }) {
+  return (
+    <ul className={`${styles.cards} ${className}`}>
+      {items.map((item) => (
+        <li key={item.code + item.start}>
+          <DateCard item={item} />
+        </li>
+      ))}
+    </ul>
+  );
+}
+
 function DateCard({ item, interest = false }: { item: ScheduleItem; interest?: boolean }) {
   const parts = item.start ? dateParts(item.start) : null;
   const span = formatSpan(item);

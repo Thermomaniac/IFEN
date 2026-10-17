@@ -7,6 +7,8 @@ import { Reveal, RevealItem } from "@/components/motion/Reveal";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import type { Speaker, SpeakersContent } from "@/data/coursePage";
+import type { Tone } from "./CourseSection";
+import sectionStyles from "./CourseSection.module.css";
 import styles from "./Mentors.module.css";
 
 /** The row always shows at least four cards; open seats are clearly marked placeholders. */
@@ -19,10 +21,23 @@ const MIN_CARDS = 4;
  * focusing one zooms the photo and reveals the small apricot arrow. Pages with fewer
  * than four speakers fill the row with "to be announced" cards rather than invented
  * people. A live region reports the visible range.
+ *
+ * `grid` lays every card out at once (the lecturers index): no arrows, no placeholders,
+ * the same cards wrapping four, two or two narrow columns per row.
  */
-export function Mentors({ content: mentors }: { content: SpeakersContent }) {
+export function Mentors({
+  content: mentors,
+  id = "speakers",
+  tone = "cream",
+  grid = false,
+}: {
+  content: SpeakersContent;
+  id?: string;
+  tone?: Tone;
+  grid?: boolean;
+}) {
   const people = mentors.people;
-  const total = Math.max(MIN_CARDS, people.length);
+  const total = grid ? people.length : Math.max(MIN_CARDS, people.length);
   const placeholders = total - people.length;
   const rowRef = useRef<HTMLUListElement>(null);
   const [range, setRange] = useState({ first: 0, last: Math.min(total, MIN_CARDS) - 1, atStart: true, atEnd: true });
@@ -30,7 +45,7 @@ export function Mentors({ content: mentors }: { content: SpeakersContent }) {
   // Which cards are fully in view, read only when the row scrolls or resizes.
   useEffect(() => {
     const row = rowRef.current;
-    if (!row) return;
+    if (!row || grid) return;
     let frame = 0;
     const read = () => {
       frame = 0;
@@ -59,7 +74,7 @@ export function Mentors({ content: mentors }: { content: SpeakersContent }) {
       ro.disconnect();
       row.removeEventListener("scroll", schedule);
     };
-  }, []);
+  }, [grid]);
 
   function step(dir: 1 | -1) {
     const row = rowRef.current;
@@ -71,7 +86,11 @@ export function Mentors({ content: mentors }: { content: SpeakersContent }) {
   }
 
   return (
-    <section id="speakers" className={styles.section} aria-labelledby="mentors-title">
+    <section
+      id={id}
+      className={`${styles.section} ${sectionStyles[tone]}`}
+      aria-labelledby={`${id}-title`}
+    >
       <div className={styles.inner}>
         <div className={styles.head}>
           <Reveal as="header" className={styles.header}>
@@ -81,12 +100,13 @@ export function Mentors({ content: mentors }: { content: SpeakersContent }) {
               </SectionLabel>
             </RevealItem>
             <RevealItem>
-              <SectionHeading id="mentors-title" align="start">
+              <SectionHeading id={`${id}-title`} align="start">
                 {mentors.heading}
               </SectionHeading>
             </RevealItem>
           </Reveal>
 
+          {!grid && (
           <Reveal className={styles.controls}>
             <RevealItem>
               <button
@@ -94,7 +114,7 @@ export function Mentors({ content: mentors }: { content: SpeakersContent }) {
                 className={styles.nav}
                 onClick={() => step(-1)}
                 disabled={range.atStart}
-                aria-controls="speakers-row"
+                aria-controls={`${id}-row`}
                 aria-label="Previous speakers"
               >
                 <ArrowCornerBackIcon />
@@ -106,21 +126,29 @@ export function Mentors({ content: mentors }: { content: SpeakersContent }) {
                 className={styles.nav}
                 onClick={() => step(1)}
                 disabled={range.atEnd}
-                aria-controls="speakers-row"
+                aria-controls={`${id}-row`}
                 aria-label="Next speakers"
               >
                 <ArrowCornerIcon />
               </button>
             </RevealItem>
           </Reveal>
+          )}
         </div>
 
-        <p className="sr-only" aria-live="polite">
-          {`Showing ${range.first + 1}${range.last > range.first ? `–${range.last + 1}` : ""} of ${total} cards`}
-        </p>
+        {!grid && (
+          <p className="sr-only" aria-live="polite">
+            {`Showing ${range.first + 1}${range.last > range.first ? `–${range.last + 1}` : ""} of ${total} cards`}
+          </p>
+        )}
 
-        <Reveal className={styles.viewport}>
-          <ul ref={rowRef} id="speakers-row" className={styles.list} tabIndex={-1}>
+        <Reveal className={styles.viewport} stagger={grid ? 0.03 : undefined} amount={grid ? "some" : undefined}>
+          <ul
+            ref={rowRef}
+            id={`${id}-row`}
+            className={`${styles.list} ${grid ? styles.grid : ""}`}
+            tabIndex={grid ? undefined : -1}
+          >
             {people.map((m) => (
               <RevealItem as="li" key={m.id} className={styles.card}>
                 <SpeakerCard person={m} />

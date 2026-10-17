@@ -31,20 +31,23 @@ type RevealProps = {
   /** Seconds between each direct child using `revealItem`. */
   stagger?: number;
   delay?: number;
+  /** Share of the group that must be in view before it plays. Pass "some" for groups
+      taller than the viewport, which never reach the default 25%. */
+  amount?: number | "some" | "all";
 };
 
 /**
  * Staggered scroll reveal. Children that are <RevealItem> (or any motion element
  * using `revealItem`) animate in sequence once the group is in view.
  */
-export function Reveal({ children, as = "div", className, stagger = 0.08, delay = 0 }: RevealProps) {
+export function Reveal({ children, as = "div", className, stagger = 0.08, delay = 0, amount = 0.25 }: RevealProps) {
   const Component = tags[as];
   return (
     <Component
       className={className}
       initial="hidden"
       whileInView="visible"
-      viewport={{ once: true, amount: 0.25 }}
+      viewport={{ once: true, amount }}
       variants={{ hidden: {}, visible: { transition: { staggerChildren: stagger, delayChildren: delay } } }}
     >
       {children}

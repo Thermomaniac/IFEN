@@ -1,6 +1,7 @@
-/* Paper: cream band, padding 72; header row with nav at its end, four 312×(340+body) cards, gap 16. */
+/* Paper: cream band (the tone class), padding 72; header row with nav at its end,
+   four 312×(340+body) cards, gap 16. */
 .section {
-  background: var(--color-cream);
+  scroll-margin-top: 80px;
 }
 
 .inner {
@@ -222,6 +223,23 @@
   font-weight: 500;
 }
 
+/* Grid mode: every card at once, wrapping rows of the carousel's card width. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--per-view), minmax(0, 1fr));
+  overflow: visible;
+  scroll-snap-type: none;
+}
+
+.grid .card {
+  width: auto;
+}
+
+.grid .name {
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
 @media (max-width: 63.99rem) {
   .list {
     --per-view: 2;
@@ -237,5 +255,25 @@
   .role {
     font-size: var(--fs-small);
     line-height: 20px;
+  }
+
+  /* Two narrow columns on phones, so a long roster stays scannable. */
+  .grid {
+    --per-view: 2;
+    --gap: 12px;
+  }
+
+  .grid .body {
+    padding: 12px;
+  }
+
+  .grid .name {
+    font-size: 1rem;
+    line-height: 20px;
+  }
+
+  .grid .role {
+    font-size: var(--fs-xs);
+    line-height: 16px;
   }
 }
