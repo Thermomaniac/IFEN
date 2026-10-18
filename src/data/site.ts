@@ -1,5 +1,7 @@
 // Site-wide content. Copy is taken from the Paper file "Final Home Page".
 
+import { BCIA_PATH, ISF_PATH, QEEG_COURSES_PATH, SUPERVISION_PATH, WEBINARS_PATH } from "./booking/paths";
+import { LISTING_PATH } from "./coursePage";
 import { ABOUT_PATH, LECTURERS_PATH } from "./ifen/paths";
 import { BLOG_PATH } from "./blog/paths";
 import { APPLICATIONS_PATH, METHODS_PATH, WHAT_IS_PATH } from "./neurofeedback/shared";
@@ -26,9 +28,14 @@ export const navLinks: NavLink[] = [
   { label: "Home", href: "/" },
   {
     label: "Course Booking",
-    href: "/#training",
+    href: LISTING_PATH,
     children: [
-      { label: "Course Dates", href: "/#training" },
+      { label: "Course Dates", href: LISTING_PATH },
+      { label: "QEEG Courses", href: QEEG_COURSES_PATH },
+      { label: "ISF Neurofeedback", href: ISF_PATH },
+      { label: "Supervision, Internship and Mentoring", href: SUPERVISION_PATH },
+      { label: "BCIA Certification", href: BCIA_PATH },
+      { label: "Webinars", href: WEBINARS_PATH },
       { label: "Certification Path", href: "/#certification" },
       { label: "Training Locations", href: "/#locations" },
     ],

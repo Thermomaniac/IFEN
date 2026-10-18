@@ -1,0 +1,4 @@
+/* The date cards sit straight in the band, without the schedule panel's inset. */
+ul.dates {
+  padding: 0;
+}

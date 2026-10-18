@@ -5,8 +5,10 @@
 // site are used where they exist. Checked 2026-10-15, these source links return 404 and are left
 // out: qeeg.neurofeedback-partner.de, vielight.neurofeedback-partner.de/index.php,
 // /de/startseite/neuromeditation-munich.html and /de/termine-kursbuchung-seminare/neuromeditation-inter.html.
-// ISF has no link on the source.
+// ISF has no link on the source; it links the local ISF Neurofeedback page. QEEG links the local
+// QEEG Courses page, which replaces the source's qeeg-kurse-m.html.
 
+import { ISF_PATH, QEEG_COURSES_PATH } from "../booking/paths";
 import type { ArticlesContent, CategoriesContent, CourseHeroContent } from "../coursePage";
 import { QEEG_WORKSHOP_PATH } from "../courses/qeegWorkshop";
 import { LIVE } from "../courses/shared";
@@ -40,7 +42,7 @@ export const methods = {
         paragraphs: [
           "Quantitative EEG uses modern data processing to make disorders visible in a brain map. This gives diagnosticians far greater possibilities and makes the biological basis of autism, stress, illness or learning disorders in the brain visible.",
         ],
-        links: [{ label: "QEEG Courses", href: `${BOOKING}/qeeg-kurse-m.html` }],
+        links: [{ label: "QEEG Courses", href: QEEG_COURSES_PATH }],
       },
       {
         heading: "Neuromeditation",
@@ -53,6 +55,7 @@ export const methods = {
         paragraphs: [
           "Infra Slow Fluctuation (infra, below; slow; fluctuation) is the scientific term for very low-frequency oscillations in the brain. ISF neurofeedback trains these slow oscillations specifically, to improve the general performance of the brain.",
         ],
+        links: [{ label: "ISF Neurofeedback", href: ISF_PATH }],
       },
       {
         heading: "Photobiomodulation",

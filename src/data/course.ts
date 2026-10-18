@@ -2,6 +2,7 @@
 // (artboard "Webinar Details Page").
 
 import type { CourseHeroContent, SpeakersContent } from "./coursePage";
+import { SUPERVISION_PATH } from "./booking/paths";
 
 export type PlanId = "standard" | "feiner" | "chiarenza";
 export type Plan = { id: PlanId; label: string; price: number };
@@ -53,7 +54,7 @@ export type Category = {
 
 export const course = {
   title: "BCIA Mentoring, QEEG Mentoring for QEEG-D Certification",
-  breadcrumb: [{ label: "Course Booking", href: "/#training" }, { label: "Mentoring" }],
+  breadcrumb: [{ label: "Course Booking", href: "/courses" }, { label: "Mentoring" }],
   badge: "Mentoring Program",
   description:
     "Our mentoring program offers personalized guidance for professionals pursuing QEEG-D certification. With experienced mentors, participants enhance their quantitative EEG expertise, interpret brain maps accurately, and develop practical skills per BCIA standards.",
@@ -187,7 +188,7 @@ export const course = {
     heading: "Browse Categories",
     items: [
       { id: "further", title: "Further Training & Other Offers", icon: { kind: "cap" }, href: "/#training" },
-      { id: "mentoring", title: "Supervision / Internship / Mentoring", icon: { kind: "users" }, href: "/#training" },
+      { id: "mentoring", title: "Supervision / Internship / Mentoring", icon: { kind: "users" }, href: SUPERVISION_PATH },
       { id: "es", title: "Spanish In-Person Training", icon: { kind: "flag", src: "/categories/es.png" }, href: "/#training" },
       { id: "de", title: "German In-Person Training", icon: { kind: "flag", src: "/categories/de.png" }, href: "/#training" },
       { id: "en", title: "English On-Site Training", icon: { kind: "flag", src: "/categories/us.svg" }, href: "/#training" },

@@ -1,6 +1,56 @@
 # IFEN Remaining Pages Progress
 
-Active phase: **Phase 5, Course Booking content pages** (not started). See `ROADMAP.md`.
+Active phase: none. All five phases are complete. See `ROADMAP.md`.
+
+## Phase 5: Course Booking content pages (completed 2026-10-18, pushed to staging)
+
+One reusable content-page system instead of five bespoke pages. Each page is a data object (`BookingPage` in `src/data/booking/shared.ts`): hero, an ordered list of sections, related cards and CTA. `src/components/course/ContentPage.tsx` renders it: ink hero, then each section in mist / cream / white order, Categories, CtaFooter. Section kinds:
+
+- `articles`: `CourseArticles` (any variant).
+- `features`: `FeatureGrid`.
+- `dates`: section header plus the schedule's date cards (`CourseCards`). Rows come from `scheduleDates` by course code through `datesFor`, and the build fails if a code is missing.
+
+Paths live in `src/data/booking/paths.ts` (a leaf module, so `site.ts` and `course.ts` import them without a cycle). The breadcrumb root is "Course Booking", which links to `/courses`.
+
+Pages (data in `src/data/booking/`, routes in `src/app/course-booking/`):
+
+- `/course-booking/qeeg-courses` (`qeegCourses.ts`). Source: neurofeedback-info.de/termine-kursbuchung-seminare/qeeg-kurse-m.html. The three paragraphs on quantitative EEG are in one card, followed by 8 dates.
+- `/course-booking/isf-neurofeedback` (`isfNeurofeedback.ts`). Source: …/isf-neurofeedback-m.html. "What Is ISF Neurofeedback?" (the three paragraphs) has links to the further-information PDF, Mark L. Smith's NeuroConnections article and IFEN's German translation. 3 dates.
+- `/course-booking/supervision-internship-mentoring` (`supervision.ts`). Source: …/supervision-praktikum-mentoring-einzelne-tage.html. The page has two cards:
+  - Internship links to the local therapist directory, where partner practices carry the "Internships & mentoring" badge.
+  - Supervision has a TeamViewer tag.
+  - It has 6 flexible units.
+- `/course-booking/bcia-certification` (`bcia.ts`). Source: …/bcia-board-certified-in-neurofeeedback.html. It has three sections:
+  - The six facts as a numbered `FeatureGrid`.
+  - "Certification Through IFEN Workshops", which links to the Thomas Feiner page.
+  - The BCIA course and BCIA mentoring dates.
+- `/course-booking/webinars` (`webinars.ts`). Source: …/webinare-m.html. "How Does a Webinar Work?" and 17 dates.
+- All copy is translated from the German originals, and nothing is trimmed. The source's German-labelled QEEG banner diagram is left out.
+- No shared component changed. `ContentPage` composes existing components, and `ContentPage.module.css` only resets the date list padding.
+- Links:
+  - Nav: Course Booking points at `/courses`. Its children are Course Dates (`/courses`), QEEG Courses, ISF Neurofeedback, Supervision, Internship and Mentoring, BCIA Certification and Webinars. Certification Path and Training Locations are kept.
+  - Methods: ISF now links the ISF page, and QEEG links the local QEEG Courses page in place of the live qeeg-kurse-m.html.
+  - BCIA Mentoring: the course page's "Supervision / Internship / Mentoring" category card links the new page, and its breadcrumb root goes to `/courses`.
+
+Mobbin references:
+
+- Meetup series dates list: https://mobbin.com/screens/ffae9f21-adba-4d25-808a-e168a4a1486b
+- Uxcel certifications page with intro: https://mobbin.com/screens/46297401-e589-4f27-bdaa-96004cb3f750
+- Magnific course intro then content list: https://mobbin.com/screens/ba0ea65e-e838-45b1-a9e7-c513f4b02e63
+
+Verification:
+
+- `npx eslint .` and `npx tsc --noEmit` are clean, and `npm run build` passes (five routes static).
+- Rendered with a production server at 1440, 390 and 320: no horizontal overflow on any of the five pages.
+
+Open issues:
+
+- The BCIA source ends with the heading "Nähere Informationen zur internationalen BCIA-Zertifizierung", which has no text or link. It is left out; ask IFEN where it should point.
+- The Categories icon set has only cap, users, brain, pulse and country flags. BCIA uses the cap and Webinars uses pulse, both repeated from other cards.
+- The schedule rows still link to the individual live course pages (only category pages were redesigned), so `schedule.ts` is unchanged.
+- The BCIA Mentoring page's other category cards (Further Training, the language trainings) still point at `/#training`.
+- Course titles on the date cards stay as in `schedule.ts`, so many are German.
+
 
 ## Phase 4: Blog (completed 2026-10-18, pushed to staging)
 
@@ -86,7 +136,7 @@ Open issues:
 
 - Dead source links left out (404 on 2026-10-15): qeeg.neurofeedback-partner.de, vielight.neurofeedback-partner.de/index.php, /de/startseite/neuromeditation-munich.html, /de/termine-kursbuchung-seminare/neuromeditation-inter.html (EN version also 404). Neuromeditation has no link until IFEN supplies one.
 - German-only training links on the source replaced with the live EN equivalents (qeeg-kurse-m, photobiomodulation, brainavatar).
-- ISF has no link on the source; the ISF page arrives in Phase 5 and should be linked from Methods then.
+- ISF has no link on the source; linked to the local ISF page in Phase 5.
 - Applications source illustration is flat clip art, off-style; the hero uses the existing site photo `/about/metric-tile.jpg` instead.
 - "Benefits" nav child used to point at the home discount section `/#benefits`; it now points at the Applications effects section. Revert if the discount anchor was intended.
 - The What-is photo is only 500px wide and renders up to ~570px on desktop; ask IFEN for a larger original.
