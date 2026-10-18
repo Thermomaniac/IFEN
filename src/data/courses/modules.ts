@@ -493,6 +493,7 @@ export const ifen100 = {
             heading: "After Booking",
             paragraphs: ["After booking you receive by email:"],
             list: ["A link to the test", "The password you need", "Your invoice and bank details (for bank transfer)"],
+            plainList: true,
           },
           {
             heading: "Taking the Test",
@@ -518,6 +519,7 @@ export const ifen100 = {
         items: [
           {
             heading: "Before You Start",
+            lead: "The questions come in different modes: mostly multiple choice, less often questions that ask for a direct answer. No aids are allowed.",
             list: [
               "65 questions from a pool of 105",
               "Time limit: 70 minutes",
@@ -527,12 +529,8 @@ export const ifen100 = {
               "The test can only be finished once every question is answered",
               "Passed with at least 70% correct answers",
             ],
-            paragraphs: [
-              "The questions come in different modes: mostly multiple choice, less often questions that ask for a direct answer. No aids are allowed.",
-            ],
           },
         ],
-        note: "We wish you every success!",
       },
     },
     {

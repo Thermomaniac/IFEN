@@ -27,6 +27,13 @@
   overflow-wrap: break-word;
 }
 
+/* Heading with its lead sentence (IFEN 100 "Before You Start"). */
+.head {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
 .text {
   color: var(--color-muted);
   font-size: var(--fs-body);
@@ -293,6 +300,24 @@
   overflow-wrap: break-word;
 }
 
+/* Plain bullets in the row text style (IFEN 100 "After Booking"). */
+.rowList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-left: 1.25em;
+  color: var(--color-muted);
+  font-size: var(--fs-body);
+  line-height: 1.4;
+  font-variation-settings: var(--fvs-display);
+  list-style: disc;
+  overflow-wrap: break-word;
+}
+
+.rowList li::marker {
+  color: var(--color-subtle);
+}
+
 .rowAddress {
   display: flex;
   flex-direction: column;
@@ -536,15 +561,16 @@
     row-gap: 0;
   }
 
-  .split > .heading {
+  .split > .heading,
+  .split > .head {
     grid-row: 1 / span 10;
   }
 
-  .split > :not(.heading) {
+  .split > :not(.heading, .head) {
     grid-column: 2;
   }
 
-  .split > :not(.heading) + :not(.heading) {
+  .split > :not(.heading, .head) + :not(.heading, .head) {
     margin-top: 16px;
   }
 }

@@ -90,11 +90,15 @@ export type ArticleIcon = "repeat" | "list" | "venue";
 export type Article = {
   /** Optional when the section heading already names the block. */
   heading?: string;
+  /** Default cards: a sentence kept with the heading (under it, left column in a split card). */
+  lead?: string;
   /** Leads the heading in the `rows` layout. */
   icon?: ArticleIcon;
   paragraphs?: string[];
   /** Rendered as check rows. */
   list?: string[];
+  /** `rows`: render `list` as plain bullets under the text instead of the bordered check rows. */
+  plainList?: boolean;
   /** Small label over the check rows. */
   listHeading?: string;
   /** Key figures as tiles, e.g. an exam's format, duration and credits. */

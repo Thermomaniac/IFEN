@@ -4,7 +4,15 @@ Active phase: Follow-up corrections programme (phases 1 to 7, 2026-10-19), in pr
 
 ## Follow-up corrections programme
 
-### Phase 5: Register screen (done 2026-10-19)
+### Phase 6: IFEN 100 page (done 2026-10-19)
+
+- How It Works, "After Booking": the three items now render as plain bullets under the sentence, in the row text style, with no white bordered card. Opt-in through `Article.plainList` (rows layout only), set only on this item; other rows keep the check-row card.
+- Technical Details: the "We wish you every success!" note is removed.
+- "Before You Start": the modes sentence (already in the data since Corrections E, but rendered in the right column of the split card) now sits directly under the heading, in the left column from 64rem and stacked under it below. Opt-in through `Article.lead`; the split card selectors treat the heading group like the heading, so other split cards are unchanged (Module 4 checked).
+- No other changes on the page.
+- Checks: eslint, tsc, build clean. Rendered at 1440, 390 and 320 (no horizontal overflow).
+
+### Phase 5: Register screen (done 2026-10-19, pushed to staging)
 
 - Figma 40001148-110591: same full screen split as login, "Create Your Account", "Already have an account? Login" at the foot.
 - Password rules: grey panel (`--color-border-soft`, 12px padding, 4px radius), two columns, 12px medium muted text, a Phosphor CheckCircle per rule in Figma order. The "Password requirements" title is kept for screen readers only (the input still points at the list with aria-describedby).

@@ -132,7 +132,15 @@ export function CourseArticles({
             key={item.heading ?? i}
             className={`${styles.card} ${cols === 1 && item.heading ? styles.split : ""}`}
           >
-            {item.heading && <h3 className={styles.heading}>{item.heading}</h3>}
+            {item.heading &&
+              (item.lead ? (
+                <div className={styles.head}>
+                  <h3 className={styles.heading}>{item.heading}</h3>
+                  <p className={styles.text}>{item.lead}</p>
+                </div>
+              ) : (
+                <h3 className={styles.heading}>{item.heading}</h3>
+              ))}
             {item.paragraphs?.map((text) => (
               <p key={text} className={styles.text}>
                 {text}
@@ -285,7 +293,16 @@ function Row({ item, index }: { item: Article; index?: number }) {
           </p>
         ))}
         {item.address && <Address address={item.address} className={styles.rowAddress} />}
-        {item.list && <OutcomeList items={item.list} />}
+        {item.list &&
+          (item.plainList ? (
+            <ul className={styles.rowList}>
+              {item.list.map((text) => (
+                <li key={text}>{text}</li>
+              ))}
+            </ul>
+          ) : (
+            <OutcomeList items={item.list} />
+          ))}
         {item.links && <Links links={item.links} />}
       </div>
     </>
