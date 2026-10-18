@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { ChevronDownIcon, CloseIcon, MenuIcon } from "@/components/icons";
 import { accountPaths } from "@/data/account";
-import { navLinks, type NavLink } from "@/data/site";
+import { navLinks, type NavChild, type NavLink } from "@/data/site";
 import styles from "./MainNav.module.css";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -86,7 +86,8 @@ function Dropdown({ link }: { link: NavLink }) {
       if (!ref.current?.contains(e.target as Node)) setOpen(false);
     };
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
+      // A flyout inside the menu handles its own Escape first and marks it handled.
+      if (e.key === "Escape" && !e.defaultPrevented) {
         setOpen(false);
         ref.current?.querySelector("button")?.focus();
       }
@@ -129,28 +130,111 @@ function Dropdown({ link }: { link: NavLink }) {
             exit={{ opacity: 0, y: -6 }}
             transition={{ duration: 0.18, ease: EASE }}
           >
-            {link.children!.map((child) => (
-              <li key={child.label}>
-                <a href={child.href} className={styles.menuLink} onClick={() => setOpen(false)}>
-                  {child.label}
+            {link.children!.map((child) =>
+              child.children ? (
+                <Flyout key={child.label} item={child} onNavigate={() => setOpen(false)} />
+              ) : (
+                <li key={child.label}>
+                  <a href={child.href} className={styles.menuLink} onClick={() => setOpen(false)}>
+                    {child.label}
+                  </a>
+                </li>
+              ),
+            )}
+          </motion.ul>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
+
+/**
+ * Second menu level (Training MODULES 1-4): the label links to the overview, the caret
+ * beside it opens the modules in a panel to the right of the dropdown. Opens on hover
+ * (closing after a short delay, so a diagonal pointer path into the panel keeps it open),
+ * on a tap or click of the caret, and on ArrowRight; Escape and ArrowLeft close it.
+ */
+function Flyout({ item, onNavigate }: { item: NavChild; onNavigate: () => void }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLLIElement>(null);
+  const timer = useRef<number | undefined>(undefined);
+  const id = useId();
+
+  const cancel = () => window.clearTimeout(timer.current);
+  const show = () => {
+    cancel();
+    setOpen(true);
+  };
+  const hide = () => {
+    cancel();
+    timer.current = window.setTimeout(() => setOpen(false), 180);
+  };
+  useEffect(() => () => window.clearTimeout(timer.current), []);
+
+  const focusToggle = () => ref.current?.querySelector<HTMLButtonElement>("button")?.focus();
+
+  return (
+    <li
+      ref={ref}
+      className={styles.group}
+      onPointerEnter={(e) => e.pointerType === "mouse" && show()}
+      onPointerLeave={(e) => e.pointerType === "mouse" && hide()}
+      onBlur={(e) => {
+        if (!ref.current?.contains(e.relatedTarget as Node)) setOpen(false);
+      }}
+      onKeyDown={(e) => {
+        if (!open || (e.key !== "Escape" && e.key !== "ArrowLeft")) return;
+        if (e.key === "ArrowLeft" && !(e.target as HTMLElement).closest(`.${styles.flyout}`)) return;
+        // Close this level only, not the whole dropdown.
+        e.stopPropagation();
+        e.preventDefault();
+        setOpen(false);
+        focusToggle();
+      }}
+    >
+      <div className={styles.groupRow} data-open={open || undefined}>
+        <a href={item.href} className={styles.menuLink} onClick={onNavigate}>
+          {item.label}
+        </a>
+        <button
+          type="button"
+          className={styles.groupToggle}
+          aria-expanded={open}
+          aria-controls={id}
+          onClick={() => (open ? setOpen(false) : show())}
+          onKeyDown={(e) => {
+            if (e.key !== "ArrowRight") return;
+            e.preventDefault();
+            show();
+            requestAnimationFrame(() => document.getElementById(id)?.querySelector("a")?.focus());
+          }}
+        >
+          <ChevronDownIcon className={styles.groupChevron} />
+          <span className="sr-only">{`${item.label}: show modules`}</span>
+        </button>
+      </div>
+      <AnimatePresence>
+        {open && (
+          <motion.ul
+            id={id}
+            className={styles.flyout}
+            aria-label={item.label}
+            initial={{ opacity: 0, x: -6 }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: -6 }}
+            transition={{ duration: 0.18, ease: EASE }}
+          >
+            {item.children!.map((sub) => (
+              <li key={sub.label}>
+                <a href={sub.href} className={styles.menuLink} onClick={onNavigate}>
+                  {sub.label}
                 </a>
-                {child.children && (
-                  <ul className={styles.menuNested} aria-label={child.label}>
-                    {child.children.map((item) => (
-                      <li key={item.label}>
-                        <a href={item.href} className={styles.menuLink} onClick={() => setOpen(false)}>
-                          {item.label}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
-                )}
               </li>
             ))}
           </motion.ul>
         )}
       </AnimatePresence>
-    </div>
+    </li>
   );
 }
 

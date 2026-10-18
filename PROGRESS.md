@@ -4,7 +4,14 @@ Active phase: Follow-up corrections programme (phases 1 to 7, 2026-10-19), in pr
 
 ## Follow-up corrections programme
 
-### Phase 1: Photo hero backgrounds (done 2026-10-19)
+### Phase 2: Training Modules flyout (done 2026-10-19)
+
+- Course Booking > "Training MODULES 1-4" is now a second-level flyout to the right of the dropdown, listing Module 1, Module 2, Module 3, Module 4 and IFEN 100 (routes checked against `src/data/courses/modulePaths.ts`; all five pages exist). The parent label still links to `/courses/modules`; a caret button next to it controls the flyout.
+- Reuses the dropdown pattern in `MainNav`: same menu card, link style, Framer Motion fade (slide from the left instead of from the top). Opens on mouse hover with a 180ms close delay and an invisible bridge over the 17px gap, so the pointer can travel into it. Tap or click on the caret toggles it (touch never relies on hover). Keyboard: ArrowRight on the caret opens it and focuses Module 1; Escape or ArrowLeft closes only the flyout and returns focus to the caret; tabbing out closes it. The dropdown's document Escape handler now skips events the flyout already handled.
+- Menus size to their content (`max-content`, 220px min, 20rem max), so no label wraps. Mobile drawer unchanged: the five modules stay listed under "Training MODULES 1-4" (a flyout makes no sense in a stacked drawer).
+- Checks: eslint, tsc, build clean. Rendered 1440 (hover, pointer moved into the flyout), 1120 with touch emulation (tap, flyout right edge at 793px, no overflow), keyboard path at 1440, drawer at 390 and 320.
+
+### Phase 1: Photo hero backgrounds (done 2026-10-19, pushed to staging)
 
 - Figma "Hero Section" (node 40001128-108319) is the ink band with the listing photo (woman, man, waveform) on the right under the radial ink fade: the exact treatment the course listing hero already uses (same `.media`, `.fade` gradient stops 34% / 62.6% / 91.7%).
 - `CourseHero`: the 17 heroes that Programme 4 made light (modules overview, Modules 2 to 4, IFEN 100, BCIA, BrainAvatar, ISF, Photobiomodulation, QEEG Courses, Supervision, Webinars, Training Courses, About IFEN, Lecturers, Topics, What Is Neurofeedback) now render that photo hero with `/training/training-offers-hero.jpg`. Copy, CTAs, breadcrumb, badge and highlights unchanged.

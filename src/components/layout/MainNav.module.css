@@ -76,7 +76,9 @@
   position: absolute;
   top: calc(100% + 8px);
   left: -16px;
+  width: max-content;
   min-width: 220px;
+  max-width: 20rem;
   padding: 8px;
   background: var(--color-white);
   border: 1px solid var(--color-border-soft);
@@ -269,11 +271,75 @@
   padding-block: 12px;
 }
 
-/* Nested group under a menu entry (Training MODULES 1-4): indented, with a hairline. */
-.menuNested {
-  margin: 0 0 4px 12px;
-  padding-left: 8px;
-  border-left: 1px solid var(--color-border);
+/* Second level (Training MODULES 1-4): label link plus caret, panel to the right. */
+.group {
+  position: relative;
+}
+
+.groupRow {
+  display: flex;
+  align-items: stretch;
+  border-radius: var(--radius-button);
+  transition: background var(--dur-fast);
+}
+
+.groupRow > .menuLink {
+  flex: 1;
+}
+
+.groupRow[data-open] {
+  background: var(--color-mist);
+}
+
+.groupRow[data-open] > .menuLink {
+  color: var(--color-ink);
+}
+
+.groupToggle {
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 32px;
+  border-radius: var(--radius-button);
+  color: var(--color-muted);
+  transition: color var(--dur-fast);
+}
+
+.groupRow[data-open] .groupToggle {
+  color: var(--color-ink);
+}
+
+.groupChevron {
+  transform: rotate(-90deg);
+}
+
+/* Sits just outside the dropdown's right border, first item level with the row. */
+.flyout {
+  position: absolute;
+  top: -9px;
+  left: calc(100% + 17px);
+  z-index: 1;
+  width: max-content;
+  min-width: 220px;
+  max-width: 20rem;
+  padding: 8px;
+  background: var(--color-white);
+  border: 1px solid var(--color-border-soft);
+  border-radius: 4px;
+  box-shadow: 0 16px 40px -16px rgb(2 6 24 / 22%);
+}
+
+/* Bridge the gap so the pointer can travel from the row into the panel. */
+.flyout::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 -18px;
+  width: 18px;
+}
+
+@media (hover: hover) {
+  .groupToggle:hover {
+    color: var(--color-ink);
+  }
 }
 
 .drawerNested {
