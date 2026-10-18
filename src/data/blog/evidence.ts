@@ -47,7 +47,7 @@ export const evidenceArticle = {
     highlights: [
       { value: "Thomas Feiner", label: "Author" },
       { value: formatPostDate(post.date), label: "Published" },
-      { value: `${post.minutes} min`, label: "Reading time" },
+      { value: `${post.minutes} min`, label: "Reading Time" },
     ],
     image: post.image.src,
   } satisfies CourseHeroContent,
@@ -199,7 +199,7 @@ export const evidenceArticle = {
     ] satisfies ArticleSource[],
     note: {
       text: "Translated from the German original, published 20 July 2026 and updated 27 July 2026.",
-      link: { label: "Read the original", href: `${LIVE_BLOG}/neurofeedback-evidenz-forschung` } satisfies Link,
+      link: { label: "Read the Original", href: `${LIVE_BLOG}/neurofeedback-evidenz-forschung` } satisfies Link,
     },
   },
 

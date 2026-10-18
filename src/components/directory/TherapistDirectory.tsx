@@ -81,7 +81,7 @@ export function TherapistDirectory({ therapists }: { therapists: Therapist[] }) 
           <span aria-hidden="true">Showing Therapist</span>
           <FilterSelect
             compact
-            label="Therapists shown"
+            label="Therapists Shown"
             value={pageSize}
             options={PAGE_SIZE_OPTIONS}
             onChange={setPageSize}
@@ -110,7 +110,7 @@ export function TherapistDirectory({ therapists }: { therapists: Therapist[] }) 
               <DirectorySearch value={filters.query} onChange={(v) => set("query", v)} />
               <FilterSelect
                 label="Country"
-                all="All countries"
+                all="All Countries"
                 placeholder="Country"
                 value={filters.country}
                 options={options.countries}
@@ -132,7 +132,7 @@ export function TherapistDirectory({ therapists }: { therapists: Therapist[] }) 
               />
               <FilterSelect
                 label="IFEN Lecturer"
-                all="All practices"
+                all="All Practices"
                 placeholder="IFEN Lecturer"
                 value={filters.lecturer}
                 options={LECTURER_OPTIONS}

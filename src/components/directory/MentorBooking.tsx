@@ -65,7 +65,7 @@ const RULES: Record<BookingStepSlug, FieldRule[]> = {
     },
     {
       name: "privacy",
-      label: "Booking terms",
+      label: "Booking Terms",
       required: true,
       missing: "Agree to the booking terms to continue.",
     },
@@ -437,7 +437,7 @@ export function MentorBookingStep({
         steps,
         basePath,
         missing: firstMissing === -1 ? null : firstMissing,
-        label: "Booking progress",
+        label: "Booking Progress",
         aside: (
           <SelectionSummary
             variant={slug === "review" ? "totals" : "facts"}

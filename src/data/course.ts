@@ -259,13 +259,13 @@ export function getPaymentMethod(id: string | undefined) {
 export const bankTransfer = {
   account: [
     { label: "Transfer to", value: "Raiffeisenbank Regenstauf" },
-    { label: "Account holder", value: "IFEN Thomas Feiner" },
-    { label: "Account number", value: "700003301" },
-    { label: "Bank code", value: "75061851" },
+    { label: "Account Holder", value: "IFEN Thomas Feiner" },
+    { label: "Account Number", value: "700003301" },
+    { label: "Bank Code", value: "75061851" },
     { label: "IBAN", value: "DE73 7506 1851 0700 0033 01" },
   ],
   terms:
-    "Transfer payment at least 10 working days before the course. Early bird discounts need earlier payment—see course details and Terms. By registering, you agree to terms and waive cancellation if the course starts within 14 days. Details in your booking confirmation.",
+    "Transfer payment at least 10 working days before the course. Early bird discounts need earlier payment; see course details and Terms. By registering, you agree to terms and waive cancellation if the course starts within 14 days. Details in your booking confirmation.",
 };
 
 /** Two decimals for the order summary and pay button, as drawn in Paper ("150.00 EUR"). */

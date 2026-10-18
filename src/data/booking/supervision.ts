@@ -19,7 +19,7 @@ export const supervision = {
   hero: {
     title: "Supervision, Internship\nand Mentoring",
     breadcrumb: [BOOKING_CRUMB, { label: "Supervision, Internship and Mentoring" }],
-    badge: "Individual days",
+    badge: "Individual Days",
     description:
       "Internship, online supervision, mentoring and individual days for your certificate training, all without fixed dates.",
     highlights: [],

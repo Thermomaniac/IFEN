@@ -34,19 +34,19 @@ export const qeeg = {
       { label: "QEEG Courses" },
       { label: "QEEG for Your Practice" },
     ],
-    badge: "On-demand professional training",
+    badge: "On-Demand Professional Training",
     description:
       "Transform complex brain data into clinically meaningful decisions with an expert-led, on-demand QEEG masterclass.",
     highlights: [
-      { value: "20+ hours", label: "Expert instruction" },
-      { value: "4-day", label: "Video masterclass" },
-      { value: "Lifetime", label: "Access to all content" },
+      { value: "20+ Hours", label: "Expert Instruction" },
+      { value: "4-day", label: "Video Masterclass" },
+      { value: "Lifetime", label: "Access to All Content" },
     ],
     booking: {
       code: "QEEG-EN",
       prices: [
-        { label: "Standard price", amount: 995 },
-        { label: "Regional pricing", amount: 550 },
+        { label: "Standard Price", amount: 995 },
+        { label: "Regional Pricing", amount: 550 },
       ],
       facts: [
         { label: "Start", value: "Flexible", icon: "start" },
@@ -81,7 +81,7 @@ export const qeeg = {
   } satisfies OverviewContent,
 
   format: {
-    label: "The format",
+    label: "The Format",
     heading: "Expert QEEG Training That Fits Your Schedule",
     items: [
       { heading: "100% Asynchronous", text: "Learn whenever it fits your schedule.", icon: "clock" },
@@ -92,7 +92,7 @@ export const qeeg = {
   } satisfies FeaturesContent,
 
   beyond: {
-    label: "Beyond the brain map",
+    label: "Beyond the Brain Map",
     heading: "QEEG Data Is Only Valuable When You Know How to Interpret It",
     intro: [
       "Move beyond symptoms and isolated numbers. Learn how experienced clinicians recognize meaningful patterns and translate findings into better-informed clinical decisions.",
@@ -115,7 +115,7 @@ export const qeeg = {
   } satisfies FeaturesContent,
 
   develop: {
-    label: "What you will develop",
+    label: "What You Will Develop",
     heading: "See More. Interpret Better. Decide With Confidence.",
     image: {
       src: "/course/qeeg-clinician.jpg",
@@ -124,47 +124,47 @@ export const qeeg = {
     items: [
       {
         eyebrow: "Understand",
-        heading: "See beyond symptoms",
+        heading: "See Beyond Symptoms",
         text: "Develop a deeper understanding of brain function and the patterns behind a patient's clinical presentation.",
       },
       {
         eyebrow: "Interpret",
-        heading: "Turn data into meaning",
+        heading: "Turn Data Into Meaning",
         text: "Approach QEEG findings systematically and translate complex information into clinically relevant insights.",
       },
       {
         eyebrow: "Apply",
-        heading: "Strengthen clinical decisions",
+        heading: "Strengthen Clinical Decisions",
         text: "Build greater confidence when connecting assessment findings with individualized clinical and neurofeedback strategies.",
       },
     ],
   } satisfies FeaturesContent,
 
   flexible: {
-    label: "Flexible professional learning",
+    label: "Flexible Professional Learning",
     heading: "Advanced Learning, Without the Timetable.",
     intro: [
       "A focused learning experience for clinicians who want to deepen their QEEG knowledge without depending on fixed dates or live attendance.",
     ],
     items: [
       {
-        heading: "Complete workshop recordings",
+        heading: "Complete Workshop Recordings",
         text: "Access the full educational content of the original four-day workshop.",
       },
       {
-        heading: "Learn at your own pace",
+        heading: "Learn at Your Own Pace",
         text: "Pause, revisit and review complex concepts whenever necessary.",
       },
       {
-        heading: "More than 20 hours of instruction",
+        heading: "More Than 20 Hours of Instruction",
         text: "A comprehensive learning experience, not a short introductory webinar.",
       },
-      { heading: "Lifetime access", text: "Use the masterclass as an ongoing professional reference." },
+      { heading: "Lifetime Access", text: "Use the masterclass as an ongoing professional reference." },
     ],
   } satisfies FeaturesContent,
 
   instructor: {
-    label: "Created and taught by",
+    label: "Created and Taught by",
     heading: "Dr. Ismael Castillo Reyes",
     name: "Dr. Ismael Castillo Reyes",
     role: "Ph.D. in Neuroscience, Ponce Health Sciences University, Puerto Rico",
@@ -177,7 +177,7 @@ export const qeeg = {
   } satisfies InstructorContent,
 
   audience: {
-    label: "Who it is for",
+    label: "Who It Is For",
     heading: "Designed for Clinicians Who Want to Master QEEG Interpretation.",
     roles: [
       { name: "Psychiatrists", image: "/hero/hero-poster.jpg" },
@@ -219,7 +219,7 @@ export const qeeg = {
       },
     ],
     help: {
-      heading: "Need help before booking?",
+      heading: "Need Help Before Booking?",
       text: "If you have any questions about the course, registration or payment, our team will be happy to help.",
       email: CONTACT_EMAIL,
     },
@@ -282,7 +282,7 @@ export const qeeg = {
   cta: {
     label: "20+ Hours · On-Demand Learning · Lifetime Access",
     headingLines: ["Master QEEG Interpretation", "at Your Own Pace"],
-    action: { label: "Book your place", href: BOOK.href },
+    action: { label: "Book Your Place", href: BOOK.href },
     secondary: { label: "View FAQ", href: "#faq" },
   } satisfies CtaContent,
 };

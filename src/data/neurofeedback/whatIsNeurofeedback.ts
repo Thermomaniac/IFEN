@@ -17,14 +17,14 @@ export const whatIsNeurofeedback = {
   hero: {
     title: "What Is Neurofeedback?",
     breadcrumb: [NEUROFEEDBACK_CRUMB, { label: "What Is Neurofeedback" }],
-    badge: "Neurofeedback explained",
+    badge: "Neurofeedback Explained",
     description:
       "A short explanation of how neurofeedback makes brain activity visible and trains it towards balance.",
     highlights: [],
   } satisfies CourseHeroContent,
 
   intro: {
-    label: "In brief",
+    label: "In Brief",
     heading: "Neurofeedback Explained",
     items: [
       {
@@ -41,7 +41,7 @@ export const whatIsNeurofeedback = {
   } satisfies ArticlesContent,
 
   steps: {
-    label: "How it works",
+    label: "How It Works",
     heading: "From the EEG to a Balanced Brain",
     numbered: true,
     items: [
@@ -50,22 +50,22 @@ export const whatIsNeurofeedback = {
         text: "First, the electrical potential fluctuations in the brain are picked up by electrodes on the scalp and shown graphically in an electroencephalogram (EEG, from the Ancient Greek enkephalos, brain, and graphein, to write).",
       },
       {
-        heading: "Reading the brain map",
+        heading: "Reading the Brain Map",
         text: "Certain symptoms and clinical pictures can sometimes be read from anomalies in the EEG, which mostly result from an imbalance in brain activity. This is known as a brain map.",
       },
       {
-        heading: "Training with feedback",
+        heading: "Training With Feedback",
         text: "In a session, the client's EEG makes their inner brain processes visible, usually through visualisations. One example is a video game in which a plane has to be steered through a target by changing brain activity.",
       },
       {
-        heading: "Reward and lasting balance",
+        heading: "Reward and Lasting Balance",
         text: "When the client settles into the desired state and steers the screen so that a goal is reached, the brain's reward centre is activated. This starts a learning process that improves brain activity. This positive feedback reinforces the brain in holding the state, and with regular training brain activity can be brought into balance in the long term.",
       },
     ],
   } satisfies FeaturesContent,
 
   related: {
-    label: "Explore further",
+    label: "Explore Further",
     heading: "Continue Learning",
     items: [RELATED.applications, RELATED.topics, ALL_OFFERS],
   } satisfies CategoriesContent,

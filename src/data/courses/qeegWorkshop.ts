@@ -37,17 +37,17 @@ export const qeegWorkshop = {
       { label: "QEEG Courses" },
       { label: "qEEG Workshop" },
     ],
-    badge: "qEEG workshop · Online · Italian",
+    badge: "qEEG Workshop · Online · Italian",
     description:
       "A practical, structured introduction to qEEG, from recording the data to interpreting it and writing the clinical report.",
     highlights: [
-      { value: "2 days", label: "Online workshop" },
-      { value: "8 topics", label: "Theory and practice" },
-      { value: "Italian", label: "Course language" },
+      { value: "2 Days", label: "Online Workshop" },
+      { value: "8 Topics", label: "Theory and Practice" },
+      { value: "Italian", label: "Course Language" },
     ],
     booking: {
       code: "QEEG-121226-EN",
-      prices: [{ label: "Standard price", amount: 750 }],
+      prices: [{ label: "Standard Price", amount: 750 }],
       facts: [
         { label: "Start", value: "Sat, 12.12.2026, 10:00", icon: "start" },
         { label: "End", value: "Sun, 13.12.2026, 17:00", icon: "end" },
@@ -59,7 +59,7 @@ export const qeegWorkshop = {
   } satisfies CourseHeroContent,
 
   overview: {
-    label: "Workshop details",
+    label: "Workshop Details",
     heading: "A Guided Introduction to qEEG",
     paragraphs: [
       "This introductory workshop is for psychologists, physicians, therapists and other health professionals who want to integrate qEEG (quantitative electroencephalography) rigorously into their clinical practice. The course offers a practical, structured introduction to qEEG, providing the fundamental knowledge and skills to start using this important assessment tool in daily practice.",
@@ -71,7 +71,7 @@ export const qeegWorkshop = {
       rows: [
         { label: "Dates", value: "Sat, 12.12.2026 to Sun, 13.12.2026", icon: "date" },
         { label: "Format", value: "Online", icon: "format" },
-        { label: "Duration", value: "2 days", icon: "duration" },
+        { label: "Duration", value: "2 Days", icon: "duration" },
         { label: "Language", value: "Italian", icon: "language" },
         { label: "Instructor", value: "Silvia Fois", icon: "instructor" },
         { label: "Fee", value: "750 EUR", icon: "fee" },
@@ -80,31 +80,31 @@ export const qeegWorkshop = {
   } satisfies OverviewContent,
 
   special: {
-    label: "Why this workshop",
+    label: "Why This Workshop",
     heading: "What Makes This Workshop Special?",
     numbered: true,
     items: [
       {
-        heading: "Practical skills",
+        heading: "Practical Skills",
         text: "The workshop is designed to build the essential skills to start working with qEEG, understanding its methodology and its main operational steps.",
       },
       {
-        heading: "From recording to clinical interpretation",
+        heading: "From Recording to Clinical Interpretation",
         text: "You will learn to understand the entire process: data recording, signal quality, reading the results and clinical interpretation.",
       },
       {
-        heading: "Real clinical cases",
+        heading: "Real Clinical Cases",
         text: "Analysing practical examples and clinical cases helps develop clinical reasoning and greater confidence in applying qEEG.",
       },
     ],
   } satisfies FeaturesContent,
 
   content: {
-    label: "The programme",
+    label: "The Programme",
     heading: "A Theoretical and Practical Path",
     items: [
       {
-        heading: "Built for working with qEEG from day one",
+        heading: "Built for Working With qEEG From Day One",
         paragraphs: [
           "Unlike other, more theory-oriented training events, this workshop focuses on the core skills needed to start working with qEEG straight away.",
           "The aim is to understand the methodology, learn to make quality recordings and interpret the results in a clinically meaningful way.",
@@ -112,7 +112,7 @@ export const qeegWorkshop = {
         ],
       },
       {
-        heading: "Main topics",
+        heading: "Main Topics",
         list: [
           "Introduction to qEEG, quantitative electroencephalography",
           "History and clinical applications",
@@ -128,7 +128,7 @@ export const qeegWorkshop = {
   } satisfies ArticlesContent,
 
   learn: {
-    label: "What you will learn",
+    label: "What You Will Learn",
     heading: "Learning Objectives",
     intro: [
       "By the end of the workshop, participants will have a solid methodological base and the practical skills needed to take their first steps in the fascinating and complex world of quantitative electroencephalography.",
@@ -136,24 +136,24 @@ export const qeegWorkshop = {
     items: [
       {
         eyebrow: "Foundations",
-        heading: "The fundamentals of qEEG",
+        heading: "The Fundamentals of qEEG",
         text: "Learn the key concepts qEEG is built on and get to know its fascinating history.",
       },
       {
         eyebrow: "Record",
-        heading: "Recording correctly",
+        heading: "Recording Correctly",
         text: "Understand the recording procedures, correct electrode placement and the main montages used in qEEG.",
       },
       {
         eyebrow: "Interpret",
-        heading: "Interpreting the results",
+        heading: "Interpreting the Results",
         text: "Acquire a structured methodology for reading qEEG data and interpreting it in relation to the clinical context.",
       },
     ],
   } satisfies FeaturesContent,
 
   instructor: {
-    label: "Your instructor",
+    label: "Your Instructor",
     heading: "Silvia Fois",
     name: "Silvia Fois",
     role: "Psychologist and psychotherapist · BCIA QEEG-D",
@@ -210,7 +210,7 @@ export const qeegWorkshop = {
     label: "2 Days · Online · Italian",
     headingLines: ["Book Your Place", "in the qEEG Workshop"],
     text: "Acquire the methodological and practical foundations to use qEEG with greater confidence in your clinical work.",
-    action: { label: "Book your place", href: BOOK.href },
+    action: { label: "Book Your Place", href: BOOK.href },
     secondary: ENQUIRE,
   } satisfies CtaContent,
 };

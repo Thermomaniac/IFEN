@@ -51,14 +51,14 @@ export const thomasFeiner = {
   hero: {
     title: "Thomas F. Feiner",
     breadcrumb: [IFEN_CRUMB, { label: "Lecturers", href: LECTURERS_PATH }, { label: "Thomas Feiner" }],
-    badge: "Lecturer profile",
+    badge: "Lecturer Profile",
     portrait: { src: "/board/member-1.png", alt: "Portrait of Thomas Feiner" },
     subline: { parts: ["BCIA BCN, QEEG-D", "Founder & Director, IFEN", "Munich"] },
     description: "Founder and director of IFEN, teaching neurofeedback, QEEG and supervision.",
     highlights: [
-      { value: "25+ yrs", label: "Clinical experience" },
-      { value: "Since 2014", label: "BCIA-certified" },
-      { value: "Since 2008", label: "IFEN director" },
+      { value: "25+ Yrs", label: "Clinical Experience" },
+      { value: "Since 2014", label: "BCIA-Certified" },
+      { value: "Since 2008", label: "IFEN Director" },
     ],
   } satisfies CourseHeroContent,
 
@@ -79,8 +79,8 @@ export const thomasFeiner = {
       "Thomas F. Feiner has over 25 years of clinical experience working with ADHD, stress, depression, addiction, and burnout. His approach is practice-oriented and focused on promoting neuronal self-regulation.",
     ],
     stats: [
-      { label: "Clinical experience", value: "25+ years" },
-      { label: "Occupational therapist", value: "Since 1991" },
+      { label: "Clinical Experience", value: "25+ Years" },
+      { label: "Occupational Therapist", value: "Since 1991" },
       { label: "Founded IFEN", value: "2008" },
     ],
   },
@@ -88,10 +88,10 @@ export const thomasFeiner = {
   credentials: {
     heading: "Training and Certifications",
     rows: [
-      { label: "Occupational therapist", value: "Since 1991" },
-      { label: "BCIA-certified neurofeedback (BCN)", value: "Since 2014" },
+      { label: "Occupational Therapist", value: "Since 1991" },
+      { label: "BCIA-Certified Neurofeedback (BCN)", value: "Since 2014" },
       { label: "QEEG Diplomate", value: "QEEG-D" },
-      { label: "Board member", value: "Foundation for Neurofeedback, Neuromodulation, and Research (FNNR)" },
+      { label: "Board Member", value: "Foundation for Neurofeedback, Neuromodulation, and Research (FNNR)" },
       {
         label: "Trained with",
         value: "Thomas F. Collura, Joel Lubar, Robert Thatcher, John Demos, Paul G. Swingle, Prof. Kropotov",
@@ -102,7 +102,7 @@ export const thomasFeiner = {
   expertise: {
     heading: "Clinical Focus and Methods",
     groups: [
-      { title: "Clinical focus", items: ["ADHD", "Stress", "Depression", "Addiction", "Burnout"] },
+      { title: "Clinical Focus", items: ["ADHD", "Stress", "Depression", "Addiction", "Burnout"] },
       {
         title: "Methods",
         items: [
@@ -147,7 +147,7 @@ export const thomasFeiner = {
   },
 
   related: {
-    label: "Explore further",
+    label: "Explore Further",
     heading: "Get to Know IFEN",
     items: [RELATED.lecturers, RELATED.about, ALL_OFFERS],
   } satisfies CategoriesContent,

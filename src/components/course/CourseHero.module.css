@@ -11,17 +11,25 @@
   color: var(--color-white);
 }
 
+/* Figma "Hero Section - Type 1": every hero is at least 464 tall from 64rem, content
+   centred; heroes with a taller booking panel grow past it. */
+@media (min-width: 64rem) {
+  .hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 464px;
+  }
+}
+
 /*
- * The pattern has open path ends inside its box: three near the top edge, one near the
- * bottom-left and one at (1032, 869), which Paper hides behind the booking panel. Sizing
- * it from the viewport alone let taller and stacked heroes show those ends and the box's
- * cut-off bottom. The box below is a size container, so the pattern is placed from the
- * hero's own width and height:
- * - one unit is 1/1440 of the hero width (Paper), never below the 68rem floor;
- * - the top never rises past unit 420, so the ends near the top stay out of view;
- * - on wide rows the (1032, 869) end follows the panel, which sits at the hero's middle;
- * - stacked, the hero is narrower than 930 units, so that end falls past the right edge;
- * - below unit 1100 (Paper's hero ends at 1099) the strokes fade out instead of stopping.
+ * The pattern has open path ends near the top of its box; the one that sat at (1032, 869)
+ * now runs on past the bottom (see `Lines`). The box below is a size container, so the
+ * pattern is placed from the hero's own width:
+ * - one unit is 1/1440 of the hero width (Figma), never below the 68rem floor;
+ * - from 64rem it sits at Figma's (-44, -446), which keeps the top ends out of view;
+ * - stacked, the hero is narrower than 930 units and the top ends stay above the band;
+ * - below unit 1100 the strokes fade out instead of stopping.
  * The global `svg { max-width: 100% }` reset would clamp the pattern, so it is lifted.
  */
 .linesBox {
@@ -47,7 +55,8 @@
 @media (min-width: 64rem) {
   .lines {
     --u: max(100cqw / 1440, 0.0445rem);
-    top: min(var(--u) * -420, 50cqh + 144px - var(--u) * 869);
+    left: calc(var(--u) * -44);
+    top: calc(var(--u) * -446);
   }
 }
 

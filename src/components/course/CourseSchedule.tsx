@@ -50,7 +50,7 @@ type Band = { id: string; tone: Tone; head: SectionHead };
 const LISTING_BAND: Band = {
   id: "dates",
   tone: "mist",
-  head: { label: "Course dates", heading: "Find Your Next Training Date" },
+  head: { label: "Course Dates", heading: "Find Your Next Training Date" },
 };
 
 const TABS: { id: Tab; label: string }[] = [
@@ -260,9 +260,9 @@ export function CourseSchedule({
                 </div>
                 {choices.type.length > 1 && (
                   <FilterSelect
-                    label="Course type"
+                    label="Course Type"
                     value={filters.type}
-                    all="All types"
+                    all="All Types"
                     options={choices.type}
                     onChange={(v) => set("type", v as Filters["type"])}
                   />
@@ -271,7 +271,7 @@ export function CourseSchedule({
                   <FilterSelect
                     label="Language"
                     value={filters.language}
-                    all="All languages"
+                    all="All Languages"
                     options={choices.language}
                     onChange={(v) => set("language", v as Filters["language"])}
                   />
@@ -280,7 +280,7 @@ export function CourseSchedule({
                   <FilterSelect
                     label="Format"
                     value={filters.format}
-                    all="All formats"
+                    all="All Formats"
                     options={choices.format}
                     onChange={(v) => set("format", v as Filters["format"])}
                   />
@@ -289,7 +289,7 @@ export function CourseSchedule({
                   <FilterSelect
                     label="Price"
                     value={filters.price}
-                    all="Paid & free"
+                    all="Paid & Free"
                     options={choices.price}
                     onChange={(v) => set("price", v as Filters["price"])}
                   />

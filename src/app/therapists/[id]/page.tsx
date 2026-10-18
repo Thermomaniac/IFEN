@@ -53,7 +53,7 @@ const book = { label: "Register For Booking", href: bookingPath(DEMO_ID) };
 const hero: CourseHeroContent = {
   title: p.person,
   breadcrumb: [{ label: "Course Booking", href: LISTING_PATH }, { label: "Mentoring" }],
-  badge: "Therapist profile",
+  badge: "Therapist Profile",
   portrait: { src: p.portrait, alt: `Portrait of ${p.person}` },
   subline: {
     parts: [p.practice, `From ${country ?? "Germany"}`],
@@ -68,7 +68,7 @@ const hero: CourseHeroContent = {
     { value: p.lecturer ? "Yes" : "No", label: "IFEN Lecturer" },
   ],
   booking: {
-    eyebrow: "Book your mentor",
+    eyebrow: "Book Your Mentor",
     prices: [{ label: s.label, amount: s.price }],
     facts: sessionFacts(s),
     cta: book,
@@ -76,7 +76,7 @@ const hero: CourseHeroContent = {
 };
 
 const cta: CtaContent = {
-  label: "Next step",
+  label: "Next Step",
   headingLines: ["Ready to book", "your mentoring session?"],
   action: book,
   secondary: { label: "Back to Therapist List", href: DIRECTORY_PATH },

@@ -65,7 +65,7 @@ export const billingRules: FieldRule[] = [
     missing: "Choose a payment method to continue.",
     check: (v) => (getPaymentMethod(v) ? undefined : "Choose a payment method to continue."),
   },
-  { name: "notes", label: "Discount code or special instructions" },
+  { name: "notes", label: "Discount Code or Special Instructions" },
 ];
 
 export type Errors = Record<string, string>;

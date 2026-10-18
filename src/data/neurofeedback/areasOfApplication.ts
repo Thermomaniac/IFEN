@@ -16,18 +16,18 @@ export const applications = {
   hero: {
     title: "Areas of Application",
     breadcrumb: [NEUROFEEDBACK_CRUMB, { label: "Areas of Application" }],
-    badge: "Areas of application",
+    badge: "Areas of Application",
     description: "What neurofeedback can do, and the disorders and clinical pictures it is applied for.",
     highlights: [],
     image: "/about/metric-tile.jpg",
   } satisfies CourseHeroContent,
 
   effects: {
-    label: "Effects and indications",
+    label: "Effects and Indications",
     heading: "What Neurofeedback Can Do and Where It Helps",
     items: [
       {
-        heading: "Positive effects",
+        heading: "Positive Effects",
         paragraphs: [
           "Depending on the correct settings and the client, the method has a range of positive effects, including:",
         ],
@@ -41,7 +41,7 @@ export const applications = {
         ],
       },
       {
-        heading: "Disorders and clinical pictures",
+        heading: "Disorders and Clinical Pictures",
         paragraphs: ["Neurofeedback is applied above all for the following disorders and clinical pictures:"],
         list: [
           "AD(H)D",
@@ -59,7 +59,7 @@ export const applications = {
   } satisfies ArticlesContent,
 
   related: {
-    label: "Explore further",
+    label: "Explore Further",
     heading: "Continue Learning",
     items: [RELATED.whatIs, RELATED.topics, RELATED.therapists],
   } satisfies CategoriesContent,

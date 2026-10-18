@@ -26,14 +26,14 @@ export const topics = {
   hero: {
     title: "Neurofeedback Topics",
     breadcrumb: [NEUROFEEDBACK_CRUMB, { label: "Topics" }],
-    badge: "Topic areas",
+    badge: "Topic Areas",
     description:
       "Five topic areas around neurofeedback, from QEEG brain mapping to photobiomodulation, with links to the matching training.",
     highlights: [],
   } satisfies CourseHeroContent,
 
   topics: {
-    label: "Topic areas",
+    label: "Topic Areas",
     heading: "Topic Areas Around Neurofeedback",
     numbered: true,
     items: [
@@ -75,7 +75,7 @@ export const topics = {
   } satisfies ArticlesContent,
 
   related: {
-    label: "Related training",
+    label: "Related Training",
     heading: "Start With QEEG",
     items: [
       { id: "qeeg-practice", title: "QEEG for Your Practice", icon: { kind: "brain" }, href: "/courses/qeeg-for-your-practice" },

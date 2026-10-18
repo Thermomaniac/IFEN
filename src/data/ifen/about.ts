@@ -25,13 +25,13 @@ export const about = {
       "The Institute for EEG Neurofeedback (IFEN for short) was founded in Munich in 2008 by Thomas F. Feiner and is one of the leading training institutes for neurofeedback in Germany.",
     highlights: [
       { value: "2008", label: "Founded in Munich" },
-      { value: "300+", label: "Workshops and webinars" },
-      { value: "25+ years", label: "Founder in neurofeedback" },
+      { value: "300+", label: "Workshops and Webinars" },
+      { value: "25+ Years", label: "Founder in Neurofeedback" },
     ],
   } satisfies CourseHeroContent,
 
   vision: {
-    label: "About us",
+    label: "About Us",
     heading: "What Is IFEN?",
     items: [
       {
@@ -54,7 +54,7 @@ export const about = {
   } satisfies ArticlesContent,
 
   director: {
-    label: "From the director",
+    label: "From the Director",
     heading: "Message From the Director",
     person: {
       image: "/board/member-1.png",
@@ -75,7 +75,7 @@ export const about = {
   } satisfies ArticlesContent,
 
   concept: {
-    label: "The IFEN concept",
+    label: "The IFEN Concept",
     heading: "Modern Neurofeedback",
     intro: [
       "Every client is unique, every brain is different. We know how important an individually tailored and holistic treatment is for therapy. Only in this way can rapid and lasting therapeutic success be guaranteed.",
@@ -116,7 +116,7 @@ export const about = {
   } satisfies FeaturesContent,
 
   whyNeurofeedback: {
-    label: "Why neurofeedback",
+    label: "Why Neurofeedback",
     heading: "Why Neurofeedback?",
     items: [
       {
@@ -171,7 +171,7 @@ export const about = {
   } satisfies FeaturesContent,
 
   basics: {
-    label: "What you will learn with us",
+    label: "What You Will Learn With Us",
     heading: "Basic Knowledge",
     items: [
       {
@@ -202,7 +202,7 @@ export const about = {
   } satisfies FeaturesContent,
 
   further: {
-    label: "What you will learn with us",
+    label: "What You Will Learn With Us",
     heading: "Further Topics",
     items: [
       {
@@ -233,7 +233,7 @@ export const about = {
   } satisfies FeaturesContent,
 
   team: {
-    label: "Our team",
+    label: "Our Team",
     heading: "The People Behind IFEN",
     people: [
       {
@@ -286,7 +286,7 @@ export const about = {
   } satisfies TeamContent,
 
   related: {
-    label: "Explore further",
+    label: "Explore Further",
     heading: "Get to Know IFEN",
     items: [RELATED.lecturers, RELATED.therapists, ALL_OFFERS],
   } satisfies CategoriesContent,

@@ -59,7 +59,7 @@ export const lecturers = {
     description: "Here you will find a complete overview of the speakers.",
     highlights: [
       { value: "25", label: "Lecturers" },
-      { value: "2008", label: "IFEN founded in Munich" },
+      { value: "2008", label: "IFEN Founded in Munich" },
     ],
   } satisfies CourseHeroContent,
 
@@ -81,7 +81,7 @@ export const lecturers = {
   } satisfies SpeakersContent,
 
   related: {
-    label: "Explore further",
+    label: "Explore Further",
     heading: "Get to Know IFEN",
     items: [RELATED.about, RELATED.therapists, ALL_OFFERS],
   } satisfies CategoriesContent,

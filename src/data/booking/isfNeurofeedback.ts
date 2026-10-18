@@ -19,7 +19,7 @@ export const isfNeurofeedback = {
   hero: {
     title: "ISF Neurofeedback",
     breadcrumb: [BOOKING_CRUMB, { label: "ISF Neurofeedback" }],
-    badge: "Infra-slow fluctuation",
+    badge: "Infra-Slow Fluctuation",
     description: "Infra Slow Fluctuation with Mark Smith, New York: the method, further reading and the course dates.",
     highlights: [],
   },

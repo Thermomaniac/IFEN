@@ -25,19 +25,19 @@ export const webinarQeeg = {
   },
 
   hero: {
-    title: "WEBINAR - QEEG and Neurofeedback in Psychotherapy: Meaningful, Ethical, Practical",
+    title: "Webinar: QEEG and Neurofeedback in Psychotherapy: Meaningful, Ethical, Practical",
     breadcrumb: [{ label: "Course Booking", href: LISTING_PATH }, { label: "Webinar" }],
-    badge: "Live webinar · 60 minutes",
+    badge: "Live Webinar · 60 Minutes",
     description:
       "A well-founded overview of how QEEG and neurofeedback can be integrated responsibly into psychotherapeutic processes.",
     highlights: [
-      { value: "60 min", label: "Compact live session" },
-      { value: "Online live", label: "Join from anywhere" },
-      { value: "German", label: "Course language" },
+      { value: "60 min", label: "Compact Live Session" },
+      { value: "Online Live", label: "Join From Anywhere" },
+      { value: "German", label: "Course Language" },
     ],
     booking: {
       code: "WEB-080227-DE",
-      prices: [{ label: "Standard price", amount: 40 }],
+      prices: [{ label: "Standard Price", amount: 40 }],
       facts: [
         { label: "Start", value: "Mon, 08.02.2027, 19:00", icon: "start" },
         { label: "End", value: "Mon, 08.02.2027, 20:00", icon: "end" },
@@ -60,7 +60,7 @@ export const webinarQeeg = {
       rows: [
         { label: "Date", value: "Mon, 08.02.2027, 19:00 to 20:00 CET (Berlin)", icon: "date" },
         { label: "Format", value: "Online · Live", icon: "format" },
-        { label: "Duration", value: "60 minutes", icon: "duration" },
+        { label: "Duration", value: "60 Minutes", icon: "duration" },
         { label: "Language", value: "German", icon: "language" },
         { label: "Fee", value: "40 EUR", icon: "fee" },
       ],
@@ -68,11 +68,11 @@ export const webinarQeeg = {
   } satisfies OverviewContent,
 
   content: {
-    label: "About the webinar",
+    label: "About the Webinar",
     heading: "What You Will Take Away",
     items: [
       {
-        heading: "Placing neurophysiological data in context",
+        heading: "Placing Neurophysiological Data in Context",
         paragraphs: [
           "QEEG and neurofeedback can usefully complement psychotherapeutic processes, provided they are used on a sound professional basis, transparently and with clear limits.",
           "What matters is not the technical measurement alone, but how neurophysiological information can be integrated responsibly into diagnostics, treatment planning and progress monitoring.",
@@ -80,7 +80,7 @@ export const webinarQeeg = {
         ],
       },
       {
-        heading: "Topics of the webinar",
+        heading: "Topics of the Webinar",
         list: [
           "Possibilities and limits of QEEG in psychotherapy",
           "Interpreting neurophysiological data correctly",
@@ -130,6 +130,6 @@ export const webinarQeeg = {
     label: "Live Webinar",
     headingLines: ["Join the Live Webinar", "on QEEG in Psychotherapy"],
     text: "Learn how QEEG and neurofeedback can be integrated into psychotherapeutic practice in a meaningful, transparent and responsible way.",
-    action: { label: "Register now", href: BOOK.href },
+    action: { label: "Register Now", href: BOOK.href },
   } satisfies CtaContent,
 };

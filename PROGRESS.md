@@ -1,6 +1,6 @@
 # IFEN Remaining Pages Progress
 
-Active phase: correction programme, phase H (Global: Title Case, hero height, hero line). See `ROADMAP.md`, section "Correction programme".
+Active phase: none. Correction programme A to H complete (2026-10-18), all phases pushed to staging.
 
 ## Correction programme
 
@@ -68,6 +68,14 @@ Active phase: correction programme, phase H (Global: Title Case, hero height, he
 - Webinars: "How Does a Webinar Work?" is now three numbered steps (Register, Receive Your Invitation, Download the Software) built from the source paragraph. The 23 dates use the filterable `CourseSchedule` (search, type, language and price filters, table and card views); there are no tabs because webinars have no interest list.
 - Shared: `DatesContent.schedule` switches a `dates` section from plain cards to `CourseSchedule`.
 - Checks: eslint, tsc, build clean. Rendered at 1440, 390, 320: no horizontal overflow on either page.
+
+### Phase H: Global (done 2026-10-18, pushed to staging)
+
+- Title Case (AP style; "From" and "With" capitalised as before) for headings, labels, buttons, tags, card and schedule titles across `src/data/**`, page metadata and UI literals (hero eyebrows "Select Your Plan", "Course Fee", "Next Date"; filter labels "All Types", "All Languages", "All Formats", "Paid & Free", "All Countries", "All Practices"; "Course Dates"; "Back to Course Details"). Sentences, hints, placeholders, code values and mixed-case terms (qEEG, sLORETA) untouched.
+- Schedule titles: all-caps prefixes normalised ("WEBINAR - " to "Webinar: ", "MODUL n - " to "Modul n: ", "MÓDULO 1 - " to "Módulo 1: ", "MODULE 1 - " to "Module 1: "). German and Spanish titles keep their own capitalisation. Fixed the truncated "Clinical Interpretatio" to "Interpretation". Em-dashes in titles and one fee note replaced.
+- Hero height: from 64rem every `CourseHero` has a 464px minimum with content centred (Figma 40001123:38856); the line pattern uses Figma's offset. Heroes with more content grow: blog 594, article and therapists 498, modules / module-2 / module-4 490, module-3 514, heroes with a booking panel 549 to 665. Below 64rem height follows content (258 to 1425).
+- Hero line: the open end of the third path is extended along its tangent past the band, so no page shows a cut end.
+- Checks: eslint, tsc, build clean. All 49 routes return 200 (the two register / book index routes 307 to their first step). Rendered at 1440, 390 and 320 across every route: no horizontal overflow.
 
 ## Phase 5: Course Booking content pages (completed 2026-10-18, pushed to staging)
 

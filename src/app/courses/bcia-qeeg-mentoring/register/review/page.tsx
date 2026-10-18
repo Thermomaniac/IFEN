@@ -3,7 +3,7 @@ import { ReviewStep } from "@/components/register/ReviewStep";
 import { StepLayout } from "@/components/register/StepLayout";
 
 export const metadata: Metadata = {
-  title: "Register: Review & pay | IFEN",
+  title: "Register: Review & Pay | IFEN",
 };
 
 export default function ReviewPage() {

@@ -19,7 +19,7 @@ export const bcia = {
   hero: {
     title: "BCIA Board Certified\nin Neurofeedback",
     breadcrumb: [BOOKING_CRUMB, { label: "BCIA Certification" }],
-    badge: "International qualification",
+    badge: "International Qualification",
     description: "The international qualification in neurofeedback: six facts about the BCIA certification program.",
     highlights: [],
   },
@@ -29,28 +29,28 @@ export const bcia = {
       kind: "features",
       id: "facts",
       content: {
-        label: "What is BCIA?",
+        label: "What Is BCIA?",
         heading: "Six Facts About the Certification Program",
         numbered: true,
         items: [
           {
-            heading: "A non-profit organization",
+            heading: "A Non-Profit Organization",
             text: "BCIA is a non-profit organization that has established standards in bio- and neurofeedback that are valid and recognized worldwide.",
           },
           {
-            heading: "Recognized by three associations",
+            heading: "Recognized by Three Associations",
             text: "Biofeedback certification is the only program recognized by the three major international associations: the Association for Applied Psychophysiology and Biofeedback (AAPB), the Biofeedback Foundation of Europe (BFE) and the International Society for Neurofeedback and Research (ISNR).",
           },
           {
-            heading: "Based on scientific findings",
+            heading: "Based on Scientific Findings",
             text: "BCIA biofeedback certification is based on scientific findings published in peer-reviewed journals, and on professional standards and ethical principles developed after a comprehensive task analysis. A task force of international biofeedback experts updates them regularly. BCIA continuously collects, validates and evaluates data on topics relevant to neurofeedback. The exams are built with psychometric methods to ensure the relevance, integrity and value of the certification program.",
           },
           {
-            heading: "Strict ethical principles",
+            heading: "Strict Ethical Principles",
             text: "BCIA requires its graduates to follow very strict ethical principles. Graduates therefore have to complete a three-hour ethics course to renew their certification. These strict ethical standards are one of the many reasons why the international partners have chosen BCIA biofeedback certification unanimously.",
           },
           {
-            heading: "A board of experts",
+            heading: "A Board of Experts",
             text: "A directive board of physicians, educators and researchers who have played a leading role in developing biofeedback is responsible. The board includes directors and presidents of the three major international associations, who have served the development of the whole field for decades.",
           },
           {

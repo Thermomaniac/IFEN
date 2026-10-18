@@ -31,19 +31,19 @@ export const module1 = {
   },
 
   hero: {
-    title: "MODULE 1 - Certified Neurofeedback Therapist",
+    title: "Module 1: Certified Neurofeedback Therapist",
     breadcrumb: [
       { label: "Course Booking", href: LISTING_PATH },
       { label: "Certified Neurofeedback Therapist", href: MODULES_PATH },
       { label: "Module 1" },
     ],
-    badge: "Module 1 of the IFEN training",
+    badge: "Module 1 of the IFEN Training",
     description:
       "The 5-day intensive course that starts the IFEN certification programme: the fundamentals of EEG, biofeedback and neurofeedback, with first practical exercises under guidance.",
     highlights: [
-      { value: "5 course days", label: "Intensive, with practice" },
-      { value: "Hybrid", label: "Online and in person" },
-      { value: "Module 1 of 4", label: "IFEN certificate pathway" },
+      { value: "5 Course Days", label: "Intensive, With Practice" },
+      { value: "Hybrid", label: "Online and in Person" },
+      { value: "Module 1 of 4", label: "IFEN Certificate Pathway" },
     ],
     booking: {
       code: "M1-051026-EN",
@@ -69,16 +69,16 @@ export const module1 = {
       { label: "Request a Consultation", href: CONSULTATION_URL },
     ],
     aside: {
-      heading: "Next appointment",
+      heading: "Next Appointment",
       rows: [
         { label: "Online", value: "5, 6 and 7 October 2026", icon: "online" },
-        { label: "In person", value: "16 and 17 October 2026", icon: "inPerson" },
-        { label: "Course times", value: "9:00 to 18:00", icon: "time" },
+        { label: "In Person", value: "16 and 17 October 2026", icon: "inPerson" },
+        { label: "Course Times", value: "9:00 to 18:00", icon: "time" },
         { label: "Language", value: "German", icon: "language" },
         { label: "Format", value: "Hybrid", icon: "format" },
       ],
       note: {
-        heading: "Questions about participation?",
+        heading: "Questions About Participation?",
         text: "We will advise you personally.",
         email: CONTACT_EMAIL,
       },
@@ -86,11 +86,11 @@ export const module1 = {
   } satisfies OverviewContent,
 
   audience: {
-    label: "Who it is for",
+    label: "Who It Is For",
     heading: "Is Module 1 Right for You?",
     items: [
       {
-        heading: "Who is this for?",
+        heading: "Who Is This For?",
         paragraphs: [
           "For qualified professionals in healthcare, therapy, education or consulting, including other appropriately qualified specialists.",
         ],
@@ -117,20 +117,20 @@ export const module1 = {
   } satisfies ArticlesContent,
 
   why: {
-    label: "Why start here",
+    label: "Why Start Here",
     heading: "Why This Module Is the Ideal Starting Point",
     numbered: true,
     items: [
       {
-        heading: "Solid basic knowledge",
+        heading: "Solid Basic Knowledge",
         text: "You learn the basics of EEG, brainwaves, biofeedback, neurofeedback and the training methods step by step.",
       },
       {
-        heading: "Direct practical experience",
+        heading: "Direct Practical Experience",
         text: "In the in-person part you work with professional neurofeedback systems, practise EEG recordings and get to know basic training approaches hands-on.",
       },
       {
-        heading: "Professional orientation",
+        heading: "Professional Orientation",
         text: "The course combines technical fundamentals, professional classification and responsible application in medical, psychological, educational or consulting contexts.",
       },
     ],
@@ -143,7 +143,7 @@ export const module1 = {
       {
         label: "Day 1",
         tag: "Basics",
-        heading: "Fundamentals of biofeedback and neurofeedback",
+        heading: "Fundamentals of Biofeedback and Neurofeedback",
         topics: [
           "Introduction to biofeedback and neurofeedback",
           "History and development",
@@ -160,7 +160,7 @@ export const module1 = {
       {
         label: "Day 2",
         tag: "Assessment",
-        heading: "Brainwaves, EEG and first training procedures",
+        heading: "Brainwaves, EEG and First Training Procedures",
         topics: [
           "Review of the basics",
           "Slow brainwaves: delta, theta and alpha",
@@ -176,7 +176,7 @@ export const module1 = {
       {
         label: "Day 3",
         tag: "Practice",
-        heading: "Training methods and practical application",
+        heading: "Training Methods and Practical Application",
         topics: [
           "Review session",
           "Overview of neurofeedback training procedures",
@@ -189,7 +189,7 @@ export const module1 = {
       {
         label: "Day 4",
         tag: "In depth",
-        heading: "In-depth study and clinical-practical application",
+        heading: "In-Depth Study and Clinical-Practical Application",
         topics: [
           "Review session",
           "Four-channel neurofeedback with databases",
@@ -202,7 +202,7 @@ export const module1 = {
       {
         label: "Day 5",
         tag: "Completion",
-        heading: "Advanced applications and conclusion",
+        heading: "Advanced Applications and Conclusion",
         topics: [
           "Standardised database training: possibilities and limitations",
           "Individualised neurofeedback training approaches",
@@ -224,7 +224,7 @@ export const module1 = {
       "The training is aimed at specialists with an appropriate basic qualification and accompanies their entry into professional neurofeedback application.",
     ],
     steps: [
-      { label: "Module 1", heading: "Intensive course", text: "5 days, hybrid", current: true },
+      { label: "Module 1", heading: "Intensive Course", text: "5 days, hybrid", current: true },
       { label: "Module 2", heading: "Internship", text: "At least 5 hours, also possible online", href: MODULE2_PATH },
       { label: "Module 3", heading: "Supervision", text: "5-hour session with a certified expert", href: MODULE3_PATH },
       { label: "Module 4", heading: "Examination", text: "Take examination & become expert", href: MODULE4_PATH },
@@ -233,18 +233,18 @@ export const module1 = {
   } satisfies PathwayContent,
 
   practical: {
-    label: "Practical information",
+    label: "Practical Information",
     heading: "Equipment and Technical Setup",
     items: [
       {
-        heading: "Equipment during the course",
+        heading: "Equipment During the Course",
         paragraphs: [
           "During the in-person part, the neurofeedback systems and technical equipment for the practical exercises are provided. You do not need to bring your own equipment.",
           "You gain practical insight into professional neurofeedback technology, signal quality and how training is carried out.",
         ],
       },
       {
-        heading: "Technical requirements for the online part",
+        heading: "Technical Requirements for the Online Part",
         list: [
           "Stable internet connection",
           "PC or laptop with Windows 10/11",
@@ -259,11 +259,11 @@ export const module1 = {
   } satisfies ArticlesContent,
 
   booking: {
-    label: "Before you book",
+    label: "Before You Book",
     heading: "Participation, Requirements and Venue",
     items: [
       {
-        heading: "Suitable for repeat participants",
+        heading: "Suitable for Repeat Participants",
         icon: "repeat",
         paragraphs: [
           "The repeat participant price is 875 EUR. It applies to former Module 1 participants who want to update their knowledge, learn new content and refresh their practical skills.",
@@ -338,7 +338,7 @@ export const module1 = {
     label: "Start Your Certification",
     headingLines: ["Reserve Your Place", "in Module 1 Now"],
     text: "Start with a sound, practical introduction to EEG, neurofeedback training and professional application.",
-    action: { label: "Reserve space", href: BOOK.href },
-    secondary: { label: "Request a consultation", href: CONSULTATION_URL },
+    action: { label: "Reserve Space", href: BOOK.href },
+    secondary: { label: "Request a Consultation", href: CONSULTATION_URL },
   } satisfies CtaContent,
 };

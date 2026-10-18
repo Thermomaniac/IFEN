@@ -17,7 +17,7 @@ export const qeegCourses = {
   hero: {
     title: "QEEG Courses",
     breadcrumb: [BOOKING_CRUMB, { label: "QEEG Courses" }],
-    badge: "Quantitative electroencephalography",
+    badge: "Quantitative Electroencephalography",
     description:
       "Courses, workshops and webinars on quantitative EEG, from brain maps and normative data to the course dates.",
     highlights: [],
@@ -63,7 +63,7 @@ export const qeegCourses = {
   ],
 
   related: {
-    label: "Related training",
+    label: "Related Training",
     heading: "More Course Categories",
     items: [
       { id: "qeeg-practice", title: "QEEG for Your Practice", icon: { kind: "brain" }, href: QEEG_PATH },

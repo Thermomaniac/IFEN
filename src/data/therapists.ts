@@ -83,21 +83,21 @@ export const therapists: Therapist[] = THERAPISTS.map((t, i) =>
 export const QUALIFICATIONS: { id: QualificationId; label: string; short: string; icon?: string }[] = [
   {
     id: "mentoring",
-    label: "Internship and mentoring providers",
+    label: "Internship and Mentoring Providers",
     short: "Internships & mentoring",
     icon: "/therapists/quals/mentoring.png",
   },
   {
     id: "qeeg",
-    label: "QEEG with Neuroguide (19-channel quantitative EEG assessments)",
+    label: "QEEG With Neuroguide (19-Channel Quantitative EEG Assessments)",
     short: "QEEG with Neuroguide",
     icon: "/therapists/quals/qeeg.png",
   },
-  { id: "loreta", label: "Loreta neurofeedback", short: "LORETA neurofeedback", icon: "/therapists/quals/loreta.png" },
+  { id: "loreta", label: "Loreta Neurofeedback", short: "LORETA neurofeedback", icon: "/therapists/quals/loreta.png" },
   { id: "isf", label: "ISF Infra-Slow Fluctuation Neurofeedback", short: "ISF neurofeedback", icon: "/therapists/quals/isf.png" },
   {
     id: "four-channel",
-    label: "4-channel Z-value method and classical methods",
+    label: "4-Channel Z-Value Method and Classical Methods",
     short: "4-channel Z-value",
     icon: "/therapists/quals/four-channel.png",
   },
@@ -105,11 +105,11 @@ export const QUALIFICATIONS: { id: QualificationId; label: string; short: string
   { id: "peak", label: "Peak Performance", short: "Peak Performance", icon: "/therapists/quals/peak.png" },
   {
     id: "biofeedback",
-    label: "Heart rate variability, skin resistance, temperature, HEG",
+    label: "Heart Rate Variability, Skin Resistance, Temperature, HEG",
     short: "Biofeedback (HRV, HEG)",
     icon: "/therapists/quals/biofeedback.png",
   },
-  { id: "erp", label: "Event-related potentials (ERP)", short: "ERP" },
+  { id: "erp", label: "Event-Related Potentials (ERP)", short: "ERP" },
 ];
 
 export const QUALIFICATION_LABELS = Object.fromEntries(QUALIFICATIONS.map((q) => [q.id, q.label])) as Record<
@@ -161,7 +161,7 @@ export const directoryPage: {
     wide: true,
     breadcrumb: [{ label: "Therapist List" }],
     // Paper copy, kept as designed.
-    badge: "All trainings at a glance",
+    badge: "All Trainings at a Glance",
     description:
       "Every practice listed here has completed IFEN training. Search by method, city or name, then narrow by qualification and expert level.",
     image: "/therapists/hero.jpg",
@@ -172,15 +172,15 @@ export const directoryPage: {
     ],
   },
   head: {
-    label: "Therapist list",
+    label: "Therapist List",
     heading: "Therapy Facilities Recognized\nBy IFEN",
     intro: [
       "For training units without fixed dates, such as internships, supervision and mentoring, you can register.",
     ],
   },
   cta: {
-    label: "For therapists",
+    label: "For Therapists",
     headingLines: ["IFEN-trained? Get your", "practice on this list."],
-    action: { label: "Apply for registration", href: REGISTRATION_URL },
+    action: { label: "Apply for Registration", href: REGISTRATION_URL },
   },
 };

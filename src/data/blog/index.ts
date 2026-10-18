@@ -26,7 +26,7 @@ export const blogIndex = {
     ],
     highlights: [
       { value: "Since 2018", label: "Publishing" },
-      { value: "German", label: "Original language" },
+      { value: "German", label: "Original Language" },
     ],
     image: "/blog/blog-header.jpg",
   } satisfies CourseHeroContent,
@@ -62,7 +62,7 @@ export const blogIndex = {
   },
 
   related: {
-    label: "Explore further",
+    label: "Explore Further",
     heading: "Learn More About Neurofeedback",
     items: [RELATED.whatIs, RELATED.topics, ALL_OFFERS],
   } satisfies CategoriesContent,

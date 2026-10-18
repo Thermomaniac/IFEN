@@ -9,7 +9,7 @@ import styles from "./RegisterHeader.module.css";
  */
 export function RegisterHeader({
   backHref = COURSE_PATH,
-  backLabel = "Back to course details",
+  backLabel = "Back to Course Details",
   title = registration.heading,
 }: {
   backHref?: string;

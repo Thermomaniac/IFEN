@@ -149,7 +149,11 @@ function Subline({ subline }: { subline: NonNullable<CourseHeroContent["subline"
   );
 }
 
-/** Four thick strokes behind the intro and the panel, placed from the hero's own size. */
+/**
+ * Four thick strokes behind the intro and the panel, placed from the hero's own size.
+ * The third stroke's open end at (1032, 869) is carried on along its tangent to
+ * (1512, 1227), past the band's bottom and into the fade, so no hero shows a cut end.
+ */
 function Lines() {
   return (
     <span className={styles.linesBox} aria-hidden="true">
@@ -165,7 +169,7 @@ function Lines() {
           />
           <path
             transform="matrix(-1 0 0 1 1032 745.293)"
-            d="M0 123.366C0 123.366 203.44 -28.419 336.483 4.736C484.136 41.533 565.16 148.57 655.622 333.663C687.948 399.806 725 517 725 517"
+            d="M-480 481.47L0 123.366C0 123.366 203.44 -28.419 336.483 4.736C484.136 41.533 565.16 148.57 655.622 333.663C687.948 399.806 725 517 725 517"
           />
           <path
             transform="matrix(-1 0 0 -1 1528 745.293)"
@@ -189,7 +193,7 @@ function BookingPanel({ booking }: { booking: NonNullable<CourseHeroContent["boo
       <RevealItem className={styles.panelHead}>
         <div className={styles.headRow}>
           <p className={styles.eyebrow} id="plan-legend">
-            {booking.eyebrow ?? (multiple ? "Select your plan" : priced ? "Course fee" : "Next date")}
+            {booking.eyebrow ?? (multiple ? "Select Your Plan" : priced ? "Course Fee" : "Next Date")}
           </p>
           {booking.code && <p className={styles.code}>{booking.code}</p>}
         </div>

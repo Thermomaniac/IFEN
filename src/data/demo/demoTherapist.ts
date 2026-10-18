@@ -106,14 +106,14 @@ export const DEMO_PROFILE: DemoProfile = {
     ],
   },
   credentials: [
-    { label: "Professional background", value: "Occupational therapy" },
+    { label: "Professional Background", value: "Occupational Therapy" },
     {
-      label: "Neurofeedback training",
+      label: "Neurofeedback Training",
       value: "IFEN Modules 1 to 4, certified IFEN neurofeedback therapist",
     },
-    { label: "Further training", value: "ISF 1 and ISF 2, qEEG workshop" },
+    { label: "Further Training", value: "ISF 1 and ISF 2, qEEG workshop" },
     {
-      label: "IFEN expert level",
+      label: "IFEN Expert Level",
       value: "Gold",
       note: "150+ training hours with IFEN",
     },
@@ -121,14 +121,14 @@ export const DEMO_PROFILE: DemoProfile = {
       label: "Mentoring",
       value: "Listed by IFEN as an internship and mentoring provider",
     },
-    { label: "IFEN lecturer", value: "No" },
+    { label: "IFEN Lecturer", value: "No" },
   ],
   expertise: {
     protocols: [
-      { label: "ISF (infra-slow fluctuation)", method: "isf" },
-      { label: "Four-channel training", method: "four-channel" },
+      { label: "ISF (Infra-Slow Fluctuation)", method: "isf" },
+      { label: "Four-Channel Training", method: "four-channel" },
       { label: "sLORETA / xLORETA", method: "loreta" },
-      { label: "qEEG-guided protocols", method: "qeeg" },
+      { label: "qEEG-Guided Protocols", method: "qeeg" },
     ],
     ageGroups: ["Children", "Adolescents", "Adults"],
     methods: ["qeeg", "capito", "loreta", "isf", "four-channel", "biofeedback"],
@@ -162,7 +162,7 @@ export const DEMO_PROFILE: DemoProfile = {
     prerequisites: ["IFEN Module 1 completed", "Own neurofeedback system, or access to one"],
   },
   session: {
-    label: "Mentoring session",
+    label: "Mentoring Session",
     price: 150,
     minutes: 60,
     formats: ["online", "in-person"],
@@ -191,7 +191,7 @@ export const FORMAT_LABELS: Record<MeetingFormat, { label: string; text: string 
     text: "Video call. The link comes with the confirmation.",
   },
   "in-person": {
-    label: "In person",
+    label: "In Person",
     text: "At the practice in München. The address comes with the confirmation.",
   },
 };
@@ -203,7 +203,7 @@ export const formatsLabel = (formats: MeetingFormat[]) =>
 /** Schedule, duration, format and languages: the hero card and the booking summary share them. */
 export const sessionFacts = (s: DemoProfile["session"]): CourseFact[] => [
   { label: "Available Schedule", value: s.schedule.short, icon: "schedule" },
-  { label: "Session duration", value: `${s.minutes} mins`, icon: "duration" },
-  { label: "Session format", value: formatsLabel(s.formats), icon: "format" },
+  { label: "Session Duration", value: `${s.minutes} mins`, icon: "duration" },
+  { label: "Session Format", value: formatsLabel(s.formats), icon: "format" },
   { label: "Languages", value: s.languages.join(", "), icon: "languages" },
 ];

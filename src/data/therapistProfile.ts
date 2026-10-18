@@ -16,12 +16,12 @@ export const METHOD_GROUPS: {
   { id: "assessment", label: "Assessment", methods: ["qeeg", "capito", "erp"] },
   {
     id: "neurofeedback",
-    label: "Neurofeedback approaches",
+    label: "Neurofeedback Approaches",
     methods: ["loreta", "isf", "four-channel", "peak"],
   },
   {
     id: "biofeedback",
-    label: "Complementary biofeedback",
+    label: "Complementary Biofeedback",
     methods: ["biofeedback"],
   },
 ];
@@ -85,8 +85,8 @@ export const profileHeads: Record<ProfileSectionId, string> = {
 };
 
 export const profileFaq: FaqContent = {
-  label: "Safety, privacy & FAQs",
-  heading: "Before you book",
+  label: "Safety, Privacy & FAQs",
+  heading: "Before You Book",
   intro: [
     "Mentoring is professional training for neurofeedback practitioners. It does not replace a diagnosis or treatment from a doctor.",
   ],
@@ -118,7 +118,7 @@ export const profileFaq: FaqContent = {
     },
   ],
   help: {
-    heading: "Questions about mentoring?",
+    heading: "Questions About Mentoring?",
     text: "Not sure which mentor or format suits your stage of training? Ask IFEN.",
     email: CONTACT_EMAIL,
   },

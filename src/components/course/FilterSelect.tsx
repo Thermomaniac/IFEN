@@ -25,7 +25,7 @@ export function FilterSelect({
   /** Accessible name of the field. */
   label: string;
   value: string;
-  /** Label of the empty choice ("All types"); omitted when a value is always set. */
+  /** Label of the empty choice ("All Types"); omitted when a value is always set. */
   all?: string;
   /** Trigger text while nothing is chosen, when it should differ from `all` ("Country"). */
   placeholder?: string;

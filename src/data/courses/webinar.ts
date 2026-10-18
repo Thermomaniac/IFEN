@@ -25,19 +25,19 @@ export const webinar = {
   },
 
   hero: {
-    title: "WEBINAR - Stress, Pain and the Nervous System: Biofeedback and Neurofeedback in Practice",
+    title: "Webinar: Stress, Pain and the Nervous System: Biofeedback and Neurofeedback in Practice",
     breadcrumb: [{ label: "Course Booking", href: LISTING_PATH }, { label: "Webinar" }],
-    badge: "Live webinar · 60 minutes",
+    badge: "Live Webinar · 60 Minutes",
     description:
       "A practical overview of how biofeedback and neurofeedback support self-regulation and what role both methods can play in everyday clinical practice.",
     highlights: [
-      { value: "60 min", label: "Compact live session" },
-      { value: "Online live", label: "Join from anywhere" },
-      { value: "German", label: "Course language" },
+      { value: "60 min", label: "Compact Live Session" },
+      { value: "Online Live", label: "Join From Anywhere" },
+      { value: "German", label: "Course Language" },
     ],
     booking: {
       code: "WEB-191026-DE",
-      prices: [{ label: "Standard price", amount: 40 }],
+      prices: [{ label: "Standard Price", amount: 40 }],
       facts: [
         { label: "Start", value: "Mon, 19.10.2026, 19:00", icon: "start" },
         { label: "End", value: "Mon, 19.10.2026, 20:00", icon: "end" },
@@ -60,7 +60,7 @@ export const webinar = {
       rows: [
         { label: "Date", value: "Mon, 19.10.2026, 19:00 to 20:00", icon: "date" },
         { label: "Format", value: "Online · Live", icon: "format" },
-        { label: "Duration", value: "60 minutes", icon: "duration" },
+        { label: "Duration", value: "60 Minutes", icon: "duration" },
         { label: "Language", value: "German", icon: "language" },
         { label: "Fee", value: "40 EUR", icon: "fee" },
       ],
@@ -68,18 +68,18 @@ export const webinar = {
   } satisfies OverviewContent,
 
   content: {
-    label: "About the webinar",
+    label: "About the Webinar",
     heading: "What You Will Take Away",
     items: [
       {
-        heading: "Understanding stress, pain and self-regulation",
+        heading: "Understanding Stress, Pain and Self-Regulation",
         paragraphs: [
           "Stress and chronic pain interact closely with the autonomic nervous system and can affect the capacity for self-regulation. Biofeedback and neurofeedback are used in various clinical fields to make these regulatory processes visible and to train them in a targeted way.",
           "In this one-hour webinar you get a practical overview of the basics of biofeedback and neurofeedback in the context of stress and pain. You learn how both methods work, which physiological signals are measured and what role they can play in clinical practice.",
         ],
       },
       {
-        heading: "Topics of the webinar",
+        heading: "Topics of the Webinar",
         list: [
           "Stress, pain and self-regulation",
           "Understanding the autonomic nervous system",
@@ -128,6 +128,6 @@ export const webinar = {
     label: "Live Webinar",
     headingLines: ["Join the Live Webinar", "on Stress and Pain"],
     text: "Get a compact overview of biofeedback, neurofeedback and their importance for self-regulation, with time for questions and discussion.",
-    action: { label: "Register now", href: BOOK.href },
+    action: { label: "Register Now", href: BOOK.href },
   } satisfies CtaContent,
 };

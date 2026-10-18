@@ -99,9 +99,9 @@ export const module2 = {
     description:
       "Start the next chapter of your certification as an IFEN neurofeedback therapist with an internship in one of our certified partner practices.",
     highlights: [
-      { value: "5 UE", label: "Minimum units" },
-      { value: "Partner practice", label: "Your choice of venue" },
-      { value: "5 credits", label: "Under § 125 SGB V" },
+      { value: "5 UE", label: "Minimum Units" },
+      { value: "Partner Practice", label: "Your Choice of Venue" },
+      { value: "5 Credits", label: "Under § 125 SGB V" },
     ],
   },
 
@@ -255,9 +255,9 @@ export const module3 = {
       "Your next step towards Certified Neurofeedback Therapist IFEN. In this module you run neurofeedback sessions in your own practice for the first time, accompanied by a personal mentor.",
     ],
     highlights: [
-      { value: "5 UE", label: "1 UE = 45 minutes" },
+      { value: "5 UE", label: "1 UE = 45 Minutes" },
       { value: "Online", label: "Phone, Zoom or Skype" },
-      { value: "5 credits", label: "Under § 125 SGB V" },
+      { value: "5 Credits", label: "Under § 125 SGB V" },
     ],
   },
 
@@ -366,8 +366,8 @@ export const module4 = {
       "Congratulations, you are almost there! Your last step to the certificate is an online examination of about one hour.",
     highlights: [
       { value: "Online", label: "Examination" },
-      { value: "About 1 hour", label: "Duration" },
-      { value: "2 credits", label: "Under § 125 SGB V" },
+      { value: "About 1 Hour", label: "Duration" },
+      { value: "2 Credits", label: "Under § 125 SGB V" },
     ],
   },
 
@@ -421,9 +421,9 @@ export const ifen100 = {
     description:
       "Check your knowledge with questions like those in the real examination, before Module 4 or simply to reflect on what you know.",
     highlights: [
-      { value: "65 questions", label: "From a pool of 105" },
-      { value: "70 minutes", label: "Time limit" },
-      { value: "70%", label: "Pass mark" },
+      { value: "65 Questions", label: "From a Pool of 105" },
+      { value: "70 Minutes", label: "Time Limit" },
+      { value: "70%", label: "Pass Mark" },
     ],
   },
 
@@ -544,9 +544,9 @@ export const modulesOverview = {
     description:
       "Welcome! We are glad you are interested in our training concept. A varied and fulfilling career is waiting for you.",
     highlights: [
-      { value: "4 modules", label: "Theory and practice" },
-      { value: "5 days", label: "Module 1 intensive course" },
-      { value: "1:1 mentor", label: "For every participant" },
+      { value: "4 Modules", label: "Theory and Practice" },
+      { value: "5 Days", label: "Module 1 Intensive Course" },
+      { value: "1:1 Mentor", label: "For Every Participant" },
     ],
   } satisfies CourseHeroContent,
 

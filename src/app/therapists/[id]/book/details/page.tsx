@@ -4,7 +4,7 @@ import { MentorBookingStep } from "@/components/directory/MentorBooking";
 import { getDemoProfile } from "@/data/demo/demoTherapist";
 
 export const metadata: Metadata = {
-  title: "Book a mentoring session: Your details | IFEN",
+  title: "Book a Mentoring Session: Your Details | IFEN",
 };
 
 export default async function MentorDetailsPage({ params }: PageProps<"/therapists/[id]/book/details">) {

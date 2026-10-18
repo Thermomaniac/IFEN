@@ -143,7 +143,7 @@ export const training = {
   label: "Our Latest Courses & Webinars", // Paper: "Our Lates Courses & Webiners"
   heading: "Upcoming Training & Education Dates",
   courses: [
-    { title: "MODULE 1 — Certified Neurofeedback Therapist", duration: "5 Days", location: "Munich", href: "/courses/module-1", image: courseImage },
+    { title: "Module 1: Certified Neurofeedback Therapist", duration: "5 Days", location: "Munich", href: "/courses/module-1", image: courseImage },
     {
       title: "BCIA Mentoring, QEEG Mentoring for QEEG-D Certification",
       duration: "Flexible",
@@ -352,11 +352,11 @@ export const footer = {
     {
       title: "Service & Help",
       links: [
-        { label: "Therapist list", href: "/therapists" },
-        { label: "Learning portal", href: "#" },
+        { label: "Therapist List", href: "/therapists" },
+        { label: "Learning Portal", href: "#" },
         { label: "Contact Support", href: "#" },
-        { label: "FAQ - Training questions", href: "#" },
-        { label: "Newsletter signup", href: "#" },
+        { label: "FAQ - Training Questions", href: "#" },
+        { label: "Newsletter Signup", href: "#" },
         { label: "Downloads", href: "#" },
       ],
     },
@@ -366,16 +366,16 @@ export const footer = {
         { label: "CE Credits & Points", href: "#" },
         { label: "Funding Opportunities", href: "#" },
         { label: "Workshop Places Germany", href: "/#locations" },
-        { label: "Repeater Discount details", href: "/#benefits" },
-        { label: "Accreditation guidelines", href: "/#certification" },
+        { label: "Repeater Discount Details", href: "/#benefits" },
+        { label: "Accreditation Guidelines", href: "/#certification" },
       ],
     },
     {
       title: "Legal",
       links: [
         { label: "Imprint", href: "#" },
-        { label: "General terms & conditions", href: "#" },
-        { label: "Cancellation terms", href: "#" },
+        { label: "General Terms & Conditions", href: "#" },
+        { label: "Cancellation Terms", href: "#" },
         { label: "Data Protection Policy", href: "#" },
         { label: "Cookie Settings", href: "#" },
       ],
@@ -383,11 +383,11 @@ export const footer = {
     {
       title: "My IFEN",
       links: [
-        { label: "Login portal", href: "#" },
-        { label: "About the institute", href: ABOUT_PATH },
-        { label: "Lecturers overview", href: LECTURERS_PATH },
-        { label: "Advisory Board members", href: "/#board" },
-        { label: "Research partnerships", href: "/#partners" },
+        { label: "Login Portal", href: "#" },
+        { label: "About the Institute", href: ABOUT_PATH },
+        { label: "Lecturers Overview", href: LECTURERS_PATH },
+        { label: "Advisory Board Members", href: "/#board" },
+        { label: "Research Partnerships", href: "/#partners" },
       ],
     },
   ] satisfies FooterColumn[],

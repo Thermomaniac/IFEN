@@ -5,7 +5,7 @@ import { getDemoProfile } from "@/data/demo/demoTherapist";
 import { bookingPath, bookingSteps } from "@/data/therapistProfile";
 
 export const metadata: Metadata = {
-  title: "Book a mentoring session: Meeting format | IFEN",
+  title: "Book a Mentoring Session: Meeting Format | IFEN",
 };
 
 export default async function MentorFormatPage({ params }: PageProps<"/therapists/[id]/book/format">) {

@@ -23,7 +23,7 @@ export const brainavatar = {
   hero: {
     title: "BrainAvatar\nSoftware Training",
     breadcrumb: [BOOKING_CRUMB, { label: "BrainAvatar" }],
-    badge: "Software training",
+    badge: "Software Training",
     description: "Learn from the best in their field.",
     highlights: [],
   },
