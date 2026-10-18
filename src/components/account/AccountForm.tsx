@@ -58,8 +58,7 @@ export function AccountForm({ action }: { action: AccountAction }) {
   const onChange = (name: string, value: string) => {
     const next = { ...values, [name]: value };
     setValues(next);
-    // Retyping the first password re-checks the confirmation once it has been checked.
-    if (live.has(name) || (name === "password1" && live.has("password2"))) recheck(next, live);
+    if (live.has(name)) recheck(next, live);
   };
 
   const onBlur = (name: string) => {
@@ -175,7 +174,6 @@ export function AccountForm({ action }: { action: AccountAction }) {
                 showLabel={copy.showPassword}
                 hideLabel={copy.hidePassword}
               />
-              {/* Figma shows one "Forget password?" link; both live recovery screens stay. */}
               <div className={styles.row}>
                 <CheckboxField name="remember" checked={values.remember === "yes"} plain onChange={onChange}>
                   {copy.remember}
@@ -184,11 +182,6 @@ export function AccountForm({ action }: { action: AccountAction }) {
                   <li>
                     <Link href={accountPaths.reset} className={styles.recoveryLink}>
                       {copy.forgotPassword}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link href={accountPaths.remind} className={styles.recoveryLink}>
-                      {copy.forgotUsername}
                     </Link>
                   </li>
                 </ul>
@@ -230,17 +223,6 @@ export function AccountForm({ action }: { action: AccountAction }) {
                   </ul>
                 </div>
               </PasswordField>
-              <PasswordField
-                {...field("password2")}
-                label="Confirm Password"
-                required
-                size="full"
-                autoComplete="new-password"
-                maxLength={PASSWORD_MAX}
-                placeholder={copy.placeholders.confirmPassword}
-                showLabel={copy.showPassword}
-                hideLabel={copy.hidePassword}
-              />
               <TextField {...field("email1")} label="Email Address" type="email" required size="full" autoComplete="email" inputMode="email" placeholder={copy.placeholders.email} />
             </>
           )}
@@ -251,6 +233,7 @@ export function AccountForm({ action }: { action: AccountAction }) {
         </div>
       </fieldset>
 
+      {/* Without a configured check, register shows no note; a submit reports the account service is not connected. */}
       {needsCaptcha &&
         (captchaOn ? (
           <div className={styles.captcha} data-invalid={errors.captcha ? "" : undefined}>
@@ -265,12 +248,14 @@ export function AccountForm({ action }: { action: AccountAction }) {
             )}
           </div>
         ) : (
-          <p className={styles.note}>
-            {copy.captchaUnavailable}{" "}
-            <a href={liveAccountUrls[action]} className={styles.link}>
-              {copy.liveLink}
-            </a>
-          </p>
+          action !== "register" && (
+            <p className={styles.note}>
+              {copy.captchaUnavailable}{" "}
+              <a href={liveAccountUrls[action]} className={styles.link}>
+                {copy.liveLink}
+              </a>
+            </p>
+          )
         ))}
 
       {status.kind === "error" && (

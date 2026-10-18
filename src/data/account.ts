@@ -90,7 +90,6 @@ export const accountCopy = {
   hidePassword: "Hide password",
   remember: "Remember me",
   forgotPassword: "Forgot your password?",
-  forgotUsername: "Forgot your username?",
   noAccount: "No account yet?",
   createAccount: "Create an account",
   haveAccount: "Already have an account?",
@@ -101,7 +100,6 @@ export const accountCopy = {
     name: "Enter your name",
     username: "Enter your username",
     password: "Enter your password",
-    confirmPassword: "Repeat your password",
     email: "Enter your email address",
   },
   brand: {

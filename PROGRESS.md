@@ -4,7 +4,15 @@ Active phase: none. Follow-up corrections programme complete (phases 1 to 7, 202
 
 ## Follow-up corrections programme
 
-### Phase 7: Module 4 final step card (done 2026-10-19)
+### Account form trims (done 2026-10-19, user request)
+
+- Login: "Forgot your username?" removed; only "Forgot your password?" is linked. The `/my-ifen/remind` screen still exists but is no longer linked from the site.
+- Register: fields are now Name, Username, Password (with the rules panel), Email Address. Confirm Password is removed from the form and from validation. The live registration still expects a confirmation field, so `/api/account/register` fills `password2` with the password before forwarding.
+- Register: the "security check is not available on this site yet" note is removed. When reCAPTCHA is configured the check still shows and is still required; when it is not, a submit gets the "not connected to the IFEN account service" alert with the live My IFEN link. The note stays on the reset and remind screens.
+- Supersedes the Phase 5 note below that Confirm Password stays.
+- Checks: eslint, tsc, build clean. Register and login rendered at 1440, 390 and 320 (no horizontal overflow). API: a valid register request without `password2` passes validation; a weak password is still rejected.
+
+### Phase 7: Module 4 final step card (done 2026-10-19, pushed to staging)
 
 - Figma 40001146-110030: one white split card, padding 40. Left column (462 of 1094): the title at 28/32 bold ink, the intro, then "See Exam Dates" (primary) and "Prepare With IFEN 100" 32px below. Right column (632): "Already Behind You" over the existing check rows, then "The Examination" over three equal tiles 32px below.
 - Opt-in through `Article.feature` on the existing default split card; only this item sets it, other split cards are unchanged (IFEN 100 "Before You Start" checked). Below 64rem everything stacks in the same order.

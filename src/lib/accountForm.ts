@@ -64,7 +64,6 @@ const rules: Record<AccountAction, FieldRule[]> = {
             ? undefined
             : "The password does not meet the requirements listed below it.",
     },
-    { name: "password2", label: "Confirm Password", required: true },
     { name: "email1", label: "Email Address", required: true, check: emailCheck },
     CAPTCHA,
   ],
@@ -85,9 +84,5 @@ export type AccountValues = Record<string, string>;
  */
 export function validateAccount(action: AccountAction, values: AccountValues, { captcha = true } = {}): Errors {
   const list = captcha ? rules[action] : rules[action].filter((r) => r.name !== "captcha");
-  const errors = validate(list, values);
-  if (action === "register" && !errors.password2 && values.password1 && values.password2 !== values.password1) {
-    errors.password2 = "The passwords do not match.";
-  }
-  return errors;
+  return validate(list, values);
 }

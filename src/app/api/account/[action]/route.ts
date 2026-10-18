@@ -24,7 +24,7 @@ import {
 const TIMEOUT_MS = 10_000;
 const CAPTCHA_ACTIONS: AccountAction[] = ["register", "reset", "remind"];
 /** Fields sent as typed: passwords are not trimmed. */
-const RAW = new Set(["password", "password1", "password2"]);
+const RAW = new Set(["password", "password1"]);
 const REDIRECT_HOSTS = new Set(["www.neurofeedback-info.de", "neurofeedback-info.de"]);
 
 const fail = (status: number, error: string, extra?: object) => Response.json({ ok: false, error, ...extra }, { status });
@@ -78,6 +78,9 @@ export async function POST(request: Request, ctx: RouteContext<"/api/account/[ac
   }
   const errors = validateAccount(action, values, { captcha: false });
   if (Object.keys(errors).length > 0) return fail(422, "invalid", { errors });
+  // The form asks for the password once; the live registration still expects the
+  // confirmation field, so it receives the same value.
+  if (action === "register") values.password2 = values.password1;
 
   const endpoint = process.env.IFEN_AUTH_ENDPOINT;
   const secret = process.env.RECAPTCHA_SECRET_KEY;
