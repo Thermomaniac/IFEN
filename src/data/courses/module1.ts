@@ -230,6 +230,7 @@ export const module1 = {
       { label: "Module 4", heading: "Examination", text: "Take examination & become expert", href: MODULE4_PATH },
     ],
     note: "Module 2 and Module 3 can be completed in any order.",
+    noteTone: "soft",
   } satisfies PathwayContent,
 
   practical: {

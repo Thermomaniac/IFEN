@@ -183,6 +183,12 @@
   text-wrap: balance;
 }
 
+/* Figma 40000758-42181: the note on the soft grey fill, no card edge. */
+.note[data-tone="soft"] {
+  background: var(--color-border-soft);
+  box-shadow: none;
+}
+
 .spark {
   flex: none;
   width: 16px;

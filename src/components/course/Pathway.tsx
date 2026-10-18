@@ -180,6 +180,7 @@ export function Pathway({ id, tone, content }: { id: string; tone: Tone; content
         {/* Always laid out, so revealing it never shifts the band. */}
         <motion.p
           className={styles.note}
+          data-tone={content.noteTone}
           initial={false}
           animate={showNote ? { y: 0, opacity: 1 } : { y: 28, opacity: 0 }}
           transition={rise(showNote, 0.05)}

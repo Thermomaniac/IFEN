@@ -156,6 +156,8 @@ export type PathwayContent = SectionHead & {
   /** `href` links a step to its own page; the current step never links. */
   steps: { label: string; heading: string; text?: string; current?: boolean; href?: string }[];
   note: string;
+  /** `soft` sets the note on the soft grey fill instead of the white card (Module 1). */
+  noteTone?: "soft";
 };
 
 export type InstructorContent = SectionHead & {

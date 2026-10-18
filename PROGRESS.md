@@ -4,7 +4,13 @@ Active phase: Follow-up corrections programme (phases 1 to 7, 2026-10-19), in pr
 
 ## Follow-up corrections programme
 
-### Phase 2: Training Modules flyout (done 2026-10-19)
+### Phase 3: Module 1 pathway note (done 2026-10-19)
+
+- Figma 40000758-42181: on Module 1 only, the "Module 2 and Module 3 can be completed in any order." note sits on the soft grey fill (`--color-border-soft`, #f3f4f6) with no card edge. Sparkles, padding, type and the rise-in motion unchanged.
+- Opt-in through `PathwayContent.noteTone: "soft"`, set only in `module1.ts`; `Pathway` passes it as `data-tone`. The Modules overview note stays white (checked).
+- Checks: eslint, tsc, build clean. Rendered at 1440 (after the pinned sequence), 390 and 320 (no horizontal overflow).
+
+### Phase 2: Training Modules flyout (done 2026-10-19, pushed to staging)
 
 - Course Booking > "Training MODULES 1-4" is now a second-level flyout to the right of the dropdown, listing Module 1, Module 2, Module 3, Module 4 and IFEN 100 (routes checked against `src/data/courses/modulePaths.ts`; all five pages exist). The parent label still links to `/courses/modules`; a caret button next to it controls the flyout.
 - Reuses the dropdown pattern in `MainNav`: same menu card, link style, Framer Motion fade (slide from the left instead of from the top). Opens on mouse hover with a 180ms close delay and an invisible bridge over the 17px gap, so the pointer can travel into it. Tap or click on the caret toggles it (touch never relies on hover). Keyboard: ArrowRight on the caret opens it and focuses Module 1; Escape or ArrowLeft closes only the flyout and returns focus to the caret; tabbing out closes it. The dropdown's document Escape handler now skips events the flyout already handled.
