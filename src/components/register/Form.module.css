@@ -524,3 +524,75 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* Checkbox (CheckboxField): 20px, radius 4, ink when ticked, as in the filter list. */
+.checkField {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.check {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: var(--fs-small);
+  line-height: 20px;
+  cursor: pointer;
+}
+
+.checkInput {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.box {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  box-shadow: inset 0 0 0 1.5px var(--color-border);
+  background: var(--color-white);
+  color: var(--color-white);
+  transition:
+    background-color var(--dur-fast) var(--ease-out),
+    box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.box svg {
+  width: 12px;
+  height: 12px;
+  opacity: 0;
+}
+
+.checkInput:checked + .box {
+  background: var(--color-ink);
+  box-shadow: none;
+}
+
+.checkInput:checked + .box svg {
+  opacity: 1;
+}
+
+.checkInput:focus-visible + .box {
+  box-shadow:
+    inset 0 0 0 1.5px var(--color-ink),
+    var(--focus-ring);
+}
+
+.checkField[data-invalid] .box {
+  box-shadow: inset 0 0 0 1.5px #c0262d;
+}
+
+@media (hover: hover) {
+  .check:hover .checkInput:not(:checked) + .box {
+    box-shadow: inset 0 0 0 1.5px var(--color-subtle);
+  }
+}

@@ -5,6 +5,7 @@ import { CourseHero } from "@/components/course/CourseHero";
 import { CourseOverview } from "@/components/course/CourseOverview";
 import { Curriculum } from "@/components/course/Curriculum";
 import { FeatureGrid } from "@/components/course/FeatureGrid";
+import { InterestCapture } from "@/components/course/InterestCapture";
 import { Mentors } from "@/components/course/Mentors";
 import { Pathway } from "@/components/course/Pathway";
 import { SiteHeader } from "@/components/layout/SiteHeader";
@@ -28,6 +29,7 @@ export default function Module1Page() {
         <FeatureGrid id="modules" tone="cream" content={moduleCards} />
         <CourseArticles id="practical" tone="white" variant="columns" content={module1.practical} />
         <CourseArticles id="booking-info" tone="mist" variant="rows" content={module1.booking} />
+        <InterestCapture tone="white" hero={module1.hero} />
         <Mentors content={module1.speakers} />
         <Categories content={module1.categories} />
       </main>

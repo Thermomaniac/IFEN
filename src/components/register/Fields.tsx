@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { ChevronDownIcon } from "@/components/icons";
+import { CheckIcon, ChevronDownIcon } from "@/components/icons";
 import type { Errors } from "@/lib/registrationForm";
 import styles from "./Form.module.css";
 
@@ -141,6 +141,57 @@ export function TextAreaField(props: Base & { placeholder?: string }) {
         onBlur={() => onBlur?.(name)}
       />
     </Shell>
+  );
+}
+
+/** A checkbox drawn like the filter list's: 20px, radius 4, ink when ticked. Emits "yes" or "". */
+export function CheckboxField({
+  name,
+  checked,
+  required,
+  error,
+  onChange,
+  children,
+}: {
+  name: string;
+  checked: boolean;
+  required?: boolean;
+  error?: string;
+  onChange: (name: string, value: string) => void;
+  children: ReactNode;
+}) {
+  const id = fieldId(name);
+  return (
+    <div className={styles.checkField} data-invalid={error ? "" : undefined}>
+      <label className={styles.check}>
+        <input
+          id={id}
+          type="checkbox"
+          name={name}
+          checked={checked}
+          required={required}
+          aria-invalid={error ? true : undefined}
+          aria-describedby={error ? `${id}-error` : undefined}
+          className={styles.checkInput}
+          onChange={(e) => onChange(name, e.target.checked ? "yes" : "")}
+        />
+        <span className={styles.box} aria-hidden="true">
+          <CheckIcon />
+        </span>
+        <span>
+          {children}
+          {required ? <span aria-hidden="true"> *</span> : <span className={styles.optional}> (Optional)</span>}
+        </span>
+      </label>
+      {error && (
+        <p id={`${id}-error`} className={styles.error}>
+          <span aria-hidden="true" className={styles.errorIcon}>
+            !
+          </span>
+          {error}
+        </p>
+      )}
+    </div>
   );
 }
 

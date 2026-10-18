@@ -1,0 +1,188 @@
+/*
+ * Interest list card. Same treatment as the course article cards: white, radius 4,
+ * 1px border shadow; on a white band it turns mist so it still reads as a card.
+ * Fields reuse the registration form pieces (Form.module.css).
+ */
+.card {
+  padding: clamp(20px, 2.5vw, 32px);
+  border-radius: 4px;
+  background: var(--color-white);
+  box-shadow:
+    inset 0 0 0 1px var(--color-border),
+    0 1px 2px #0000000f;
+  min-width: 0;
+}
+
+.card[data-tone="white"] {
+  background: var(--color-mist);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.fieldset > legend {
+  margin-bottom: 24px;
+}
+
+.link {
+  color: var(--color-ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  overflow-wrap: anywhere;
+}
+
+.link:focus-visible {
+  border-radius: 2px;
+  box-shadow: var(--focus-ring);
+}
+
+.alert {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 20px;
+  border-left: 4px solid #b4232a;
+  border-radius: 4px;
+  background: #fdf2f2;
+  font-size: var(--fs-body);
+  line-height: 24px;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.alert:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
+.mail {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  color: var(--color-ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  overflow-wrap: anywhere;
+}
+
+.mail:focus-visible {
+  border-radius: 2px;
+  box-shadow: var(--focus-ring);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+}
+
+.submit {
+  gap: 10px;
+  cursor: pointer;
+}
+
+.submit:disabled {
+  cursor: progress;
+  opacity: 0.7;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 800ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.course {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
+  min-width: 0;
+  color: var(--color-muted);
+  font-size: var(--fs-small);
+  line-height: 20px;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.code {
+  padding: 2px 8px;
+  border-radius: var(--radius-pill);
+  background: var(--color-border-soft);
+  color: var(--color-heading);
+  font-size: var(--fs-xs);
+  line-height: 16px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+.done {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.doneIcon {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  color: #009ba7;
+}
+
+.doneText {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  font-size: var(--fs-body);
+  line-height: 24px;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.doneHeading {
+  font-size: 1.25rem;
+  line-height: 28px;
+  font-weight: 600;
+  font-variation-settings: var(--fvs-display);
+}
+
+.doneHeading:focus,
+.doneHeading:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+@media (max-width: 30rem) {
+  .submit {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation-duration: 2400ms;
+  }
+}

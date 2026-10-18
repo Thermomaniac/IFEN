@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Categories } from "@/components/course/Categories";
 import { CourseHero } from "@/components/course/CourseHero";
 import { CourseOverview } from "@/components/course/CourseOverview";
+import { InterestCapture } from "@/components/course/InterestCapture";
 import { Mentors } from "@/components/course/Mentors";
 import { TopicLoop } from "@/components/course/TopicLoop";
 import { SiteHeader } from "@/components/layout/SiteHeader";
@@ -18,6 +19,7 @@ export default function WebinarPage() {
         <CourseHero content={webinar.hero} />
         <CourseOverview content={webinar.overview} decor />
         <TopicLoop id="content" tone="white" content={webinar.content} />
+        <InterestCapture tone="mist" hero={webinar.hero} />
         <Mentors content={webinar.speakers} />
         <Categories content={webinar.categories} />
       </main>

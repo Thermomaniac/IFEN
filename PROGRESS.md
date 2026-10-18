@@ -1,8 +1,18 @@
 # IFEN Remaining Pages Progress
 
-Active phase: 1 (interest capture), interest, account and design-system programme. Correction programme A to H complete (2026-10-18), all phases pushed to staging.
+Active phase: 2 (account screens), interest, account and design-system programme. Correction programme A to H complete (2026-10-18), all phases pushed to staging.
 
 ## Interest, account and design-system programme
+
+### Phase 1: Interest capture (done 2026-10-18, pushed to staging)
+
+- `InterestCapture` (`src/components/course/InterestCapture.tsx`) sits before Speakers on Module 1, BCIA QEEG Mentoring, QEEG for Your Practice, QEEG Workshop and both webinars. White band after a mist band (Module 1, BCIA), mist band after a white one (the rest). Standard section header, then one card (white on mist, mist on white).
+- Fields as the live prospect form: Salutation (optional; Mr., Mrs., Ms.), First Name, Last Name, Email, Phone, required AGB checkbox linking the live AGB. No newsletter or marketing consent. The course (hero title, booking code, path) is read from the page and sent with the submission; it also shows next to the button.
+- Booking stays primary: the submit uses the secondary button style. Copy in `src/data/interest.ts`; rules shared by client and server in `src/lib/interestForm.ts`. Checkbox moved into the shared `register/Fields.tsx` (`CheckboxField`); MentorBooking uses it too.
+- States: errors on submit (summary focused) or on blur once filled, then live; sending (button disabled, spinner, `aria-busy`); success panel (`role="status"`, heading focused) only on a confirmed `{ok: true}`; failure alert (`role="alert"`, focused) with a mailto fallback carrying the course and code.
+- Integration boundary: `POST /api/interest` validates again and forwards JSON `{course, salutation, firstName, lastName, email, phone, termsAccepted}` to `IFEN_INTEREST_ENDPOINT` (optional `IFEN_INTEREST_TOKEN` bearer, 10 s timeout). Without the variable it answers 503 and the form says the details were not sent.
+- **Open dependency:** IFEN must provide a service that writes into the Seminarman prospect lists (the Joomla form needs a session and CSRF token, so it cannot be called from here), and say which list each course code maps to. Then set `IFEN_INTEREST_ENDPOINT` on Railway. Until then every submission shows the honest "not connected" message.
+- Checks: eslint, tsc, build clean. API: 400 bad JSON, 422 invalid fields, 503 unconfigured, 200 with a stand-in upstream (payload and bearer verified), 502 on upstream error. Browser: 1440, 390, 320 with no horizontal overflow, long German surname wraps; empty submit focuses the summary; 503 and success states render and take focus.
 
 ### Phase 0: Audit (done 2026-10-18)
 

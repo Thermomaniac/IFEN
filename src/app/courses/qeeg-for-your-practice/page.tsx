@@ -7,6 +7,7 @@ import { FeatureGrid } from "@/components/course/FeatureGrid";
 import { FocusCards } from "@/components/course/FocusCards";
 import { FormatSteps } from "@/components/course/FormatSteps";
 import { Instructor } from "@/components/course/Instructor";
+import { InterestCapture } from "@/components/course/InterestCapture";
 import { Mentors } from "@/components/course/Mentors";
 import { RoleMarquee } from "@/components/course/RoleMarquee";
 import { SiteHeader } from "@/components/layout/SiteHeader";
@@ -29,6 +30,7 @@ export default function QeegPage() {
         <Instructor id="instructor" tone="white" content={qeeg.instructor} />
         <RoleMarquee id="audience" tone="cream" content={qeeg.audience} />
         <Faq id="faq" tone="white" content={qeeg.faq} />
+        <InterestCapture tone="mist" hero={qeeg.hero} />
         <Mentors content={qeeg.speakers} />
         <Categories content={qeeg.categories} />
       </main>

@@ -3,10 +3,9 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, type ReactNode } from "react";
-import { CheckIcon } from "@/components/icons";
 import { BankTransferDialog } from "@/components/register/BankTransferDialog";
 import { OptionGroup, PaymentMark } from "@/components/register/BillingForm";
-import { ErrorSummary, fieldId, SelectField, TextAreaField, TextField } from "@/components/register/Fields";
+import { CheckboxField, ErrorSummary, SelectField, TextAreaField, TextField } from "@/components/register/Fields";
 import { ProcessingDialog, type BookingOutcome } from "@/components/register/ProcessingDialog";
 import { Item, Section } from "@/components/register/ReviewStep";
 import { SelectionSummary } from "@/components/register/SelectionSummary";
@@ -80,57 +79,6 @@ type StepProps = {
   steps: ReturnType<typeof bookingSteps>;
   step: number;
 };
-
-/** A checkbox drawn like the filter list's: 20px, radius 4, ink when ticked. */
-function Checkbox({
-  name,
-  checked,
-  required,
-  error,
-  onChange,
-  children,
-}: {
-  name: string;
-  checked: boolean;
-  required?: boolean;
-  error?: string;
-  onChange: (name: string, value: string) => void;
-  children: ReactNode;
-}) {
-  const id = fieldId(name);
-  return (
-    <div className={styles.checkField} data-invalid={error ? "" : undefined}>
-      <label className={styles.check}>
-        <input
-          id={id}
-          type="checkbox"
-          name={name}
-          checked={checked}
-          required={required}
-          aria-invalid={error ? true : undefined}
-          aria-describedby={error ? `${id}-error` : undefined}
-          className={styles.checkInput}
-          onChange={(e) => onChange(name, e.target.checked ? "yes" : "")}
-        />
-        <span className={styles.box} aria-hidden="true">
-          <CheckIcon />
-        </span>
-        <span>
-          {children}
-          {required ? <span aria-hidden="true"> *</span> : <span className={form.optional}> (Optional)</span>}
-        </span>
-      </label>
-      {error && (
-        <p id={`${id}-error`} className={form.error}>
-          <span aria-hidden="true" className={form.errorIcon}>
-            !
-          </span>
-          {error}
-        </p>
-      )}
-    </div>
-  );
-}
 
 /** Go Back to the previous step, or a single Continue on the first. */
 function Actions({
@@ -343,7 +291,7 @@ function ReviewForm({ profile, store, defaults, steps, step }: StepProps) {
           <fieldset className={form.card}>
             <legend className={form.cardTitle}>Consent</legend>
             <div className={styles.checks}>
-              <Checkbox
+              <CheckboxField
                 name="privacy"
                 checked={values.privacy === "yes"}
                 required
@@ -351,10 +299,10 @@ function ReviewForm({ profile, store, defaults, steps, step }: StepProps) {
                 onChange={onChange}
               >
                 {bookingCopy.privacy}
-              </Checkbox>
-              <Checkbox name="marketing" checked={values.marketing === "yes"} onChange={onChange}>
+              </CheckboxField>
+              <CheckboxField name="marketing" checked={values.marketing === "yes"} onChange={onChange}>
                 {bookingCopy.marketing}
-              </Checkbox>
+              </CheckboxField>
             </div>
           </fieldset>
         </div>

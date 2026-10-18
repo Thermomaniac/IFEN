@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Categories } from "@/components/course/Categories";
 import { CourseHero } from "@/components/course/CourseHero";
+import { InterestCapture } from "@/components/course/InterestCapture";
 import { Mentors } from "@/components/course/Mentors";
 import { ProgramDetails } from "@/components/course/ProgramDetails";
 import { SiteHeader } from "@/components/layout/SiteHeader";
@@ -19,6 +20,7 @@ export default function CoursePage() {
       <main id="main">
         <CourseHero content={courseHero} />
         <ProgramDetails />
+        <InterestCapture tone="white" hero={courseHero} />
         <Mentors content={courseSpeakers} />
         <Categories content={course.categories} />
       </main>
