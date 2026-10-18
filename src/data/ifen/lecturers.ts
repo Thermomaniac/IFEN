@@ -38,6 +38,14 @@ const LECTURERS: [string, string, string, string][] = [
   ["jamuna-rajeswaran", "Prof. Dr. Jamuna Rajeswaran", "Clinical neuropsychology, NIMHANS Bangalore", "83-prof-dr-jamuna-rajeswaran"],
 ];
 
+/** A lecturer's card by id, linked to the live profile (module pages list their lecturers). */
+export function lecturer(id: string): Speaker {
+  const row = LECTURERS.find(([key]) => key === id);
+  if (!row) throw new Error(`No lecturer with id ${id}`);
+  const [, name, role, slug] = row;
+  return { id, name, role, image: `/lecturers/${id}.jpg`, href: live(slug) };
+}
+
 export const lecturers = {
   meta: {
     title: "Our Lecturers | IFEN Neurofeedback",

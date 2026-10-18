@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useMemo, useState, type KeyboardEvent } from "react";
+import { useEffect, useId, useMemo, useState, type CSSProperties, type KeyboardEvent } from "react";
 import {
   CalendarCheckIcon,
   CardsIcon,
@@ -16,6 +16,7 @@ import {
   XCircleIcon,
 } from "@/components/icons";
 import { formatPrice } from "@/data/course";
+import type { SectionHead } from "@/data/coursePage";
 import {
   FORMAT_LABELS,
   LANGUAGE_LABELS,
@@ -37,13 +38,20 @@ import {
   type Filters,
   type PriceFilter,
 } from "@/lib/schedule";
-import { CourseSection } from "./CourseSection";
+import { CourseSection, type Tone } from "./CourseSection";
 import { FilterSelect, type FilterOption } from "./FilterSelect";
 import styles from "./CourseSchedule.module.css";
 
 type View = "table" | "cards";
 type Tab = "dates" | "interest";
 type Note = { text: string; link: { label: string; href: string } };
+type Band = { id: string; tone: Tone; head: SectionHead };
+
+const LISTING_BAND: Band = {
+  id: "dates",
+  tone: "mist",
+  head: { label: "Course dates", heading: "Find Your Next Training Date" },
+};
 
 const TABS: { id: Tab; label: string }[] = [
   { id: "dates", label: "Appointments" },
@@ -67,20 +75,27 @@ const PAGE_SIZE_OPTIONS = PAGE_SIZES.map((n) => ({ value: String(n), label: Stri
  * Course listing: one filter box drives two tabs, the dated appointments and the
  * interest lists. The table only shows from 64rem; smaller screens always get cards.
  * Course codes stay searchable but are never shown.
+ *
+ * Other pages reuse it for their own dates: `section` replaces the listing's band, and
+ * without `interest` the tabs drop away and the filters sit straight above the dates.
+ * A filter with fewer than two values in the data is left out.
  */
 export function CourseSchedule({
   dates,
-  interest,
-  notes,
+  interest = [],
+  notes = [],
+  section = LISTING_BAND,
 }: {
   dates: ScheduleItem[];
-  interest: ScheduleItem[];
-  notes: Note[];
+  interest?: ScheduleItem[];
+  notes?: Note[];
+  section?: Band;
 }) {
   const [filters, setFilters] = useState<Filters>(EMPTY_FILTERS);
   const [view, setView] = useState<View>("table");
   const [tab, setTab] = useState<Tab>("dates");
   const uid = useId();
+  const tabbed = interest.length > 0;
 
   const all = useMemo(() => [...dates, ...interest], [dates, interest]);
   const choices = useMemo(
@@ -91,7 +106,12 @@ export function CourseSchedule({
         icon: <Flag language={o.value as Language} />,
       })),
       format: present<CourseFormat>(FORMAT_LABELS, new Set(all.map((i) => i.format))),
-      price: options<PriceFilter>(PRICE_LABELS),
+      price: options<PriceFilter>(PRICE_LABELS).filter(
+        (o) =>
+          (o.value === "free" && all.some((i) => i.prices.length === 0)) ||
+          (o.value === "paid" && all.some((i) => i.prices.length > 0)) ||
+          (o.value === "reduced" && all.some((i) => i.prices.length > 1)),
+      ),
     }),
     [all],
   );
@@ -129,19 +149,25 @@ export function CourseSchedule({
     document.getElementById(`${uid}-tab-${next}`)?.focus();
   };
 
+  // Search plus each filter that has a real choice to make.
+  const fields = 1 + [choices.type, choices.language, choices.format, choices.price].filter((c) => c.length > 1).length;
+  const grid = { "--fields": fields, "--fields-md": Math.min(fields, 4) } as CSSProperties;
+
   return (
     <CourseSection
-      id="dates"
-      tone="mist"
-      head={{ label: "Course dates", heading: "Find Your Next Training Date" }}
+      id={section.id}
+      tone={section.tone}
+      head={section.head}
       headExtra={
-        <ul className={styles.notes}>
-          {notes.map((note) => (
-            <li key={note.link.href}>
-              {note.text} <a href={note.link.href}>{note.link.label}</a>.
-            </li>
-          ))}
-        </ul>
+        notes.length > 0 && (
+          <ul className={styles.notes}>
+            {notes.map((note) => (
+              <li key={note.link.href}>
+                {note.text} <a href={note.link.href}>{note.link.label}</a>.
+              </li>
+            ))}
+          </ul>
+        )
       }
     >
       <div className={styles.offerings}>
@@ -177,30 +203,32 @@ export function CourseSchedule({
         </div>
 
         <div className={styles.listings}>
-          <div className={styles.tabs} role="tablist" aria-label="Offer type">
-            {TABS.map((t) => (
-              <button
-                key={t.id}
-                id={`${uid}-tab-${t.id}`}
-                type="button"
-                role="tab"
-                aria-selected={tab === t.id}
-                aria-controls={`${uid}-panel`}
-                tabIndex={tab === t.id ? 0 : -1}
-                className={styles.tab}
-                onClick={() => switchTab(t.id)}
-                onKeyDown={onTabKey}
-              >
-                {t.label}
-              </button>
-            ))}
-          </div>
+          {tabbed && (
+            <div className={styles.tabs} role="tablist" aria-label="Offer type">
+              {TABS.map((t) => (
+                <button
+                  key={t.id}
+                  id={`${uid}-tab-${t.id}`}
+                  type="button"
+                  role="tab"
+                  aria-selected={tab === t.id}
+                  aria-controls={`${uid}-panel`}
+                  tabIndex={tab === t.id ? 0 : -1}
+                  className={styles.tab}
+                  onClick={() => switchTab(t.id)}
+                  onKeyDown={onTabKey}
+                >
+                  {t.label}
+                </button>
+              ))}
+            </div>
+          )}
 
           <div
             id={`${uid}-panel`}
             className={styles.panel}
-            role="tabpanel"
-            aria-labelledby={`${uid}-tab-${tab}`}
+            role={tabbed ? "tabpanel" : undefined}
+            aria-labelledby={tabbed ? `${uid}-tab-${tab}` : undefined}
           >
             <form className={styles.filters} role="search" onSubmit={(e) => e.preventDefault()}>
               <div className={styles.filterHead}>
@@ -214,7 +242,7 @@ export function CourseSchedule({
                   <p className={styles.filterState}>No filter is applied</p>
                 )}
               </div>
-              <div className={styles.fields}>
+              <div className={styles.fields} style={grid}>
                 <div className={styles.field}>
                   <label className="sr-only" htmlFor={`${uid}-q`}>
                     Search
@@ -230,34 +258,42 @@ export function CourseSchedule({
                   />
                   <SearchIcon className={styles.fieldIcon} aria-hidden />
                 </div>
-                <FilterSelect
-                  label="Course type"
-                  value={filters.type}
-                  all="All types"
-                  options={choices.type}
-                  onChange={(v) => set("type", v as Filters["type"])}
-                />
-                <FilterSelect
-                  label="Language"
-                  value={filters.language}
-                  all="All languages"
-                  options={choices.language}
-                  onChange={(v) => set("language", v as Filters["language"])}
-                />
-                <FilterSelect
-                  label="Format"
-                  value={filters.format}
-                  all="All formats"
-                  options={choices.format}
-                  onChange={(v) => set("format", v as Filters["format"])}
-                />
-                <FilterSelect
-                  label="Price"
-                  value={filters.price}
-                  all="Paid & free"
-                  options={choices.price}
-                  onChange={(v) => set("price", v as Filters["price"])}
-                />
+                {choices.type.length > 1 && (
+                  <FilterSelect
+                    label="Course type"
+                    value={filters.type}
+                    all="All types"
+                    options={choices.type}
+                    onChange={(v) => set("type", v as Filters["type"])}
+                  />
+                )}
+                {choices.language.length > 1 && (
+                  <FilterSelect
+                    label="Language"
+                    value={filters.language}
+                    all="All languages"
+                    options={choices.language}
+                    onChange={(v) => set("language", v as Filters["language"])}
+                  />
+                )}
+                {choices.format.length > 1 && (
+                  <FilterSelect
+                    label="Format"
+                    value={filters.format}
+                    all="All formats"
+                    options={choices.format}
+                    onChange={(v) => set("format", v as Filters["format"])}
+                  />
+                )}
+                {choices.price.length > 1 && (
+                  <FilterSelect
+                    label="Price"
+                    value={filters.price}
+                    all="Paid & free"
+                    options={choices.price}
+                    onChange={(v) => set("price", v as Filters["price"])}
+                  />
+                )}
               </div>
             </form>
 
@@ -479,7 +515,7 @@ function Prices({ item }: { item: ScheduleItem }) {
 
 function BookLink({ item, label }: { item: ScheduleItem; label: string }) {
   return (
-    <a href={item.href} className={styles.bookBtn}>
+    <a href={item.bookHref ?? item.href} className={styles.bookBtn}>
       {label}
       <span className="sr-only">: {item.title}</span>
     </a>
@@ -530,13 +566,24 @@ function InterestRow({ item }: { item: ScheduleItem }) {
   );
 }
 
-/** The schedule's date cards on their own, for pages that list a fixed set of dates. */
-export function CourseCards({ items, className = "" }: { items: ScheduleItem[]; className?: string }) {
+/**
+ * The schedule's date cards on their own, for pages that list a fixed set of dates.
+ * `interest` renders interest-list cards: no date line, "Join List" in place of "Book".
+ */
+export function CourseCards({
+  items,
+  interest = false,
+  className = "",
+}: {
+  items: ScheduleItem[];
+  interest?: boolean;
+  className?: string;
+}) {
   return (
     <ul className={`${styles.cards} ${className}`}>
       {items.map((item) => (
         <li key={item.code + item.start}>
-          <DateCard item={item} />
+          <DateCard item={item} interest={interest} />
         </li>
       ))}
     </ul>

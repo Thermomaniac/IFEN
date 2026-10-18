@@ -17,6 +17,16 @@
   filter: drop-shadow(0 1px 1px #0000000f);
 }
 
+/* Linked cards: the button sits at the foot, so a row of cards lines its buttons up. */
+.link {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+.body:has(+ .link) {
+  margin-bottom: 12px;
+}
+
 .top {
   display: flex;
   align-items: baseline;

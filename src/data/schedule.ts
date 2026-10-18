@@ -12,7 +12,7 @@ import {
   type CtaContent,
   type Price,
 } from "./coursePage";
-import { MODULE1_PATH } from "./courses/module1";
+import { IFEN100_PATH, MODULE1_PATH, MODULE2_PATH, MODULE3_PATH, MODULE4_PATH } from "./courses/modulePaths";
 import { QEEG_PATH } from "./courses/qeeg";
 import { QEEG_WORKSHOP_PATH } from "./courses/qeegWorkshop";
 import { WEBINAR_PATH } from "./courses/webinar";
@@ -27,6 +27,8 @@ export type ScheduleItem = {
   title: string;
   /** Internal path for redesigned course pages, otherwise the live page. */
   href: string;
+  /** Where "Book" goes when it differs from `href`, e.g. the live booking form of a local page. */
+  bookHref?: string;
   isNew?: boolean;
   language?: Language;
   /** Local date and time, "YYYY-MM-DDTHH:mm". Absent when the date is flexible. */
@@ -103,7 +105,8 @@ export const scheduleDates: ScheduleItem[] = [
   {
     code: "IFEN-100-DE",
     title: "IFEN 100 - Schriftliches Prüfungs-Mentoring",
-    href: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/modul-1-4/ifen-100-pruefungs-mentoring.html",
+    href: IFEN100_PATH,
+    bookHref: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/modul-1-4/ifen-100-pruefungs-mentoring.html#appform",
     location: "Online",
     format: "online",
     type: "certification",
@@ -112,7 +115,8 @@ export const scheduleDates: ScheduleItem[] = [
   {
     code: "M2-P-IFEN-DE",
     title: "MODUL 2 - Praktikum für Zertifizierung zum/zur IFEN Neurofeedback-Therapeut/in",
-    href: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/alle-fortbildungen-im-ueberblick/courses/1-modul-2-praktikum-fuer-zertifizierung-zum-zur-ifen-neurofeedback-therapeut-in.html",
+    href: MODULE2_PATH,
+    bookHref: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/alle-fortbildungen-im-ueberblick/courses/1-modul-2-praktikum-fuer-zertifizierung-zum-zur-ifen-neurofeedback-therapeut-in.html#appform",
     location: "Your choice",
     format: "flexible",
     type: "certification",
@@ -121,7 +125,8 @@ export const scheduleDates: ScheduleItem[] = [
   {
     code: "M3-S",
     title: "MODUL 3 - Supervision",
-    href: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/alle-fortbildungen-im-ueberblick/courses/4-modul-3-supervision.html",
+    href: MODULE3_PATH,
+    bookHref: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/alle-fortbildungen-im-ueberblick/courses/4-modul-3-supervision.html#appform",
     location: "Online",
     format: "online",
     type: "certification",
@@ -130,7 +135,8 @@ export const scheduleDates: ScheduleItem[] = [
   {
     code: "M3-Std",
     title: "MODUL 3 - Supervision - Einzelstunde",
-    href: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/alle-fortbildungen-im-ueberblick/courses/14-modul-3-supervision-einzelstunde.html",
+    href: MODULE3_PATH,
+    bookHref: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/alle-fortbildungen-im-ueberblick/courses/14-modul-3-supervision-einzelstunde.html#appform",
     location: "Online",
     format: "online",
     type: "certification",
@@ -142,7 +148,8 @@ export const scheduleDates: ScheduleItem[] = [
   {
     code: "M4-P",
     title: "MODUL 4 - Prüfung",
-    href: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/alle-fortbildungen-im-ueberblick/courses/60-modul-4-pruefung.html",
+    href: MODULE4_PATH,
+    bookHref: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/alle-fortbildungen-im-ueberblick/courses/60-modul-4-pruefung.html#appform",
     language: "de",
     location: "Online",
     format: "online",

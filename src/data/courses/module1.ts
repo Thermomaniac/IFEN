@@ -18,8 +18,9 @@ import {
   type SpeakersContent,
 } from "../coursePage";
 import { ALL_OFFERS, FEINER, LIVE } from "./shared";
+import { MODULE1_PATH, MODULE2_PATH, MODULE3_PATH, MODULE4_PATH, MODULES_PATH } from "./modulePaths";
 
-export const MODULE1_PATH = "/courses/module-1";
+export { MODULE1_PATH };
 const BOOK = { label: "Register For Booking", href: `${REGISTER_PATH}/participant` };
 
 export const module1 = {
@@ -31,7 +32,11 @@ export const module1 = {
 
   hero: {
     title: "MODULE 1 - Certified Neurofeedback Therapist",
-    breadcrumb: [{ label: "Course Booking", href: LISTING_PATH }, { label: "Module 1" }],
+    breadcrumb: [
+      { label: "Course Booking", href: LISTING_PATH },
+      { label: "Certified Neurofeedback Therapist", href: MODULES_PATH },
+      { label: "Module 1" },
+    ],
     badge: "Module 1 of the IFEN training",
     description:
       "The 5-day intensive course that starts the IFEN certification programme: the fundamentals of EEG, biofeedback and neurofeedback, with first practical exercises under guidance.",
@@ -42,10 +47,6 @@ export const module1 = {
     ],
     booking: {
       code: "M1-051026-EN",
-      prices: [
-        { label: "Standard price", amount: 1750 },
-        { label: "Repeat participants", amount: 750 },
-      ],
       facts: [
         { label: "Start", value: "Mon, 05.10.2026, 09:00", icon: "start" },
         { label: "End", value: "Sat, 17.10.2026, 18:00", icon: "end" },
@@ -224,9 +225,9 @@ export const module1 = {
     ],
     steps: [
       { label: "Module 1", heading: "Intensive course", text: "5 days, hybrid", current: true },
-      { label: "Module 2", heading: "Internship", text: "At least 5 hours, also possible online" },
-      { label: "Module 3", heading: "Supervision", text: "5-hour session with a certified expert" },
-      { label: "Module 4", heading: "Examination", text: "Take examination & become expert" },
+      { label: "Module 2", heading: "Internship", text: "At least 5 hours, also possible online", href: MODULE2_PATH },
+      { label: "Module 3", heading: "Supervision", text: "5-hour session with a certified expert", href: MODULE3_PATH },
+      { label: "Module 4", heading: "Examination", text: "Take examination & become expert", href: MODULE4_PATH },
     ],
     note: "Module 2 and Module 3 can be completed in any order.",
   } satisfies PathwayContent,

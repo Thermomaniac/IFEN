@@ -10,6 +10,7 @@ import { Pathway } from "@/components/course/Pathway";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { CtaFooter } from "@/components/sections/CtaFooter/CtaFooter";
 import { module1 } from "@/data/courses/module1";
+import { moduleCards } from "@/data/courses/modules";
 
 export const metadata: Metadata = module1.meta;
 
@@ -24,6 +25,7 @@ export default function Module1Page() {
         <FeatureGrid id="why" tone="cream" content={module1.why} />
         <Curriculum id="curriculum" tone="white" content={module1.curriculum} />
         <Pathway id="pathway" tone="mist" content={module1.pathway} />
+        <FeatureGrid id="modules" tone="cream" content={moduleCards} />
         <CourseArticles id="practical" tone="white" variant="columns" content={module1.practical} />
         <CourseArticles id="booking-info" tone="mist" variant="rows" content={module1.booking} />
         <Mentors content={module1.speakers} />

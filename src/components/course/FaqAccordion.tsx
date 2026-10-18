@@ -3,7 +3,7 @@
 import { useId, useState } from "react";
 import { ChevronDownIcon } from "@/components/icons";
 import { Reveal, RevealItem } from "@/components/motion/Reveal";
-import type { FaqContent } from "@/data/coursePage";
+import type { FaqBlock, FaqContent } from "@/data/coursePage";
 import styles from "./Faq.module.css";
 
 /**
@@ -44,7 +44,7 @@ export function FaqAccordion({ items }: { items: FaqContent["items"] }) {
                 </h3>
                 <div id={panelId} role="region" aria-labelledby={btnId} className={styles.panel} inert={!isOpen}>
                   <div className={styles.panelInner}>
-                    <p className={styles.answer}>{item.answer}</p>
+                    <Answer answer={item.answer} />
                   </div>
                 </div>
               </div>
@@ -64,12 +64,54 @@ export function FaqAccordion({ items }: { items: FaqContent["items"] }) {
         ))}
         <div className={styles.ghostAnswers}>
           {items.map((item) => (
-            <p key={item.question} className={styles.answer}>
-              {item.answer}
-            </p>
+            <Answer key={item.question} answer={item.answer} ghost />
           ))}
         </div>
       </div>
+    </div>
+  );
+}
+
+/** A plain answer stays one paragraph; block answers stack paragraphs, lists and links. */
+function Answer({ answer, ghost = false }: { answer: FaqContent["items"][number]["answer"]; ghost?: boolean }) {
+  if (typeof answer === "string") return <p className={styles.answer}>{answer}</p>;
+  return (
+    <div className={styles.answer}>
+      {answer.map((block, i) => (
+        <Block key={i} block={block} ghost={ghost} />
+      ))}
+    </div>
+  );
+}
+
+function Block({ block, ghost }: { block: FaqBlock; ghost: boolean }) {
+  if (typeof block === "string") return <p>{block}</p>;
+  if ("list" in block) {
+    return (
+      <ul className={styles.answerList}>
+        {block.list.map((line) => (
+          <li key={line}>{line}</li>
+        ))}
+      </ul>
+    );
+  }
+  return (
+    <div className={styles.answerLinks}>
+      {block.heading && <p className={styles.answerLinksHeading}>{block.heading}</p>}
+      <ul>
+        {block.links.map((link) => (
+          <li key={link.href}>
+            {/* The hidden twin keeps the size without adding focusable links. */}
+            {ghost ? (
+              <span>{link.label}</span>
+            ) : (
+              <a href={link.href} target={link.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">
+                {link.label}
+              </a>
+            )}
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

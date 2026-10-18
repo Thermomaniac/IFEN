@@ -192,6 +192,44 @@
   text-wrap: pretty;
 }
 
+/* Block answers: paragraphs, bullet lists and link groups 12px apart. */
+.answer > * + * {
+  margin-top: 12px;
+}
+
+.answerList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-left: 1.25em;
+  list-style: disc;
+}
+
+.answerList li::marker {
+  color: var(--color-subtle);
+}
+
+.answerLinks ul {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.answerLinksHeading {
+  margin-bottom: 4px;
+  color: var(--color-ink);
+  font-weight: 600;
+  font-variation-settings: var(--fvs-display);
+}
+
+.answer a,
+.answerLinks span {
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+}
+
 .panel .answer {
   opacity: 0;
   translate: 0 -6px;

@@ -161,7 +161,13 @@ export function Pathway({ id, tone, content }: { id: string; tone: Tone; content
                   </span>
                   <div className={styles.text}>
                     <h3 className={styles.heading}>
-                      {s.heading}
+                      {s.href && !s.current ? (
+                        <a href={s.href} className={styles.link}>
+                          {s.heading}
+                        </a>
+                      ) : (
+                        s.heading
+                      )}
                       {s.current && <span className="sr-only"> (this course)</span>}
                     </h3>
                     {s.text && <p className={styles.detail}>{s.text}</p>}

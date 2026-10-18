@@ -1,6 +1,6 @@
 # IFEN Remaining Pages Progress
 
-Active phase: correction programme, phase E (Modules). See `ROADMAP.md`, section "Correction programme".
+Active phase: correction programme, phase F (Course pages). See `ROADMAP.md`, section "Correction programme".
 
 ## Correction programme
 
@@ -40,6 +40,16 @@ Active phase: correction programme, phase E (Modules). See `ROADMAP.md`, section
 - New posts from April 2026 on only have text-on-image social graphics, so they use the dotted-brain tile.
 - Evidence article: one white reading column (`ArticleBody` / `ArticleSection`, 42rem measure, 17/30 body, lead paragraph, objections as gold-rule pull quotes, sources numbered) beside the "On This Page" nav, which now also lists Share. Footer: sources, share row, previous post, then "Keep Reading: More From the Blog" (the three previous posts, link to the index). Category is "News" at the source, so no "More in Research" label.
 - Checks: eslint, tsc, build clean; no overflow at 390 and 320 on /blog and the article.
+
+### Phase E: Modules (done 2026-10-18, pushed to staging)
+
+- New overview `/courses/modules` ("Certified Neurofeedback Therapist IFEN"): Welcome and Our Philosophy panels, the M1 to M4 pathway with each step linked, "Overview of All Modules" cards, then every module date in the `CourseSchedule` table (search, language, format and price filters, no tabs), Module 1 in English and Spanish as Join List cards, and the full FAQ (13 questions from Itemid=1442) at `#faq`.
+- New pages `/courses/module-2`, `/courses/module-3`, `/courses/module-4`, `/courses/ifen-100` on `ContentPage` (data in `src/data/courses/modules.ts`). Module 2: requirements, four numbered registration steps, notes, dates, six lecturers. Module 3: focus, phone or online, TeamViewer (official download link), units, two date lines, five lecturers. Module 4 and IFEN 100: exam flow and dates.
+- Module 1: pricing panel removed from the hero ("Next date" shows instead), breadcrumb runs through the overview, the pathway links to Modules 2 to 4, and the "Overview of All Modules" cards sit after it. Booking journey unchanged.
+- Nav: Course Booking lists Certified Neurofeedback Therapist, Module 1 to 4 and IFEN 100.
+- Shared changes: `CourseSchedule` takes optional `interest`, `notes` and `section`; tabs only show with interest entries; a filter only shows with more than one choice. `datesFor` and `interestFor` fail the build on a missing code. `DatesBand` (ContentPage) renders date or interest cards straight in a band. FAQ answers take blocks (lists, links). `FeatureGrid` items take a `link`; `Pathway` steps take an `href`. Module paths live in `modulePaths.ts` to keep imports acyclic.
+- Kept as published: Module 3 text says 150 € per unit with Handwerker, Feiner or Schack, the schedule lists 250 € with Handwerker or Feiner. Needs IFEN to confirm.
+- Checks: eslint, tsc, build clean. Rendered at 1440, 390, 320: no horizontal overflow on the overview, Module 1 to 4 and IFEN 100 (the Module 1 mentor row scrolls sideways by design).
 
 ## Phase 5: Course Booking content pages (completed 2026-10-18, pushed to staging)
 

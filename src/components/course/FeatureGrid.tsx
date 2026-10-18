@@ -1,5 +1,6 @@
 import { CheckBoldIcon } from "@/components/icons";
 import { Reveal, RevealItem } from "@/components/motion/Reveal";
+import { Button } from "@/components/ui/Button";
 import type { FeaturesContent } from "@/data/coursePage";
 import { CourseSection, type Tone } from "./CourseSection";
 import { FEATURE_ICONS } from "./featureIcons";
@@ -73,6 +74,11 @@ export function FeatureGrid({
                 <h3 className={styles.heading}>{item.heading}</h3>
                 <p className={styles.text}>{item.text}</p>
               </div>
+              {item.link && (
+                <Button href={item.link.href} variant="secondary" className={styles.link}>
+                  {item.link.label}
+                </Button>
+              )}
             </RevealItem>
           );
         })}

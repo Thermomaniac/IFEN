@@ -29,7 +29,8 @@ export type CourseHeroContent = {
     code?: string;
     /** Replaces "Select your plan" / "Course fee" above the price (therapist profiles). */
     eyebrow?: string;
-    prices: Price[];
+    /** Left out where the price lives in the dates and the registration (Module 1). */
+    prices?: Price[];
     facts: CourseFact[];
     cta: Link;
   };
@@ -130,7 +131,8 @@ export type FeaturesContent = SectionHead & {
   numbered?: boolean;
   /** Photo beside the cards, for split layouts. */
   image?: { src: string; alt: string };
-  items: { heading: string; text: string; eyebrow?: string; icon?: FeatureIcon }[];
+  /** `link` adds a secondary button at the foot of the card (module overview cards). */
+  items: { heading: string; text: string; eyebrow?: string; icon?: FeatureIcon; link?: Link }[];
 };
 
 /** Professions shown as photo cards. */
@@ -141,7 +143,8 @@ export type CurriculumContent = SectionHead & {
 };
 
 export type PathwayContent = SectionHead & {
-  steps: { label: string; heading: string; text?: string; current?: boolean }[];
+  /** `href` links a step to its own page; the current step never links. */
+  steps: { label: string; heading: string; text?: string; current?: boolean; href?: string }[];
   note: string;
 };
 
@@ -158,7 +161,14 @@ export type TeamMember = Omit<InstructorContent, keyof SectionHead>;
 
 export type TeamContent = SectionHead & { people: TeamMember[] };
 
+/**
+ * One block of a longer answer: a paragraph, a bullet list, or a group of links with an
+ * optional heading (the source FAQ's reading lists).
+ */
+export type FaqBlock = string | { list: string[] } | { heading?: string; links: Link[] };
+
 export type FaqContent = SectionHead & {
-  items: { question: string; answer: string }[];
+  /** A single paragraph, or blocks in reading order. */
+  items: { question: string; answer: string | FaqBlock[] }[];
   help: { heading: string; text: string; email: string };
 };

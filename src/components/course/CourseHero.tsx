@@ -178,7 +178,8 @@ function Lines() {
 }
 
 function BookingPanel({ booking }: { booking: NonNullable<CourseHeroContent["booking"]> }) {
-  const { prices, facts } = booking;
+  const { prices = [], facts } = booking;
+  const priced = prices.length > 0;
   const multiple = prices.length > 1;
   const fromPrice = Math.min(...prices.map((p) => p.amount));
   const factRows = [facts.slice(0, 2), facts.slice(2, 4)].filter((row) => row.length > 0);
@@ -188,14 +189,16 @@ function BookingPanel({ booking }: { booking: NonNullable<CourseHeroContent["boo
       <RevealItem className={styles.panelHead}>
         <div className={styles.headRow}>
           <p className={styles.eyebrow} id="plan-legend">
-            {booking.eyebrow ?? (multiple ? "Select your plan" : "Course fee")}
+            {booking.eyebrow ?? (multiple ? "Select your plan" : priced ? "Course fee" : "Next date")}
           </p>
           {booking.code && <p className={styles.code}>{booking.code}</p>}
         </div>
-        <p className={styles.from}>
-          {multiple ? "From " : ""}
-          {formatPrice(fromPrice)}
-        </p>
+        {priced && (
+          <p className={styles.from}>
+            {multiple ? "From " : ""}
+            {formatPrice(fromPrice)}
+          </p>
+        )}
       </RevealItem>
 
       <RevealItem className={styles.rule}>

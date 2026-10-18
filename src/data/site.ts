@@ -2,6 +2,14 @@
 
 import { BCIA_PATH, ISF_PATH, QEEG_COURSES_PATH, SUPERVISION_PATH, WEBINARS_PATH } from "./booking/paths";
 import { LISTING_PATH } from "./coursePage";
+import {
+  IFEN100_PATH,
+  MODULE1_PATH,
+  MODULE2_PATH,
+  MODULE3_PATH,
+  MODULE4_PATH,
+  MODULES_PATH,
+} from "./courses/modulePaths";
 import { ABOUT_PATH, LECTURERS_PATH } from "./ifen/paths";
 import { BLOG_PATH } from "./blog/paths";
 import { AREAS_PATH, TOPICS_PATH, WHAT_IS_PATH } from "./neurofeedback/shared";
@@ -31,6 +39,12 @@ export const navLinks: NavLink[] = [
     href: LISTING_PATH,
     children: [
       { label: "Course Dates", href: LISTING_PATH },
+      { label: "Certified Neurofeedback Therapist", href: MODULES_PATH },
+      { label: "Module 1, Intensive Course", href: MODULE1_PATH },
+      { label: "Module 2, Internship", href: MODULE2_PATH },
+      { label: "Module 3, Supervision", href: MODULE3_PATH },
+      { label: "Module 4, Examination", href: MODULE4_PATH },
+      { label: "IFEN 100, Exam Mentoring", href: IFEN100_PATH },
       { label: "QEEG Courses", href: QEEG_COURSES_PATH },
       { label: "ISF Neurofeedback", href: ISF_PATH },
       { label: "Supervision, Internship and Mentoring", href: SUPERVISION_PATH },

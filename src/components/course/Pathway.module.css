@@ -128,6 +128,36 @@
   color: var(--color-ink);
 }
 
+/* A linked step opens its module page from anywhere on the card. */
+.link {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: 4px;
+  transition: text-decoration-color var(--dur-base) var(--ease-glide);
+}
+
+.link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+}
+
+.link:hover,
+.link:focus-visible {
+  text-decoration-color: currentColor;
+}
+
+.link:focus-visible {
+  outline: none;
+}
+
+.link:focus-visible::after {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
+
 .step[data-active] .heading {
   color: var(--color-ink);
 }

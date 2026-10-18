@@ -11,9 +11,10 @@ import {
   type CtaContent,
   type FeaturesContent,
   type SectionHead,
+  type SpeakersContent,
 } from "../coursePage";
 import { ALL_OFFERS } from "../courses/shared";
-import { scheduleDates, type ScheduleItem } from "../schedule";
+import { interestList, scheduleDates, type ScheduleItem } from "../schedule";
 import { BCIA_PATH, ISF_PATH, QEEG_COURSES_PATH, SUPERVISION_PATH, WEBINARS_PATH } from "./paths";
 
 export { BCIA_PATH, ISF_PATH, QEEG_COURSES_PATH, SUPERVISION_PATH, WEBINARS_PATH };
@@ -44,13 +45,18 @@ export const BOOKING_CTA: CtaContent = {
 };
 
 /** A dated list of courses under a section header. */
-export type DatesContent = SectionHead & { items: ScheduleItem[] };
+export type DatesContent = SectionHead & {
+  items: ScheduleItem[];
+  /** Interest-list entries: the cards say Flexible and offer Join List instead of Book. */
+  interest?: boolean;
+};
 
 /** One band of a category page. Tones alternate mist, cream, white in order. */
 export type BookingSection =
   | { kind: "articles"; id: string; variant?: "panels" | "columns" | "rows" | "media"; content: ArticlesContent }
   | { kind: "features"; id: string; content: FeaturesContent }
-  | { kind: "dates"; id: string; content: DatesContent };
+  | { kind: "dates"; id: string; content: DatesContent }
+  | { kind: "speakers"; id: string; content: SpeakersContent };
 
 export type BookingPage = {
   meta: { title: string; description: string };
@@ -65,9 +71,18 @@ export type BookingPage = {
  * code is missing, so a removed date cannot silently drop off a page.
  */
 export function datesFor(page: string, codes: string[]): ScheduleItem[] {
+  return pick(scheduleDates, page, codes, "schedule date");
+}
+
+/** The interest-list entries (courses without a date yet) for a page, failing the same way. */
+export function interestFor(page: string, codes: string[]): ScheduleItem[] {
+  return pick(interestList, page, codes, "interest-list entry");
+}
+
+function pick(list: ScheduleItem[], page: string, codes: string[], what: string): ScheduleItem[] {
   return codes.map((code) => {
-    const item = scheduleDates.find((d) => d.code === code);
-    if (!item) throw new Error(`${page}: no schedule date with code ${code}`);
+    const item = list.find((d) => d.code === code);
+    if (!item) throw new Error(`${page}: no ${what} with code ${code}`);
     return item;
   });
 }
