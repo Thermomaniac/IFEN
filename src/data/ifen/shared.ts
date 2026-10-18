@@ -3,9 +3,9 @@
 import type { Category } from "../course";
 import { LISTING_PATH, type CtaContent } from "../coursePage";
 import { ALL_OFFERS } from "../courses/shared";
-import { ABOUT_PATH, FEINER_PATH, LECTURERS_PATH } from "./paths";
+import { ABOUT_PATH, FEINER_PATH, LECTURERS_PATH, TRAINING_PATH } from "./paths";
 
-export { ABOUT_PATH, FEINER_PATH, LECTURERS_PATH };
+export { ABOUT_PATH, FEINER_PATH, LECTURERS_PATH, TRAINING_PATH };
 
 /** The section's breadcrumb root. About IFEN is the landing page of the group. */
 export const IFEN_CRUMB = { label: "IFEN", href: ABOUT_PATH };

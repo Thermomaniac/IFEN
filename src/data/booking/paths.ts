@@ -7,3 +7,5 @@ export const ISF_PATH = `${ROOT}/isf-neurofeedback`;
 export const SUPERVISION_PATH = `${ROOT}/supervision-internship-mentoring`;
 export const BCIA_PATH = `${ROOT}/bcia-certification`;
 export const WEBINARS_PATH = `${ROOT}/webinars`;
+export const BRAINAVATAR_PATH = `${ROOT}/brainavatar`;
+export const PBM_PATH = `${ROOT}/photobiomodulation`;

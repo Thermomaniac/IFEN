@@ -1,6 +1,14 @@
 // Site-wide content. Copy is taken from the Paper file "Final Home Page".
 
-import { BCIA_PATH, ISF_PATH, QEEG_COURSES_PATH, SUPERVISION_PATH, WEBINARS_PATH } from "./booking/paths";
+import {
+  BCIA_PATH,
+  BRAINAVATAR_PATH,
+  ISF_PATH,
+  PBM_PATH,
+  QEEG_COURSES_PATH,
+  SUPERVISION_PATH,
+  WEBINARS_PATH,
+} from "./booking/paths";
 import { LISTING_PATH } from "./coursePage";
 import {
   IFEN100_PATH,
@@ -10,7 +18,7 @@ import {
   MODULE4_PATH,
   MODULES_PATH,
 } from "./courses/modulePaths";
-import { ABOUT_PATH, LECTURERS_PATH } from "./ifen/paths";
+import { ABOUT_PATH, LECTURERS_PATH, TRAINING_PATH } from "./ifen/paths";
 import { BLOG_PATH } from "./blog/paths";
 import { AREAS_PATH, TOPICS_PATH, WHAT_IS_PATH } from "./neurofeedback/shared";
 
@@ -48,7 +56,9 @@ export const navLinks: NavLink[] = [
       { label: "QEEG Courses", href: QEEG_COURSES_PATH },
       { label: "ISF Neurofeedback", href: ISF_PATH },
       { label: "Supervision, Internship and Mentoring", href: SUPERVISION_PATH },
+      { label: "BrainAvatar", href: BRAINAVATAR_PATH },
       { label: "BCIA Certification", href: BCIA_PATH },
+      { label: "Photobiomodulation", href: PBM_PATH },
       { label: "Webinars", href: WEBINARS_PATH },
     ],
   },
@@ -67,6 +77,7 @@ export const navLinks: NavLink[] = [
     children: [
       { label: "About IFEN", href: ABOUT_PATH },
       { label: "Lecturers", href: LECTURERS_PATH },
+      { label: "Training Courses in Neurofeedback", href: TRAINING_PATH },
     ],
   },
   { label: "Shop", href: "#" },

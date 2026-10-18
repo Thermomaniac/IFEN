@@ -7,6 +7,7 @@ import { CourseArticles } from "./CourseArticles";
 import { CourseHero } from "./CourseHero";
 import { CourseCards } from "./CourseSchedule";
 import { CourseSection, type Tone } from "./CourseSection";
+import { Faq } from "./Faq";
 import { FeatureGrid } from "./FeatureGrid";
 import { Mentors } from "./Mentors";
 import styles from "./ContentPage.module.css";
@@ -17,7 +18,7 @@ const TONES: Tone[] = ["mist", "cream", "white"];
  * A data-driven content page (Course Booking categories): the ink hero, then each section
  * in order on alternating mist, cream and white bands, related cards and the CTA footer.
  * Sections are explainers (`CourseArticles`), fact cards (`FeatureGrid`), a page's
- * course dates as the schedule's date cards, or its lecturers (`Mentors` grid).
+ * course dates as the schedule's date cards, its lecturers (`Mentors` grid) or an FAQ.
  */
 export function ContentPage({ page }: { page: BookingPage }) {
   return (
@@ -43,6 +44,8 @@ function Section({ section, tone }: { section: BookingSection; tone: Tone }) {
       return <FeatureGrid id={section.id} tone={tone} content={section.content} />;
     case "speakers":
       return <Mentors id={section.id} tone={tone} content={section.content} grid />;
+    case "faq":
+      return <Faq id={section.id} tone={tone} content={section.content} />;
     case "dates":
       return <DatesBand id={section.id} tone={tone} content={section.content} />;
   }

@@ -1,6 +1,6 @@
 # IFEN Remaining Pages Progress
 
-Active phase: correction programme, phase F (Course pages). See `ROADMAP.md`, section "Correction programme".
+Active phase: correction programme, phase G (Supervision and Webinars). See `ROADMAP.md`, section "Correction programme".
 
 ## Correction programme
 
@@ -50,6 +50,17 @@ Active phase: correction programme, phase F (Course pages). See `ROADMAP.md`, se
 - Shared changes: `CourseSchedule` takes optional `interest`, `notes` and `section`; tabs only show with interest entries; a filter only shows with more than one choice. `datesFor` and `interestFor` fail the build on a missing code. `DatesBand` (ContentPage) renders date or interest cards straight in a band. FAQ answers take blocks (lists, links). `FeatureGrid` items take a `link`; `Pathway` steps take an `href`. Module paths live in `modulePaths.ts` to keep imports acyclic.
 - Kept as published: Module 3 text says 150 € per unit with Handwerker, Feiner or Schack, the schedule lists 250 € with Handwerker or Feiner. Needs IFEN to confirm.
 - Checks: eslint, tsc, build clean. Rendered at 1440, 390, 320: no horizontal overflow on the overview, Module 1 to 4 and IFEN 100 (the Module 1 mentor row scrolls sideways by design).
+
+### Phase F: Course pages (done 2026-10-18, pushed to staging)
+
+- New `/ifen/training-courses` ("Training Courses in Neurofeedback", data `src/data/ifen/trainingCourses.ts`) on `ContentPage`: who the courses are for and what to expect (panels), Why Neurofeedback and Why IFEN (columns), the nine training dates, the five upcoming courses and webinars, the 13-question FAQ (shared with the modules overview), and a "Your Next Step" CTA. Left out: participant quotes and the orphaned "Für wen ist dieser Kurs geeignet?" block.
+- New `/course-booking/brainavatar`: about BrainAvatar, five dates (the source also lists the BCIA foundation course), and a Join List card for AVA-INTER.
+- New `/course-booking/photobiomodulation`: the four source paragraphs in two columns and a Join List card for PBM-INTER.
+- BCIA: added the five certification requirements (numbered rows, with the 36-hour blueprint and the practical training counts), the recommended order, fees, certification through prior experience and the EEG brochure link. Related now includes BrainAvatar.
+- Nav: Course Booking gains BrainAvatar and Photobiomodulation (source order); IFEN gains Training Courses in Neurofeedback.
+- Shared: `ContentPage` renders a `faq` section kind.
+- Not shown: the source's upcoming table lists WEB-071126-EN (Swingle assessment), which is not in `schedule.ts`.
+- Checks: eslint, tsc, build clean. Rendered at 1440, 390, 320: no horizontal overflow on the four pages.
 
 ## Phase 5: Course Booking content pages (completed 2026-10-18, pushed to staging)
 

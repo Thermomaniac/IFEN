@@ -9,20 +9,32 @@ import {
   type CategoriesContent,
   type CourseHeroContent,
   type CtaContent,
+  type FaqContent,
   type FeaturesContent,
   type SectionHead,
   type SpeakersContent,
 } from "../coursePage";
 import { ALL_OFFERS } from "../courses/shared";
 import { interestList, scheduleDates, type ScheduleItem } from "../schedule";
-import { BCIA_PATH, ISF_PATH, QEEG_COURSES_PATH, SUPERVISION_PATH, WEBINARS_PATH } from "./paths";
+import {
+  BCIA_PATH,
+  BRAINAVATAR_PATH,
+  ISF_PATH,
+  PBM_PATH,
+  QEEG_COURSES_PATH,
+  SUPERVISION_PATH,
+  WEBINARS_PATH,
+} from "./paths";
 
-export { BCIA_PATH, ISF_PATH, QEEG_COURSES_PATH, SUPERVISION_PATH, WEBINARS_PATH };
+export { BCIA_PATH, BRAINAVATAR_PATH, ISF_PATH, PBM_PATH, QEEG_COURSES_PATH, SUPERVISION_PATH, WEBINARS_PATH };
 
 /** The group's breadcrumb root: the course dates listing. */
 export const BOOKING_CRUMB = { label: "Course Booking", href: LISTING_PATH };
 
-export const RELATED: Record<"qeeg" | "isf" | "supervision" | "bcia" | "webinars", Category> = {
+export const RELATED: Record<
+  "qeeg" | "isf" | "supervision" | "bcia" | "webinars" | "brainavatar" | "pbm",
+  Category
+> = {
   qeeg: { id: "qeeg-courses", title: "QEEG Courses", icon: { kind: "brain" }, href: QEEG_COURSES_PATH },
   isf: { id: "isf", title: "ISF Neurofeedback", icon: { kind: "pulse" }, href: ISF_PATH },
   supervision: {
@@ -33,6 +45,8 @@ export const RELATED: Record<"qeeg" | "isf" | "supervision" | "bcia" | "webinars
   },
   bcia: { id: "bcia", title: "BCIA Certification", icon: { kind: "cap" }, href: BCIA_PATH },
   webinars: { id: "webinars", title: "Webinars", icon: { kind: "pulse" }, href: WEBINARS_PATH },
+  brainavatar: { id: "brainavatar", title: "BrainAvatar", icon: { kind: "brain" }, href: BRAINAVATAR_PATH },
+  pbm: { id: "pbm", title: "Photobiomodulation", icon: { kind: "pulse" }, href: PBM_PATH },
 };
 
 export { ALL_OFFERS };
@@ -56,7 +70,8 @@ export type BookingSection =
   | { kind: "articles"; id: string; variant?: "panels" | "columns" | "rows" | "media"; content: ArticlesContent }
   | { kind: "features"; id: string; content: FeaturesContent }
   | { kind: "dates"; id: string; content: DatesContent }
-  | { kind: "speakers"; id: string; content: SpeakersContent };
+  | { kind: "speakers"; id: string; content: SpeakersContent }
+  | { kind: "faq"; id: string; content: FaqContent };
 
 export type BookingPage = {
   meta: { title: string; description: string };
