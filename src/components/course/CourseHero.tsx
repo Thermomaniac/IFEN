@@ -16,8 +16,8 @@ import { formatPrice, type CourseFact } from "@/data/course";
 import type { CourseHeroContent } from "@/data/coursePage";
 import styles from "./CourseHero.module.css";
 
-/** Figma "Hero Section" photo, copied into the app so no Figma URL is used at runtime. */
-const LIGHT_PHOTO = "/hero/ifen-hero-light.jpg";
+/** Figma "Hero Section" photo (node 40001128-108319): the listing hero photo, kept local. */
+const HERO_PHOTO = "/training/training-offers-hero.jpg";
 
 const factIcons: Record<CourseFact["icon"], typeof UsersIcon> = {
   start: CalendarTickIcon,
@@ -35,28 +35,20 @@ const factIcons: Record<CourseFact["icon"], typeof UsersIcon> = {
  * panel on the right. The prices are a static list; the package is chosen in the
  * registration flow. Without `booking` (listing pages) only the intro renders. With
  * `image` a photo fills the right side under an ink fade instead of the line pattern.
- * Every other hero without a booking panel or portrait is light: the IFEN photo on the
- * right under a light fade, ink type (Figma "Hero Section", light variant).
+ * Every other hero without a booking panel or portrait gets the same treatment with the
+ * listing photo (Figma "Hero Section").
  */
 export function CourseHero({ content }: { content: CourseHeroContent }) {
   const { booking } = content;
   const paragraphs = Array.isArray(content.description) ? content.description : [content.description];
-  const light = !booking && !content.portrait && !content.image;
-  const tone = content.image ? styles.photoHero : light ? `${styles.photoHero} ${styles.light}` : "";
+  const photo = content.image ?? (!booking && !content.portrait ? HERO_PHOTO : undefined);
 
   return (
-    <section className={`${styles.hero} ${tone}`} aria-labelledby="course-title">
-      {light ? (
+    <section className={`${styles.hero} ${photo ? styles.photoHero : ""}`} aria-labelledby="course-title">
+      {photo ? (
         <>
           <span className={styles.media}>
-            <Image src={LIGHT_PHOTO} alt="" fill priority sizes="100vw" className={styles.photo} />
-          </span>
-          <span className={styles.fade} aria-hidden="true" />
-        </>
-      ) : content.image ? (
-        <>
-          <span className={styles.media}>
-            <Image src={content.image} alt="" fill priority sizes="100vw" className={styles.photo} />
+            <Image src={photo} alt="" fill priority sizes="100vw" className={styles.photo} />
           </span>
           <span className={styles.fade} aria-hidden="true" />
         </>

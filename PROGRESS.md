@@ -1,6 +1,16 @@
 # IFEN Remaining Pages Progress
 
-Active phase: none. Interest, account and design-system programme complete (phases 0 to 6, 2026-10-18). Correction programme A to H complete (2026-10-18), all phases pushed to staging.
+Active phase: Follow-up corrections programme (phases 1 to 7, 2026-10-19), in progress. Interest, account and design-system programme complete (phases 0 to 6, 2026-10-18). Correction programme A to H complete (2026-10-18).
+
+## Follow-up corrections programme
+
+### Phase 1: Photo hero backgrounds (done 2026-10-19)
+
+- Figma "Hero Section" (node 40001128-108319) is the ink band with the listing photo (woman, man, waveform) on the right under the radial ink fade: the exact treatment the course listing hero already uses (same `.media`, `.fade` gradient stops 34% / 62.6% / 91.7%).
+- `CourseHero`: the 17 heroes that Programme 4 made light (modules overview, Modules 2 to 4, IFEN 100, BCIA, BrainAvatar, ISF, Photobiomodulation, QEEG Courses, Supervision, Webinars, Training Courses, About IFEN, Lecturers, Topics, What Is Neurofeedback) now render that photo hero with `/training/training-offers-hero.jpg`. Copy, CTAs, breadcrumb, badge and highlights unchanged.
+- The light tone CSS and `public/hero/ifen-hero-light.jpg` are removed (no remaining references). No new overlay style.
+- Unchanged: booking heroes (line pattern), the Thomas Feiner and therapist portrait heroes, and the five heroes with their own photo.
+- Checks: eslint, tsc, build clean. Rendered Module 4 at 1440 (matches Figma), About IFEN at 390 and 320 (photo strip under the copy, no horizontal overflow).
 
 ## Interest, account and design-system programme
 
