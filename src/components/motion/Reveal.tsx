@@ -55,10 +55,21 @@ export function Reveal({ children, as = "div", className, stagger = 0.08, delay 
   );
 }
 
-export function RevealItem({ children, as = "div", className }: { children: ReactNode; as?: Tag; className?: string }) {
+export function RevealItem({
+  children,
+  as = "div",
+  className,
+  lang,
+}: {
+  children: ReactNode;
+  as?: Tag;
+  className?: string;
+  /** For text in another language than the page. */
+  lang?: string;
+}) {
   const Component = tags[as];
   return (
-    <Component className={className} variants={revealItem}>
+    <Component className={className} lang={lang} variants={revealItem}>
       {children}
     </Component>
   );

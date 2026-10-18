@@ -4,7 +4,16 @@ Active phase: none. Follow-up corrections programme complete (phases 1 to 7, 202
 
 ## Follow-up corrections programme
 
-### Module overview icon discs (done 2026-10-19, user request)
+### Interest list pages (done 2026-10-19, user request)
+
+- "Join List" (and the course title) on every interest-list entry now opens an on-site page at `/courses/interest-list/<slug>` instead of the live Seminarman prospect form. Six static pages, one per `interestList` row: brainavatar, module-1-en, module-1-es, neuromeditation, photobiomodulation, workshop-isf-es. Any other slug is a 404.
+- Content is the live prospect page's, unchanged: title, course number, price (Free or the course fee), place and description. English text is the live English text; BrainAvatar has only German on the live page, so it uses the same English text with its topic; the two Spanish pages keep their Spanish text (marked `lang="es"`). Data in `src/data/interestPages.ts`, paths in `src/data/interestPaths.ts`.
+- Built from existing pieces: `CourseHero` (line pattern, booking panel with code, price, Location fact and a "Join the Interest List" CTA to the form), then `InterestCapture` on a mist band with the "Join the Interest List" header (live: "Tragen Sie sich in die Interessentenliste ein!"), then the Course Booking `CtaFooter`. The form's fields, AGB checkbox and `/api/interest` delivery are unchanged.
+- Small optional extensions: `CourseHero` booking `priceNote` (shows "Free" where there is no amount) and content `lang`; `RevealItem` `lang`; `InterestCapture` `head`.
+- Checks: eslint, tsc, build clean. All six pages rendered at 1440, 390 and 320 (no horizontal overflow). BrainAvatar booking page and the `/courses` listing link to the local pages; no prospect URLs remain.
+- Open: submissions still need `IFEN_INTEREST_ENDPOINT` from IFEN (without it the form shows the "not connected" message with the email fallback, as on the course pages).
+
+### Module overview icon discs (done 2026-10-19, user request, pushed to staging)
 
 - "Overview of All Modules" (Module 1 page and the Training Modules overview, same `moduleCards` data): Internship, Supervision and Written Exam Mentoring now use the Examination card's lime disc (#edf5c4), so all four match.
 - The per-card `tint` option (teal, cream, grey) had no other users, so it is removed from the data type, `FeatureGrid` and its CSS; icon cards always take the lime disc. `--color-tint-teal` stays (the Training section uses it).

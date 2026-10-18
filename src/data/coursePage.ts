@@ -20,6 +20,8 @@ export type CourseHeroContent = {
   subline?: { parts: string[]; flag?: { src: string; alt: string } };
   /** One or more paragraphs under the title. */
   description: string | string[];
+  /** Language of the description when it differs from the page (Spanish interest lists). */
+  lang?: string;
   highlights: { value: string; label: string }[];
   /** Photo on the right under an ink fade, in place of the line pattern (listing hero). */
   image?: string;
@@ -31,6 +33,8 @@ export type CourseHeroContent = {
     eyebrow?: string;
     /** Left out where the price lives in the dates and the registration (Module 1). */
     prices?: Price[];
+    /** Shown in the price's place when there is no amount, e.g. "Free" (interest lists). */
+    priceNote?: string;
     facts: CourseFact[];
     cta: Link;
   };

@@ -17,6 +17,7 @@ import { QEEG_PATH } from "./courses/qeeg";
 import { QEEG_WORKSHOP_PATH } from "./courses/qeegWorkshop";
 import { WEBINAR_PATH } from "./courses/webinar";
 import { WEBINAR_QEEG_PATH } from "./courses/webinarQeegPsychotherapy";
+import { interestPath } from "./interestPaths";
 
 export type CourseType = "certification" | "webinar" | "workshop" | "mentoring" | "event";
 export type CourseFormat = "online" | "in-person" | "hybrid" | "flexible";
@@ -695,12 +696,16 @@ export const scheduleDates: ScheduleItem[] = [
   },
 ];
 
-/** Courses without a date yet. Joining the list is free; the price is the course fee. */
+/**
+ * Courses without a date yet. Joining the list is free; the price is the course fee. Each
+ * entry links to its on-site sign-up page (`interestPages.ts`), which replaces the live
+ * Seminarman prospect form.
+ */
 export const interestList: ScheduleItem[] = [
   {
     code: "AVA-INTER",
     title: "BrainAvatar - Interessentenliste",
-    href: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/alle-fortbildungen-im-ueberblick/prospect/9-brainavatar-interessentenliste.html",
+    href: interestPath("brainavatar"),
     location: "To be announced",
     format: "flexible",
     type: "workshop",
@@ -709,7 +714,7 @@ export const interestList: ScheduleItem[] = [
   {
     code: "M1-EN",
     title: "Module 1: Certified Neurofeedback Therapist – Interessentenliste",
-    href: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/alle-fortbildungen-im-ueberblick/prospect/11-neuromeditation-interessentenliste-prospects-list-0.html",
+    href: interestPath("module-1-en"),
     language: "en",
     location: "Flexible",
     format: "flexible",
@@ -719,7 +724,7 @@ export const interestList: ScheduleItem[] = [
   {
     code: "M1-ES",
     title: "Módulo 1: Terapeuta Neurofeedback",
-    href: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/alle-fortbildungen-im-ueberblick/prospect/12-modulo-1-terapeuta-neurofeedback.html",
+    href: interestPath("module-1-es"),
     language: "es",
     location: "Flexible",
     format: "flexible",
@@ -729,7 +734,7 @@ export const interestList: ScheduleItem[] = [
   {
     code: "NM-INTER",
     title: "Neuromeditation-Interessentenliste - prospects list",
-    href: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/alle-fortbildungen-im-ueberblick/prospect/10-neuromeditation-interessentenliste-prospects-list.html",
+    href: interestPath("neuromeditation"),
     location: "Flexible",
     format: "flexible",
     type: "workshop",
@@ -738,7 +743,7 @@ export const interestList: ScheduleItem[] = [
   {
     code: "PBM-INTER",
     title: "Photobiomodulation - Interessentenliste - prospects list",
-    href: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/alle-fortbildungen-im-ueberblick/prospect/8-photobiomodulation-interessentenliste-prospects-list.html",
+    href: interestPath("photobiomodulation"),
     location: "To be announced",
     format: "flexible",
     type: "certification",
@@ -747,7 +752,7 @@ export const interestList: ScheduleItem[] = [
   {
     code: "QEEG-ES",
     title: "Workshop ISF - ES",
-    href: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/alle-fortbildungen-im-ueberblick/prospect/15-2025-03-18-17-09-48-0-0.html",
+    href: interestPath("workshop-isf-es"),
     language: "es",
     location: "Flexible",
     format: "flexible",

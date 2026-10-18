@@ -110,7 +110,7 @@ export function CourseHero({ content }: { content: CourseHeroContent }) {
               </RevealItem>
             )}
             {paragraphs.map((text) => (
-              <RevealItem key={text} as="p" className={styles.description}>
+              <RevealItem key={text} as="p" className={styles.description} lang={content.lang}>
                 {text}
               </RevealItem>
             ))}
@@ -203,11 +203,13 @@ function BookingPanel({ booking }: { booking: NonNullable<CourseHeroContent["boo
           </p>
           {booking.code && <p className={styles.code}>{booking.code}</p>}
         </div>
-        {priced && (
+        {priced ? (
           <p className={styles.from}>
             {multiple ? "From " : ""}
             {formatPrice(fromPrice)}
           </p>
+        ) : (
+          booking.priceNote && <p className={styles.from}>{booking.priceNote}</p>
         )}
       </RevealItem>
 

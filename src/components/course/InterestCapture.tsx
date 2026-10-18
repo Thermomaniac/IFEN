@@ -6,7 +6,7 @@ import { CheckCircleFillIcon, MailIcon } from "@/components/icons";
 import { CheckboxField, ErrorSummary, SelectField, TextField } from "@/components/register/Fields";
 import form from "@/components/register/Form.module.css";
 import button from "@/components/ui/Button.module.css";
-import type { CourseHeroContent } from "@/data/coursePage";
+import type { CourseHeroContent, SectionHead } from "@/data/coursePage";
 import { interestSection as copy } from "@/data/interest";
 import { SALUTATIONS, TERMS_URL, validateInterest, type InterestValues } from "@/lib/interestForm";
 import type { Errors } from "@/lib/registrationForm";
@@ -30,10 +30,13 @@ const EMPTY: InterestValues = { salutation: "", firstName: "", lastName: "", ema
  */
 export function InterestCapture({
   hero,
+  head = copy.head,
   id = "interest",
   tone = "white",
 }: {
   hero: CourseHeroContent;
+  /** Replaces the default header, e.g. on an interest-list page where the hero explains the list. */
+  head?: SectionHead;
   id?: string;
   tone?: Tone;
 }) {
@@ -112,7 +115,7 @@ export function InterestCapture({
   const sending = status.kind === "sending";
 
   return (
-    <CourseSection id={id} tone={tone} head={copy.head}>
+    <CourseSection id={id} tone={tone} head={head}>
       <div className={styles.card} data-tone={tone}>
         {status.kind === "sent" ? (
           <div className={styles.done} role="status">
