@@ -1,0 +1,150 @@
+/* Long-form article body. A single white card (the site's 4px / 1px-border card) with prose
+   at ~68 characters, an 18px body on 30px leading, sections set apart by space and a hairline. */
+
+.article {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: clamp(24px, 5vw, 72px) clamp(20px, 5vw, 72px);
+  border-radius: 4px;
+  background: var(--color-white);
+  box-shadow:
+    inset 0 0 0 1px var(--color-border),
+    0 1px 2px #0000000f;
+}
+
+/* Under the main nav, plus the mobile "On This Page" strip below 64rem. */
+.section {
+  scroll-margin-top: calc(var(--nav-h) + 72px);
+}
+
+.section + .section {
+  margin-top: clamp(40px, 5vw, 56px);
+  padding-top: clamp(40px, 5vw, 56px);
+  border-top: 1px solid var(--color-border-soft);
+}
+
+.flow {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 42rem;
+}
+
+.heading {
+  margin-bottom: 4px;
+  color: var(--color-ink);
+  font-size: clamp(1.375rem, 1.1rem + 0.9vw, 1.75rem);
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  font-weight: 600;
+  font-variation-settings: var(--fvs-display);
+  text-wrap: balance;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.text {
+  color: var(--color-heading);
+  font-size: 1.0625rem;
+  line-height: 30px;
+  text-wrap: pretty;
+  overflow-wrap: break-word;
+}
+
+.text strong {
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
+/* The opening paragraph, a step up. */
+.lead {
+  color: var(--color-ink);
+  font-size: clamp(1.1875rem, 1rem + 0.6vw, 1.375rem);
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+  font-variation-settings: var(--fvs-display);
+}
+
+/* An objection: the claim as a pull quote on a gold rule, the answer under it. */
+.quote {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-block: 8px;
+  padding: 4px 0 4px 20px;
+  border-left: 2px solid #b8a85e;
+}
+
+.claim {
+  color: var(--color-ink);
+  font-size: clamp(1.125rem, 1rem + 0.4vw, 1.25rem);
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+  font-variation-settings: var(--fvs-display);
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* Sources: numbered, smaller, links underlined. */
+.sources {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-left: 1.25rem;
+  list-style: decimal;
+  color: var(--color-muted);
+  font-size: var(--fs-small);
+  line-height: 22px;
+}
+
+.sources li {
+  padding-left: 4px;
+  overflow-wrap: anywhere;
+}
+
+.link {
+  color: var(--color-ink);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.link:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: 2px;
+}
+
+.note {
+  color: var(--color-muted);
+  font-size: var(--fs-small);
+  line-height: 20px;
+}
+
+/* Footer heading: a small label above the share row and the previous post. */
+.label {
+  color: var(--color-muted);
+  font-size: var(--fs-small);
+  line-height: 20px;
+  font-weight: 600;
+  font-variation-settings: var(--fvs-display);
+}
+
+@media (min-width: 64rem) {
+  .section {
+    scroll-margin-top: calc(var(--nav-h) + 24px);
+  }
+}
+
+@media (max-width: 47.99rem) {
+  .text {
+    font-size: var(--fs-body);
+    line-height: 28px;
+  }
+
+  .quote {
+    padding-left: 16px;
+  }
+}

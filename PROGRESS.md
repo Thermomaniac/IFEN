@@ -1,6 +1,6 @@
 # IFEN Remaining Pages Progress
 
-Active phase: correction programme, phase D (Blog). See `ROADMAP.md`, section "Correction programme".
+Active phase: correction programme, phase E (Modules). See `ROADMAP.md`, section "Correction programme".
 
 ## Correction programme
 
@@ -32,6 +32,14 @@ Active phase: correction programme, phase D (Blog). See `ROADMAP.md`, section "C
 - `directory/ProfileParts.tsx` holds the shared profile pieces (Stats, Rows, Box, Badges, Group, List); the therapist profile now imports them.
 - Checks: eslint clean, tsc clean, build passes. Rendered at 1440, 390 and 320: no horizontal overflow on About, Thomas Feiner, a therapist profile and Module 1.
 
+### Phase D: Blog (done 2026-10-18, pushed to staging)
+
+- Featured card: the border is an overlay (`.card::before`, z-index 1) so the poster can no longer paint over it at rest or on hover; the poster sits inset in its half. Applies to every blog card.
+- Removed the featured "Read and Download the Poster" line, the "German" and "German original" badges (cards and previous post; screen readers still hear "in German, opens the IFEN blog").
+- Latest: the twelve newest real posts from the blog's wp-json API (20 Jul 2026 back to 17 Mar 2026), shown six at a time by a client `PostGrid` ("Show 6 more articles", "6 of 12"), then "More Articles on the IFEN Blog". No article count anywhere; the "117 Articles" hero figure is gone. Focus moves to the first new card after "Show more". The 2022 philosophy post left the list and the data.
+- New posts from April 2026 on only have text-on-image social graphics, so they use the dotted-brain tile.
+- Evidence article: one white reading column (`ArticleBody` / `ArticleSection`, 42rem measure, 17/30 body, lead paragraph, objections as gold-rule pull quotes, sources numbered) beside the "On This Page" nav, which now also lists Share. Footer: sources, share row, previous post, then "Keep Reading: More From the Blog" (the three previous posts, link to the index). Category is "News" at the source, so no "More in Research" label.
+- Checks: eslint, tsc, build clean; no overflow at 390 and 320 on /blog and the article.
 
 ## Phase 5: Course Booking content pages (completed 2026-10-18, pushed to staging)
 

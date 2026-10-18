@@ -5,9 +5,9 @@
 // source's bold terms. The source's table of contents is the "On This Page" nav, with short
 // labels; the section headings are kept whole. The six sources are given as published.
 
-import type { CategoriesContent, CourseHeroContent, Link } from "../coursePage";
+import type { CourseHeroContent, Link, SectionHead } from "../coursePage";
 import { LISTING_PATH } from "../coursePage";
-import { ALL_OFFERS, BLOG_CRUMB, BLOG_CTA, BLOG_PATH, formatPostDate, LIVE_BLOG, POSTS, RELATED } from "./shared";
+import { BLOG_CRUMB, BLOG_CTA, BLOG_PATH, formatPostDate, LIVE_BLOG, POSTS, type BlogPost } from "./shared";
 
 export type ArticleSectionId =
   | "manifesto"
@@ -207,16 +207,18 @@ export const evidenceArticle = {
   // source has only "Vorheriger Beitrag": this is the newest post, so there is no next one.
   share: {
     id: "share" as const,
+    label: "Share",
     heading: "Share This Article",
     title: post.title,
     previous: { label: "Previous Post", post: POSTS.biofeedback },
   },
 
-  related: {
-    label: "Explore further",
-    heading: "Keep Reading",
-    items: [RELATED.blog, RELATED.whatIs, ALL_OFFERS],
-  } satisfies CategoriesContent,
+  // The three posts before this one on the source blog, then the blog index.
+  more: {
+    head: { label: "Keep Reading", heading: "More From the Blog" } satisfies SectionHead,
+    posts: [POSTS.biofeedback, POSTS.neuromeditation, POSTS.photobiomodulation] satisfies BlogPost[],
+    archive: { label: "All Articles", href: BLOG_PATH },
+  },
 
   cta: { ...BLOG_CTA, secondary: { label: "Back to the Blog", href: BLOG_PATH } },
 };

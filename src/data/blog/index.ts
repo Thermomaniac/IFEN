@@ -1,8 +1,9 @@
 // Blog index. Content from the live blog home, neurofeedback-ifen.com/blog ("Thomas Feiners
 // Neurofeedback BLOG"), translated to English: the welcome text, the featured post (the
-// Brodmann poster) and the five "Aktuelle Beiträge". The welcome's link to
-// www.neurofeedback-info.de points to this site's course listing. The article count and the
-// first post date (27 Aug 2018) come from the blog's wp-json API; all posts are in German.
+// Brodmann poster) and the twelve most recent posts from the blog's wp-json API (newest
+// first). The welcome's link to www.neurofeedback-info.de points to this site's course
+// listing. The first post date (27 Aug 2018) comes from the same API; all posts are in
+// German. No article count is shown, since it changes with every post.
 
 import type { CategoriesContent, CourseHeroContent, SectionHead } from "../coursePage";
 import { ALL_OFFERS, BLOG_CTA, LIVE_BLOG, POSTS, RELATED, type BlogPost } from "./shared";
@@ -24,7 +25,6 @@ export const blogIndex = {
       "Interested in training as a neurofeedback therapist? Looking for further education? Then see our course dates.",
     ],
     highlights: [
-      { value: "117", label: "Articles" },
       { value: "Since 2018", label: "Publishing" },
       { value: "German", label: "Original language" },
     ],
@@ -34,7 +34,6 @@ export const blogIndex = {
   featured: {
     head: { label: "Featured", heading: "Featured Article" } satisfies SectionHead,
     post: POSTS.brodmann satisfies BlogPost,
-    cta: "Read and Download the Poster",
   },
 
   latest: {
@@ -43,8 +42,23 @@ export const blogIndex = {
       heading: "Latest Articles",
       intro: ["The first article is translated here. The others open in German on the IFEN blog."],
     } satisfies SectionHead,
-    posts: [POSTS.evidence, POSTS.biofeedback, POSTS.neuromeditation, POSTS.photobiomodulation, POSTS.philosophy] satisfies BlogPost[],
-    archive: { label: "Browse All 117 Articles", href: LIVE_BLOG },
+    posts: [
+      POSTS.evidence,
+      POSTS.biofeedback,
+      POSTS.neuromeditation,
+      POSTS.photobiomodulation,
+      POSTS.moellenkamp,
+      POSTS.castilloReyes,
+      POSTS.brainMonitoring,
+      POSTS.fois,
+      POSTS.qeegPractice,
+      POSTS.rawEeg,
+      POSTS.chiarenza,
+      POSTS.emotionTuner,
+    ] satisfies BlogPost[],
+    /** Cards shown at first and added per "Show more". */
+    pageSize: 6,
+    archive: { label: "More Articles on the IFEN Blog", href: LIVE_BLOG },
   },
 
   related: {
