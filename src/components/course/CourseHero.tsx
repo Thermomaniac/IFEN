@@ -16,6 +16,9 @@ import { formatPrice, type CourseFact } from "@/data/course";
 import type { CourseHeroContent } from "@/data/coursePage";
 import styles from "./CourseHero.module.css";
 
+/** Figma "Hero Section" photo, copied into the app so no Figma URL is used at runtime. */
+const LIGHT_PHOTO = "/hero/ifen-hero-light.jpg";
+
 const factIcons: Record<CourseFact["icon"], typeof UsersIcon> = {
   start: CalendarTickIcon,
   end: CalendarSlashIcon,
@@ -32,14 +35,25 @@ const factIcons: Record<CourseFact["icon"], typeof UsersIcon> = {
  * panel on the right. The prices are a static list; the package is chosen in the
  * registration flow. Without `booking` (listing pages) only the intro renders. With
  * `image` a photo fills the right side under an ink fade instead of the line pattern.
+ * Every other hero without a booking panel or portrait is light: the IFEN photo on the
+ * right under a light fade, ink type (Figma "Hero Section", light variant).
  */
 export function CourseHero({ content }: { content: CourseHeroContent }) {
   const { booking } = content;
   const paragraphs = Array.isArray(content.description) ? content.description : [content.description];
+  const light = !booking && !content.portrait && !content.image;
+  const tone = content.image ? styles.photoHero : light ? `${styles.photoHero} ${styles.light}` : "";
 
   return (
-    <section className={`${styles.hero} ${content.image ? styles.photoHero : ""}`} aria-labelledby="course-title">
-      {content.image ? (
+    <section className={`${styles.hero} ${tone}`} aria-labelledby="course-title">
+      {light ? (
+        <>
+          <span className={styles.media}>
+            <Image src={LIGHT_PHOTO} alt="" fill priority sizes="100vw" className={styles.photo} />
+          </span>
+          <span className={styles.fade} aria-hidden="true" />
+        </>
+      ) : content.image ? (
         <>
           <span className={styles.media}>
             <Image src={content.image} alt="" fill priority sizes="100vw" className={styles.photo} />

@@ -1,8 +1,16 @@
 # IFEN Remaining Pages Progress
 
-Active phase: 4 (light hero), interest, account and design-system programme. Correction programme A to H complete (2026-10-18), all phases pushed to staging.
+Active phase: 5 (Module 4 final step card), interest, account and design-system programme. Correction programme A to H complete (2026-10-18), all phases pushed to staging.
 
 ## Interest, account and design-system programme
+
+### Phase 4: Light hero (done 2026-10-18, pushed to staging)
+
+- `CourseHero` gains a light tone, chosen automatically: a hero with no booking panel, no portrait and no own `image` is light. Mist band, the Figma "Hero Section" IFEN photo (`public/hero/ifen-hero-light.jpg`, 2400×1043, 100 KB, copied from the Figma export; no Figma URL at runtime) covering the band pinned right, a mist fade from the left (solid behind the copy, clear by 66%), ink title, `--color-heading` breadcrumb, description and metric labels, ink metric values, badge on 8% ink. Content unchanged.
+- Light on 17 heroes: modules overview, Modules 2 to 4, IFEN 100, BCIA, BrainAvatar, ISF, Photobiomodulation, QEEG Courses, Supervision, Webinars, Training Courses, About IFEN, Lecturers, Topics, What Is Neurofeedback.
+- Unchanged: booking heroes (Module 1, QEEG pages, webinar detail pages) and the Thomas Feiner and therapist profiles (portrait). The five heroes that already carry their own photo (course listing, therapist directory, blog, blog article, Areas of Application) keep it under the ink fade: the listing and directory heroes are Paper/Figma designs, and swapping their photos would change content.
+- Stacked (below 64rem) the photo becomes the shared bottom strip, fading up into mist.
+- Checks: eslint, tsc, build clean. 1440 (faces clear of the copy), 390, 320 on all 24 hero routes with no horizontal overflow; reduced motion renders.
 
 ### Phase 3: Nav and modules overview (done 2026-10-18, pushed to staging)
 
