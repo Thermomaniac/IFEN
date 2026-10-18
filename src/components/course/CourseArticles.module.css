@@ -346,6 +346,16 @@
   margin-top: 8px;
 }
 
+/* In a stretched card the buttons sit at its foot, so a row of cards keeps them on one
+   line whatever the copy length (Supervision "Internship"). The padding keeps the old
+   8px above them when the copy fills the card. */
+.card > .links,
+.panelsItem > .links,
+.columnsItem > .links {
+  margin-top: auto;
+  padding-top: 8px;
+}
+
 /* "media": the copy beside a photo, same 4px corners as the cards. */
 .media {
   display: grid;
@@ -520,12 +530,22 @@
     padding: 40px;
   }
 
+  /* The heading spans spare rows; with no row gap the unused ones collapse to nothing,
+     and the copy is spaced by margins instead. */
+  .split {
+    row-gap: 0;
+  }
+
   .split > .heading {
     grid-row: 1 / span 10;
   }
 
   .split > :not(.heading) {
     grid-column: 2;
+  }
+
+  .split > :not(.heading) + :not(.heading) {
+    margin-top: 16px;
   }
 }
 

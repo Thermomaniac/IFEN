@@ -1,8 +1,15 @@
 # IFEN Remaining Pages Progress
 
-Active phase: 6 (bottom-anchored card CTAs), interest, account and design-system programme. Correction programme A to H complete (2026-10-18), all phases pushed to staging.
+Active phase: none. Interest, account and design-system programme complete (phases 0 to 6, 2026-10-18). Correction programme A to H complete (2026-10-18), all phases pushed to staging.
 
 ## Interest, account and design-system programme
+
+### Phase 6: Bottom-anchored card CTAs (done 2026-10-18, pushed to staging)
+
+- Shared `CourseArticles` pattern, with the Supervision Internship card as the reference: in default cards, panels and columns, the `links` row takes `margin-top: auto`, so buttons sit on the card's bottom padding and line up across cards in a row of uneven height. Cards without links keep their natural flow.
+- Split cards (heading left, content right, from 64rem) no longer leave empty grid rows under the buttons: row-gap 0, with 16px margins between the content blocks.
+- Pages checked (every page whose articles carry `links`): BCIA, Supervision/Internship/Mentoring, ISF, blog evidence article, Topics, What Is Neurofeedback, Modules 1 to 4.
+- Checks: eslint, tsc, build clean. 1440 (BCIA, Supervision, Module 4: buttons on card padding, 32 to 40px), 390 and 320 (stacked, 24px card padding, no horizontal overflow).
 
 ### Phase 5: Module 4 "The Final Step" (done 2026-10-18, pushed to staging)
 
