@@ -1,8 +1,16 @@
 # IFEN Remaining Pages Progress
 
-Active phase: 3 (nav and modules overview), interest, account and design-system programme. Correction programme A to H complete (2026-10-18), all phases pushed to staging.
+Active phase: 4 (light hero), interest, account and design-system programme. Correction programme A to H complete (2026-10-18), all phases pushed to staging.
 
 ## Interest, account and design-system programme
+
+### Phase 3: Nav and modules overview (done 2026-10-18, pushed to staging)
+
+- Course Booking menu: "Certified Neurofeedback Therapist IFEN" is now "Training MODULES 1-4" (one constant, `MODULES_TITLE` in `modulePaths.ts`). The parent links to the overview; Module 1, 2, 3, 4 and IFEN 100 sit in a nested list under it, indented with a hairline, in the desktop dropdown and the mobile drawer. Always visible rather than a flyout, so keyboard and touch reach it in plain tab order. Nav types gained one nesting level (`NavChild`).
+- Overview hero title "Training / MODULES 1-4"; the old title moved into the badge. Breadcrumbs on the overview and on Modules 1 to 4 and IFEN 100, the Module 1 secondary CTA and the Training Courses link use the same name. Meta title leads with it.
+- Pathway note "Module 2 and Module 3 can be completed in any order" on white with the standard card hairline (overview and Module 1).
+- "Overview of All Modules" cards: Phosphor regular icons (UsersThree, ChalkboardTeacher, GraduationCap, ListChecks) in discs tinted with existing tokens (`--color-tint-teal`, `--color-cream`, lime, `--color-border-soft`); primary md buttons; subgrid rows so icon, eyebrow, title, text and button line up across a row, button at the foot. Falls back to the old flex column without subgrid.
+- Checks: eslint, tsc, build clean. 1440 (dropdown, cards aligned, buttons at one baseline), 390 (drawer nesting), 320 (no overflow, title wraps), reduced motion.
 
 ### Phase 2: Account screens (done 2026-10-18, pushed to staging)
 

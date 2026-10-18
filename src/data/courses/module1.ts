@@ -18,7 +18,7 @@ import {
   type SpeakersContent,
 } from "../coursePage";
 import { ALL_OFFERS, FEINER, LIVE } from "./shared";
-import { MODULE1_PATH, MODULE2_PATH, MODULE3_PATH, MODULE4_PATH, MODULES_PATH } from "./modulePaths";
+import { MODULE1_PATH, MODULE2_PATH, MODULE3_PATH, MODULE4_PATH, MODULES_PATH, MODULES_TITLE } from "./modulePaths";
 
 export { MODULE1_PATH };
 const BOOK = { label: "Register For Booking", href: `${REGISTER_PATH}/participant` };
@@ -34,7 +34,7 @@ export const module1 = {
     title: "Module 1: Certified Neurofeedback Therapist",
     breadcrumb: [
       { label: "Course Booking", href: LISTING_PATH },
-      { label: "Certified Neurofeedback Therapist", href: MODULES_PATH },
+      { label: MODULES_TITLE, href: MODULES_PATH },
       { label: "Module 1" },
     ],
     badge: "Module 1 of the IFEN Training",

@@ -629,3 +629,32 @@ export function EyeSlashIcon(props: IconProps) {
     </svg>
   );
 }
+
+export function GraduationCapPhIcon(props: IconProps) {
+  return (
+    <svg {...base} width="32" height="32" viewBox="0 0 256 256" {...regular} {...props}>
+      <path d="M8 96 128 32l120 64-120 64Z" />
+      <path d="M188 240V128l-60-32" />
+      <path d="M220 113v54.6a8 8 0 0 1-2 5.3c-11.3 12.6-39 39.1-90 39.1s-78.7-26.5-90-39.1a8 8 0 0 1-2-5.3V113" />
+    </svg>
+  );
+}
+
+export function ChalkboardTeacherIcon(props: IconProps) {
+  return (
+    <svg {...base} width="32" height="32" viewBox="0 0 256 256" {...regular} {...props}>
+      <circle cx="104" cy="144" r="32" />
+      <path d="M53.4 208a56 56 0 0 1 101.2 0H208a8 8 0 0 0 8-8V56a8 8 0 0 0-8-8H48a8 8 0 0 0-8 8v144a8 8 0 0 0 8 8h5.4" />
+      <path d="M160 176h16V80H80v16" />
+    </svg>
+  );
+}
+
+export function ListChecksIcon(props: IconProps) {
+  return (
+    <svg {...base} width="32" height="32" viewBox="0 0 256 256" {...regular} {...props}>
+      <path d="M128 64h88M128 128h88M128 192h88" />
+      <path d="m40 64 16 16 32-32M40 128l16 16 32-32M40 192l16 16 32-32" />
+    </svg>
+  );
+}

@@ -268,3 +268,15 @@
 .drawerActions .login {
   padding-block: 12px;
 }
+
+/* Nested group under a menu entry (Training MODULES 1-4): indented, with a hairline. */
+.menuNested {
+  margin: 0 0 4px 12px;
+  padding-left: 8px;
+  border-left: 1px solid var(--color-border);
+}
+
+.drawerNested {
+  margin-left: 16px;
+  border-left: 1px solid var(--color-border);
+}

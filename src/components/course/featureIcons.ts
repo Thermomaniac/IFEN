@@ -1,11 +1,14 @@
 import {
   ArrowsClockwiseIcon,
   BooksIcon,
+  ChalkboardTeacherIcon,
   CalendarDotsIcon,
   ClockIcon,
+  GraduationCapPhIcon,
   HandPalmIcon,
   HeartIcon,
   LifebuoyIcon,
+  ListChecksIcon,
   StarIcon,
   UsersThreeIcon,
   VideoLessonIcon,
@@ -24,4 +27,7 @@ export const FEATURE_ICONS: Record<FeatureIcon, typeof ClockIcon> = {
   lifebuoy: LifebuoyIcon,
   community: UsersThreeIcon,
   books: BooksIcon,
+  mentor: ChalkboardTeacherIcon,
+  cap: GraduationCapPhIcon,
+  checklist: ListChecksIcon,
 };

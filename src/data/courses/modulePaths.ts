@@ -7,3 +7,6 @@ export const MODULE2_PATH = "/courses/module-2";
 export const MODULE3_PATH = "/courses/module-3";
 export const MODULE4_PATH = "/courses/module-4";
 export const IFEN100_PATH = "/courses/ifen-100";
+
+/** Name of the modules overview in the nav, breadcrumbs and hero. */
+export const MODULES_TITLE = "Training MODULES 1-4";

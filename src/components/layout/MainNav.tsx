@@ -134,6 +134,17 @@ function Dropdown({ link }: { link: NavLink }) {
                 <a href={child.href} className={styles.menuLink} onClick={() => setOpen(false)}>
                   {child.label}
                 </a>
+                {child.children && (
+                  <ul className={styles.menuNested} aria-label={child.label}>
+                    {child.children.map((item) => (
+                      <li key={item.label}>
+                        <a href={item.href} className={styles.menuLink} onClick={() => setOpen(false)}>
+                          {item.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </li>
             ))}
           </motion.ul>
@@ -247,6 +258,17 @@ function MobileDrawer({ open, onClose, currentHref }: { open: boolean; onClose: 
                                     <a href={child.href} className={styles.drawerSubLink} onClick={onClose}>
                                       {child.label}
                                     </a>
+                                    {child.children && (
+                                      <ul className={styles.drawerNested} aria-label={child.label}>
+                                        {child.children.map((item) => (
+                                          <li key={item.label}>
+                                            <a href={item.href} className={styles.drawerSubLink} onClick={onClose}>
+                                              {item.label}
+                                            </a>
+                                          </li>
+                                        ))}
+                                      </ul>
+                                    )}
                                   </li>
                                 ))}
                               </motion.ul>

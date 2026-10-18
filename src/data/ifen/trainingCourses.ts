@@ -7,7 +7,7 @@
 // The upcoming table lists WEB-071126-EN (Swingle assessment), which is not in `schedule.ts`, so
 // it is not shown.
 
-import { MODULES_PATH } from "../courses/modulePaths";
+import { MODULES_PATH, MODULES_TITLE } from "../courses/modulePaths";
 import { modulesOverview } from "../courses/modules";
 import { LISTING_PATH } from "../coursePage";
 import { datesFor, type BookingPage } from "../booking/shared";
@@ -140,6 +140,6 @@ export const trainingCourses = {
     headingLines: ["Start Your Journey Into", "Modern Neuroscience"],
     text: "Learn how to support your clients sustainably with innovative methods. Sign up today and invest in your future as a neurofeedback specialist.",
     action: { label: "View Course Dates", href: LISTING_PATH },
-    secondary: { label: "Certified Neurofeedback Therapist", href: MODULES_PATH },
+    secondary: { label: MODULES_TITLE, href: MODULES_PATH },
   },
 } satisfies BookingPage;

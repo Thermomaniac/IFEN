@@ -17,16 +17,16 @@ import {
 } from "../coursePage";
 import { ALL_OFFERS, BOOKING_CRUMB, RELATED, datesFor, type BookingPage } from "../booking/shared";
 import { lecturer } from "../ifen/lecturers";
-import { IFEN100_PATH, MODULE1_PATH, MODULE2_PATH, MODULE3_PATH, MODULE4_PATH, MODULES_PATH } from "./modulePaths";
+import { IFEN100_PATH, MODULE1_PATH, MODULE2_PATH, MODULE3_PATH, MODULE4_PATH, MODULES_PATH, MODULES_TITLE } from "./modulePaths";
 
-export { IFEN100_PATH, MODULE2_PATH, MODULE3_PATH, MODULE4_PATH, MODULES_PATH };
+export { IFEN100_PATH, MODULE2_PATH, MODULE3_PATH, MODULE4_PATH, MODULES_PATH, MODULES_TITLE };
 
 const LIVE_BOOKING = "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/modul-1-4";
 const TEAMVIEWER = "https://www.teamviewer.com/en/download/";
 const CREDITS_URL =
   "https://www.neurofeedback-info.de/index.php?option=com_content&view=article&id=86&Itemid=1458&lang=de";
 
-const MODULES_CRUMB = { label: "Certified Neurofeedback Therapist", href: MODULES_PATH };
+const MODULES_CRUMB = { label: MODULES_TITLE, href: MODULES_PATH };
 
 const MODULE_CATEGORIES: Record<"m1" | "m2" | "m3" | "m4" | "ifen100" | "overview", Category> = {
   overview: { id: "modules", title: "All Modules", icon: { kind: "cap" }, href: MODULES_PATH },
@@ -59,24 +59,32 @@ export const moduleCards: FeaturesContent = {
     {
       eyebrow: "Module 2",
       heading: "Internship",
+      icon: "community",
+      tint: "teal",
       text: "At least 5 units of hands-on practice in one of our certified partner practices.",
       link: { label: "View Module 2", href: MODULE2_PATH },
     },
     {
       eyebrow: "Module 3",
       heading: "Supervision",
+      icon: "mentor",
+      tint: "cream",
       text: "At least 5 units online with a personal mentor while you work with your own clients.",
       link: { label: "View Module 3", href: MODULE3_PATH },
     },
     {
       eyebrow: "Module 4",
       heading: "Examination",
+      icon: "cap",
+      tint: "lime",
       text: "The online examination, about one hour, that completes your certification.",
       link: { label: "View Module 4", href: MODULE4_PATH },
     },
     {
       eyebrow: "IFEN 100",
       heading: "Written Exam Mentoring",
+      icon: "checklist",
+      tint: "grey",
       text: "A 65-question practice test to check your knowledge before the examination.",
       link: { label: "View IFEN 100", href: IFEN100_PATH },
     },
@@ -531,16 +539,16 @@ export const ifen100 = {
 
 export const modulesOverview = {
   meta: {
-    title: "Certified Neurofeedback Therapist IFEN, Modules 1 to 4 | IFEN",
+    title: "Training MODULES 1-4, Certified Neurofeedback Therapist IFEN | IFEN",
     description:
       "The four modules of the IFEN certification, from the 5-day intensive course through internship and supervision to the examination, with dates and FAQ.",
   },
 
   hero: {
-    title: "Certified Neurofeedback\nTherapist IFEN",
+    title: "Training\nMODULES 1-4",
     wide: true,
-    breadcrumb: [BOOKING_CRUMB, { label: "Certified Neurofeedback Therapist" }],
-    badge: "Training Modules 1 to 4",
+    breadcrumb: [BOOKING_CRUMB, { label: MODULES_TITLE }],
+    badge: "Certified Neurofeedback Therapist IFEN",
     description:
       "Welcome! We are glad you are interested in our training concept. A varied and fulfilling career is waiting for you.",
     highlights: [

@@ -124,15 +124,21 @@ export type FeatureIcon =
   | "heart"
   | "lifebuoy"
   | "community"
-  | "books";
+  | "books"
+  | "mentor"
+  | "cap"
+  | "checklist";
+
+/** Soft token washes for an icon card's disc; lime when unset. */
+export type FeatureTint = "lime" | "teal" | "cream" | "grey";
 
 export type FeaturesContent = SectionHead & {
   /** Show 01, 02 … above each card. */
   numbered?: boolean;
   /** Photo beside the cards, for split layouts. */
   image?: { src: string; alt: string };
-  /** `link` adds a secondary button at the foot of the card (module overview cards). */
-  items: { heading: string; text: string; eyebrow?: string; icon?: FeatureIcon; link?: Link }[];
+  /** `link` adds a primary button at the foot of the card (module overview cards). */
+  items: { heading: string; text: string; eyebrow?: string; icon?: FeatureIcon; tint?: FeatureTint; link?: Link }[];
 };
 
 /** Professions shown as photo cards. */

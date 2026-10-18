@@ -18,6 +18,7 @@ import {
   MODULE3_PATH,
   MODULE4_PATH,
   MODULES_PATH,
+  MODULES_TITLE,
 } from "./courses/modulePaths";
 import { ABOUT_PATH, LECTURERS_PATH, TRAINING_PATH } from "./ifen/paths";
 import { BLOG_PATH } from "./blog/paths";
@@ -39,7 +40,10 @@ export const languages: Language[] = [
   { code: "el", label: "EL", name: "Ελληνικά", flag: "/flags/el.svg" },
 ];
 
-export type NavLink = { label: string; href: string; children?: { label: string; href: string }[] };
+export type NavItem = { label: string; href: string };
+/** A menu entry; one level of nesting, e.g. the four modules under Training MODULES 1-4. */
+export type NavChild = NavItem & { children?: NavItem[] };
+export type NavLink = NavItem & { children?: NavChild[] };
 
 export const navLinks: NavLink[] = [
   { label: "Home", href: "/" },
@@ -48,12 +52,17 @@ export const navLinks: NavLink[] = [
     href: LISTING_PATH,
     children: [
       { label: "Course Dates", href: LISTING_PATH },
-      { label: "Certified Neurofeedback Therapist", href: MODULES_PATH },
-      { label: "Module 1, Intensive Course", href: MODULE1_PATH },
-      { label: "Module 2, Internship", href: MODULE2_PATH },
-      { label: "Module 3, Supervision", href: MODULE3_PATH },
-      { label: "Module 4, Examination", href: MODULE4_PATH },
-      { label: "IFEN 100, Exam Mentoring", href: IFEN100_PATH },
+      {
+        label: MODULES_TITLE,
+        href: MODULES_PATH,
+        children: [
+          { label: "Module 1, Intensive Course", href: MODULE1_PATH },
+          { label: "Module 2, Internship", href: MODULE2_PATH },
+          { label: "Module 3, Supervision", href: MODULE3_PATH },
+          { label: "Module 4, Examination", href: MODULE4_PATH },
+          { label: "IFEN 100, Exam Mentoring", href: IFEN100_PATH },
+        ],
+      },
       { label: "QEEG Courses", href: QEEG_COURSES_PATH },
       { label: "ISF Neurofeedback", href: ISF_PATH },
       { label: "Supervision, Internship and Mentoring", href: SUPERVISION_PATH },

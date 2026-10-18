@@ -10,7 +10,9 @@ import styles from "./FeatureGrid.module.css";
  * Short reasons or features: three or four bordered cards. Numbered grids follow Figma's
  * "Module Benefit" cards: plain white, 8px apart, led by a large grey index.
  * The `check` variant is a 2×2 of taller white cards led by a lime check (QEEG).
- * Items with an `icon` lead with it in the same lime disc (About IFEN concept).
+ * Items with an `icon` lead with it in the same lime disc (About IFEN concept), or in
+ * the item's `tint`. Linked cards (module overview) share row tracks through subgrid,
+ * so icon, eyebrow, title, text and button line up across a row.
  */
 export function FeatureGrid({
   id,
@@ -26,6 +28,7 @@ export function FeatureGrid({
   const cols = variant === "check" ? 2 : content.items.length % 4 === 0 ? 4 : 3;
   const check = variant === "check";
   const icons = content.items.some((item) => item.icon);
+  const linked = content.items.some((item) => item.link);
   return (
     <CourseSection id={id} tone={tone} head={content} narrow={content.numbered}>
       <Reveal
@@ -36,6 +39,7 @@ export function FeatureGrid({
           check && styles.check,
           content.numbered && styles.numbered,
           icons && styles.icons,
+          linked && styles.linked,
         ]
           .filter(Boolean)
           .join(" ")}
@@ -46,7 +50,7 @@ export function FeatureGrid({
           return (
             <RevealItem as="li" key={item.heading} className={styles.card}>
               {Icon && (
-                <span className={styles.iconMark} aria-hidden="true">
+                <span className={styles.iconMark} data-tint={item.tint} aria-hidden="true">
                   <Icon />
                 </span>
               )}
@@ -75,7 +79,7 @@ export function FeatureGrid({
                 <p className={styles.text}>{item.text}</p>
               </div>
               {item.link && (
-                <Button href={item.link.href} variant="secondary" className={styles.link}>
+                <Button href={item.link.href} className={styles.link}>
                   {item.link.label}
                 </Button>
               )}
