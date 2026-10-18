@@ -104,13 +104,12 @@ export const accountCopy = {
   },
   brand: {
     badge: "Institute for EEG Neurofeedback",
-    headline: "Become A Certified Neurofeedback Therapist With IFEN",
+    /** A no-break space keeps "With IFEN" together on its own line. */
+    headline: "Become A Certified Neurofeedback Therapist With\u00a0IFEN",
   },
   passwordRules: "Your password needs",
   ruleMet: "met",
   ruleNotMet: "not met",
-  captchaUnavailable:
-    "The security check is not available on this site yet, so this form cannot be sent from here. Please use the current My IFEN page.",
   captchaExpired: "The security check expired. Please complete it again.",
   errors: {
     notConfigured: "Your request was not sent: this site is not connected to the IFEN account service yet. Please use the current My IFEN page.",

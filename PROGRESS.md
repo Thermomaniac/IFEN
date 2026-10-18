@@ -4,11 +4,18 @@ Active phase: none. Follow-up corrections programme complete (phases 1 to 7, 202
 
 ## Follow-up corrections programme
 
-### Account form trims (done 2026-10-19, user request)
+### Account form order and headline (done 2026-10-19, user request)
+
+- Register order is now Name, Username, Email Address, Password (password always last, with its rules panel under it). Validation order matches, so the error summary lists fields in the same order.
+- The "security check is not available on this site yet" note is removed from every account screen (reset and the unlinked remind screen included); its copy and `.note` style are deleted. reCAPTCHA still shows and is still required when configured.
+- Photo panel headline (login, register, reset): a no-break space keeps "With IFEN" together, so at 1440 it reads "Become A Certified / Neurofeedback Therapist / With IFEN".
+- Checks: eslint, tsc, build clean. Rendered at 1440, 1100, 390 and 320 (no horizontal overflow).
+
+### Account form trims (done 2026-10-19, user request, pushed to staging)
 
 - Login: "Forgot your username?" removed; only "Forgot your password?" is linked. The `/my-ifen/remind` screen still exists but is no longer linked from the site.
 - Register: fields are now Name, Username, Password (with the rules panel), Email Address. Confirm Password is removed from the form and from validation. The live registration still expects a confirmation field, so `/api/account/register` fills `password2` with the password before forwarding.
-- Register: the "security check is not available on this site yet" note is removed. When reCAPTCHA is configured the check still shows and is still required; when it is not, a submit gets the "not connected to the IFEN account service" alert with the live My IFEN link. The note stays on the reset and remind screens.
+- Register: the "security check is not available on this site yet" note is removed. When reCAPTCHA is configured the check still shows and is still required; when it is not, a submit gets the "not connected to the IFEN account service" alert with the live My IFEN link.
 - Supersedes the Phase 5 note below that Confirm Password stays.
 - Checks: eslint, tsc, build clean. Register and login rendered at 1440, 390 and 320 (no horizontal overflow). API: a valid register request without `password2` passes validation; a weak password is still rejected.
 

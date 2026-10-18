@@ -53,6 +53,7 @@ const rules: Record<AccountAction, FieldRule[]> = {
       check: (v) =>
         /[<>"'%;()&\\]/.test(v) || v.length > 150 ? "Use letters, numbers, dots, hyphens or underscores for your username." : undefined,
     },
+    { name: "email1", label: "Email Address", required: true, check: emailCheck },
     {
       name: "password1",
       label: "Password",
@@ -64,7 +65,6 @@ const rules: Record<AccountAction, FieldRule[]> = {
             ? undefined
             : "The password does not meet the requirements listed below it.",
     },
-    { name: "email1", label: "Email Address", required: true, check: emailCheck },
     CAPTCHA,
   ],
   reset: [{ name: "email", label: "Email Address", required: true, check: emailCheck }, CAPTCHA],

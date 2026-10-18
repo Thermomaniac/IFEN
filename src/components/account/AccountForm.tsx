@@ -193,6 +193,7 @@ export function AccountForm({ action }: { action: AccountAction }) {
             <>
               <TextField {...field("name")} label="Name" required size="full" autoComplete="name" placeholder={copy.placeholders.name} />
               <TextField {...field("username")} label="Username" required size="full" autoComplete="username" autoCapitalize="none" placeholder={copy.placeholders.username} />
+              <TextField {...field("email1")} label="Email Address" type="email" required size="full" autoComplete="email" inputMode="email" placeholder={copy.placeholders.email} />
               <PasswordField
                 {...field("password1")}
                 label="Password"
@@ -223,7 +224,6 @@ export function AccountForm({ action }: { action: AccountAction }) {
                   </ul>
                 </div>
               </PasswordField>
-              <TextField {...field("email1")} label="Email Address" type="email" required size="full" autoComplete="email" inputMode="email" placeholder={copy.placeholders.email} />
             </>
           )}
 
@@ -233,30 +233,20 @@ export function AccountForm({ action }: { action: AccountAction }) {
         </div>
       </fieldset>
 
-      {/* Without a configured check, register shows no note; a submit reports the account service is not connected. */}
-      {needsCaptcha &&
-        (captchaOn ? (
-          <div className={styles.captcha} data-invalid={errors.captcha ? "" : undefined}>
-            <Captcha onToken={onToken} resetKey={captchaReset} error={errors.captcha} />
-            {errors.captcha && (
-              <p id="field-captcha-error" className={form.error}>
-                <span aria-hidden="true" className={form.errorIcon}>
-                  !
-                </span>
-                {errors.captcha}
-              </p>
-            )}
-          </div>
-        ) : (
-          action !== "register" && (
-            <p className={styles.note}>
-              {copy.captchaUnavailable}{" "}
-              <a href={liveAccountUrls[action]} className={styles.link}>
-                {copy.liveLink}
-              </a>
+      {/* Without a configured check no note shows; a submit reports the account service is not connected. */}
+      {captchaOn && (
+        <div className={styles.captcha} data-invalid={errors.captcha ? "" : undefined}>
+          <Captcha onToken={onToken} resetKey={captchaReset} error={errors.captcha} />
+          {errors.captcha && (
+            <p id="field-captcha-error" className={form.error}>
+              <span aria-hidden="true" className={form.errorIcon}>
+                !
+              </span>
+              {errors.captcha}
             </p>
-          )
-        ))}
+          )}
+          </div>
+        )}
 
       {status.kind === "error" && (
         <div ref={alertRef} tabIndex={-1} role="alert" className={styles.alert}>
