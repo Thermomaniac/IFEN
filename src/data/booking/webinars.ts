@@ -1,7 +1,8 @@
 // Webinars. Content from the live page
 // neurofeedback-info.de/termine-kursbuchung-seminare/webinare-m.html ("Webinare", "online
 // weiterbilden wo immer SIE wollen"), translated from the German original and kept in full.
-// Dates: the source's date table, by course code, from `schedule.ts`.
+// The source's single "How does a webinar work?" paragraph is split into three numbered steps.
+// Dates: the source's date table, by course code, from `schedule.ts`, in the filterable schedule.
 
 import { ALL_OFFERS, BOOKING_CRUMB, BOOKING_CTA, RELATED, datesFor, type BookingPage } from "./shared";
 
@@ -22,16 +23,21 @@ export const webinars = {
 
   sections: [
     {
-      kind: "articles",
+      kind: "features",
       id: "about",
       content: {
-        label: "How it works",
+        label: "How It Works",
         heading: "How Does a Webinar Work?",
+        numbered: true,
         items: [
+          { heading: "Register", text: "Choose a webinar from the dates below and book it online." },
           {
-            paragraphs: [
-              "After you register, you receive an invitation link at regular intervals, together with the download of the webinar software. The download is free of charge.",
-            ],
+            heading: "Receive Your Invitation",
+            text: "After you register, you receive an invitation link at regular intervals.",
+          },
+          {
+            heading: "Download the Software",
+            text: "The invitation comes with the download of the webinar software. The download is free of charge.",
           },
         ],
       },
@@ -42,7 +48,8 @@ export const webinars = {
       content: {
         label: "Dates",
         heading: "Webinar Dates",
-        intro: ["The course language is shown on each card."],
+        intro: ["Search by topic or filter the list, and switch between table and cards."],
+        schedule: true,
         items: datesFor("Webinars", [
           "WEB-191026-DE",
           "WEB-261026-DE",

@@ -3,8 +3,9 @@
 // ("Praxis, Praxis, Praxis"), translated from the German original and kept in full. The source
 // links its therapist list and marks partner practices with an internship icon; here the link
 // goes to the local directory, whose cards carry the "Internships & mentoring" badge. The
-// source's "TeamViewer" heading has no text; it is kept as a tag on the supervision card.
-// Dates: the source's date table, by course code, from `schedule.ts`.
+// source's TeamViewer note ("you need the software TeamViewer, available as a free download")
+// becomes its own card with set-up steps; the download goes to TeamViewer's official page instead
+// of the source's intermediate article. Dates: the source's date table, by course code, from `schedule.ts`.
 
 import { ALL_OFFERS, BOOKING_CRUMB, BOOKING_CTA, RELATED, datesFor, type BookingPage } from "./shared";
 
@@ -29,7 +30,7 @@ export const supervision = {
       kind: "articles",
       id: "about",
       content: {
-        label: "Practice, practice, practice",
+        label: "Practice, Practice, Practice",
         heading: "Internship and Supervision",
         items: [
           {
@@ -45,7 +46,18 @@ export const supervision = {
             paragraphs: [
               "Supervision takes place over an internet connection. In this concept, unique so far, you run a session and your screen is transmitted to the supervisor directly and without delay. The session can be discussed and guided as if the tutor were sitting in the room. This gives you maximum freedom to set the dates as best suits your needs.",
             ],
-            tags: ["TeamViewer"],
+          },
+          {
+            heading: "TeamViewer",
+            paragraphs: [
+              "For supervision you need the screen-sharing software TeamViewer, which is free to download.",
+            ],
+            list: [
+              "Download TeamViewer from the official website and install it",
+              "Open TeamViewer before the session starts",
+              "Give your supervisor the ID and password shown in the app",
+            ],
+            links: [{ label: "Download TeamViewer", href: "https://www.teamviewer.com/en/download/" }],
           },
         ],
       },

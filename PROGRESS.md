@@ -1,6 +1,6 @@
 # IFEN Remaining Pages Progress
 
-Active phase: correction programme, phase G (Supervision and Webinars). See `ROADMAP.md`, section "Correction programme".
+Active phase: correction programme, phase H (Global: Title Case, hero height, hero line). See `ROADMAP.md`, section "Correction programme".
 
 ## Correction programme
 
@@ -61,6 +61,13 @@ Active phase: correction programme, phase G (Supervision and Webinars). See `ROA
 - Shared: `ContentPage` renders a `faq` section kind.
 - Not shown: the source's upcoming table lists WEB-071126-EN (Swingle assessment), which is not in `schedule.ts`.
 - Checks: eslint, tsc, build clean. Rendered at 1440, 390, 320: no horizontal overflow on the four pages.
+
+### Phase G: Supervision and Webinars (done 2026-10-18, pushed to staging)
+
+- Supervision: hero title on two lines ("Supervision, Internship\nand Mentoring"). The TeamViewer tag is replaced by a TeamViewer card with what the session needs and a "Download TeamViewer" link to teamviewer.com/en/download. The set-up steps are generic usage steps; the source only says TeamViewer is required.
+- Webinars: "How Does a Webinar Work?" is now three numbered steps (Register, Receive Your Invitation, Download the Software) built from the source paragraph. The 23 dates use the filterable `CourseSchedule` (search, type, language and price filters, table and card views); there are no tabs because webinars have no interest list.
+- Shared: `DatesContent.schedule` switches a `dates` section from plain cards to `CourseSchedule`.
+- Checks: eslint, tsc, build clean. Rendered at 1440, 390, 320: no horizontal overflow on either page.
 
 ## Phase 5: Course Booking content pages (completed 2026-10-18, pushed to staging)
 

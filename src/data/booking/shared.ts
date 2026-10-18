@@ -63,6 +63,8 @@ export type DatesContent = SectionHead & {
   items: ScheduleItem[];
   /** Interest-list entries: the cards say Flexible and offer Join List instead of Book. */
   interest?: boolean;
+  /** The filterable table and cards (`CourseSchedule`) in place of plain cards, for long lists. */
+  schedule?: boolean;
 };
 
 /** One band of a category page. Tones alternate mist, cream, white in order. */

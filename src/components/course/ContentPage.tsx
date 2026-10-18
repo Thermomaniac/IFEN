@@ -5,7 +5,7 @@ import type { BookingPage, BookingSection, DatesContent } from "@/data/booking/s
 import { Categories } from "./Categories";
 import { CourseArticles } from "./CourseArticles";
 import { CourseHero } from "./CourseHero";
-import { CourseCards } from "./CourseSchedule";
+import { CourseCards, CourseSchedule } from "./CourseSchedule";
 import { CourseSection, type Tone } from "./CourseSection";
 import { Faq } from "./Faq";
 import { FeatureGrid } from "./FeatureGrid";
@@ -47,7 +47,11 @@ function Section({ section, tone }: { section: BookingSection; tone: Tone }) {
     case "faq":
       return <Faq id={section.id} tone={tone} content={section.content} />;
     case "dates":
-      return <DatesBand id={section.id} tone={tone} content={section.content} />;
+      return section.content.schedule ? (
+        <CourseSchedule dates={section.content.items} section={{ id: section.id, tone, head: section.content }} />
+      ) : (
+        <DatesBand id={section.id} tone={tone} content={section.content} />
+      );
   }
 }
 
