@@ -1,6 +1,24 @@
 # IFEN Remaining Pages Progress
 
-Active phase: none. Correction programme A to H complete (2026-10-18), all phases pushed to staging.
+Active phase: 1 (interest capture), interest, account and design-system programme. Correction programme A to H complete (2026-10-18), all phases pushed to staging.
+
+## Interest, account and design-system programme
+
+### Phase 0: Audit (done 2026-10-18)
+
+- Live prospect form (Seminarman, photobiomodulation interest list): Salutation select (optional; Herr, Frau, Mr., Mrs., Ms.), First Name, Last Name, Email, Phone (all required), required checkbox "I accept the General Terms and Conditions" linking `https://www.neurofeedback-info.de/de/agb-2018.html`. No marketing consent. It posts to Joomla with a CSRF token and session, so it cannot be posted cross-origin from this app.
+- Live account screens (`mein-ifen.html`, Joomla com_users):
+  - Login: username, password (show toggle, max 99), "Remember me", links to reset, remind and registration.
+  - Registration: name, username, password and confirmation, email, reCAPTCHA v2. Password rules: at least 8 characters, 1 digit, 1 special character, 1 upper case and 1 lower case letter.
+  - Reset and remind: email plus reCAPTCHA v2. Reset sends a verification code; remind sends the username.
+  - The reCAPTCHA site key is bound to the live domain, so it cannot be reused on staging.
+- No backend or auth exists in this app. Both features are built against route handlers that forward to an upstream set by environment variables, and never report success without one.
+- Mobbin references:
+  - Interest form: Headspace "Join the waitlist" (copy left, form right) https://mobbin.com/sites/sections/a4f79272-6385-4c1b-9dea-874c0b2797d9, Webflow waitlist with terms checkbox https://mobbin.com/sites/sections/b88c0a5c-ab0c-4fc4-ba95-08373f7178c2, Sana https://mobbin.com/sites/sections/eef24f82-acda-4a1b-9992-006602c5f0cc.
+  - Login (split, photo right): Sprig https://mobbin.com/screens/35685629-5b55-4d94-bb70-fd34acea9848, Klaviyo (reCAPTCHA in the form) https://mobbin.com/screens/b913bc06-4fcf-4e33-adbd-cfd53f1ff898, Square https://mobbin.com/screens/51358a95-0a92-40ef-b433-8120fe1bf67e.
+  - Registration (live password checklist): Dropbox Dash https://mobbin.com/screens/e96dc357-b8be-4d51-99dd-af253276d439, Uxcel https://mobbin.com/screens/69e77196-7b4d-4a0b-b499-564b5eb5fd3f.
+  - Final step card: Duolingo test readiness and requirements https://mobbin.com/sites/sections/9b0aa4ab-3f00-4d58-b2df-468f6a34f898, https://mobbin.com/sites/sections/7fb9cdab-1d2a-4a6a-871c-a0dbf35a8bb7; HubSpot certification process https://mobbin.com/sites/sections/13833919-8bab-499c-b4f0-e18c5f125420.
+- Figma "Hero Section" (node 40001128:108319): photo full-bleed on ink with a left radial fade. The photo is copied into `public/hero/` for the light variant; no Figma URL at runtime.
 
 ## Correction programme
 
