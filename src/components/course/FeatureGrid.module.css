@@ -174,18 +174,6 @@
   height: 24px;
 }
 
-.iconMark[data-tint="teal"] {
-  background: var(--color-tint-teal);
-}
-
-.iconMark[data-tint="cream"] {
-  background: var(--color-cream);
-}
-
-.iconMark[data-tint="grey"] {
-  background: var(--color-border-soft);
-}
-
 /* Linked cards (module overview): each card spans five shared rows (icon, eyebrow,
    title, text, button), so a long German title in one card moves the whole row's text
    and buttons together instead of leaving them staggered. */

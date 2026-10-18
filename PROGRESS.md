@@ -4,7 +4,13 @@ Active phase: none. Follow-up corrections programme complete (phases 1 to 7, 202
 
 ## Follow-up corrections programme
 
-### Account form order and headline (done 2026-10-19, user request)
+### Module overview icon discs (done 2026-10-19, user request)
+
+- "Overview of All Modules" (Module 1 page and the Training Modules overview, same `moduleCards` data): Internship, Supervision and Written Exam Mentoring now use the Examination card's lime disc (#edf5c4), so all four match.
+- The per-card `tint` option (teal, cream, grey) had no other users, so it is removed from the data type, `FeatureGrid` and its CSS; icon cards always take the lime disc. `--color-tint-teal` stays (the Training section uses it).
+- Checks: eslint, tsc, build clean. Module 1 rendered at 1440, 390 and 320; Training Modules overview and About IFEN checked at 1440 (no horizontal overflow).
+
+### Account form order and headline (done 2026-10-19, user request, pushed to staging)
 
 - Register order is now Name, Username, Email Address, Password (password always last, with its rules panel under it). Validation order matches, so the error summary lists fields in the same order.
 - The "security check is not available on this site yet" note is removed from every account screen (reset and the unlinked remind screen included); its copy and `.note` style are deleted. reCAPTCHA still shows and is still required when configured.

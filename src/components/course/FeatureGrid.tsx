@@ -10,8 +10,8 @@ import styles from "./FeatureGrid.module.css";
  * Short reasons or features: three or four bordered cards. Numbered grids follow Figma's
  * "Module Benefit" cards: plain white, 8px apart, led by a large grey index.
  * The `check` variant is a 2×2 of taller white cards led by a lime check (QEEG).
- * Items with an `icon` lead with it in the same lime disc (About IFEN concept), or in
- * the item's `tint`. Linked cards (module overview) share row tracks through subgrid,
+ * Items with an `icon` lead with it in the same lime disc (About IFEN concept and the
+ * module overview). Linked cards (module overview) share row tracks through subgrid,
  * so icon, eyebrow, title, text and button line up across a row.
  */
 export function FeatureGrid({
@@ -50,7 +50,7 @@ export function FeatureGrid({
           return (
             <RevealItem as="li" key={item.heading} className={styles.card}>
               {Icon && (
-                <span className={styles.iconMark} data-tint={item.tint} aria-hidden="true">
+                <span className={styles.iconMark} aria-hidden="true">
                   <Icon />
                 </span>
               )}
