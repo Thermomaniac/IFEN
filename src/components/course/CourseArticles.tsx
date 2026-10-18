@@ -130,9 +130,20 @@ export function CourseArticles({
           <RevealItem
             as="article"
             key={item.heading ?? i}
-            className={`${styles.card} ${cols === 1 && item.heading ? styles.split : ""}`}
+            className={`${styles.card} ${cols === 1 && item.heading ? styles.split : ""} ${item.feature ? styles.feature : ""}`}
           >
-            {item.heading &&
+            {item.feature && item.heading ? (
+              <div className={`${styles.head} ${styles.featureHead}`}>
+                <h3 className={`${styles.heading} ${styles.featureHeading}`}>{item.heading}</h3>
+                {item.paragraphs?.map((text) => (
+                  <p key={text} className={styles.text}>
+                    {text}
+                  </p>
+                ))}
+                {item.links && <Links links={item.links} />}
+              </div>
+            ) : (
+              item.heading &&
               (item.lead ? (
                 <div className={styles.head}>
                   <h3 className={styles.heading}>{item.heading}</h3>
@@ -140,8 +151,10 @@ export function CourseArticles({
                 </div>
               ) : (
                 <h3 className={styles.heading}>{item.heading}</h3>
-              ))}
-            {item.paragraphs?.map((text) => (
+              ))
+            )}
+            {!item.feature &&
+              item.paragraphs?.map((text) => (
               <p key={text} className={styles.text}>
                 {text}
               </p>
@@ -163,7 +176,7 @@ export function CourseArticles({
                 ))}
               </ul>
             )}
-            {item.links && <Links links={item.links} />}
+            {!item.feature && item.links && <Links links={item.links} />}
           </RevealItem>
         ))}
       </Reveal>
@@ -186,7 +199,7 @@ function Links({ links }: { links: NonNullable<Article["links"]> }) {
   );
 }
 
-/** Key figures in mist tiles, value over label, under an optional small heading. */
+/** Key figures in mist tiles, label over value, under an optional small heading. */
 function Facts({ facts }: { facts: NonNullable<Article["facts"]> }) {
   return (
     <div className={styles.group}>

@@ -389,6 +389,7 @@ export const module4 = {
         items: [
           {
             heading: "Congratulations, You Are Almost There!",
+            feature: true,
             paragraphs: [
               "You have gathered a lot of valuable experience on your way to Certified Neurofeedback Therapist IFEN. Module 4 is your last step to the certificate.",
             ],
@@ -399,7 +400,7 @@ export const module4 = {
               items: [
                 { value: "Online", label: "Format" },
                 { value: "About 1 Hour", label: "Duration" },
-                { value: "2 CPD Credits", label: "Under § 125 SGB V" },
+                { value: "2 CPD Credits", label: "Credits, § 125 SGB V" },
               ],
             },
             links: [

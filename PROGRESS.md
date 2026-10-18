@@ -1,10 +1,22 @@
 # IFEN Remaining Pages Progress
 
-Active phase: Follow-up corrections programme (phases 1 to 7, 2026-10-19), in progress. Interest, account and design-system programme complete (phases 0 to 6, 2026-10-18). Correction programme A to H complete (2026-10-18).
+Active phase: none. Follow-up corrections programme complete (phases 1 to 7, 2026-10-19). Interest, account and design-system programme complete (phases 0 to 6, 2026-10-18). Correction programme A to H complete (2026-10-18).
 
 ## Follow-up corrections programme
 
-### Phase 6: IFEN 100 page (done 2026-10-19)
+### Phase 7: Module 4 final step card (done 2026-10-19)
+
+- Figma 40001146-110030: one white split card, padding 40. Left column (462 of 1094): the title at 28/32 bold ink, the intro, then "See Exam Dates" (primary) and "Prepare With IFEN 100" 32px below. Right column (632): "Already Behind You" over the existing check rows, then "The Examination" over three equal tiles 32px below.
+- Opt-in through `Article.feature` on the existing default split card; only this item sets it, other split cards are unchanged (IFEN 100 "Before You Start" checked). Below 64rem everything stacks in the same order.
+- Exam tiles (`Facts`, used only here): label over value, mist tile with a 1px `--color-border` edge, 8/12 padding, label 11px semibold muted, value 16/24 medium ink.
+- Figma vs source: Figma labels the third tile "Credits". The source states the credits fall under § 125 SGB V, so the label reads "Credits, § 125 SGB V" rather than dropping that fact. No other facts added or changed.
+- Checks: eslint, tsc, build clean. Rendered at 1440, 390 and 320 (no horizontal overflow).
+
+### Final QA (2026-10-19)
+
+- Home, Module 1, Module 4, IFEN 100, login (`/my-ifen`), register and Webinars return 200 and show no horizontal overflow at 320.
+
+### Phase 6: IFEN 100 page (done 2026-10-19, pushed to staging)
 
 - How It Works, "After Booking": the three items now render as plain bullets under the sentence, in the row text style, with no white bordered card. Opt-in through `Article.plainList` (rows layout only), set only on this item; other rows keep the check-row card.
 - Technical Details: the "We wish you every success!" note is removed.

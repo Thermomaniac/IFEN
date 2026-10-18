@@ -27,11 +27,31 @@
   overflow-wrap: break-word;
 }
 
+/* The final step card's title (Figma: 28/32 bold). */
+.featureHeading {
+  color: var(--color-ink);
+  font-size: clamp(1.5rem, 2.4vw, 1.75rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  font-weight: 700;
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+
 /* Heading with its lead sentence (IFEN 100 "Before You Start"). */
 .head {
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+/* Final step card: title, intro, then the buttons 32px below (Figma). */
+.featureHead {
+  gap: 16px;
+}
+
+.featureHead > .links {
+  margin-top: 16px;
 }
 
 .text {
@@ -70,32 +90,31 @@
   gap: 8px;
 }
 
+/* Figma 40001146-110030: label over value, mist tile with a 1px border. */
 .fact {
   display: flex;
-  flex-direction: column-reverse;
-  justify-content: flex-end;
+  flex-direction: column;
   gap: 2px;
   min-width: 0;
-  padding: 16px;
+  padding: 8px 12px;
   border-radius: 4px;
   background: var(--color-mist);
-  box-shadow: inset 0 0 0 1px var(--color-border-soft);
+  box-shadow: inset 0 0 0 1px var(--color-border);
 }
 
 .factValue {
   color: var(--color-ink);
-  font-size: 1.25rem;
-  line-height: 28px;
-  letter-spacing: -0.02em;
-  font-weight: 600;
-  font-variation-settings: var(--fvs-display);
+  font-size: var(--fs-body);
+  line-height: 24px;
+  font-weight: 500;
+  overflow-wrap: break-word;
 }
 
 .factLabel {
   color: var(--color-muted);
-  font-size: var(--fs-xs);
+  font-size: 0.6875rem;
   line-height: 16px;
-  font-weight: 500;
+  font-weight: 600;
   overflow-wrap: break-word;
   hyphens: auto;
 }
@@ -572,6 +591,15 @@
 
   .split > :not(.heading, .head) + :not(.heading, .head) {
     margin-top: 16px;
+  }
+
+  /* Figma: a 462px copy column and a 632px column for the list and exam tiles. */
+  .feature {
+    grid-template-columns: minmax(0, 462fr) minmax(0, 632fr);
+  }
+
+  .feature > :not(.heading, .head) + :not(.heading, .head) {
+    margin-top: 32px;
   }
 }
 

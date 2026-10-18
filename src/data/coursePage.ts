@@ -92,6 +92,11 @@ export type Article = {
   heading?: string;
   /** Default cards: a sentence kept with the heading (under it, left column in a split card). */
   lead?: string;
+  /**
+   * Single default card: a display-size heading with the paragraphs and links in the left
+   * column, the list and facts on the right (Figma Module 4 "The Final Step").
+   */
+  feature?: boolean;
   /** Leads the heading in the `rows` layout. */
   icon?: ArticleIcon;
   paragraphs?: string[];
