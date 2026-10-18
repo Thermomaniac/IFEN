@@ -1,7 +1,10 @@
 // About IFEN. Content from the live page neurofeedback-info.de/ifen-de/ueber-uns.html
-// ("Über das IFEN"), in the site's English translation. Every source paragraph is kept:
-// what IFEN is, its vision, the director's message, the six points of the IFEN concept and
-// the four team profiles. Dashes inside sentences became commas or brackets.
+// ("Über das IFEN"), in the site's English translation: what IFEN is, its vision (shortened
+// to two paragraphs on request), the director's message, the six points of the IFEN concept
+// and the four team profiles. Dashes inside sentences became commas or brackets.
+// "Why Neurofeedback?", "Why IFEN?" and the two "What you learn with us" lists moved here
+// from the live Module 1 page (neurofeedback-info.de/modul-1.html), translated from German;
+// the card headings name what each source paragraph says.
 // Photo from the same page (NFB_klein); team portraits from the same page.
 
 import type { ArticlesContent, CategoriesContent, CourseHeroContent, FeaturesContent, TeamContent } from "../coursePage";
@@ -22,8 +25,8 @@ export const about = {
       "The Institute for EEG Neurofeedback (IFEN for short) was founded in Munich in 2008 by Thomas F. Feiner and is one of the leading training institutes for neurofeedback in Germany.",
     highlights: [
       { value: "2008", label: "Founded in Munich" },
-      { value: "300+", label: "Workshops and webinars since 2008" },
-      { value: "25+ yrs", label: "Founder's work in neurofeedback" },
+      { value: "300+", label: "Workshops and webinars" },
+      { value: "25+ years", label: "Founder in neurofeedback" },
     ],
   } satisfies CourseHeroContent,
 
@@ -37,11 +40,10 @@ export const about = {
         ],
       },
       {
-        heading: "Vision and philosophy of IFEN",
+        heading: "Vision and Philosophy of IFEN",
         paragraphs: [
-          "Neurofeedback is a rapidly developing field in medicine. This method has existed for about 50 years, yet it remains far too little known. Yet neurofeedback continues to offer unforeseen opportunities and possibilities for our entire healthcare system.",
-          "These new incentives are urgently needed because our healthcare systems are facing an unprecedented challenge affecting the well-being of millions of people. To address this, we need methods that relieve the burden on the system, prevent cost increases, and ensure that the system does not collapse or ultimately descend into a two-tier healthcare system.",
-          "The modern and scientifically based neurofeedback therapy method, as taught by IFEN (founded by Thomas Feiner) for over 12 years, has already helped thousands of patients suffering from life-threatening and debilitating illnesses. It helps people living in circumstances where their suffering is a significant burden and poses a risk to the health of their loved ones. We know the method works. We receive messages almost daily from enthusiastic therapists who are achieving remarkable therapeutic success with the IFEN method.",
+          "Neurofeedback has existed for about 50 years and is still far too little known, yet it offers new possibilities for a healthcare system facing an unprecedented challenge. We need methods that relieve that system and keep it affordable for everyone.",
+          "The scientifically based method IFEN has taught for over 12 years has already helped thousands of patients with serious and debilitating illnesses. Therapists write to us almost daily about the results they achieve with it.",
         ],
       },
     ],
@@ -53,10 +55,15 @@ export const about = {
 
   director: {
     label: "From the director",
-    heading: "Message from the Director",
+    heading: "Message From the Director",
+    person: {
+      image: "/board/member-1.png",
+      alt: "Portrait of Thomas F. Feiner",
+      name: "Thomas F. Feiner",
+      role: "Founder and Director, Institute for EEG Neurofeedback",
+    },
     items: [
       {
-        heading: "Thomas Feiner, Director of the Institute for EEG Neurofeedback",
         paragraphs: [
           "When I first encountered neurofeedback over 20 years ago, I was one of the first neurofeedback therapists in Germany, and the first in my hometown of Regensburg. Later, I moved to Munich, where there were also very few knowledgeable neurofeedback therapists. This fact puzzled me. Why is such an effective method so little known?",
           "I therefore see it as my duty to promote neurofeedback, to raise awareness about it, and to give neurofeedback a professional image. Only good and thorough training, with continuous professional development and further education, can ensure that neurofeedback becomes established in the long term and can benefit a broad public.",
@@ -76,28 +83,151 @@ export const about = {
     ],
     items: [
       {
-        heading: "Always up-to-date",
+        heading: "Always Up to Date",
+        icon: "refresh",
         text: "Scientific rigor is our top priority. We base the content of our courses exclusively on current, well-founded research and studies, as well as many years of experience. Furthermore, we work closely with international universities.",
       },
       {
-        heading: "Always “hands-on”",
+        heading: "Always Hands-On",
+        icon: "hand",
         text: "Practical experience is paramount at IFEN. The certificate is only awarded to those who can demonstrate sufficient experience through an internship and supervision with a personal mentor.",
       },
       {
-        heading: "Closeness to people",
+        heading: "Close to People",
+        icon: "heart",
         text: "Our lecturers are not just technicians, but therapists and doctors who care about the well-being and health of people.",
       },
       {
-        heading: "Reliable support",
+        heading: "Reliable Support",
+        icon: "lifebuoy",
         text: "Our experienced neurofeedback experts are available almost 24 hours a day, online and by phone.",
       },
       {
-        heading: "Inclusive community",
+        heading: "Inclusive Community",
+        icon: "community",
         text: "No one is alone in the IFEN family. Our friendly community welcomes everyone who needs help and advice.",
       },
       {
-        heading: "Extensive range of courses",
+        heading: "Extensive Range of Courses",
+        icon: "books",
         text: "Our wide-ranging training program offers something for everyone. Our workshops are supported by international experts. Quantitative EEG is one of our key areas of focus.",
+      },
+    ],
+  } satisfies FeaturesContent,
+
+  whyNeurofeedback: {
+    label: "Why neurofeedback",
+    heading: "Why Neurofeedback?",
+    items: [
+      {
+        heading: "Self-Regulation Without Medication",
+        text: "Neurofeedback helps more and more people lead a more self-determined life without medication. Through operant conditioning of brain states, the brain's self-regulation is trained and restored.",
+      },
+      {
+        heading: "Established in Clinical Practice",
+        text: "For years, therapists and doctors have used neurofeedback for AD(H)D, chronic pain and depression. Migraine, autism, sleep disorders, anxiety disorders and addiction can also be treated faster and more easily.",
+      },
+      {
+        heading: "Peak Performance",
+        text: "Coaches and trainers use neurofeedback to raise peak performance and sustain it. In the practices of some IFEN graduates, Olympic athletes receive stress and performance training.",
+      },
+      {
+        heading: "A Skill for Many Professions",
+        text: "We believe the neurofeedback certificate will become an important part of many professions' portfolios: occupational therapists, alternative practitioners (Heilpraktiker), neurologists, psychotherapists and many more.",
+      },
+    ],
+  } satisfies FeaturesContent,
+
+  whyIfen: {
+    label: "Why IFEN",
+    heading: "Why IFEN?",
+    numbered: true,
+    items: [
+      {
+        heading: "A Leading Institute",
+        text: "For more than ten years, IFEN has been one of the leading training institutes for bio- and neurofeedback in Germany. Transparency and scientific rigour matter most to us.",
+      },
+      {
+        heading: "International Standards",
+        text: "Our workshops follow international standards, with a strong focus on practical application.",
+      },
+      {
+        heading: "Lecturers From Practice",
+        text: "Our lecturers are usually practising doctors and therapists.",
+      },
+      {
+        heading: "Close to Research",
+        text: "We want to develop neurofeedback further and stay at the pulse of research.",
+      },
+      {
+        heading: "A Worldwide Network",
+        text: "IFEN is at the centre of a worldwide network of therapists, doctors, scientists and enthusiasts.",
+      },
+      {
+        heading: "Universities and Clinics",
+        text: "IFEN is internationally networked with universities and clinics and supports neuroscientific and medical research projects.",
+      },
+    ],
+  } satisfies FeaturesContent,
+
+  basics: {
+    label: "What you will learn with us",
+    heading: "Basic Knowledge",
+    items: [
+      {
+        heading: "Origins of Neurofeedback",
+        text: "The scientific background of neurofeedback and the most important pioneering achievements.",
+      },
+      {
+        heading: "Brainwaves",
+        text: "For a neurofeedback therapist, brainwaves are the key to the client. You learn the frequencies and the states that correspond to them.",
+      },
+      {
+        heading: "What Is Biofeedback?",
+        text: "Biofeedback is based on operant conditioning. This “unconscious learning” is the basis of all neurofeedback.",
+      },
+      {
+        heading: "Measuring an EEG",
+        text: "How an electroencephalogram is measured and the role it plays in neurofeedback.",
+      },
+      {
+        heading: "Basic Neuroanatomy",
+        text: "The interplay of the sympathetic and parasympathetic nervous systems and its effect on well-being.",
+      },
+      {
+        heading: "What Is a Neurofeedback Protocol?",
+        text: "Protocols are preprogrammed session parameters that set the frame for the training.",
+      },
+    ],
+  } satisfies FeaturesContent,
+
+  further: {
+    label: "What you will learn with us",
+    heading: "Further Topics",
+    items: [
+      {
+        heading: "Introduction to Quantitative EEG",
+        text: "The basics of extended EEG analysis (QEEG).",
+      },
+      {
+        heading: "Symptom and Performance Patterns in the EEG",
+        text: "Recognising patterns (biomarkers) that point to peak performance or to disorders.",
+      },
+      {
+        heading: "Treatment Assessment",
+        text: "Practical checklists for tailoring treatment to the client.",
+      },
+      {
+        heading: "Ethical Principles and Responsible Neurofeedback",
+        text: "The key principles for ethical, responsible practice within the guidelines.",
+      },
+      {
+        heading: "Functional Neuroanatomy",
+        text: "The main regions and areas of the brain, to localise disorders and illnesses.",
+      },
+      {
+        heading: "Neurofeedback Software",
+        text: "Working with BrainAvatar, the most widely used neurofeedback software.",
       },
     ],
   } satisfies FeaturesContent,

@@ -287,8 +287,9 @@
 
 .highlights {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 24px;
+  gap: 16px 24px;
 }
 
 .highlight {
@@ -312,6 +313,7 @@
   line-height: 16px;
   font-weight: 500;
   font-variation-settings: var(--fvs-display);
+  white-space: nowrap;
 }
 
 .divider {
@@ -513,6 +515,17 @@
 }
 
 @media (max-width: 47.99rem) {
+  /* Metrics stack on phones, each label still on one line. */
+  .highlights {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .divider {
+    display: none;
+  }
+
   .description {
     font-size: var(--fs-body);
     line-height: 26px;

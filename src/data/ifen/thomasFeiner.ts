@@ -1,10 +1,12 @@
 // Thomas Feiner lecturer profile. Content from the live page
-// neurofeedback-info.de/en/ifen-de/dozenten-m/1-thomas-f-feiner-bcia-bcn-qeeg-d.html.
-// The five profile sections are kept in full. The source's "Experience" text ends in an
-// unfinished editor placeholder ("developed [a specific method/approach - context needed].
-// Training programs for children with learning difficulties."); it is joined here into the
-// one sentence it was meant to be. The course table lists the dates he teaches; the codes
-// end in -EN on the English page and in -DE in the schedule data, which holds the same dates.
+// neurofeedback-info.de/en/ifen-de/dozenten-m/1-thomas-f-feiner-bcia-bcn-qeeg-d.html, laid
+// out as the therapist profile: a summary card, credential rows, expertise badges and
+// bulleted experience and research. Facts not on that page (QEEG Diplomate, FNNR board,
+// IFEN Neuroscience Lab, 300+ workshops, ERP and heartbeat-evoked-potential work) come from
+// his team profile on the live "Über das IFEN" page (see about.ts). The source's
+// "Experience" text ends in an unfinished editor placeholder; only its finished sentences
+// are used. The course list holds the dates he teaches; the codes end in -EN on the English
+// page and in -DE in the schedule data, which holds the same dates.
 
 import type { CategoriesContent, CourseHeroContent } from "../coursePage";
 import { scheduleDates, type ScheduleItem } from "../schedule";
@@ -37,7 +39,7 @@ const courses = COURSE_CODES.map((code): ScheduleItem => {
   return item;
 });
 
-export type LecturerSectionId = "clinical" | "approach" | "training" | "experience" | "research" | "courses";
+export type LecturerSectionId = "overview" | "credentials" | "expertise" | "experience" | "research" | "courses";
 
 export const thomasFeiner = {
   meta: {
@@ -47,24 +49,23 @@ export const thomasFeiner = {
   },
 
   hero: {
-    title: "Thomas Feiner, BCIA BCN, QEEG-D",
+    title: "Thomas F. Feiner",
     breadcrumb: [IFEN_CRUMB, { label: "Lecturers", href: LECTURERS_PATH }, { label: "Thomas Feiner" }],
     badge: "Lecturer profile",
     portrait: { src: "/board/member-1.png", alt: "Portrait of Thomas Feiner" },
-    subline: { parts: ["Founder & Director, IFEN", "Munich"] },
-    description:
-      "Thomas F. Feiner has over 25 years of clinical experience working with ADHD, stress, depression, addiction, and burnout. His approach is practice-oriented and focused on promoting neuronal self-regulation.",
+    subline: { parts: ["BCIA BCN, QEEG-D", "Founder & Director, IFEN", "Munich"] },
+    description: "Founder and director of IFEN, teaching neurofeedback, QEEG and supervision.",
     highlights: [
       { value: "25+ yrs", label: "Clinical experience" },
       { value: "Since 2014", label: "BCIA-certified" },
-      { value: "Since 2008", label: "IFEN founder and director" },
+      { value: "Since 2008", label: "IFEN director" },
     ],
   } satisfies CourseHeroContent,
 
   nav: [
-    { id: "clinical", label: "Clinical Profile" },
-    { id: "approach", label: "Approach" },
-    { id: "training", label: "Training" },
+    { id: "overview", label: "Overview" },
+    { id: "credentials", label: "Credentials" },
+    { id: "expertise", label: "Expertise" },
     { id: "experience", label: "Experience" },
     { id: "research", label: "Research" },
     { id: "courses", label: "Courses" },
@@ -72,43 +73,72 @@ export const thomasFeiner = {
 
   book: { label: "See Courses", href: "#courses" },
 
-  sections: [
-    {
-      id: "clinical",
-      heading: "Clinical Profile",
-      paragraphs: [
-        "Thomas F. Feiner has over 25 years of clinical experience working with ADHD, stress, depression, addiction, and burnout. His approach is practice-oriented and focused on promoting neuronal self-regulation.",
-      ],
-    },
-    {
-      id: "approach",
-      heading: "Therapeutic Approach",
-      paragraphs: [
-        "In his therapeutic practice, he combines neurofeedback with further neurophysiological and neuromodulatory procedures such as transcranial direct current stimulation (tDCS), photobiomodulation, and methods of cognitive and emotional self-regulation.",
-      ],
-    },
-    {
-      id: "training",
-      heading: "Training and Certifications",
-      paragraphs: [
-        "Occupational therapist since 1991. BCIA-certified neurofeedback trainer since 2014. Professional training and further education with, among others, Thomas F. Collura, Joel Lubar, Robert Thatcher, John Demos, Paul G. Swingle and Prof. Kropotov.",
-      ],
-    },
-    {
-      id: "experience",
-      heading: "Experience in Practice and Teaching",
-      paragraphs: [
-        "As the founder (2008) and director of IFEN, Thomas F. Feiner supports professionals in Germany and Europe in their neurofeedback-based work. In addition to his clinical practice, he has many years of experience in training and supervision, as well as in organizing international workshops and advanced training courses, including collaborations with Prof. Giuseppe Chiarenza and Dr. Thomas F. Collura. He has also worked with top athletes, executives, and artists, and developed training programs for children with learning difficulties.",
-      ],
-    },
-    {
-      id: "research",
-      heading: "Research and Publications",
-      paragraphs: [
-        "Thomas F. Feiner is active in applied brain research, focusing on peak performance, meditation, and accelerated learning. He is the author and co-author of scientific publications and a speaker at international conferences. Since 2016, he and his brain mapping team have been leading a large-scale international study analyzing the EEG patterns of various meditation practices.",
-      ],
-    },
-  ] satisfies { id: LecturerSectionId; heading: string; paragraphs: string[] }[],
+  overview: {
+    heading: "Overview",
+    paragraphs: [
+      "Thomas F. Feiner has over 25 years of clinical experience working with ADHD, stress, depression, addiction, and burnout. His approach is practice-oriented and focused on promoting neuronal self-regulation.",
+    ],
+    stats: [
+      { label: "Clinical experience", value: "25+ years" },
+      { label: "Occupational therapist", value: "Since 1991" },
+      { label: "Founded IFEN", value: "2008" },
+    ],
+  },
+
+  credentials: {
+    heading: "Training and Certifications",
+    rows: [
+      { label: "Occupational therapist", value: "Since 1991" },
+      { label: "BCIA-certified neurofeedback (BCN)", value: "Since 2014" },
+      { label: "QEEG Diplomate", value: "QEEG-D" },
+      { label: "Board member", value: "Foundation for Neurofeedback, Neuromodulation, and Research (FNNR)" },
+      {
+        label: "Trained with",
+        value: "Thomas F. Collura, Joel Lubar, Robert Thatcher, John Demos, Paul G. Swingle, Prof. Kropotov",
+      },
+    ],
+  },
+
+  expertise: {
+    heading: "Clinical Focus and Methods",
+    groups: [
+      { title: "Clinical focus", items: ["ADHD", "Stress", "Depression", "Addiction", "Burnout"] },
+      {
+        title: "Methods",
+        items: [
+          "Neurofeedback",
+          "QEEG brain mapping",
+          "tDCS",
+          "Photobiomodulation",
+          "Cognitive and emotional self-regulation",
+        ],
+      },
+    ],
+  },
+
+  experience: {
+    heading: "Experience in Practice and Teaching",
+    intro:
+      "As the founder (2008) and director of IFEN, Thomas F. Feiner supports professionals in Germany and Europe in their neurofeedback-based work.",
+    items: [
+      "Clinical practice alongside many years of training and supervision",
+      "More than 300 workshops and webinars worldwide since 2008",
+      "International workshops and advanced courses with Prof. Giuseppe Chiarenza and Dr. Thomas F. Collura",
+      "Work with top athletes, executives and artists",
+      "Training programmes for children with learning difficulties",
+    ],
+  },
+
+  research: {
+    heading: "Research and Publications",
+    intro: "Active in applied brain research, focusing on peak performance, meditation and accelerated learning.",
+    items: [
+      "Author and co-author of scientific publications, speaker at international conferences",
+      "Since 2016, leads with his brain mapping team a large international study of EEG patterns in meditation practices",
+      "Research on heartbeat evoked potentials and other neurophysiological markers",
+      "Founder of the IFEN Neuroscience Lab: ERP measurement tools, the Free-Cap-EEG system and the ERP Analyzer",
+    ],
+  },
 
   courses: {
     id: "courses" as const,

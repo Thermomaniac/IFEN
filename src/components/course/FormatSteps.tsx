@@ -2,18 +2,13 @@
 
 import { useState, type CSSProperties } from "react";
 import { motion, useMotionValueEvent, useSpring } from "framer-motion";
-import { CalendarDotsIcon, CheckBoldIcon, ClockIcon, StarIcon, VideoLessonIcon } from "@/components/icons";
+import { CheckBoldIcon } from "@/components/icons";
 import { usePinnedSteps } from "@/components/motion/usePinnedSteps";
-import type { FeatureIcon, FeaturesContent } from "@/data/coursePage";
+import type { FeaturesContent } from "@/data/coursePage";
 import { CourseSection, type Tone } from "./CourseSection";
+import { FEATURE_ICONS as ICONS } from "./featureIcons";
 import styles from "./FormatSteps.module.css";
 
-const ICONS: Record<FeatureIcon, typeof ClockIcon> = {
-  clock: ClockIcon,
-  video: VideoLessonIcon,
-  star: StarIcon,
-  calendar: CalendarDotsIcon,
-};
 
 /** A column lights up once its line is this far drawn, so the two read as one motion. */
 const LIGHT_AT = 0.5;

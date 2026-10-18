@@ -17,9 +17,13 @@ export default function AboutPage() {
       <main id="main">
         <CourseHero content={page.hero} />
         <CourseArticles id="vision" tone="mist" variant="media" content={page.vision} />
-        <CourseArticles id="director" tone="cream" content={page.director} />
+        <CourseArticles id="director" tone="cream" variant="profile" content={page.director} />
         <FeatureGrid id="concept" tone="white" content={page.concept} />
-        <Team id="team" tone="mist" content={page.team} />
+        <FeatureGrid id="why-neurofeedback" tone="mist" content={page.whyNeurofeedback} />
+        <FeatureGrid id="why-ifen" tone="cream" content={page.whyIfen} />
+        <FeatureGrid id="basics" tone="white" content={page.basics} />
+        <FeatureGrid id="further-topics" tone="mist" content={page.further} />
+        <Team id="team" tone="white" content={page.team} />
         <Categories content={page.related} />
       </main>
       <CtaFooter content={page.cta} />

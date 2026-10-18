@@ -107,11 +107,23 @@ export type ArticlesContent = SectionHead & {
   numbered?: boolean;
   /** `media`: the photo beside the copy. */
   image?: { src: string; alt: string };
+  /** `profile`: the person card (portrait, name, role) beside the copy. */
+  person?: { image: string; alt: string; name: string; role: string };
   /** A highlighted remark under the blocks. */
   note?: string;
 };
 
-export type FeatureIcon = "clock" | "video" | "star" | "calendar";
+export type FeatureIcon =
+  | "clock"
+  | "video"
+  | "star"
+  | "calendar"
+  | "refresh"
+  | "hand"
+  | "heart"
+  | "lifebuoy"
+  | "community"
+  | "books";
 
 export type FeaturesContent = SectionHead & {
   /** Show 01, 02 … above each card. */

@@ -5,8 +5,8 @@ import { CourseHero } from "@/components/course/CourseHero";
 import { Faq } from "@/components/course/Faq";
 import { LevelIcon } from "@/components/directory/LevelBadge";
 import { ProfileNav } from "@/components/directory/ProfileNav";
+import { Badges, Box, Group, List, Rows, Stats } from "@/components/directory/ProfileParts";
 import { ProfileSection } from "@/components/directory/ProfileSection";
-import { CheckCircleIcon, CheckIcon } from "@/components/icons";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { RevealItem } from "@/components/motion/Reveal";
 import { CtaFooter } from "@/components/sections/CtaFooter/CtaFooter";
@@ -91,55 +91,7 @@ function Section({ id, children }: { id: ProfileSectionId; children: ReactNode }
   );
 }
 
-/** Bordered group with an uppercase title: the expertise boxes. */
-function Box({ title, children }: { title: string; children: ReactNode }) {
-  return (
-    <RevealItem className={styles.box}>
-      <h3 className={styles.groupTitle}>{title}</h3>
-      {children}
-    </RevealItem>
-  );
-}
-
 const QUAL_ICONS = new Map(QUALIFICATIONS.map((q) => [q.id, q.icon]));
-
-/** Badges with the method's qualification icon, as on the directory cards; a check when it has none. */
-function Badges({ items, check }: { items: { label: string; icon?: string }[]; check?: boolean }) {
-  return (
-    <ul className={styles.badges}>
-      {items.map((i) => (
-        <li key={i.label} className={styles.badge}>
-          {i.icon ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={i.icon} alt="" width={16} height={16} />
-          ) : (
-            check && <CheckIcon width={12} height={12} aria-hidden="true" />
-          )}
-          {i.label}
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-function Group({ title, children }: { title: string; children: ReactNode }) {
-  return (
-    <RevealItem className={styles.group}>
-      <h3 className={styles.groupTitle}>{title}</h3>
-      {children}
-    </RevealItem>
-  );
-}
-
-function List({ items }: { items: string[] }) {
-  return (
-    <ul className={styles.list}>
-      {items.map((i) => (
-        <li key={i}>{i}</li>
-      ))}
-    </ul>
-  );
-}
 
 export default async function TherapistProfilePage({ params }: Props) {
   if (!getDemoProfile((await params).id)) notFound();
@@ -168,44 +120,25 @@ export default async function TherapistProfilePage({ params }: Props) {
                     </RevealItem>
                   ))}
                 </div>
-                <RevealItem>
-                  <dl className={styles.stats}>
-                    {p.overview.facts.map((f) => (
-                      <div key={f.label} className={styles.stat}>
-                        <dt>{f.label}</dt>
-                        <dd>{f.value}</dd>
-                      </div>
-                    ))}
-                  </dl>
-                </RevealItem>
+                <Stats items={p.overview.facts} />
               </Section>
 
               <Section id="credentials">
-                <RevealItem>
-                  <dl className={styles.rows}>
-                    {p.credentials.map((c) => (
-                      <div key={c.label} className={styles.row}>
-                        <dt>
-                          <span className={styles.tick} aria-hidden="true">
-                            <CheckCircleIcon width={16} height={16} />
-                          </span>
-                          {c.label}
-                        </dt>
-                        <dd>
-                          {c.label === "IFEN expert level" && DEMO_THERAPIST.level ? (
-                            <span className={styles.level}>
-                              <LevelIcon level={DEMO_THERAPIST.level} size={16} />
-                              {c.value}
-                            </span>
-                          ) : (
-                            c.value
-                          )}
-                          {c.note && <span className={styles.note}> ({c.note})</span>}
-                        </dd>
-                      </div>
-                    ))}
-                  </dl>
-                </RevealItem>
+                <Rows
+                  items={p.credentials.map((c) => ({
+                    label: c.label,
+                    note: c.note,
+                    value:
+                      c.label === "IFEN expert level" && DEMO_THERAPIST.level ? (
+                        <span className={styles.level}>
+                          <LevelIcon level={DEMO_THERAPIST.level} size={16} />
+                          {c.value}
+                        </span>
+                      ) : (
+                        c.value
+                      ),
+                  }))}
+                />
               </Section>
 
               <Section id="expertise">

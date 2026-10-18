@@ -546,3 +546,63 @@ export function TickIcon(props: IconProps) {
     </svg>
   );
 }
+
+/* About IFEN concept cards: one regular weight on a 256 grid (Phosphor proportions). */
+const regular = { ...stroke, strokeWidth: 18 } as const;
+
+export function ArrowsClockwiseIcon(props: IconProps) {
+  return (
+    <svg {...base} width="32" height="32" viewBox="0 0 256 256" {...regular} {...props}>
+      <path d="M176 104h48V56" />
+      <path d="M190.2 190.2a88 88 0 1 1 0-124.4L224 104" />
+    </svg>
+  );
+}
+
+export function HandPalmIcon(props: IconProps) {
+  return (
+    <svg {...base} width="32" height="32" viewBox="0 0 256 256" {...regular} {...props}>
+      <path d="M188 116V84a20 20 0 0 1 40 0v68a88 88 0 0 1-88 88h-8a88 88 0 0 1-76-44L28 148a20 20 0 0 1 34.6-20L76 152V68a20 20 0 0 1 40 0v52" />
+      <path d="M116 112V44a20 20 0 0 1 40 0v68" />
+      <path d="M156 112V60a16 16 0 0 1 32 0v56" />
+    </svg>
+  );
+}
+
+export function HeartIcon(props: IconProps) {
+  return (
+    <svg {...base} width="32" height="32" viewBox="0 0 256 256" {...regular} {...props}>
+      <path d="M128 216S24 160 24 94a54 54 0 0 1 104-20.7A54 54 0 0 1 232 94c0 66-104 122-104 122Z" />
+    </svg>
+  );
+}
+
+export function LifebuoyIcon(props: IconProps) {
+  return (
+    <svg {...base} width="32" height="32" viewBox="0 0 256 256" {...regular} {...props}>
+      <circle cx="128" cy="128" r="96" />
+      <circle cx="128" cy="128" r="40" />
+      <path d="m99.7 99.7-39.6-39.6M156.3 99.7l39.6-39.6M156.3 156.3l39.6 39.6M99.7 156.3l-39.6 39.6" />
+    </svg>
+  );
+}
+
+export function UsersThreeIcon(props: IconProps) {
+  return (
+    <svg {...base} width="32" height="32" viewBox="0 0 256 256" {...regular} {...props}>
+      <circle cx="128" cy="140" r="40" />
+      <path d="M196 116a59.8 59.8 0 0 1 48 24M12 140a59.8 59.8 0 0 1 48-24M70.4 216a64 64 0 0 1 115.2 0M60 116a32 32 0 1 1 31.5-37.6M164.5 78.4A32 32 0 1 1 196 116" />
+    </svg>
+  );
+}
+
+export function BooksIcon(props: IconProps) {
+  return (
+    <svg {...base} width="32" height="32" viewBox="0 0 256 256" {...regular} {...props}>
+      <rect x="40" y="40" width="48" height="176" rx="8" />
+      <rect x="88" y="40" width="48" height="176" rx="8" />
+      <path d="M40 72h48M88 184h48" />
+      <rect x="157.3" y="35.9" width="48" height="176" rx="8" transform="rotate(-15 181.3 123.9)" />
+    </svg>
+  );
+}

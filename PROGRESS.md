@@ -1,6 +1,6 @@
 # IFEN Remaining Pages Progress
 
-Active phase: correction programme, phase C (About IFEN and lecturers). See `ROADMAP.md`, section "Correction programme".
+Active phase: correction programme, phase D (Blog). See `ROADMAP.md`, section "Correction programme".
 
 ## Correction programme
 
@@ -21,6 +21,16 @@ Active phase: correction programme, phase C (About IFEN and lecturers). See `ROA
 - Desktop and mobile both read `navLinks`, so they stay in sync.
 - Footer links "Advisory Board members" and "Research partnerships" still point at the home sections, which exist; not part of the menu brief.
 - Checks: eslint clean, tsc clean, build passes. Production server: both redirects return 307 to the new paths; desktop menus and the mobile drawer list the new items; no overflow at 390.
+
+### Phase C: About IFEN and lecturers (done 2026-10-18, pushed to staging)
+
+- Hero metrics (`CourseHero`): labels never wrap, the row wraps as a whole, and below 48rem the metrics stack with the dividers hidden. About labels shortened so all three sit on one line at 1440.
+- About IFEN: headings in title case ("Vision and Philosophy of IFEN", "Message From the Director"); vision shortened to two paragraphs. The director message uses a new `profile` variant of `CourseArticles`: a sticky portrait card (name, role) beside the full text, a compact row on phones. No quotes added.
+- Modern Neurofeedback cards: `FeatureGrid` items take an optional `icon`; a 48px lime icon mark sits above the heading, rows keep equal heights. Six Phosphor-proportioned icons added by hand to `src/components/icons` (one weight). Icon lookup shared in `course/featureIcons.ts` (also used by `FormatSteps`).
+- Moved from the live `modul-1.html`, translated: Why Neurofeedback?, Why IFEN?, What You Will Learn With Us (Basic Knowledge), Further Topics. The coded Module 1 page never had them, so nothing is removed there in this phase.
+- Thomas Feiner: rebuilt on the therapist profile layout (`ProfileNav`, `ProfileSection`). Sections: Overview with stat cards, Training and Certifications rows, Clinical Focus and Methods badges, Experience, Research, Courses. Hero title shortened to the name, credentials moved to the subline. Every credential and number comes from the IFEN about page profile; no ratings or counts invented.
+- `directory/ProfileParts.tsx` holds the shared profile pieces (Stats, Rows, Box, Badges, Group, List); the therapist profile now imports them.
+- Checks: eslint clean, tsc clean, build passes. Rendered at 1440, 390 and 320: no horizontal overflow on About, Thomas Feiner, a therapist profile and Module 1.
 
 
 ## Phase 5: Course Booking content pages (completed 2026-10-18, pushed to staging)

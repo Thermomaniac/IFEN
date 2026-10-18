@@ -143,6 +143,27 @@
   letter-spacing: -0.5px;
 }
 
+/* Icon cards: the glyph sits on top in the check variant's lime disc; cards in a row
+   share one height through the grid's default stretch. */
+.icons .card {
+  gap: 20px;
+}
+
+.iconMark {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 999px;
+  background: #edf5c4;
+  color: #009ba7;
+}
+
+.iconMark svg {
+  width: 24px;
+  height: 24px;
+}
+
 @media (min-width: 48rem) {
   .cols2,
   .cols3,

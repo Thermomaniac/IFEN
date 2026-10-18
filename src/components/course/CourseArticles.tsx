@@ -14,7 +14,7 @@ const ICONS: Record<ArticleIcon, ReactNode> = {
   venue: <MapPinIcon />,
 };
 
-type Variant = "panels" | "columns" | "rows" | "media";
+type Variant = "panels" | "columns" | "rows" | "media" | "profile";
 
 /**
  * Text-led content blocks: a heading, then paragraphs, check rows, chips or an address.
@@ -25,6 +25,7 @@ type Variant = "panels" | "columns" | "rows" | "media";
  * - `rows`: full-width rows between rules, icon and heading left, copy right (venue).
  *   With `numbered` an index leads each heading instead (Neurofeedback methods).
  * - `media`: the copy beside `content.image`, for explainers (What Is Neurofeedback).
+ * - `profile`: `content.person` as a portrait card beside the copy (About IFEN director).
  * Any layout takes per-item `links` (secondary buttons) and a highlighted `note` below.
  */
 export function CourseArticles({
@@ -62,6 +63,41 @@ export function CourseArticles({
               />
             </RevealItem>
           )}
+        </Reveal>
+        {note}
+      </CourseSection>
+    );
+  }
+
+  if (variant === "profile") {
+    const { person } = content;
+    return (
+      <CourseSection id={id} tone={tone} head={content}>
+        <Reveal className={styles.profile} stagger={0.06}>
+          {person && (
+            <RevealItem className={styles.person}>
+              <span className={styles.personFrame}>
+                <Image
+                  src={person.image}
+                  alt={person.alt}
+                  fill
+                  sizes="(min-width: 64rem) 320px, (min-width: 48rem) 280px, 320px"
+                  className={styles.personPhoto}
+                />
+              </span>
+              <p className={styles.personCaption}>
+                <strong className={styles.personName}>{person.name}</strong>
+                <span className={styles.personRole}>{person.role}</span>
+              </p>
+            </RevealItem>
+          )}
+          <div className={styles.mediaText}>
+            {content.items.map((item, i) => (
+              <RevealItem as="article" key={item.heading ?? i} className={styles.columnsItem}>
+                <Column item={item} />
+              </RevealItem>
+            ))}
+          </div>
         </Reveal>
         {note}
       </CourseSection>
