@@ -1,8 +1,15 @@
 # IFEN Remaining Pages Progress
 
-Active phase: 5 (Module 4 final step card), interest, account and design-system programme. Correction programme A to H complete (2026-10-18), all phases pushed to staging.
+Active phase: 6 (bottom-anchored card CTAs), interest, account and design-system programme. Correction programme A to H complete (2026-10-18), all phases pushed to staging.
 
 ## Interest, account and design-system programme
+
+### Phase 5: Module 4 "The Final Step" (done 2026-10-18, pushed to staging)
+
+- The single card now answers four things in order, using only what the page already said: why it matters (the experience gathered, Module 4 is the last step to the certificate), what is already behind you (check rows: intensive course, internship, supervision), the examination (tiles: Online / Format, About 1 Hour / Duration, 2 CPD Credits / Under § 125 SGB V, the same figures as the hero) and the next action (primary "See Exam Dates" to `#dates`, secondary "Prepare With IFEN 100").
+- `CourseArticles` default cards gained optional `listHeading` and `facts` (mist tiles, `dl`, value over label, auto-fit to one column on phones); `Link` gained `primary`. No other page sets them, so every other articles section renders as before.
+- Mobbin references from Phase 0 (Duolingo test readiness, HubSpot certification process).
+- Checks: eslint, tsc, build clean. 1440 (heading left, content right), 320 (tiles stacked, no overflow). Heading order h2 > h3 > h4.
 
 ### Phase 4: Light hero (done 2026-10-18, pushed to staging)
 

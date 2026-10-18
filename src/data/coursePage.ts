@@ -4,7 +4,7 @@
 import type { Category, CourseFact } from "./course";
 
 export type Crumb = { label: string; href?: string };
-export type Link = { label: string; href: string };
+export type Link = { label: string; href: string; /** Primary button instead of secondary. */ primary?: boolean };
 export type Price = { label: string; amount: number };
 
 export type CourseHeroContent = {
@@ -95,6 +95,10 @@ export type Article = {
   paragraphs?: string[];
   /** Rendered as check rows. */
   list?: string[];
+  /** Small label over the check rows. */
+  listHeading?: string;
+  /** Key figures as tiles, e.g. an exam's format, duration and credits. */
+  facts?: { heading?: string; items: { value: string; label: string }[] };
   /** Short labels rendered as chips. */
   tags?: string[];
   address?: { name: string; lines: string[] };

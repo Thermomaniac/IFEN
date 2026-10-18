@@ -390,11 +390,22 @@ export const module4 = {
           {
             heading: "Congratulations, You Are Almost There!",
             paragraphs: [
-              "You have completed the intensive course, the internship and the supervision, and gathered a lot of valuable experience on your way to Certified Neurofeedback Therapist IFEN.",
-              "Your last step to the certificate is Module 4. For this you take an online examination that lasts about one hour.",
-              "Successful completion earns 2 CPD credits under § 125 SGB V.",
+              "You have gathered a lot of valuable experience on your way to Certified Neurofeedback Therapist IFEN. Module 4 is your last step to the certificate.",
             ],
-            links: [{ label: "Prepare With IFEN 100", href: IFEN100_PATH }],
+            listHeading: "Already Behind You",
+            list: ["The intensive course", "The internship", "The supervision"],
+            facts: {
+              heading: "The Examination",
+              items: [
+                { value: "Online", label: "Format" },
+                { value: "About 1 Hour", label: "Duration" },
+                { value: "2 CPD Credits", label: "Under § 125 SGB V" },
+              ],
+            },
+            links: [
+              { label: "See Exam Dates", href: "#dates", primary: true },
+              { label: "Prepare With IFEN 100", href: IFEN100_PATH },
+            ],
           },
         ],
       },

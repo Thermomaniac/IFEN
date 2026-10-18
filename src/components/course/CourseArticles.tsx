@@ -26,7 +26,8 @@ type Variant = "panels" | "columns" | "rows" | "media" | "profile";
  *   With `numbered` an index leads each heading instead (Neurofeedback methods).
  * - `media`: the copy beside `content.image`, for explainers (What Is Neurofeedback).
  * - `profile`: `content.person` as a portrait card beside the copy (About IFEN director).
- * Any layout takes per-item `links` (secondary buttons) and a highlighted `note` below.
+ * Any layout takes per-item `links` (secondary buttons, or primary when flagged) and a
+ * highlighted `note` below. Default cards also take a `listHeading` and `facts` tiles.
  */
 export function CourseArticles({
   id,
@@ -138,7 +139,13 @@ export function CourseArticles({
               </p>
             ))}
             {item.address && <Address address={item.address} />}
-            {item.list && <OutcomeList items={item.list} />}
+            {item.list && (
+              <div className={styles.group}>
+                {item.listHeading && <h4 className={styles.subheading}>{item.listHeading}</h4>}
+                <OutcomeList items={item.list} />
+              </div>
+            )}
+            {item.facts && <Facts facts={item.facts} />}
             {item.tags && (
               <ul className={styles.tags}>
                 {item.tags.map((tag) => (
@@ -162,12 +169,29 @@ function Links({ links }: { links: NonNullable<Article["links"]> }) {
     <ul className={styles.links}>
       {links.map((link) => (
         <li key={link.href}>
-          <Button href={link.href} variant="secondary">
+          <Button href={link.href} variant={link.primary ? "primary" : "secondary"}>
             {link.label}
           </Button>
         </li>
       ))}
     </ul>
+  );
+}
+
+/** Key figures in mist tiles, value over label, under an optional small heading. */
+function Facts({ facts }: { facts: NonNullable<Article["facts"]> }) {
+  return (
+    <div className={styles.group}>
+      {facts.heading && <h4 className={styles.subheading}>{facts.heading}</h4>}
+      <dl className={styles.facts}>
+        {facts.items.map((fact) => (
+          <div key={fact.label} className={styles.fact}>
+            <dt className={styles.factLabel}>{fact.label}</dt>
+            <dd className={styles.factValue}>{fact.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
   );
 }
 
