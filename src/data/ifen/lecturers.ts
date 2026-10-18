@@ -75,7 +75,7 @@ export const lecturers = {
   related: {
     label: "Explore further",
     heading: "Get to Know IFEN",
-    items: [RELATED.about, RELATED.board, ALL_OFFERS],
+    items: [RELATED.about, RELATED.therapists, ALL_OFFERS],
   } satisfies CategoriesContent,
 
   cta: IFEN_CTA,

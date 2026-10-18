@@ -10,10 +10,9 @@ export { ABOUT_PATH, FEINER_PATH, LECTURERS_PATH };
 /** The section's breadcrumb root. About IFEN is the landing page of the group. */
 export const IFEN_CRUMB = { label: "IFEN", href: ABOUT_PATH };
 
-export const RELATED: Record<"about" | "lecturers" | "board" | "therapists", Category> = {
+export const RELATED: Record<"about" | "lecturers" | "therapists", Category> = {
   about: { id: "about", title: "About IFEN", icon: { kind: "brain" }, href: ABOUT_PATH },
   lecturers: { id: "lecturers", title: "Our Lecturers", icon: { kind: "users" }, href: LECTURERS_PATH },
-  board: { id: "board", title: "Board Members", icon: { kind: "users" }, href: "/#board" },
   therapists: { id: "therapists", title: "Find a Therapist", icon: { kind: "pulse" }, href: "/therapists" },
 };
 

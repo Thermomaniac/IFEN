@@ -50,7 +50,7 @@ export const blogIndex = {
   related: {
     label: "Explore further",
     heading: "Learn More About Neurofeedback",
-    items: [RELATED.whatIs, RELATED.methods, ALL_OFFERS],
+    items: [RELATED.whatIs, RELATED.topics, ALL_OFFERS],
   } satisfies CategoriesContent,
 
   cta: BLOG_CTA,

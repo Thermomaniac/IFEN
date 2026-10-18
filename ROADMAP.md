@@ -1,6 +1,6 @@
 # IFEN Remaining Pages Roadmap
 
-Five phases, one phase per session. Read `PROGRESS.md` first to see which phase is active, and `DESIGN-SYSTEM.md` before building anything.
+Five build phases (done), then the correction programme below (phases A to H, one session, each pushed to staging). Five phases, one phase per session. Read `PROGRESS.md` first to see which phase is active, and `DESIGN-SYSTEM.md` before building anything.
 
 Branch: `phase-2` (staging deploy at ifen-staging.up.railway.app). Never push or merge to `main`. At the end of every phase, commit and push `phase-2` to deploy staging (see `CLAUDE.md`).
 
@@ -51,3 +51,20 @@ Footer links "About the institute" and "Lecturers overview" move to Phase 3 rout
 - Band order, section header, cards, CtaButton and breakpoints per `DESIGN-SYSTEM.md`.
 - When a listing row's page is redesigned, switch its `href` in `src/data/schedule.ts` to the local path constant.
 - Checks before handoff: `npx eslint .`, `npx tsc --noEmit`, `npm run build`, render at 1440 / 390 / 320, update `PROGRESS.md`.
+
+## Correction programme (started 2026-10-18)
+
+Architecture corrections, page improvements and missing pages after phases 1 to 5. Run A to H in order; after each phase run the checks, render 1440 / 390 / 320, update `PROGRESS.md`, commit that phase's files and push `phase-2`.
+
+- **A. Audit.** Sources verified (raw HTML of the live pages, parsed locally, because accordions are hidden from Firecrawl markdown). Plan written here.
+- **B. Navigation and IA.**
+  - Neurofeedback: What Is Neurofeedback, Topics (themenbereiche, `/neurofeedback/topics`), Areas of Application (anwendungsgebiete, `/neurofeedback/areas-of-application`). Benefits and Methods go; old routes redirect.
+  - IFEN: About IFEN, Lecturers, Training Courses in Neurofeedback. Board Members, Partners and Testimonials go. No Feedback page.
+  - Blog: plain link to `/blog`, no "Latest Articles" child.
+  - Course Booking: Certification Path and Training Locations go; module pages, BrainAvatar, BCIA and Photobiomodulation are added as their pages land (E, F).
+- **C. About IFEN and lecturers.** Title case, shorter Vision and Philosophy, director section with portrait (no invented quotes), modern neurofeedback cards with the icon on top and equal heights, one-line hero metrics on desktop. Move Why Neurofeedback?, Why IFEN?, What You Will Learn With Us, Basic Knowledge and Further Topics from the live Module 1 category page (`modul-1.html`). Thomas Feiner: compact hero, summary card, source-backed facts only, related courses.
+- **D. Blog.** Featured card border fix in the component, remove Read / poster / batch labels and "German original" badges, real load-more archive instead of the article count, article body in a reading layout (narrow measure, rhythm), footer with share, sources, previous post and Keep Reading.
+- **E. Modules.** Overview (`/courses/modules`): progression M1 to M4 plus IFEN 100, dates with card/table toggle and filters, no tabs, FAQ (`faq-fragen-und-antworten.html`) with an anchor. Module 1: remove testimonials and pricing UI, add "Overview of All Modules". Detail pages for Module 2, 3, 4 and IFEN 100.
+- **F. Course Booking gaps.** Training Courses in Neurofeedback (`alle-kurse-zum-thema-neurofeedback`), BrainAvatar (dates plus interest list), BCIA refinement, Photobiomodulation (interest list).
+- **G. Supervision and webinars.** Supervision hero on two lines, TeamViewer as instructions with the official download. Webinars: card/table toggle and filters without tabs.
+- **H. QA.** Title-case headings, shared 464px hero height (Figma "Hero Type 1"), hero line SVG never shows its path end, full checks across all routes.

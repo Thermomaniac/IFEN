@@ -4,7 +4,7 @@
 // three paragraphs, the further-information PDF and both article downloads are kept.
 // Dates: the source's date table, by course code, from `schedule.ts`.
 
-import { METHODS_PATH } from "../neurofeedback/shared";
+import { TOPICS_PATH } from "../neurofeedback/shared";
 import { ALL_OFFERS, BOOKING_CRUMB, BOOKING_CTA, RELATED, datesFor, type BookingPage } from "./shared";
 
 const DOWNLOADS = "https://www.neurofeedback-info.de/images";
@@ -67,7 +67,7 @@ export const isfNeurofeedback = {
     label: "Related",
     heading: "Keep Exploring",
     items: [
-      { id: "methods", title: "Neurofeedback Methods", icon: { kind: "brain" }, href: METHODS_PATH },
+      { id: "topics", title: "Neurofeedback Topics", icon: { kind: "brain" }, href: TOPICS_PATH },
       RELATED.qeeg,
       ALL_OFFERS,
     ],

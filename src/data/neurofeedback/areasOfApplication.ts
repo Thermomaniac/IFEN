@@ -1,4 +1,4 @@
-// Applications of Neurofeedback. Content from the live page
+// Areas of Application. Content from the live page
 // neurofeedback-info.de/neurofeedback-de/anwendungsgebiete.html ("Anwendung von Neurofeedback"),
 // translated from German; both lists and the closing remark are kept in full. The source
 // illustration is a flat clip-art graphic, so the hero uses IFEN's EEG practice photo instead.
@@ -8,15 +8,15 @@ import { NEUROFEEDBACK_CRUMB, NEUROFEEDBACK_CTA, RELATED } from "./shared";
 
 export const applications = {
   meta: {
-    title: "Applications of Neurofeedback | IFEN",
+    title: "Areas of Application | IFEN",
     description:
       "What neurofeedback can do and where it helps: its positive effects and the disorders and clinical pictures it is applied for.",
   },
 
   hero: {
-    title: "Applications of Neurofeedback",
-    breadcrumb: [NEUROFEEDBACK_CRUMB, { label: "Applications" }],
-    badge: "Neurofeedback applications",
+    title: "Areas of Application",
+    breadcrumb: [NEUROFEEDBACK_CRUMB, { label: "Areas of Application" }],
+    badge: "Areas of application",
     description: "What neurofeedback can do, and the disorders and clinical pictures it is applied for.",
     highlights: [],
     image: "/about/metric-tile.jpg",
@@ -61,7 +61,7 @@ export const applications = {
   related: {
     label: "Explore further",
     heading: "Continue Learning",
-    items: [RELATED.whatIs, RELATED.methods, RELATED.therapists],
+    items: [RELATED.whatIs, RELATED.topics, RELATED.therapists],
   } satisfies CategoriesContent,
 
   cta: NEUROFEEDBACK_CTA,

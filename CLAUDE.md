@@ -35,7 +35,7 @@ Five-phase redesign of the remaining IFEN pages, one phase per session. At sessi
 2. `ROADMAP.md`: phase scope, source URLs, nav plan, per-phase conventions.
 3. `DESIGN-SYSTEM.md`: exact type, color, spacing, radius, breakpoint, component and motion values.
 
-Execute only the active phase. Before handoff run `npx eslint .`, `npx tsc --noEmit`, `npm run build`, render at 1440 / 390 / 320, then update `PROGRESS.md`. Work stays on `phase-2`; never push or merge to `main`.
+Execute only the active phase. After phase 5 a correction programme (phases A to H, listed in `ROADMAP.md`) runs in one session, each phase pushed to staging before the next starts. Before handoff run `npx eslint .`, `npx tsc --noEmit`, `npm run build`, render at 1440 / 390 / 320, then update `PROGRESS.md`. Work stays on `phase-2`; never push or merge to `main`.
 
 ## Staging deploy after every phase
 

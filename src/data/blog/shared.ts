@@ -7,7 +7,7 @@
 import type { Category } from "../course";
 import { LISTING_PATH, type CtaContent } from "../coursePage";
 import { ALL_OFFERS } from "../courses/shared";
-import { METHODS_PATH, WHAT_IS_PATH } from "../neurofeedback/shared";
+import { TOPICS_PATH, WHAT_IS_PATH } from "../neurofeedback/shared";
 import { BLOG_PATH, EVIDENCE_PATH, LIVE_BLOG } from "./paths";
 
 export { BLOG_PATH, EVIDENCE_PATH, LIVE_BLOG };
@@ -113,10 +113,10 @@ export const POSTS = {
   },
 } satisfies Record<string, BlogPost>;
 
-export const RELATED: Record<"blog" | "whatIs" | "methods", Category> = {
+export const RELATED: Record<"blog" | "whatIs" | "topics", Category> = {
   blog: { id: "blog", title: "All Blog Articles", icon: { kind: "brain" }, href: BLOG_PATH },
   whatIs: { id: "what-is", title: "What Is Neurofeedback?", icon: { kind: "pulse" }, href: WHAT_IS_PATH },
-  methods: { id: "methods", title: "Neurofeedback Methods", icon: { kind: "brain" }, href: METHODS_PATH },
+  topics: { id: "topics", title: "Neurofeedback Topics", icon: { kind: "brain" }, href: TOPICS_PATH },
 };
 
 export { ALL_OFFERS };

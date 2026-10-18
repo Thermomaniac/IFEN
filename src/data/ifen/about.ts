@@ -158,7 +158,7 @@ export const about = {
   related: {
     label: "Explore further",
     heading: "Get to Know IFEN",
-    items: [RELATED.lecturers, RELATED.board, ALL_OFFERS],
+    items: [RELATED.lecturers, RELATED.therapists, ALL_OFFERS],
   } satisfies CategoriesContent,
 
   cta: {

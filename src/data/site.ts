@@ -4,7 +4,7 @@ import { BCIA_PATH, ISF_PATH, QEEG_COURSES_PATH, SUPERVISION_PATH, WEBINARS_PATH
 import { LISTING_PATH } from "./coursePage";
 import { ABOUT_PATH, LECTURERS_PATH } from "./ifen/paths";
 import { BLOG_PATH } from "./blog/paths";
-import { APPLICATIONS_PATH, METHODS_PATH, WHAT_IS_PATH } from "./neurofeedback/shared";
+import { AREAS_PATH, TOPICS_PATH, WHAT_IS_PATH } from "./neurofeedback/shared";
 
 export const contact = {
   phone: "+49 (89) 2000 299 66",
@@ -36,8 +36,6 @@ export const navLinks: NavLink[] = [
       { label: "Supervision, Internship and Mentoring", href: SUPERVISION_PATH },
       { label: "BCIA Certification", href: BCIA_PATH },
       { label: "Webinars", href: WEBINARS_PATH },
-      { label: "Certification Path", href: "/#certification" },
-      { label: "Training Locations", href: "/#locations" },
     ],
   },
   {
@@ -45,9 +43,8 @@ export const navLinks: NavLink[] = [
     href: WHAT_IS_PATH,
     children: [
       { label: "What Is Neurofeedback", href: WHAT_IS_PATH },
-      { label: "Applications", href: APPLICATIONS_PATH },
-      { label: "Benefits", href: `${APPLICATIONS_PATH}#effects` },
-      { label: "Methods", href: METHODS_PATH },
+      { label: "Topics", href: TOPICS_PATH },
+      { label: "Areas of Application", href: AREAS_PATH },
     ],
   },
   {
@@ -56,14 +53,11 @@ export const navLinks: NavLink[] = [
     children: [
       { label: "About IFEN", href: ABOUT_PATH },
       { label: "Lecturers", href: LECTURERS_PATH },
-      { label: "Board Members", href: "/#board" },
-      { label: "Partners", href: "/#partners" },
-      { label: "Testimonials", href: "/#testimonials" },
     ],
   },
   { label: "Shop", href: "#" },
   { label: "Therapist List", href: "/therapists" },
-  { label: "Blog", href: BLOG_PATH, children: [{ label: "Latest Articles", href: BLOG_PATH }] },
+  { label: "Blog", href: BLOG_PATH },
 ];
 
 export const hero = {

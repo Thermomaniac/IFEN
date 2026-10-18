@@ -1,4 +1,4 @@
-// Neurofeedback Methods. Content from the live page
+// Neurofeedback Topics. Content from the live page
 // neurofeedback-info.de/neurofeedback-de/themenbereiche.html ("Neurofeedback Verfahren", "Themenbereiche"),
 // translated from German; all five topic texts are kept in full.
 // Links: the source's training links point at /de pages; the English equivalents on the live
@@ -16,16 +16,16 @@ import { ALL_OFFERS, NEUROFEEDBACK_CRUMB, NEUROFEEDBACK_CTA } from "./shared";
 
 const BOOKING = `${LIVE}/termine-kursbuchung-seminare`;
 
-export const methods = {
+export const topics = {
   meta: {
-    title: "Neurofeedback Methods | IFEN",
+    title: "Neurofeedback Topics | IFEN",
     description:
       "QEEG, neuromeditation, ISF neurofeedback, photobiomodulation and BrainAvatar: the topic areas around neurofeedback, briefly explained.",
   },
 
   hero: {
-    title: "Neurofeedback Methods",
-    breadcrumb: [NEUROFEEDBACK_CRUMB, { label: "Methods" }],
+    title: "Neurofeedback Topics",
+    breadcrumb: [NEUROFEEDBACK_CRUMB, { label: "Topics" }],
     badge: "Topic areas",
     description:
       "Five topic areas around neurofeedback, from QEEG brain mapping to photobiomodulation, with links to the matching training.",
@@ -34,7 +34,7 @@ export const methods = {
 
   topics: {
     label: "Topic areas",
-    heading: "Methods and Topic Areas",
+    heading: "Topic Areas Around Neurofeedback",
     numbered: true,
     items: [
       {

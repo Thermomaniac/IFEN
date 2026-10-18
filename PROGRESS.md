@@ -1,6 +1,27 @@
 # IFEN Remaining Pages Progress
 
-Active phase: none. All five phases are complete. See `ROADMAP.md`.
+Active phase: correction programme, phase C (About IFEN and lecturers). See `ROADMAP.md`, section "Correction programme".
+
+## Correction programme
+
+### Phase A: Audit (done 2026-10-18)
+
+- Sources fetched as raw HTML and parsed locally (Firecrawl markdown drops accordion content): modul-1-4, modul-1 (category), modul-2, modul-3, modul-4, ifen-100-pruefungs-mentoring, faq-fragen-und-antworten, alle-kurse-zum-thema-neurofeedback, brainavatar, photobiomodulation, bcia-board-certified-in-neurofeeedback, supervision-praktikum-mentoring-einzelne-tage, webinare-m, ifen-de/ueber-uns.
+- The five sections to move to About IFEN (Warum Neurofeedback?, Warum IFEN?, Was Sie bei uns lernen, Das Grundwissen, Weiterführende Themen) are on the live Module 1 category page `modul-1.html`, not on the English course page (which returns 403). They were never in the local Module 1 page.
+- No icon library is installed (no Phosphor, no "Foursquare"); icons stay in `src/components/icons`, with Phosphor-style paths added there by hand in one weight.
+- The hero line SVG ends an open path at (1032, 869) of its 1528 viewBox; pages without a booking panel show the cut end.
+
+### Phase B: Navigation and IA (done 2026-10-18, pushed to staging)
+
+- Neurofeedback menu: What Is Neurofeedback, Topics, Areas of Application. Benefits (`/neurofeedback/applications#effects`) and Methods removed.
+- Routes renamed: `/neurofeedback/methods` → `/neurofeedback/topics`, `/neurofeedback/applications` → `/neurofeedback/areas-of-application`. Both old paths redirect (307, `next.config.ts`). Data files `topics.ts` and `areasOfApplication.ts`; constants `TOPICS_PATH` and `AREAS_PATH`; related cards, breadcrumbs, titles and the ISF and blog related cards relabelled.
+- IFEN menu: About IFEN, Lecturers (Training Courses in Neurofeedback is added in phase F with its page). Board Members, Partners and Testimonials removed; the "Board Members" related card on About and Lecturers replaced with Find a Therapist.
+- Blog: plain link to `/blog`, no child.
+- Course Booking: Certification Path and Training Locations removed. Module, BrainAvatar and Photobiomodulation items are added with their pages (E, F) so the nav never points at a missing route.
+- Desktop and mobile both read `navLinks`, so they stay in sync.
+- Footer links "Advisory Board members" and "Research partnerships" still point at the home sections, which exist; not part of the menu brief.
+- Checks: eslint clean, tsc clean, build passes. Production server: both redirects return 307 to the new paths; desktop menus and the mobile drawer list the new items; no overflow at 390.
+
 
 ## Phase 5: Course Booking content pages (completed 2026-10-18, pushed to staging)
 

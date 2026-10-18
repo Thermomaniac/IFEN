@@ -4,11 +4,11 @@ import { CourseArticles } from "@/components/course/CourseArticles";
 import { CourseHero } from "@/components/course/CourseHero";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { CtaFooter } from "@/components/sections/CtaFooter/CtaFooter";
-import { applications as page } from "@/data/neurofeedback/applications";
+import { applications as page } from "@/data/neurofeedback/areasOfApplication";
 
 export const metadata: Metadata = page.meta;
 
-export default function ApplicationsPage() {
+export default function AreasOfApplicationPage() {
   return (
     <>
       <SiteHeader currentHref="" />

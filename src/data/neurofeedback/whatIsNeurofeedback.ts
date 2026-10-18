@@ -67,7 +67,7 @@ export const whatIsNeurofeedback = {
   related: {
     label: "Explore further",
     heading: "Continue Learning",
-    items: [RELATED.applications, RELATED.methods, ALL_OFFERS],
+    items: [RELATED.applications, RELATED.topics, ALL_OFFERS],
   } satisfies CategoriesContent,
 
   cta: NEUROFEEDBACK_CTA,
