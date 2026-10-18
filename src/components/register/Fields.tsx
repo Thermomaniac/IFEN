@@ -1,7 +1,8 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { CheckIcon, ChevronDownIcon } from "@/components/icons";
+import { useState } from "react";
+import { CheckIcon, ChevronDownIcon, EyeIcon, EyeSlashIcon } from "@/components/icons";
 import type { Errors } from "@/lib/registrationForm";
 import styles from "./Form.module.css";
 
@@ -58,10 +59,13 @@ type TextProps = Base & {
   placeholder?: string;
   autoComplete?: string;
   inputMode?: "text" | "numeric" | "tel" | "email";
+  maxLength?: number;
+  autoCapitalize?: "none" | "sentences" | "words";
 };
 
 export function TextField(props: TextProps) {
-  const { name, value, error, required, hint, type = "text", placeholder, autoComplete, inputMode, onChange, onBlur } = props;
+  const { name, value, error, required, hint, type = "text", placeholder, autoComplete, inputMode, maxLength, autoCapitalize, onChange, onBlur } =
+    props;
   return (
     <Shell {...props}>
       <input
@@ -72,6 +76,9 @@ export function TextField(props: TextProps) {
         placeholder={placeholder}
         autoComplete={autoComplete}
         inputMode={inputMode}
+        maxLength={maxLength}
+        autoCapitalize={autoCapitalize}
+        spellCheck={autoCapitalize === "none" ? false : undefined}
         required={required}
         aria-invalid={error ? true : undefined}
         aria-describedby={describedBy(name, hint, error)}
@@ -79,6 +86,62 @@ export function TextField(props: TextProps) {
         onChange={(e) => onChange(name, e.target.value)}
         onBlur={() => onBlur?.(name)}
       />
+    </Shell>
+  );
+}
+
+type PasswordProps = Base & {
+  autoComplete: "current-password" | "new-password";
+  maxLength?: number;
+  showLabel: string;
+  hideLabel: string;
+  /** Extra ids for aria-describedby, e.g. a requirements list under the field. */
+  describedBy?: string;
+  children?: ReactNode;
+};
+
+/**
+ * Password input with a show/hide toggle inside the field, as on the live site.
+ * The toggle is a real button with aria-pressed; the input keeps its value and
+ * focus when the type changes.
+ */
+export function PasswordField(props: PasswordProps) {
+  const { name, value, error, required, hint, autoComplete, maxLength, showLabel, hideLabel, describedBy: extra, children, onChange, onBlur } =
+    props;
+  const [shown, setShown] = useState(false);
+  const described = [describedBy(name, hint, error), extra].filter(Boolean).join(" ") || undefined;
+  return (
+    <Shell {...props}>
+      <div className={styles.passwordWrap}>
+        <input
+          id={fieldId(name)}
+          name={name}
+          type={shown ? "text" : "password"}
+          value={value}
+          autoComplete={autoComplete}
+          maxLength={maxLength}
+          autoCapitalize="none"
+          autoCorrect="off"
+          spellCheck={false}
+          required={required}
+          aria-invalid={error ? true : undefined}
+          aria-describedby={described}
+          className={styles.input}
+          onChange={(e) => onChange(name, e.target.value)}
+          onBlur={() => onBlur?.(name)}
+        />
+        <button
+          type="button"
+          className={styles.reveal}
+          aria-pressed={shown}
+          aria-controls={fieldId(name)}
+          aria-label={shown ? hideLabel : showLabel}
+          onClick={() => setShown((v) => !v)}
+        >
+          {shown ? <EyeSlashIcon /> : <EyeIcon />}
+        </button>
+      </div>
+      {children}
     </Shell>
   );
 }
@@ -150,6 +213,7 @@ export function CheckboxField({
   checked,
   required,
   error,
+  plain,
   onChange,
   children,
 }: {
@@ -157,6 +221,8 @@ export function CheckboxField({
   checked: boolean;
   required?: boolean;
   error?: string;
+  /** Drops the "(Optional)" note, for a preference such as "Remember me". */
+  plain?: boolean;
   onChange: (name: string, value: string) => void;
   children: ReactNode;
 }) {
@@ -180,7 +246,7 @@ export function CheckboxField({
         </span>
         <span>
           {children}
-          {required ? <span aria-hidden="true"> *</span> : <span className={styles.optional}> (Optional)</span>}
+          {required ? <span aria-hidden="true"> *</span> : !plain && <span className={styles.optional}> (Optional)</span>}
         </span>
       </label>
       {error && (

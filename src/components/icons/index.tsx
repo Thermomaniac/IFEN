@@ -606,3 +606,26 @@ export function BooksIcon(props: IconProps) {
     </svg>
   );
 }
+
+/** Password fields: show (Phosphor "Eye", regular weight). */
+export function EyeIcon(props: IconProps) {
+  return (
+    <svg {...base} width="20" height="20" viewBox="0 0 256 256" fill="none" stroke="currentColor" strokeWidth="16" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="M128 56C48 56 16 128 16 128s32 72 112 72 112-72 112-72-32-72-112-72Z" />
+      <circle cx="128" cy="128" r="40" />
+    </svg>
+  );
+}
+
+/** Password fields: hide (Phosphor "EyeSlash", regular weight). */
+export function EyeSlashIcon(props: IconProps) {
+  return (
+    <svg {...base} width="20" height="20" viewBox="0 0 256 256" fill="none" stroke="currentColor" strokeWidth="16" strokeLinecap="round" strokeLinejoin="round" {...props}>
+      <path d="m48 40 160 176" />
+      <path d="M154.91 157.6a40 40 0 0 1-53.82-59.2" />
+      <path d="M74 68.6C33.23 89.24 16 128 16 128s32 72 112 72a118 118 0 0 0 54-12.6" />
+      <path d="M208.6 169.1C230.4 149.6 240 128 240 128s-32-72-112-72a126 126 0 0 0-20.88 1.7" />
+      <path d="M135.53 88.71a40 40 0 0 1 32.3 35.53" />
+    </svg>
+  );
+}

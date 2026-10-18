@@ -9,6 +9,7 @@ import {
   SUPERVISION_PATH,
   WEBINARS_PATH,
 } from "./booking/paths";
+import { ACCOUNT_PATH } from "./account";
 import { LISTING_PATH } from "./coursePage";
 import {
   IFEN100_PATH,
@@ -383,7 +384,7 @@ export const footer = {
     {
       title: "My IFEN",
       links: [
-        { label: "Login Portal", href: "#" },
+        { label: "Login Portal", href: ACCOUNT_PATH },
         { label: "About the Institute", href: ABOUT_PATH },
         { label: "Lecturers Overview", href: LECTURERS_PATH },
         { label: "Advisory Board Members", href: "/#board" },

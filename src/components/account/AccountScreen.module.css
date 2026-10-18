@@ -1,0 +1,85 @@
+/* Mist band like the course bands; white card with the shared 1px border shadow. */
+.band {
+  background: var(--color-mist);
+  border-block: 1px solid var(--color-border-soft);
+}
+
+.inner {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 24px;
+  max-width: calc(var(--content-max) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding: var(--section-pad-sm) var(--gutter);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  min-width: 0;
+  padding: clamp(24px, 4vw, 56px);
+  border-radius: 4px;
+  background: var(--color-white);
+  box-shadow:
+    inset 0 0 0 1px var(--color-border),
+    0 1px 2px #0000000f;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  max-width: 36rem;
+}
+
+/* Long German compounds must break rather than overflow. */
+.title {
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+
+.intro {
+  color: var(--color-heading);
+  font-size: var(--fs-body);
+  line-height: 24px;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.media {
+  position: relative;
+  min-height: 100%;
+  overflow: hidden;
+  border-radius: 4px;
+  background: var(--color-border-soft);
+}
+
+.image {
+  object-fit: cover;
+  object-position: 50% 30%;
+}
+
+@media (max-width: 64rem) {
+  .inner {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .media {
+    display: none;
+  }
+}
+
+@media (max-width: 30rem) {
+  .inner {
+    padding-inline: 0;
+    padding-block: 0;
+  }
+
+  .card {
+    padding: 32px var(--gutter);
+    border-radius: 0;
+    box-shadow: none;
+  }
+}

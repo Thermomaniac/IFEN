@@ -5,6 +5,7 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { ChevronDownIcon, CloseIcon, MenuIcon } from "@/components/icons";
+import { accountPaths } from "@/data/account";
 import { navLinks, type NavLink } from "@/data/site";
 import styles from "./MainNav.module.css";
 
@@ -49,10 +50,10 @@ export function MainNav({ currentHref = "/" }: { currentHref?: string }) {
         </nav>
 
         <div className={styles.actions}>
-          <a href="#" className={styles.login}>
+          <a href={accountPaths.login} className={styles.login}>
             Login
           </a>
-          <a href="#" className={styles.register}>
+          <a href={accountPaths.register} className={styles.register}>
             Register
           </a>
         </div>
@@ -269,10 +270,10 @@ function MobileDrawer({ open, onClose, currentHref }: { open: boolean; onClose: 
             </nav>
 
             <div className={styles.drawerActions}>
-              <a href="#" className={styles.register}>
+              <a href={accountPaths.register} className={styles.register} onClick={onClose}>
                 Register
               </a>
-              <a href="#" className={styles.login}>
+              <a href={accountPaths.login} className={styles.login} onClick={onClose}>
                 Login
               </a>
             </div>

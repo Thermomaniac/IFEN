@@ -1,8 +1,18 @@
 # IFEN Remaining Pages Progress
 
-Active phase: 2 (account screens), interest, account and design-system programme. Correction programme A to H complete (2026-10-18), all phases pushed to staging.
+Active phase: 3 (nav and modules overview), interest, account and design-system programme. Correction programme A to H complete (2026-10-18), all phases pushed to staging.
 
 ## Interest, account and design-system programme
+
+### Phase 2: Account screens (done 2026-10-18, pushed to staging)
+
+- Four routes under `/my-ifen` (log in, `/register`, `/reset`, `/remind`), `noindex`. Header Login and Register (desktop and drawer) and the footer "Login Portal" now point there. One layout (`AccountScreen`): mist band, white card with label, h1 and intro, form; IFEN photo (`/about/ifen-neurofeedback.jpg`) on the right from 64rem up, dropped below; the card goes edge to edge at 30rem.
+- Fields exactly as the live Joomla pages: login username, password (show/hide toggle, max 99), Remember me, links to both recovery screens and to registration; register name, username, password with confirmation, email, reCAPTCHA v2; reset and remind email plus reCAPTCHA. Live password checklist (8+ characters, number, special character, upper and lower case) tied to the field with `aria-describedby`, each rule announced as met or not met.
+- Shared pieces extended, not forked: `PasswordField`, `TextField` `maxLength`/`autoCapitalize`, `CheckboxField` `plain`, `SectionHeading` `as="h1"`, `EyeIcon`/`EyeSlashIcon`. Rules shared by client and server in `src/lib/accountForm.ts`, copy in `src/data/account.ts`.
+- Integration boundary: `POST /api/account/[action]` validates again, verifies reCAPTCHA with `RECAPTCHA_SECRET_KEY` (register, reset, remind), forwards JSON to `${IFEN_AUTH_ENDPOINT}/<action>` (10 s timeout), passes the service's `Set-Cookie` through, and only accepts redirects to same-site paths or neurofeedback-info.de. Login 401/403 maps to "Username and password do not match"; 409/422 field errors are passed back for known fields only. Without the endpoint, or without the reCAPTCHA secret on a captcha form, it answers 503 and the form says the request was not sent, with a link to the live My IFEN page. Nothing here decides a login.
+- Without `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` the captcha forms show a note instead of the widget; the server still refuses them (fail closed).
+- **Open dependency:** IFEN must provide an account service (a Joomla bridge) answering `POST /login|/register|/reset|/remind` with JSON, setting the Joomla session cookie on login, and returning 401 for wrong credentials and 409/422 `{errors}` for taken usernames or emails. Then set `IFEN_AUTH_ENDPOINT`, plus a reCAPTCHA v2 key pair registered for the staging and production domains (`NEXT_PUBLIC_RECAPTCHA_SITE_KEY` at build, `RECAPTCHA_SECRET_KEY` at runtime). The live key is bound to neurofeedback-info.de and cannot be reused.
+- Checks: eslint, tsc, build clean. API: 404 unknown action, 400 bad JSON, 422 missing fields, weak password and mismatch, 422 missing captcha, 503 unconfigured, 401 wrong credentials, 200 with session cookie passed through and an off-site redirect dropped (stand-in upstream), invalid captcha token rejected by Google's live siteverify. Not verified end to end: a passing captcha, since that needs a real key for the domain. Browser: 1440, 390, 320 with no overflow; empty submit focuses the summary; toggle switches type, `aria-pressed` and label; failure alert and success panel take focus; reduced motion renders.
 
 ### Phase 1: Interest capture (done 2026-10-18, pushed to staging)
 

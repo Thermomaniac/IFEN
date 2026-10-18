@@ -1,0 +1,200 @@
+/* My IFEN forms. Fields reuse the registration pieces (Form.module.css). */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  max-width: 36rem;
+}
+
+.fieldset {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.fieldset > legend {
+  margin-bottom: 24px;
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.rules {
+  margin-top: 4px;
+  color: var(--color-muted);
+  font-size: var(--fs-small);
+  line-height: 20px;
+}
+
+.rulesTitle {
+  margin-bottom: 6px;
+  color: var(--color-heading);
+  font-weight: 600;
+}
+
+.rules ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 4px 16px;
+}
+
+.rules li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.rules li svg {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  margin-top: 3px;
+}
+
+.rules li[data-met] {
+  color: var(--color-ink);
+}
+
+.rules li[data-met] svg {
+  color: #009ba7;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.captcha {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 78px;
+}
+
+.captcha > div:focus-visible {
+  border-radius: 4px;
+  box-shadow: var(--focus-ring);
+}
+
+.note {
+  padding: 16px 20px;
+  border-left: 4px solid var(--color-border);
+  border-radius: 4px;
+  background: var(--color-mist);
+  color: var(--color-heading);
+  font-size: var(--fs-small);
+  line-height: 20px;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.link {
+  color: var(--color-ink);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  overflow-wrap: anywhere;
+}
+
+.link:focus-visible {
+  border-radius: 2px;
+  box-shadow: var(--focus-ring);
+}
+
+.alert {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 16px 20px;
+  border-left: 4px solid #b4232a;
+  border-radius: 4px;
+  background: #fdf2f2;
+  font-size: var(--fs-body);
+  line-height: 24px;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.alert:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 32px;
+}
+
+.recovery {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: var(--fs-small);
+  line-height: 20px;
+}
+
+.switch {
+  padding-top: 24px;
+  border-top: 1px solid var(--color-border-soft);
+  color: var(--color-heading);
+  font-size: var(--fs-body);
+  line-height: 24px;
+}
+
+.done {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  max-width: 36rem;
+}
+
+.doneIcon {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  color: #009ba7;
+}
+
+.doneText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+  font-size: var(--fs-body);
+  line-height: 24px;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.doneHeading {
+  font-size: 1.25rem;
+  line-height: 28px;
+  font-weight: 600;
+  font-variation-settings: var(--fvs-display);
+}
+
+.doneHeading:focus,
+.doneHeading:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+@media (max-width: 34rem) {
+  .rules ul {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
