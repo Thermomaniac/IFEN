@@ -203,6 +203,15 @@ export const evidenceArticle = {
     },
   },
 
+  // The source's share row (Facebook, X, LinkedIn, email) and its post navigation. The
+  // source has only "Vorheriger Beitrag": this is the newest post, so there is no next one.
+  share: {
+    id: "share" as const,
+    heading: "Share This Article",
+    title: post.title,
+    previous: { label: "Previous Post", post: POSTS.biofeedback },
+  },
+
   related: {
     label: "Explore further",
     heading: "Keep Reading",

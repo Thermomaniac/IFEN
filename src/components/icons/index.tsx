@@ -206,6 +206,14 @@ export function InstagramIcon(props: IconProps) {
   );
 }
 
+export function LinkedInIcon(props: IconProps) {
+  return (
+    <svg {...base} width="16" height="16" viewBox="3.5 3.3 17 17.2" fill="currentColor" {...props}>
+      <path d="M20.447 20.452H16.893V14.883C16.893 13.555 16.866 11.846 15.041 11.846C13.188 11.846 12.905 13.291 12.905 14.785V20.452H9.351V9H12.765V10.561H12.811C13.288 9.661 14.448 8.711 16.181 8.711C19.782 8.711 20.448 11.081 20.448 14.166V20.452ZM5.337 7.433C4.198 7.433 3.275 6.509 3.275 5.371C3.275 4.232 4.198 3.308 5.337 3.308C6.476 3.308 7.399 4.232 7.399 5.371C7.399 6.509 6.476 7.433 5.337 7.433ZM7.119 20.452H3.555V9H7.119V20.452Z" />
+    </svg>
+  );
+}
+
 /** Program details list marker. */
 export function CheckCircleIcon(props: IconProps) {
   return (

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Reveal, RevealItem } from "@/components/motion/Reveal";
+import { ArrowCircleLeftIcon } from "@/components/icons";
 import { CtaButton } from "@/components/ui/CtaButton";
 import { formatPostDate, type BlogPost } from "@/data/blog/shared";
 import styles from "./BlogPosts.module.css";
@@ -90,5 +91,34 @@ export function PostGrid({ posts, archive }: { posts: BlogPost[]; archive?: { la
         </Reveal>
       )}
     </>
+  );
+}
+
+/** Previous post under an article (the source's "Vorheriger Beitrag"), as a linked box. */
+export function PostNav({ previous }: { previous: { label: string; post: BlogPost } }) {
+  const { label, post } = previous;
+  return (
+    <nav aria-label="More articles">
+      <a href={post.href} className={styles.prev} rel="prev">
+        <span className={styles.prevLabel}>
+          <ArrowCircleLeftIcon width={20} height={20} />
+          {label}
+        </span>
+        <span className={styles.prevTitle}>{post.title}</span>
+        <span className={styles.prevMeta}>
+          <span>
+            <time dateTime={post.date}>{formatPostDate(post.date)}</time>
+            <span aria-hidden="true"> · </span>
+            {post.minutes} min read
+          </span>
+          {post.external && (
+            <>
+              <span className={styles.lang}>German original</span>
+              <span className={styles.srOnly}> (opens the IFEN blog)</span>
+            </>
+          )}
+        </span>
+      </a>
+    </nav>
   );
 }

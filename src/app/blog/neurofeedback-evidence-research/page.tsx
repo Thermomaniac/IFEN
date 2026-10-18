@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Fragment } from "react";
+import { PostNav } from "@/components/blog/BlogPosts";
+import { ShareLinks } from "@/components/blog/ShareLinks";
 import { Categories } from "@/components/course/Categories";
 import { CourseHero } from "@/components/course/CourseHero";
 import { ProfileNav } from "@/components/directory/ProfileNav";
@@ -8,6 +10,7 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { RevealItem } from "@/components/motion/Reveal";
 import { CtaFooter } from "@/components/sections/CtaFooter/CtaFooter";
 import { evidenceArticle as page } from "@/data/blog/evidence";
+import { EVIDENCE_PATH } from "@/data/blog/shared";
 import styles from "@/components/directory/Profile.module.css";
 
 export const metadata: Metadata = page.meta;
@@ -22,7 +25,8 @@ function Rich({ text }: { text: string }) {
 const nav = [...page.sections, page.sources].map(({ id, label }) => ({ id, label }));
 
 // A long article in the profile layout: hero, "On This Page" nav (the source's table of
-// contents) and one card per section, ending in the sources and a link to the original.
+// contents) and one card per section, ending in the sources, a link to the original,
+// the share row and the previous post.
 export default function EvidenceArticlePage() {
   return (
     <>
@@ -75,6 +79,15 @@ export default function EvidenceArticlePage() {
                   <a href={page.sources.note.link.href} className={styles.source} hrefLang="de">
                     {page.sources.note.link.label}
                   </a>
+                </RevealItem>
+              </ProfileSection>
+
+              <ProfileSection id={page.share.id} heading={page.share.heading}>
+                <RevealItem>
+                  <ShareLinks title={page.share.title} path={EVIDENCE_PATH} />
+                </RevealItem>
+                <RevealItem>
+                  <PostNav previous={page.share.previous} />
                 </RevealItem>
               </ProfileSection>
             </div>

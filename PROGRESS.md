@@ -15,6 +15,8 @@ Pages (data in `src/data/blog/`, routes in `src/app/blog/`). Paths in `src/data/
 
 Mobbin references: GitBook blog (featured wide card above a grid), Mural (featured post), Passionfroot (date · read-time meta), AngelList (category tag with date and read time) for the index; Codecademy (right-side Contents rail), Hashnode (table-of-contents card), Uxcel (title, author, read time, updated date) for the article.
 
+Follow-up (2026-10-18): share row and previous post added to the article, as the last card ("Share This Article"), not in the "On This Page" nav. Facebook, X, LinkedIn and Email, as on the source; the URL is read in the browser (`ShareLinks`, client), so staging and production each share their own address. The source has only "Vorheriger Beitrag" (the newest post has no next one), so there is a "Previous Post" box to the biofeedback post, tagged German original (`PostNav` in `BlogPosts.tsx`). New `LinkedInIcon`. Mobbin references: The New York Times (share list, icon and label per network), Peerlist (share menu with X, LinkedIn), Hashnode (more articles at the article end).
+
 Verification:
 
 - `npx eslint .` clean; `npx tsc --noEmit` clean; `npm run build` passes (both routes static).
@@ -26,7 +28,6 @@ Open issues:
 - Excerpts for the German-linked posts are translations of the source excerpts, which end mid-sentence ("…"); kept as is.
 - The hero welcome text links to www.neurofeedback-info.de on the source; here "see our course dates" is plain text and the CTA footer links the course listing.
 - The Philosophy post has no image on the source; its card uses the dotted brain on ink.
-- No share links (the source has Facebook, Twitter, LinkedIn, Mail) and no previous/next post links.
 
 
 ## Phase 3: IFEN pages (completed 2026-10-18, pushed to staging)
