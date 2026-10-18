@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useRef, useState, type FormEvent } from "react";
-import { CheckCircleFillIcon, CheckIcon, MinusIcon } from "@/components/icons";
+import { CheckCircleFillIcon, CheckCircleIcon } from "@/components/icons";
 import { CheckboxField, ErrorSummary, PasswordField, TextField } from "@/components/register/Fields";
 import form from "@/components/register/Form.module.css";
 import { SubmitButton } from "@/components/register/SubmitButton";
@@ -213,13 +213,13 @@ export function AccountForm({ action }: { action: AccountAction }) {
                 describedBy="password-rules"
               >
                 <div id="password-rules" className={styles.rules}>
-                  <p className={styles.rulesTitle}>{copy.passwordRules}</p>
+                  <p className={styles.srOnly}>{copy.passwordRules}</p>
                   <ul>
                     {PASSWORD_RULES.map((rule) => {
                       const met = rule.test(password1);
                       return (
                         <li key={rule.id} data-met={met || undefined}>
-                          {met ? <CheckIcon aria-hidden="true" /> : <MinusIcon aria-hidden="true" />}
+                          <CheckCircleIcon aria-hidden="true" />
                           <span>
                             {rule.label}
                             <span className={styles.srOnly}>, {met ? copy.ruleMet : copy.ruleNotMet}</span>

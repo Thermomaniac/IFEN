@@ -4,7 +4,15 @@ Active phase: Follow-up corrections programme (phases 1 to 7, 2026-10-19), in pr
 
 ## Follow-up corrections programme
 
-### Phase 4: Login screen (done 2026-10-19)
+### Phase 5: Register screen (done 2026-10-19)
+
+- Figma 40001148-110591: same full screen split as login, "Create Your Account", "Already have an account? Login" at the foot.
+- Password rules: grey panel (`--color-border-soft`, 12px padding, 4px radius), two columns, 12px medium muted text, a Phosphor CheckCircle per rule in Figma order. The "Password requirements" title is kept for screen readers only (the input still points at the list with aria-describedby).
+- Met state: the text turns ink and the icon turns into a filled teal disc (180ms colour, fill and scale transition). Shape change plus the spoken ", met" / ", not met" mean the state never depends on colour alone. Under prefers-reduced-motion the transition and scale are off.
+- Figma vs backend: the frame shows only Name, Username and Password. Confirm Password, Email Address and the reCAPTCHA security check stay because the live registration needs them; validation, the password rule check and the request are unchanged.
+- Checks: eslint, tsc, build clean. Rendered at 1440 (matches the frame; typed "abcdefg1": 8 characters, number and lower case met, the other two not), 390 and 320 (single column below 34rem, no overflow), 320 with reduced motion (no transition). Links resolve to login, live registration and home.
+
+### Phase 4: Login screen (done 2026-10-19, pushed to staging)
 
 - Figma 40001147-110209: full screen split. Left, a white panel with the logo (links home), "Log In To IFEN" (32px semibold, muted), the fields in a 412px column with placeholders, Remember me and the recovery links on one row, the Login CtaButton, and "No account yet? Create an account" at the foot. Right, a 720px photo panel with the ink fade, the "Institute for EEG Neurofeedback" badge and the gradient headline; it is sticky, so it stays in view while the longer register form scrolls. Below 64rem only the form panel shows.
 - The `/my-ifen` layout no longer renders the site header and CTA footer, as in the Figma frame; the logo is the way home. Applies to all four account screens so they stay one family.

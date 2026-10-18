@@ -18,17 +18,18 @@
   gap: 24px;
 }
 
+/* Figma register: grey panel, two columns, Phosphor CheckCircle per rule. A met rule
+   turns ink and its icon becomes a filled teal disc (shape and colour change, plus the
+   spoken status), so the state never relies on colour alone. */
 .rules {
   margin-top: 4px;
+  padding: 12px;
+  border-radius: 4px;
+  background: var(--color-border-soft);
   color: var(--color-muted);
-  font-size: var(--fs-small);
-  line-height: 20px;
-}
-
-.rulesTitle {
-  margin-bottom: 6px;
-  color: var(--color-heading);
-  font-weight: 600;
+  font-size: var(--fs-xs);
+  line-height: 16px;
+  font-weight: 500;
 }
 
 .rules ul {
@@ -44,13 +45,20 @@
   min-width: 0;
   overflow-wrap: break-word;
   hyphens: auto;
+  transition: color var(--dur-fast) var(--ease-out);
 }
 
 .rules li svg {
   flex: none;
   width: 14px;
   height: 14px;
-  margin-top: 3px;
+  margin-top: 1px;
+  border-radius: 50%;
+  color: var(--color-subtle);
+  transition:
+    color var(--dur-fast) var(--ease-out),
+    background-color var(--dur-fast) var(--ease-out),
+    transform var(--dur-fast) var(--ease-out);
 }
 
 .rules li[data-met] {
@@ -58,7 +66,20 @@
 }
 
 .rules li[data-met] svg {
-  color: #009ba7;
+  background-color: #009ba7;
+  color: var(--color-white);
+  transform: scale(1.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .rules li,
+  .rules li svg {
+    transition: none;
+  }
+
+  .rules li[data-met] svg {
+    transform: none;
+  }
 }
 
 .srOnly {
