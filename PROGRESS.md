@@ -4,7 +4,17 @@ Active phase: Follow-up corrections programme (phases 1 to 7, 2026-10-19), in pr
 
 ## Follow-up corrections programme
 
-### Phase 3: Module 1 pathway note (done 2026-10-19)
+### Phase 4: Login screen (done 2026-10-19)
+
+- Figma 40001147-110209: full screen split. Left, a white panel with the logo (links home), "Log In To IFEN" (32px semibold, muted), the fields in a 412px column with placeholders, Remember me and the recovery links on one row, the Login CtaButton, and "No account yet? Create an account" at the foot. Right, a 720px photo panel with the ink fade, the "Institute for EEG Neurofeedback" badge and the gradient headline; it is sticky, so it stays in view while the longer register form scrolls. Below 64rem only the form panel shows.
+- The `/my-ifen` layout no longer renders the site header and CTA footer, as in the Figma frame; the logo is the way home. Applies to all four account screens so they stay one family.
+- Photo: the Figma fill ("The BG 1") was downloaded once and cropped to the frame's visible area, saved as `public/account/login-photo.jpg` (839x1210, 96 KB). No Figma URL in code.
+- Copy: login and register drop the intro (Figma); reset and remind keep theirs. Placeholder "Enter your passowrd" typo fixed. Submit reads "Login".
+- Kept from the backend contract: username and password validation, error summary, password show/hide toggle, Remember me, the `/api/account/login` request and every failure path. `PasswordField` gained an optional `placeholder`.
+- Figma vs backend: Figma shows one "Forget password?" link; the live account system has two recovery screens, so both "Forgot your password?" and "Forgot your username?" stay, stacked on the right of the row.
+- Checks: eslint, tsc, build clean. Rendered at 1440 (matches the frame), 390 and 320 (no overflow); submit with empty fields shows both errors and focuses the summary; toggle switches the input to text with aria-pressed true; recovery and register links resolve. Register and remind checked at 1440 and 320 with the new shell (register styling is Phase 5).
+
+### Phase 3: Module 1 pathway note (done 2026-10-19, pushed to staging)
 
 - Figma 40000758-42181: on Module 1 only, the "Module 2 and Module 3 can be completed in any order." note sits on the soft grey fill (`--color-border-soft`, #f3f4f6) with no card edge. Sparkles, padding, type and the rise-in motion unchanged.
 - Opt-in through `PathwayContent.noteTone: "soft"`, set only in `module1.ts`; `Pathway` passes it as `data-tone`. The Modules overview note stays white (checked).

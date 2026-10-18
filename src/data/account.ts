@@ -23,15 +23,17 @@ export const liveAccountUrls: Record<AccountAction, string> = {
   remind: `${LIVE}?view=remind`,
 };
 
+/** Figma login/register photo panel ("The BG 1"), cropped to the frame and kept local. */
 export const accountImage = {
-  src: "/about/ifen-neurofeedback.jpg",
+  src: "/account/login-photo.jpg",
   alt: "An IFEN therapist places a neurofeedback sensor on a smiling client's forehead.",
 };
 
 type Screen = {
   metaTitle: string;
   title: string;
-  intro: string;
+  /** Figma drops the intro on login and register; the recovery screens keep it. */
+  intro?: string;
   submit: string;
   sending: string;
   success?: { heading: string; text: string };
@@ -40,16 +42,14 @@ type Screen = {
 export const accountScreens: Record<AccountAction, Screen> = {
   login: {
     metaTitle: "Log In | My IFEN",
-    title: "Log In to My IFEN",
-    intro: "Log in with your IFEN username and password.",
-    submit: "Log In",
+    title: "Log In To IFEN",
+    submit: "Login",
     sending: "Logging In",
     success: { heading: "You Are Logged In", text: "Welcome back to My IFEN." },
   },
   register: {
     metaTitle: "Create an Account | My IFEN",
     title: "Create Your Account",
-    intro: "Register for a My IFEN account. Fields marked with an asterisk (*) are required.",
     submit: "Register",
     sending: "Registering",
     success: {
@@ -95,6 +95,19 @@ export const accountCopy = {
   createAccount: "Create an account",
   haveAccount: "Already have an account?",
   backToLogin: "Back to log in",
+  login: "Login",
+  home: "IFEN home",
+  placeholders: {
+    name: "Enter your name",
+    username: "Enter your username",
+    password: "Enter your password",
+    confirmPassword: "Repeat your password",
+    email: "Enter your email address",
+  },
+  brand: {
+    badge: "Institute for EEG Neurofeedback",
+    headline: "Become A Certified Neurofeedback Therapist With IFEN",
+  },
   passwordRules: "Your password needs",
   ruleMet: "met",
   ruleNotMet: "not met",

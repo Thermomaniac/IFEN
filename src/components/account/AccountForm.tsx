@@ -159,11 +159,11 @@ export function AccountForm({ action }: { action: AccountAction }) {
       <ErrorSummary errors={summary} summaryRef={summaryRef} />
 
       <fieldset className={styles.fieldset}>
-        <legend className={form.cardTitle}>{copy.legend}</legend>
+        <legend className={styles.srOnly}>{copy.legend}</legend>
         <div className={styles.fields}>
           {action === "login" && (
             <>
-              <TextField {...field("username")} label="Username" required size="full" autoComplete="username" autoCapitalize="none" />
+              <TextField {...field("username")} label="Username" required size="full" autoComplete="username" autoCapitalize="none" placeholder={copy.placeholders.username} />
               <PasswordField
                 {...field("password")}
                 label="Password"
@@ -171,19 +171,35 @@ export function AccountForm({ action }: { action: AccountAction }) {
                 size="full"
                 autoComplete="current-password"
                 maxLength={PASSWORD_MAX}
+                placeholder={copy.placeholders.password}
                 showLabel={copy.showPassword}
                 hideLabel={copy.hidePassword}
               />
-              <CheckboxField name="remember" checked={values.remember === "yes"} plain onChange={onChange}>
-                {copy.remember}
-              </CheckboxField>
+              {/* Figma shows one "Forget password?" link; both live recovery screens stay. */}
+              <div className={styles.row}>
+                <CheckboxField name="remember" checked={values.remember === "yes"} plain onChange={onChange}>
+                  {copy.remember}
+                </CheckboxField>
+                <ul className={styles.recovery}>
+                  <li>
+                    <Link href={accountPaths.reset} className={styles.recoveryLink}>
+                      {copy.forgotPassword}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href={accountPaths.remind} className={styles.recoveryLink}>
+                      {copy.forgotUsername}
+                    </Link>
+                  </li>
+                </ul>
+              </div>
             </>
           )}
 
           {action === "register" && (
             <>
-              <TextField {...field("name")} label="Name" required size="full" autoComplete="name" />
-              <TextField {...field("username")} label="Username" required size="full" autoComplete="username" autoCapitalize="none" />
+              <TextField {...field("name")} label="Name" required size="full" autoComplete="name" placeholder={copy.placeholders.name} />
+              <TextField {...field("username")} label="Username" required size="full" autoComplete="username" autoCapitalize="none" placeholder={copy.placeholders.username} />
               <PasswordField
                 {...field("password1")}
                 label="Password"
@@ -191,6 +207,7 @@ export function AccountForm({ action }: { action: AccountAction }) {
                 size="full"
                 autoComplete="new-password"
                 maxLength={PASSWORD_MAX}
+                placeholder={copy.placeholders.password}
                 showLabel={copy.showPassword}
                 hideLabel={copy.hidePassword}
                 describedBy="password-rules"
@@ -220,15 +237,16 @@ export function AccountForm({ action }: { action: AccountAction }) {
                 size="full"
                 autoComplete="new-password"
                 maxLength={PASSWORD_MAX}
+                placeholder={copy.placeholders.confirmPassword}
                 showLabel={copy.showPassword}
                 hideLabel={copy.hidePassword}
               />
-              <TextField {...field("email1")} label="Email Address" type="email" required size="full" autoComplete="email" inputMode="email" />
+              <TextField {...field("email1")} label="Email Address" type="email" required size="full" autoComplete="email" inputMode="email" placeholder={copy.placeholders.email} />
             </>
           )}
 
           {(action === "reset" || action === "remind") && (
-            <TextField {...field("email")} label="Email Address" type="email" required size="full" autoComplete="email" inputMode="email" />
+            <TextField {...field("email")} label="Email Address" type="email" required size="full" autoComplete="email" inputMode="email" placeholder={copy.placeholders.email} />
           )}
         </div>
       </fieldset>
@@ -266,43 +284,7 @@ export function AccountForm({ action }: { action: AccountAction }) {
 
       <div className={styles.actions}>
         <SubmitButton disabled={sending}>{sending ? screen.sending : screen.submit}</SubmitButton>
-        {action === "login" && (
-          <ul className={styles.recovery}>
-            <li>
-              <Link href={accountPaths.reset} className={styles.link}>
-                {copy.forgotPassword}
-              </Link>
-            </li>
-            <li>
-              <Link href={accountPaths.remind} className={styles.link}>
-                {copy.forgotUsername}
-              </Link>
-            </li>
-          </ul>
-        )}
       </div>
-
-      <p className={styles.switch}>
-        {action === "login" ? (
-          <>
-            {copy.noAccount}{" "}
-            <Link href={accountPaths.register} className={styles.link}>
-              {copy.createAccount}
-            </Link>
-          </>
-        ) : action === "register" ? (
-          <>
-            {copy.haveAccount}{" "}
-            <Link href={accountPaths.login} className={styles.link}>
-              {copy.backToLogin}
-            </Link>
-          </>
-        ) : (
-          <Link href={accountPaths.login} className={styles.link}>
-            {copy.backToLogin}
-          </Link>
-        )}
-      </p>
     </form>
   );
 }

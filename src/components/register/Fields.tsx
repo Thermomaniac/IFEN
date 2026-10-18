@@ -93,6 +93,7 @@ export function TextField(props: TextProps) {
 type PasswordProps = Base & {
   autoComplete: "current-password" | "new-password";
   maxLength?: number;
+  placeholder?: string;
   showLabel: string;
   hideLabel: string;
   /** Extra ids for aria-describedby, e.g. a requirements list under the field. */
@@ -106,7 +107,7 @@ type PasswordProps = Base & {
  * focus when the type changes.
  */
 export function PasswordField(props: PasswordProps) {
-  const { name, value, error, required, hint, autoComplete, maxLength, showLabel, hideLabel, describedBy: extra, children, onChange, onBlur } =
+  const { name, value, error, required, hint, autoComplete, maxLength, placeholder, showLabel, hideLabel, describedBy: extra, children, onChange, onBlur } =
     props;
   const [shown, setShown] = useState(false);
   const described = [describedBy(name, hint, error), extra].filter(Boolean).join(" ") || undefined;
@@ -120,6 +121,7 @@ export function PasswordField(props: PasswordProps) {
           value={value}
           autoComplete={autoComplete}
           maxLength={maxLength}
+          placeholder={placeholder}
           autoCapitalize="none"
           autoCorrect="off"
           spellCheck={false}

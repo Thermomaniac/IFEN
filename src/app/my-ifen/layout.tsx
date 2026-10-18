@@ -1,13 +1,6 @@
 import type { ReactNode } from "react";
-import { SiteHeader } from "@/components/layout/SiteHeader";
-import { CtaFooter } from "@/components/sections/CtaFooter/CtaFooter";
 
+/** The account screens are full screen (Figma login and register): no site header or footer. */
 export default function AccountLayout({ children }: { children: ReactNode }) {
-  return (
-    <>
-      <SiteHeader currentHref="" />
-      <main id="main">{children}</main>
-      <CtaFooter />
-    </>
-  );
+  return <main id="main">{children}</main>;
 }
