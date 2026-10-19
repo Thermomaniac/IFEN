@@ -4,7 +4,16 @@ Active phase: none. Follow-up corrections programme complete (phases 1 to 7, 202
 
 ## Follow-up corrections programme
 
-### Interest list pages (done 2026-10-19, user request)
+### Homepage hero, Paper redesign (done 2026-10-19, user request)
+
+- Home hero rebuilt from Paper frame "Hero" (Final Home Page): cream band with the three #f1ecd7 background strokes, copy left (trust pill with warm hairline, 80px ink-to-teal gradient title, 20px muted subline, accent CtaButton), two-column image reel right (294/282, 12px gutters, 724px tall at 1440, 12px off the right edge).
+- Reel loops vertically with Framer Motion: left column drifts up, right column drifts down, 40s per set, linear, seamless (each track holds its set twice and slides exactly -50%). Top and bottom fade into the cream via a mask. Reduced motion holds it still.
+- Replaces the background-video hero; `hero.video` removed from `src/data/site.ts`, `hero.reel` added. Reel images in `public/hero/reel-1..4.jpg`. The old video files in `public/hero/` are now unused but left in place.
+- New tokens: `--color-cream-deep` (#f1ecd7), `--color-border-warm` (#ddd8d2).
+- Below 64rem the reel drops under the copy (shorter reel, lighter fade, strokes kept at drawn proportion).
+- Checks: eslint, tsc, build clean. Rendered at 1440, 390 and 320 (no horizontal overflow); reel motion and reduced motion verified in the browser.
+
+### Interest list pages (done 2026-10-19, user request, pushed to staging)
 
 - "Join List" (and the course title) on every interest-list entry now opens an on-site page at `/courses/interest-list/<slug>` instead of the live Seminarman prospect form. Six static pages, one per `interestList` row: brainavatar, module-1-en, module-1-es, neuromeditation, photobiomodulation, workshop-isf-es. Any other slug is a 404.
 - Content is the live prospect page's, unchanged: title, course number, price (Free or the course fee), place and description. English text is the live English text; BrainAvatar has only German on the live page, so it uses the same English text with its topic; the two Spanish pages keep their Spanish text (marked `lang="es"`). Data in `src/data/interestPages.ts`, paths in `src/data/interestPaths.ts`.

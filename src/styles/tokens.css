@@ -13,6 +13,7 @@
   /* Neutrals */
   --color-white: #ffffff;
   --color-cream: #f8f4e3; /* Training, Benefits, Partners */
+  --color-cream-deep: #f1ecd7; /* hero background strokes */
   --color-mist: #f9fafb; /* Certification */
   --color-heading: #4a5565;
   --color-muted: #6a7282;
@@ -20,6 +21,7 @@
   --color-on-dark: #d1d5dc;
   --color-border: #e5e7eb;
   --color-border-soft: #f3f4f6;
+  --color-border-warm: #ddd8d2; /* hairline on cream */
   --color-hover-tint: #f1fafa; /* secondary button hover */
   --color-overlay: #020618a3; /* hero scrim */
   --color-overlay-soft: #02061852;

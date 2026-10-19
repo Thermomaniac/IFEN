@@ -101,7 +101,18 @@ export const hero = {
   titleLines: ["The Institute For", "EEG-Neurofeedback"],
   subline: "Over 20 years of experience in clinical neurofeedback training & bio-regulatory science.",
   cta: { label: "Explore Courses", href: "#training" },
-  video: { webm: "/hero/hero.webm", mp4: "/hero/hero.mp4", poster: "/hero/hero-poster.jpg" },
+  // Two image columns that loop vertically: left drifts up, right drifts down.
+  // `h` is each tile's height share of the reel, from Paper (724px reel at 1440).
+  reel: [
+    [
+      { src: "/hero/reel-1.jpg", h: 322, position: "left center" },
+      { src: "/hero/reel-3.jpg", h: 390, position: "center" },
+    ],
+    [
+      { src: "/hero/reel-2.jpg", h: 288, position: "center" },
+      { src: "/hero/reel-4.jpg", h: 426, position: "center" },
+    ],
+  ],
 };
 
 export type AboutStat = { value: string; text: string; icon: "users" | "timer"; tone: "lime" | "sand" };
