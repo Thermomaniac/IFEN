@@ -1,15 +1,19 @@
 /* Paper "Hero" (1440 x 919): cream band, copy left, two-column image reel right. */
 .hero {
-  --reel-w: clamp(25rem, 40.83vw, 36.75rem); /* 588px at 1440 */
-  --reel-h: clamp(30rem, 50.28vw, 45.25rem); /* 724px at 1440 */
+  --header-h: calc(34px + var(--nav-h)); /* utility bar + sticky nav above the hero */
+  --hero-h: max(36rem, calc(100svh - var(--header-h))); /* fills the first screen */
+  --hero-pad: 32px;
+  --reel-w: clamp(25rem, 36vw, 32.5rem); /* 518px at 1440 */
+  --reel-h: min(45.25rem, 50.28vw, calc(var(--hero-h) - 2 * var(--hero-pad))); /* 724px max */
   position: relative;
   isolation: isolate;
   display: grid;
   grid-template-columns: minmax(0, 1fr) var(--reel-w);
+  column-gap: clamp(3rem, 5vw, 4.5rem); /* 72px at 1440: air between title and reel */
   align-items: center;
-  min-height: clamp(36rem, 63.8vw, 57.5rem); /* 919px at 1440 */
+  min-height: var(--hero-h);
   /* Copy aligns with the content column; the reel runs to 12px off the right edge at 1440. */
-  padding-block: clamp(2rem, 6.6vw, 6rem);
+  padding-block: var(--hero-pad);
   padding-left: max(var(--gutter), calc((100% - var(--content-max)) / 2));
   padding-right: max(12px, calc((100% - var(--content-max)) / 2 - 60px));
   overflow: hidden;
@@ -67,7 +71,7 @@
 
 .title {
   margin-top: 32px;
-  font-size: clamp(2rem, 0.75rem + 4.72vw, 5rem); /* 80px at 1440 */
+  font-size: clamp(2rem, -0.19rem + 5.77vw, 5rem); /* 80px at 1440, 56px at 1024: fits beside the reel */
   line-height: 1.1; /* 88/80 */
   letter-spacing: -0.025em; /* -2px at 80px */
   font-weight: 700;
@@ -154,6 +158,7 @@
   .strokes {
     height: auto;
     aspect-ratio: 1440 / 919;
+    overflow: visible; /* strokes run on past the box; the hero clips them, so no cut edge shows */
   }
 
   /* Shorter reel: lighter fade so the tiles stay readable. */

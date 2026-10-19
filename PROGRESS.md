@@ -4,7 +4,7 @@ Active phase: none. Follow-up corrections programme complete (phases 1 to 7, 202
 
 ## Follow-up corrections programme
 
-### Homepage hero, Paper redesign (done 2026-10-19, user request)
+### Homepage hero, Paper redesign (done 2026-10-19, user request, pushed to staging)
 
 - Home hero rebuilt from Paper frame "Hero" (Final Home Page): cream band with the three #f1ecd7 background strokes, copy left (trust pill with warm hairline, 80px ink-to-teal gradient title, 20px muted subline, accent CtaButton), two-column image reel right (294/282, 12px gutters, 724px tall at 1440, 12px off the right edge).
 - Reel loops vertically with Framer Motion: left column drifts up, right column drifts down, 40s per set, linear, seamless (each track holds its set twice and slides exactly -50%). Top and bottom fade into the cream via a mask. Reduced motion holds it still.
@@ -12,6 +12,7 @@ Active phase: none. Follow-up corrections programme complete (phases 1 to 7, 202
 - New tokens: `--color-cream-deep` (#f1ecd7), `--color-border-warm` (#ddd8d2).
 - Below 64rem the reel drops under the copy (shorter reel, lighter fade, strokes kept at drawn proportion).
 - Checks: eslint, tsc, build clean. Rendered at 1440, 390 and 320 (no horizontal overflow); reel motion and reduced motion verified in the browser.
+- Follow-up (user request): on desktop the hero fills the first screen (`100svh` minus utility bar and nav, 36rem floor) and the reel height follows the viewport. Title and reel now have a 72px column gap at 1440 (reel 518px wide, title scales to 56px at 1024 so "EEG-Neurofeedback" still fits). The stroke ends that showed inside the band (third stroke near the reel bottom, first stroke near its top) are extended along their tangents off the canvas; on mobile the strokes run past the SVG box so no cut edge shows. Checks clean; rendered at 1440, 390, 320.
 
 ### Interest list pages (done 2026-10-19, user request, pushed to staging)
 
