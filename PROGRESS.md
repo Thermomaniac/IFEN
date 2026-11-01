@@ -1,6 +1,28 @@
 # IFEN Remaining Pages Progress
 
-Active phase: none. Follow-up corrections programme complete (phases 1 to 7, 2026-10-19). Interest, account and design-system programme complete (phases 0 to 6, 2026-10-18). Correction programme A to H complete (2026-10-18).
+Active phase: UI/UX refinement programme, Phase 3 (sections), starting with homepage metrics. Phase 2 hero themes done 2026-11-01, on Vercel preview. Follow-up corrections programme complete (phases 1 to 7, 2026-10-19).
+
+## UI/UX refinement programme (started 2026-11-01)
+
+Phases: 0 audit (done), 1 Mobbin research (done, approved 2026-11-01), 2 four hero themes, 3 sections in order (homepage metrics, upcoming training cards, Our Location V2, therapist list, therapist profile, blog hero, audit), 4 QA, 5 Vercel preview staging from `phase-2`, 6 production only after the user confirms staging and asks to merge to `main`.
+
+Deploy target is now Vercel (project `ifen`, linked 2026-11-01; `.vercel/` and `.env.local` are gitignored). Staging = `vercel deploy` preview, never `--prod`.
+
+Decisions from the user (2026-11-01):
+
+- V1/V2 floating switcher on exactly two areas. Therapist flow: new cleaned-up version is the default, switcher restores the current redesign (price and availability filters, extra profile sections, MentorBooking, `/therapists/[id]/book/*`). Homepage Our Location: current version is the default, switcher shows the new legacy-image version. Delete nothing.
+- Hero themes: `default`, `courses`, `therapist`, `blog`, mapped by an explicit route table, no URL substring checks.
+- Homepage metrics: bold and prominent, modelled on Mobbin Instrument (https://mobbin.com/sites/sections/10b3f9ff-98d3-4526-b4e3-bc5efeb5724c). The labels must also be bold and prominent so the number reads without hunting for context. Copy change: "Years of online neurofeedback experience" becomes "Years of neurofeedback experience". Keep "Workshops and webinars delivered worldwide". No invented stats.
+- Homepage upcoming training cards: prominent and exciting, modelled on Mobbin Partiful (https://mobbin.com/screens/ec636758-83f4-4b52-9c1d-be60acce7f64): image-led cards with a date/urgency chip on the media. Start date on every card; at most one urgency chip ("Last day to register" if registration closes today, else "Starts tomorrow"), only from real data, Europe/Berlin dates.
+- Everything else in the Phase 1 direction is approved as proposed. Interest, account and design-system programme complete (phases 0 to 6, 2026-10-18). Correction programme A to H complete (2026-10-18).
+
+### Phase 2: hero themes (done 2026-11-01, Vercel preview)
+
+- Route table `src/data/heroThemes.ts` maps every hero route to `default`, `courses`, `therapist` or `blog`. `CourseHero` and `ContentPage` now require a typed `route` prop; an unmapped route fails `tsc`. No runtime URL checks. The section carries `data-theme`.
+- `default` (ifen/*, neurofeedback/*, home) and `courses` (courses/*, course-booking/*) keep the ink band unchanged: default with the listing photo, courses with the line pattern and booking panel (the listing keeps its photo).
+- `therapist` (therapist list, profile): compact white band, ink type, muted copy, no photo or lines, portrait and booking panel kept (the panel moves behind the V1/V2 switcher in Phase 3). Hairline under the band before the mist band.
+- `blog` (index, article): white typographic band, 60px title at 1440 on a 52rem measure, label as plain uppercase, 18px intro, hairline rule above the facts, no media.
+- Checks: eslint, tsc, build clean. Rendered at 1440 and 390; all themed pages plus course, course-booking and ifen samples at 320 with no horizontal overflow.
 
 ## Follow-up corrections programme
 

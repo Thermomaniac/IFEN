@@ -2,6 +2,7 @@ import { SiteHeader } from "@/components/layout/SiteHeader";
 import { Reveal, RevealItem } from "@/components/motion/Reveal";
 import { CtaFooter } from "@/components/sections/CtaFooter/CtaFooter";
 import type { BookingPage, BookingSection, DatesContent } from "@/data/booking/shared";
+import type { HeroRoute } from "@/data/heroThemes";
 import { Categories } from "./Categories";
 import { CourseArticles } from "./CourseArticles";
 import { CourseHero } from "./CourseHero";
@@ -20,12 +21,12 @@ const TONES: Tone[] = ["mist", "cream", "white"];
  * Sections are explainers (`CourseArticles`), fact cards (`FeatureGrid`), a page's
  * course dates as the schedule's date cards, its lecturers (`Mentors` grid) or an FAQ.
  */
-export function ContentPage({ page }: { page: BookingPage }) {
+export function ContentPage({ page, route }: { page: BookingPage; route: HeroRoute }) {
   return (
     <>
       <SiteHeader currentHref="" />
       <main id="main">
-        <CourseHero content={page.hero} />
+        <CourseHero route={route} content={page.hero} />
         {page.sections.map((section, i) => (
           <Section key={section.id} section={section} tone={TONES[i % TONES.length]} />
         ))}

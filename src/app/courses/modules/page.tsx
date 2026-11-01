@@ -24,7 +24,7 @@ export default function ModulesPage() {
     <>
       <SiteHeader currentHref="" />
       <main id="main">
-        <CourseHero content={page.hero} />
+        <CourseHero route="/courses/modules" content={page.hero} />
         <CourseArticles id="intro" tone="mist" variant="panels" content={page.intro} />
         <Pathway id="pathway" tone="cream" content={page.pathway} />
         <FeatureGrid id="modules" tone="white" content={page.cards} />

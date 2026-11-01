@@ -14,7 +14,7 @@ export default function TherapistsPage() {
     <>
       <SiteHeader currentHref="" />
       <main id="main">
-        <CourseHero content={directoryPage.hero} />
+        <CourseHero route="/therapists" content={directoryPage.hero} />
         <CourseSection id="therapists" tone="mist" head={directoryPage.head}>
           {/* Demo fixture first: the only card with a profile page in this prototype. */}
           <TherapistDirectory therapists={[DEMO_THERAPIST, ...therapists]} />

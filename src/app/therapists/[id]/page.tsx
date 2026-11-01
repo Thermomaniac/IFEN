@@ -105,7 +105,7 @@ export default async function TherapistProfilePage({ params }: Props) {
     <>
       <SiteHeader currentHref="" />
       <main id="main">
-        <CourseHero content={hero} />
+        <CourseHero route="/therapists/[id]" content={hero} />
 
         <div className={styles.band}>
           <div className={styles.layout}>

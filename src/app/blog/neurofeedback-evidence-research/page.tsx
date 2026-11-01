@@ -34,7 +34,7 @@ export default function EvidenceArticlePage() {
     <>
       <SiteHeader currentHref="" />
       <main id="main">
-        <CourseHero content={page.hero} />
+        <CourseHero route="/blog/[slug]" content={page.hero} />
 
         <div className={layout.band}>
           <div className={layout.layout}>

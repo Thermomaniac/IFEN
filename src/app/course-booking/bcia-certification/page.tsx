@@ -5,5 +5,5 @@ import { bcia as page } from "@/data/booking/bcia";
 export const metadata: Metadata = page.meta;
 
 export default function BciaPage() {
-  return <ContentPage page={page} />;
+  return <ContentPage route="/course-booking/bcia-certification" page={page} />;
 }

@@ -13,7 +13,7 @@ export default function LecturersPage() {
     <>
       <SiteHeader currentHref="" />
       <main id="main">
-        <CourseHero content={page.hero} />
+        <CourseHero route="/ifen/lecturers" content={page.hero} />
         <Mentors id="lecturers" tone="mist" grid content={page.people} />
         <Categories content={page.related} />
       </main>

@@ -12,7 +12,7 @@ export default function CoursesPage() {
     <>
       <SiteHeader currentHref="" />
       <main id="main">
-        <CourseHero content={listingPage.hero} />
+        <CourseHero route="/courses" content={listingPage.hero} />
         <CourseSchedule dates={scheduleDates} interest={interestList} notes={scheduleIntro.notes} />
       </main>
       <CtaFooter content={listingPage.cta} />

@@ -20,7 +20,7 @@ export default function Module1Page() {
     <>
       <SiteHeader currentHref="" />
       <main id="main">
-        <CourseHero content={module1.hero} />
+        <CourseHero route="/courses/module-1" content={module1.hero} />
         <CourseOverview content={module1.overview} />
         <CourseArticles id="audience" tone="white" variant="panels" content={module1.audience} />
         <FeatureGrid id="why" tone="cream" content={module1.why} />

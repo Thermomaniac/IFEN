@@ -5,5 +5,5 @@ import { webinars as page } from "@/data/booking/webinars";
 export const metadata: Metadata = page.meta;
 
 export default function WebinarsPage() {
-  return <ContentPage page={page} />;
+  return <ContentPage route="/course-booking/webinars" page={page} />;
 }

@@ -5,5 +5,5 @@ import { trainingCourses as page } from "@/data/ifen/trainingCourses";
 export const metadata: Metadata = page.meta;
 
 export default function TrainingCoursesPage() {
-  return <ContentPage page={page} />;
+  return <ContentPage route="/ifen/training-courses" page={page} />;
 }

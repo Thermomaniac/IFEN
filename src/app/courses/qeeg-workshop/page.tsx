@@ -18,7 +18,7 @@ export default function QeegWorkshopPage() {
     <>
       <SiteHeader currentHref="" />
       <main id="main">
-        <CourseHero content={qeegWorkshop.hero} />
+        <CourseHero route="/courses/qeeg-workshop" content={qeegWorkshop.hero} />
         <CourseOverview content={qeegWorkshop.overview} decor />
         <FeatureGrid id="special" tone="cream" content={qeegWorkshop.special} />
         <TopicLoop id="content" tone="white" content={qeegWorkshop.content} />

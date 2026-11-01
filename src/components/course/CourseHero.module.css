@@ -579,3 +579,112 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
+
+/* ---------- Themes (see src/data/heroThemes.ts) ----------
+ * default and courses keep the ink band above. The light themes are white bands with
+ * ink type and a hairline under them, so the mist band that follows reads as a new band.
+ */
+
+.light {
+  background: var(--color-white);
+  color: var(--color-ink);
+  border-bottom: 1px solid var(--color-border-soft);
+}
+
+@media (min-width: 64rem) {
+  .light {
+    min-height: 0;
+  }
+}
+
+.light .breadcrumb {
+  color: var(--color-muted);
+}
+
+.light .crumb [aria-current] {
+  color: var(--color-ink);
+}
+
+@media (hover: hover) {
+  .light .crumbLink:hover {
+    color: var(--color-ink);
+  }
+}
+
+.light .badge {
+  background: var(--color-cream-deep);
+}
+
+.light .title {
+  background: none;
+  color: var(--color-ink);
+}
+
+.light .subline,
+.light .description,
+.light .highlightLabel {
+  color: var(--color-muted);
+}
+
+.light .sublineDot {
+  background: var(--color-subtle);
+}
+
+.light .highlightValue {
+  color: var(--color-ink);
+}
+
+.light .divider {
+  background: var(--color-border);
+}
+
+/* Therapist: a compact header. The directory and profile below carry the weight. */
+.therapist .inner {
+  padding-block: clamp(2rem, 3.9vw, 3.5rem);
+}
+
+.therapist .intro {
+  gap: 20px;
+}
+
+/* Blog: typography-led. A larger title on a wider measure, the label set as plain
+   uppercase text, and a hairline between the intro and the facts. */
+.blog .inner {
+  padding-block: clamp(3rem, 6.67vw, 6rem) clamp(2.5rem, 4.44vw, 4rem);
+}
+
+.blog .badge {
+  padding: 0;
+  background: none;
+  color: var(--color-muted);
+  letter-spacing: 0.08em;
+  font-weight: 600;
+}
+
+.blog .title {
+  font-size: clamp(2.25rem, 1.1rem + 3.4vw, 3.75rem); /* 60 at 1440 */
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+}
+
+.blog .description {
+  max-width: 40rem;
+  font-size: var(--fs-body);
+  line-height: 26px;
+}
+
+.blog .highlights {
+  padding-top: 24px;
+  border-top: 1px solid var(--color-border);
+}
+
+@media (min-width: 64rem) {
+  .blog .intro:only-child {
+    flex-basis: 52rem;
+  }
+
+  .blog .description {
+    font-size: 1.125rem;
+    line-height: 30px;
+  }
+}

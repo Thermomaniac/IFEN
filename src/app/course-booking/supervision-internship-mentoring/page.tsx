@@ -5,5 +5,5 @@ import { supervision as page } from "@/data/booking/supervision";
 export const metadata: Metadata = page.meta;
 
 export default function SupervisionPage() {
-  return <ContentPage page={page} />;
+  return <ContentPage route="/course-booking/supervision-internship-mentoring" page={page} />;
 }

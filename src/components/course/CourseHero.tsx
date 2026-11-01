@@ -14,6 +14,7 @@ import { CtaButton } from "@/components/ui/CtaButton";
 import { LineBreaks } from "@/components/ui/LineBreaks";
 import { formatPrice, type CourseFact } from "@/data/course";
 import type { CourseHeroContent } from "@/data/coursePage";
+import { heroThemes, type HeroRoute } from "@/data/heroThemes";
 import styles from "./CourseHero.module.css";
 
 /** Figma "Hero Section" photo (node 40001128-108319): the listing hero photo, kept local. */
@@ -37,14 +38,25 @@ const factIcons: Record<CourseFact["icon"], typeof UsersIcon> = {
  * `image` a photo fills the right side under an ink fade instead of the line pattern.
  * Every other hero without a booking panel or portrait gets the same treatment with the
  * listing photo (Figma "Hero Section").
+ *
+ * `route` picks the theme from `heroThemes`. The light themes (therapist, blog) are white
+ * bands with ink type and carry no photo or line pattern.
  */
-export function CourseHero({ content }: { content: CourseHeroContent }) {
+export function CourseHero({ content, route }: { content: CourseHeroContent; route: HeroRoute }) {
+  const theme = heroThemes[route];
+  const light = theme === "therapist" || theme === "blog";
   const { booking } = content;
   const paragraphs = Array.isArray(content.description) ? content.description : [content.description];
-  const photo = content.image ?? (!booking && !content.portrait ? HERO_PHOTO : undefined);
+  const photo = light ? undefined : (content.image ?? (!booking && !content.portrait ? HERO_PHOTO : undefined));
 
   return (
-    <section className={`${styles.hero} ${photo ? styles.photoHero : ""}`} aria-labelledby="course-title">
+    <section
+      className={[styles.hero, styles[theme], light && styles.light, photo && styles.photoHero]
+        .filter(Boolean)
+        .join(" ")}
+      data-theme={theme}
+      aria-labelledby="course-title"
+    >
       {photo ? (
         <>
           <span className={styles.media}>
@@ -53,7 +65,7 @@ export function CourseHero({ content }: { content: CourseHeroContent }) {
           <span className={styles.fade} aria-hidden="true" />
         </>
       ) : (
-        <Lines />
+        !light && <Lines />
       )}
 
       <div className={styles.inner}>

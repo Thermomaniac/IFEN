@@ -16,7 +16,7 @@ export default function WebinarQeegPage() {
     <>
       <SiteHeader currentHref="" />
       <main id="main">
-        <CourseHero content={webinarQeeg.hero} />
+        <CourseHero route="/courses/webinar-qeeg-psychotherapy" content={webinarQeeg.hero} />
         <CourseOverview content={webinarQeeg.overview} decor />
         <TopicLoop id="content" tone="white" content={webinarQeeg.content} />
         <InterestCapture tone="mist" hero={webinarQeeg.hero} />

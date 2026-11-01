@@ -15,7 +15,7 @@ export default function AboutPage() {
     <>
       <SiteHeader currentHref="" />
       <main id="main">
-        <CourseHero content={page.hero} />
+        <CourseHero route="/ifen/about" content={page.hero} />
         <CourseArticles id="vision" tone="mist" variant="media" content={page.vision} />
         <CourseArticles id="director" tone="cream" variant="profile" content={page.director} />
         <FeatureGrid id="concept" tone="white" content={page.concept} />

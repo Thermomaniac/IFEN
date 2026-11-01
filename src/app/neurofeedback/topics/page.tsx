@@ -13,7 +13,7 @@ export default function TopicsPage() {
     <>
       <SiteHeader currentHref="" />
       <main id="main">
-        <CourseHero content={page.hero} />
+        <CourseHero route="/neurofeedback/topics" content={page.hero} />
         <CourseArticles id="topics" tone="mist" variant="rows" content={page.topics} />
         <Categories content={page.related} />
       </main>

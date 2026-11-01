@@ -13,7 +13,7 @@ export default function AreasOfApplicationPage() {
     <>
       <SiteHeader currentHref="" />
       <main id="main">
-        <CourseHero content={page.hero} />
+        <CourseHero route="/neurofeedback/areas-of-application" content={page.hero} />
         <CourseArticles id="effects" tone="mist" variant="panels" content={page.effects} />
         <Categories content={page.related} />
       </main>

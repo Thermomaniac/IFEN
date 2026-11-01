@@ -14,7 +14,7 @@ export default function WhatIsNeurofeedbackPage() {
     <>
       <SiteHeader currentHref="" />
       <main id="main">
-        <CourseHero content={page.hero} />
+        <CourseHero route="/neurofeedback/what-is-neurofeedback" content={page.hero} />
         <CourseArticles id="in-brief" tone="mist" variant="media" content={page.intro} />
         <FeatureGrid id="how-it-works" tone="cream" content={page.steps} />
         <Categories content={page.related} />

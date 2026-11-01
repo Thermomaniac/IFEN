@@ -5,5 +5,5 @@ import { module4 as page } from "@/data/courses/modules";
 export const metadata: Metadata = page.meta;
 
 export default function Module4Page() {
-  return <ContentPage page={page} />;
+  return <ContentPage route="/courses/module-4" page={page} />;
 }

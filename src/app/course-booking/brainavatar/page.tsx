@@ -5,5 +5,5 @@ import { brainavatar as page } from "@/data/booking/brainavatar";
 export const metadata: Metadata = page.meta;
 
 export default function BrainAvatarPage() {
-  return <ContentPage page={page} />;
+  return <ContentPage route="/course-booking/brainavatar" page={page} />;
 }

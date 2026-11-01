@@ -17,7 +17,7 @@ export default function BlogPage() {
     <>
       <SiteHeader currentHref="" />
       <main id="main">
-        <CourseHero content={page.hero} />
+        <CourseHero route="/blog" content={page.hero} />
 
         <CourseSection id="featured" tone="mist" head={page.featured.head}>
           <FeaturedPost post={page.featured.post} />

@@ -18,7 +18,7 @@ export default function CoursePage() {
     <>
       <SiteHeader currentHref="" />
       <main id="main">
-        <CourseHero content={courseHero} />
+        <CourseHero route="/courses/bcia-qeeg-mentoring" content={courseHero} />
         <ProgramDetails />
         <InterestCapture tone="white" hero={courseHero} />
         <Mentors content={courseSpeakers} />

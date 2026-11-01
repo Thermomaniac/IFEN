@@ -21,7 +21,7 @@ export default function QeegPage() {
     <>
       <SiteHeader currentHref="" />
       <main id="main">
-        <CourseHero content={qeeg.hero} />
+        <CourseHero route="/courses/qeeg-for-your-practice" content={qeeg.hero} />
         <CourseOverview content={qeeg.overview} decor />
         <FormatSteps id="format" tone="white" content={qeeg.format} />
         <FeatureGrid id="beyond" tone="cream" content={qeeg.beyond} />

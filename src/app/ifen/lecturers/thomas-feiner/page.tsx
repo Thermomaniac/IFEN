@@ -22,7 +22,7 @@ export default function ThomasFeinerPage() {
     <>
       <SiteHeader currentHref="" />
       <main id="main">
-        <CourseHero content={page.hero} />
+        <CourseHero route="/ifen/lecturers/[slug]" content={page.hero} />
 
         <div className={styles.band}>
           <div className={styles.layout}>

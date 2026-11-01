@@ -33,7 +33,7 @@ export default async function InterestListPage({ params }: Props) {
     <>
       <SiteHeader currentHref="" />
       <main id="main">
-        <CourseHero content={page.hero} />
+        <CourseHero route="/courses/interest-list/[slug]" content={page.hero} />
         <InterestCapture tone="mist" hero={page.hero} head={interestFormHead} />
       </main>
       <CtaFooter content={BOOKING_CTA} />
