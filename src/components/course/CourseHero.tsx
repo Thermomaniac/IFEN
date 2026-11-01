@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Fragment, type CSSProperties } from "react";
+import { Fragment, type CSSProperties, type ReactNode } from "react";
 import {
   CalendarSlashIcon,
   CalendarTickIcon,
@@ -40,18 +40,29 @@ const factIcons: Record<CourseFact["icon"], typeof UsersIcon> = {
  * listing photo (Figma "Hero Section").
  *
  * `route` picks the theme from `heroThemes`. The light themes (therapist, blog) are white
- * bands with ink type and carry no photo or line pattern.
+ * bands with ink type and carry no ink-faded photo or line pattern; the blog shows its
+ * `image` as a framed figure on the right instead. `aside` fills the right column with a
+ * page's own visual (the therapist list's practice map) and turns the band cream.
  */
-export function CourseHero({ content, route }: { content: CourseHeroContent; route: HeroRoute }) {
+export function CourseHero({
+  content,
+  route,
+  aside,
+}: {
+  content: CourseHeroContent;
+  route: HeroRoute;
+  aside?: ReactNode;
+}) {
   const theme = heroThemes[route];
   const light = theme === "therapist" || theme === "blog";
   const { booking } = content;
   const paragraphs = Array.isArray(content.description) ? content.description : [content.description];
   const photo = light ? undefined : (content.image ?? (!booking && !content.portrait ? HERO_PHOTO : undefined));
+  const figure = theme === "blog" ? content.image : undefined;
 
   return (
     <section
-      className={[styles.hero, styles[theme], light && styles.light, photo && styles.photoHero]
+      className={[styles.hero, styles[theme], light && styles.light, photo && styles.photoHero, aside && styles.withAside]
         .filter(Boolean)
         .join(" ")}
       data-theme={theme}
@@ -144,6 +155,23 @@ export function CourseHero({ content, route }: { content: CourseHeroContent; rou
         </Reveal>
 
         {booking && <BookingPanel booking={booking} />}
+
+        {figure && (
+          <Reveal className={styles.figure} delay={0.15}>
+            <RevealItem className={styles.figureFrame}>
+              <Image
+                src={figure}
+                alt=""
+                fill
+                priority
+                sizes="(min-width: 64rem) 30rem, 100vw"
+                className={styles.figureImage}
+              />
+            </RevealItem>
+          </Reveal>
+        )}
+
+        {aside && <div className={styles.aside}>{aside}</div>}
       </div>
     </section>
   );

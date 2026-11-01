@@ -24,6 +24,15 @@ Decisions from the user (2026-11-01):
 - `blog` (index, article): white typographic band, 60px title at 1440 on a 52rem measure, label as plain uppercase, 18px intro, hairline rule above the facts, no media.
 - Checks: eslint, tsc, build clean. Rendered at 1440 and 390; all themed pages plus course, course-booking and ifen samples at 320 with no horizontal overflow.
 
+### User corrections to Phase 2 (done 2026-11-02, Vercel preview)
+
+- Blog index hero: the blog header image (`/blog/blog-header.jpg`) now sits in a framed figure on the right (4/5 at 1440, 16/10 stacked below 64rem, cropped to the circuit brain). Articles without a hero image keep the typographic band.
+- Blog hairline above "Since 2018 | German" is capped at 40rem, the same width as the intro text.
+- Therapist list hero rebuilt so it no longer reads like the directory band below it: cream band, larger title, bold metrics on a warm hairline, and a new `PracticeMap` on the right. It reuses the Paper Germany tile map; each tile holding a mapped practice turns ink, tiles with 3 or more turn accent, and the three busiest cities (kept at least 160 map units apart) get white callout cards with leader lines. Tiles fill in row by row, practice tiles land after, then callouts; reduced motion holds it still. Data: `src/data/practiceMap.ts`, projected from each record's own coordinates, nothing invented.
+- `CourseHero` takes an optional `aside` node; the profile hero is unchanged.
+- Mobbin references: Hims provider network (https://mobbin.com/sites/sections/2d518945-9981-4e3b-a795-dba0f88aa814), Mailchimp experts directory (https://mobbin.com/sites/sections/352e5d47-46eb-4892-a186-b739f8c70941), Cloudflare Workers map callouts (https://mobbin.com/sites/sections/812789fa-37f5-4e8c-9bb7-4fbba96331b7), Base stats beside a map (https://mobbin.com/sites/sections/82283dd4-9b04-4dff-b1e9-eedbf7d55a85), Daylight network map (https://mobbin.com/sites/sections/9409f7e7-ec92-477e-9db5-dc4efa0ecdc0), Braintrust map with stats (https://mobbin.com/sites/sections/e5d3f8df-7b64-4c12-9686-50628d40d0a1).
+- Checks: eslint, tsc, build clean. Rendered at 1440, 390, 320; no horizontal overflow, callouts inside the viewport at 320.
+
 ## Follow-up corrections programme
 
 ### Homepage hero, Paper redesign (done 2026-10-19, user request, pushed to staging)

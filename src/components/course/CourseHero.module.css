@@ -688,3 +688,112 @@
     line-height: 30px;
   }
 }
+
+/* The facts rule runs as wide as the description above it, not the whole column. */
+.blog .highlights {
+  max-width: 40rem;
+}
+
+/* Blog figure: the header image framed on the right, cropped to the brain in the hands. */
+.figure {
+  width: 100%;
+}
+
+.figureFrame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 10;
+  border-radius: 4px;
+  background: var(--color-mist);
+  box-shadow: 0 0 0 1px var(--color-border);
+}
+
+.figureImage {
+  object-fit: cover;
+  object-position: 84% 50%;
+}
+
+@media (min-width: 64rem) {
+  .figure {
+    flex: 0 1 28rem;
+  }
+
+  .figureFrame {
+    aspect-ratio: 4 / 5;
+  }
+}
+
+/* ---------- Therapist list: cream band with the practice map ----------
+ * The directory below sits on mist, so the list hero changes ground (cream), scale
+ * (bold metrics, a larger title) and shape (the map) instead of repeating a header.
+ */
+.therapist.withAside {
+  background: var(--color-cream);
+  border-bottom: 0;
+}
+
+.therapist.withAside .inner {
+  padding-block: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.therapist.withAside .intro {
+  gap: 32px;
+}
+
+.therapist.withAside .badge {
+  background: var(--color-white);
+}
+
+.therapist.withAside .title {
+  font-size: clamp(2rem, 1.2rem + 2.4vw, 3.25rem);
+  line-height: 1.08;
+  letter-spacing: -0.025em;
+}
+
+.therapist.withAside .description {
+  max-width: 34rem;
+  font-size: var(--fs-body);
+  line-height: 26px;
+}
+
+.therapist.withAside .highlights {
+  gap: 16px 32px;
+  padding-top: 28px;
+  border-top: 1px solid var(--color-border-warm);
+}
+
+.therapist.withAside .highlight {
+  gap: 6px;
+}
+
+.therapist.withAside .highlightValue {
+  font-size: clamp(2rem, 1.5rem + 1.4vw, 2.75rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  font-weight: 600;
+}
+
+.therapist.withAside .highlightLabel {
+  font-size: var(--fs-small);
+  line-height: 18px;
+  font-weight: 600;
+}
+
+.therapist.withAside .divider {
+  height: 56px;
+  background: var(--color-border-warm);
+}
+
+.aside {
+  width: 100%;
+  max-width: 22rem;
+  margin-inline: auto;
+}
+
+@media (min-width: 64rem) {
+  .aside {
+    flex: 0 1 27rem;
+    max-width: none;
+    margin-inline: 0 2rem;
+  }
+}

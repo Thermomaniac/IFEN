@@ -1,0 +1,163 @@
+.figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  margin: 0;
+}
+
+/* 532×657 Paper map, scaled as one unit so the callouts stay on their tiles. */
+.map {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 532 / 657;
+  container-type: inline-size;
+}
+
+.tiles {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  fill: var(--color-cream-deep);
+}
+
+/* Rows fill in top to bottom, ~30ms apart; practice tiles land once the map is in. */
+.tiles rect {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: tile 480ms var(--ease-out) both;
+  animation-delay: calc(var(--row) * 30ms);
+}
+
+.tiles .lit,
+.tiles .dense {
+  fill: var(--color-ink);
+  animation-name: tile, settle;
+  animation-duration: 480ms, 360ms;
+  animation-delay: calc(var(--row) * 30ms), calc(700ms + var(--row) * 18ms);
+}
+
+.tiles .dense {
+  fill: var(--color-accent);
+  stroke: var(--color-ink);
+  stroke-width: 3;
+}
+
+@keyframes tile {
+  from {
+    opacity: 0;
+    scale: 0.4;
+  }
+}
+
+@keyframes settle {
+  from {
+    scale: 0.7;
+  }
+}
+
+.callouts {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  pointer-events: none;
+}
+
+/* A short leader from the tile to a white card, on the side with more room. */
+.callout {
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  display: flex;
+  align-items: center;
+  translate: 0 -50%;
+  animation: callout 320ms var(--ease-out) both;
+  animation-delay: calc(1100ms + var(--i) * 120ms);
+}
+
+.callout::before {
+  content: "";
+  flex: none;
+  width: clamp(1rem, 6cqi, 2.25rem);
+  height: 1px;
+  background: var(--color-ink);
+}
+
+.callout[data-side="left"] {
+  flex-direction: row-reverse;
+  translate: -100% -50%;
+}
+
+.calloutCard {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  background: var(--color-white);
+  box-shadow: 0 0 0 1px var(--color-border);
+  white-space: nowrap;
+}
+
+.calloutCity {
+  color: var(--color-ink);
+  font-size: var(--fs-small);
+  line-height: 18px;
+  font-weight: 600;
+  font-variation-settings: var(--fvs-display);
+}
+
+.calloutCount {
+  color: var(--color-muted);
+  font-size: var(--fs-xs);
+  line-height: 16px;
+  font-weight: 500;
+}
+
+@keyframes callout {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+.caption {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 20px;
+  color: var(--color-muted);
+  font-size: var(--fs-xs);
+  line-height: 16px;
+  font-weight: 500;
+}
+
+.key {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.swatch {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: var(--color-ink);
+}
+
+.swatchDense {
+  background: var(--color-accent);
+  box-shadow: inset 0 0 0 1.5px var(--color-ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tiles rect,
+  .callout {
+    animation: none;
+  }
+}

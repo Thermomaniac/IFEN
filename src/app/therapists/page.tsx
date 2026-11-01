@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { CourseHero } from "@/components/course/CourseHero";
 import { CourseSection } from "@/components/course/CourseSection";
+import { PracticeMap } from "@/components/directory/PracticeMap";
 import { TherapistDirectory } from "@/components/directory/TherapistDirectory";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { CtaFooter } from "@/components/sections/CtaFooter/CtaFooter";
@@ -14,7 +15,7 @@ export default function TherapistsPage() {
     <>
       <SiteHeader currentHref="" />
       <main id="main">
-        <CourseHero route="/therapists" content={directoryPage.hero} />
+        <CourseHero route="/therapists" content={directoryPage.hero} aside={<PracticeMap />} />
         <CourseSection id="therapists" tone="mist" head={directoryPage.head}>
           {/* Demo fixture first: the only card with a profile page in this prototype. */}
           <TherapistDirectory therapists={[DEMO_THERAPIST, ...therapists]} />
