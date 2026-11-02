@@ -92,23 +92,30 @@
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  gap: 20px;
 }
 
+/* Instrument-style metric: the number dominates the card, the label sits on a rule directly under it. */
 .value {
-  font-size: clamp(2.75rem, 2rem + 2.2vw, 4rem);
-  line-height: 1;
+  font-size: clamp(4.5rem, 2.75rem + 5.4vw, 7.5rem); /* 120px at 1440 */
+  line-height: 0.9;
   font-weight: 700;
   font-style: italic;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.03em;
   text-transform: uppercase;
   font-variation-settings: var(--fvs-display);
 }
 
 .text {
   max-width: 22rem;
-  font-weight: 500;
-  line-height: 24px;
+  padding-top: 20px;
+  border-top: 1px solid color-mix(in srgb, var(--color-ink) 20%, transparent);
+  font-size: clamp(1.25rem, 1.1rem + 0.45vw, 1.5rem); /* 24px at 1440 */
+  font-weight: 700;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+  text-wrap: pretty;
+  overflow-wrap: break-word;
   font-variation-settings: var(--fvs-display);
 }
 

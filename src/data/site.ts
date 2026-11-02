@@ -124,7 +124,7 @@ export const about = {
   // Paper repeats "Workshops and webinars delivered" after each sentence; trimmed as a copy slip.
   stats: [
     { value: "300+", text: "Workshops and webinars delivered worldwide.", icon: "users", tone: "lime" },
-    { value: "25+", text: "Years of online neurofeedback experience.", icon: "timer", tone: "sand" },
+    { value: "25+", text: "Years of neurofeedback experience.", icon: "timer", tone: "sand" },
   ] satisfies AboutStat[],
   image: {
     src: "/about/metric-tile.jpg",

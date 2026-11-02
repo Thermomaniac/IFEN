@@ -1,6 +1,6 @@
 # IFEN Remaining Pages Progress
 
-Active phase: UI/UX refinement programme, Phase 3 (sections), starting with homepage metrics. Phase 2 hero themes done 2026-11-01, on Vercel preview. Follow-up corrections programme complete (phases 1 to 7, 2026-10-19).
+Active phase: UI/UX refinement programme, Phase 3 (sections), next up: upcoming training cards. Homepage metrics done 2026-11-02, Phase 2 hero themes done 2026-11-01, both on Vercel preview. Follow-up corrections programme complete (phases 1 to 7, 2026-10-19).
 
 ## UI/UX refinement programme (started 2026-11-01)
 
@@ -41,6 +41,14 @@ User asked to use the Figma "Blog sections" frames (node 40001255:39069) as the 
 - Therapist list hero (Figma "Re-design"): cream-deep band with the line pattern a shade darker (#eee7cc), tan badge, 52px title, gold facts without a rule. Map: teal practice tiles, cream empty tiles, apricot dense tiles without the ink outline, callout cards without leader lines.
 - New tokens: `--color-teal` #009ba7, `--color-gold` #b8a85e, `--color-tan` #f2e1bb.
 - Kept: existing copy (the Figma copy is slightly reworded), real counts (Countries 9, Figma shows 4), the map legend, and stacked facts below 48rem (the shared rule for every hero). The therapist profile hero is unchanged.
+
+### Phase 3.1: homepage metrics (done 2026-11-02, Vercel preview)
+
+- About stat cards: the number now dominates the card (120px italic bold at 1440, 72px floor) and the label sits directly below it on an ink hairline, 24px bold at 1440 (20px floor). Tones, icon tile, dotted brain, photo card and Reveal stagger are unchanged.
+- Copy: "Years of online neurofeedback experience." is now "Years of neurofeedback experience." (`src/data/site.ts`). "Workshops and webinars delivered worldwide." kept. No new stats.
+- Labels use `text-wrap: pretty` with no auto hyphenation, so "neurofeedback" never splits.
+- Reference: Mobbin Instrument (https://mobbin.com/sites/sections/10b3f9ff-98d3-4526-b4e3-bc5efeb5724c), via the brief. Mobbin MCP search did not return that exact section, so the Craft Agency stat cards (https://mobbin.com/sites/sections/6433b6c6-aa48-43a5-9802-c5e92860c4f5) and HoneyBook stats with a rule (https://mobbin.com/sites/sections/002b28fe-7dd0-4869-b963-d4427fcf9d0d) were used to check the pattern.
+- Checks: eslint, tsc, build clean. Rendered at 1440, 390, 320; no horizontal overflow.
 
 ## Follow-up corrections programme
 
