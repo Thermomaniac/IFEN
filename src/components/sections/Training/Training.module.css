@@ -107,8 +107,34 @@
   filter: drop-shadow(0 1px 3px #acd47c9e);
 }
 
-.chip img {
+.chipIcon {
   flex: none;
+  overflow: visible;
+}
+
+/* Origins for the hover motion in ChipIcon: hands and seal turn on the centre, the flame grows from its base. */
+.chipIcon [data-part] {
+  transform-box: view-box;
+  transform-origin: 8px 8px;
+}
+
+.chipIcon [data-part="flame"] {
+  transform-origin: 8px 14px;
+}
+
+/*
+ * Caps-only label: trim the line box to cap height and baseline so the caps sit on the
+ * icon's centre line. Without the trim the empty descender space pushes them up.
+ */
+.chipLabel {
+  text-box: trim-both cap alphabetic;
+}
+
+/* Firefox has no text-box yet: untrimmed, the caps' centre sits 0.4px above the icon's. */
+@supports not (text-box: trim-both cap alphabetic) {
+  .chipLabel {
+    translate: 0 0.5px;
+  }
 }
 
 /* Shown on hover and keyboard focus only, as in the Figma hover state. */

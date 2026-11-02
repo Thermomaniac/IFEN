@@ -8,6 +8,7 @@ import { SectionLabel } from "@/components/ui/SectionLabel";
 import { training, type TrainingImage } from "@/data/site";
 import { FORMAT_LABELS, LANGUAGE_LABELS, TYPE_LABELS, scheduleDates, type ScheduleItem } from "@/data/schedule";
 import { berlinNow, chipFor, dateParts, formatDay, upcomingDates, type CardChip } from "@/lib/schedule";
+import { ChipIcon } from "./ChipIcon";
 import styles from "./Training.module.css";
 
 type Dated = ScheduleItem & { start: string };
@@ -31,12 +32,6 @@ function cardChip(item: Dated, index: number, now: string): CardChip | null {
   return chipFor(item, now);
 }
 
-const CHIP_ICONS = {
-  "ends-today": "/training/chip-clock.svg",
-  sale: "/training/chip-sale.svg",
-  new: "/training/chip-fire.svg",
-} as const;
-
 function Chip({ chip }: { chip: CardChip }) {
   const label =
     chip.kind === "ends-today"
@@ -46,9 +41,8 @@ function Chip({ chip }: { chip: CardChip }) {
         : training.chips.new;
   return (
     <span className={styles.chip} data-kind={chip.kind}>
-      {/* eslint-disable-next-line @next/next/no-img-element -- 16px decorative SVG */}
-      <img src={CHIP_ICONS[chip.kind]} alt="" width={16} height={16} />
-      {label}
+      <ChipIcon kind={chip.kind} />
+      <span className={styles.chipLabel}>{label}</span>
     </span>
   );
 }
