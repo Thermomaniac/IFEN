@@ -293,19 +293,9 @@
 
 .venueBody {
   display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 4px 20px 20px;
-}
-
-.venueLabel {
-  color: var(--color-muted);
-  font-size: var(--fs-xs);
-  line-height: 16px;
-  font-weight: 500;
-  font-variation-settings: var(--fvs-display);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  flex: 1;
+  align-items: center;
+  padding: 16px 20px;
 }
 
 .venueName,
@@ -390,7 +380,7 @@
   }
 
   .venueBody {
-    padding: 2px 12px 14px;
+    padding: 12px;
   }
 
   .venueName,

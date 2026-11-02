@@ -311,7 +311,6 @@ export const locations = {
    */
   legacy: {
     intro: "Courses run in person at seven venues across Germany, alongside our online programme.",
-    cityLabel: "Training location",
     cities: [
       { name: "Munich", photo: "/locations/legacy/muenchen.jpg", alt: "Watercolour of Munich's Marienplatz with the Frauenkirche and the New Town Hall" },
       { name: "Hamburg", photo: "/locations/legacy/hamburg.jpg", alt: "Watercolour of the Elbphilharmonie in Hamburg" },
@@ -321,7 +320,7 @@ export const locations = {
       { name: "Regensburg", photo: "/locations/legacy/regensburg.jpg", alt: "Watercolour of the Regensburg old town and cathedral across the Danube" },
       { name: "Rotenburg an der Fulda", photo: "/locations/legacy/rotenburg.jpg", alt: "Watercolour of a church and half-timbered houses in Rotenburg an der Fulda" },
     ] satisfies LegacyCity[],
-    all: { label: "All venues", title: "View all venues", photo: "/locations/legacy/all-venues.png" },
+    all: { title: "View all venues", photo: "/locations/legacy/all-venues.png" },
   },
 };
 

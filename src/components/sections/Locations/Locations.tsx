@@ -140,7 +140,7 @@ function TileMap() {
 
 /** Version 2: the legacy homepage's venue watercolours, one IFEN card per city, then the all-venues card. */
 function VenueCards() {
-  const { cities, cityLabel, all } = locations.legacy;
+  const { cities, all } = locations.legacy;
   return (
     <Reveal as="ul" className={styles.venues} stagger={0.06} amount="some">
       {cities.map((city) => (
@@ -149,7 +149,6 @@ function VenueCards() {
             <Image src={city.photo} alt={city.alt} fill sizes="(min-width: 64rem) 306px, 45vw" className={styles.venuePhoto} />
           </span>
           <span className={styles.venueBody}>
-            <span className={styles.venueLabel}>{cityLabel}</span>
             <span className={styles.venueName}>{city.name}</span>
           </span>
         </RevealItem>
@@ -162,7 +161,6 @@ function VenueCards() {
           </span>
         </span>
         <span className={styles.venueBody}>
-          <span className={styles.venueLabel}>{all.label}</span>
           {/* Stretched link: the whole card is one tab stop. */}
           <a href={locations.cta.href} className={styles.venueLink}>
             {all.title}
