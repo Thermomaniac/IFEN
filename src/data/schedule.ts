@@ -35,6 +35,8 @@ export type ScheduleItem = {
   /** Local date and time, "YYYY-MM-DDTHH:mm". Absent when the date is flexible. */
   start?: string;
   end?: string;
+  /** Last day to register, local "YYYY-MM-DD". Drives the homepage "Last day to register" chip; no date carries one yet. */
+  registrationCloses?: string;
   location: string;
   locationHref?: string;
   format: CourseFormat;

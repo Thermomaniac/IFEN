@@ -11,6 +11,9 @@ import { Partners } from "@/components/sections/Partners/Partners";
 import { Testimonials } from "@/components/sections/Testimonials/Testimonials";
 import { Video } from "@/components/sections/Video/Video";
 
+// Upcoming training dates and their chips follow the Berlin calendar; refresh hourly.
+export const revalidate = 3600;
+
 export default function Home() {
   return (
     <>

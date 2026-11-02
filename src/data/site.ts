@@ -21,6 +21,7 @@ import {
   MODULES_TITLE,
 } from "./courses/modulePaths";
 import { ABOUT_PATH, LECTURERS_PATH, TRAINING_PATH } from "./ifen/paths";
+import type { CourseType } from "./schedule";
 import { BLOG_PATH } from "./blog/paths";
 import { AREAS_PATH, TOPICS_PATH, WHAT_IS_PATH } from "./neurofeedback/shared";
 
@@ -171,41 +172,29 @@ export const certification = {
   cta: { label: "Check Module 1", href: "/courses/module-1" },
 };
 
-export type Course = { title: string; duration: string; location: string; href: string; image: { src: string; alt: string } };
+export type TrainingImage = { src: string; alt: string };
 
-const courseImage = {
-  src: "/training/course.jpg",
-  alt: "A practitioner fits an EEG electrode cap on a seated trainee.",
-};
-
-// Paper shows the same course four times; swap in real dates and booking links when available.
+// Homepage training cards: the next dated offers from `scheduleDates`. Photos are the site's
+// own, picked by course type; when a type repeats, the card takes the next unused photo.
 export const training = {
   label: "Our Latest Courses & Webinars", // Paper: "Our Lates Courses & Webiners"
   heading: "Upcoming Training & Education Dates",
-  courses: [
-    { title: "Module 1: Certified Neurofeedback Therapist", duration: "5 Days", location: "Munich", href: "/courses/module-1", image: courseImage },
-    {
-      title: "BCIA Mentoring, QEEG Mentoring for QEEG-D Certification",
-      duration: "Flexible",
-      location: "After Election", // Paper copy; likely means "by arrangement"
-      href: "/courses/bcia-qeeg-mentoring",
-      image: courseImage,
-    },
-    {
-      title: "Webinar: Stress, Pain and the Nervous System",
-      duration: "60 Minutes",
-      location: "Online",
-      href: "/courses/webinar-stress-pain",
-      image: courseImage,
-    },
-    {
-      title: "QEEG for Your Practice",
-      duration: "20+ Hours",
-      location: "Online",
-      href: "/courses/qeeg-for-your-practice",
-      image: courseImage,
-    },
-  ] satisfies Course[],
+  count: 4,
+  images: {
+    certification: { src: "/training/course.jpg", alt: "A practitioner fits an EEG electrode cap on a seated trainee." },
+    webinar: { src: "/hero/reel-4.jpg", alt: "A clinician reviews EEG traces on two monitors." },
+    workshop: { src: "/course/qeeg-clinician.jpg", alt: "A clinician studies QEEG brain maps at her desk." },
+    mentoring: { src: "/course/program.jpg", alt: "Two colleagues discuss brain maps on a monitor." },
+    event: { src: "/hero/reel-1.jpg", alt: "Colleagues review charts around a meeting table." },
+  } satisfies Record<CourseType, TrainingImage>,
+  /** Fallback order when a card's own photo is already in use. */
+  imagePool: [
+    { src: "/hero/reel-4.jpg", alt: "A clinician reviews EEG traces on two monitors." },
+    { src: "/blog/biofeedback.jpg", alt: "HRV and EEG readings side by side on two screens." },
+    { src: "/course/qeeg-clinician.jpg", alt: "A clinician studies QEEG brain maps at her desk." },
+    { src: "/course/program.jpg", alt: "Two colleagues discuss brain maps on a monitor." },
+    { src: "/training/course.jpg", alt: "A practitioner fits an EEG electrode cap on a seated trainee." },
+  ] satisfies TrainingImage[],
   cta: { label: "View All Dates", href: "/courses" },
 };
 

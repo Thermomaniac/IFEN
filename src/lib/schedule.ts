@@ -124,3 +124,46 @@ export function groupByMonth(items: ScheduleItem[]): MonthGroup[] {
   }
   return [...groups.values()].sort((a, b) => Number(a.key === "flexible") - Number(b.key === "flexible"));
 }
+
+// Upcoming dates for the homepage. "Now" is read in Europe/Berlin, where every course runs,
+// and compared against the stored local strings, so the server's own zone never matters.
+
+const BERLIN = new Intl.DateTimeFormat("en-CA", {
+  timeZone: "Europe/Berlin",
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+  hour: "2-digit",
+  minute: "2-digit",
+  hourCycle: "h23",
+});
+
+/** The current Berlin wall-clock time as "YYYY-MM-DDTHH:mm". */
+export function berlinNow(now: Date = new Date()) {
+  const p = Object.fromEntries(BERLIN.formatToParts(now).map((x) => [x.type, x.value]));
+  return `${p.year}-${p.month}-${p.day}T${p.hour}:${p.minute}`;
+}
+
+/** Calendar day after a "YYYY-MM-DD" date. */
+function nextDay(day: string) {
+  const [y, m, d] = day.split("-").map(Number);
+  return new Date(Date.UTC(y, m - 1, d + 1)).toISOString().slice(0, 10);
+}
+
+/** The next `count` dated offers that have not started yet, soonest first. */
+export function upcomingDates(items: ScheduleItem[], count: number, now: string) {
+  return items
+    .filter((item): item is ScheduleItem & { start: string } => !!item.start && item.start > now)
+    .sort((a, b) => a.start.localeCompare(b.start))
+    .slice(0, count);
+}
+
+export type Urgency = "Last day to register" | "Starts tomorrow";
+
+/** At most one chip, and only from the item's own dates. */
+export function urgencyFor(item: ScheduleItem, now: string): Urgency | null {
+  const today = now.slice(0, 10);
+  if (item.registrationCloses === today) return "Last day to register";
+  if (item.start?.slice(0, 10) === nextDay(today)) return "Starts tomorrow";
+  return null;
+}

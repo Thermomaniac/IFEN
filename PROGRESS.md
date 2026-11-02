@@ -1,6 +1,6 @@
 # IFEN Remaining Pages Progress
 
-Active phase: UI/UX refinement programme, Phase 3 (sections), next up: upcoming training cards. Homepage metrics done 2026-11-02, Phase 2 hero themes done 2026-11-01, both on Vercel preview. Follow-up corrections programme complete (phases 1 to 7, 2026-10-19).
+Active phase: UI/UX refinement programme, Phase 3 (sections), next up: Our Location V2 behind the V1/V2 switcher. Upcoming training cards and homepage metrics done 2026-11-02, Phase 2 hero themes done 2026-11-01, both on Vercel preview. Follow-up corrections programme complete (phases 1 to 7, 2026-10-19).
 
 ## UI/UX refinement programme (started 2026-11-01)
 
@@ -51,6 +51,16 @@ User asked to use the Figma "Blog sections" frames (node 40001255:39069) as the 
 - Tile 3 keeps the timer icon; Figma shows the users icon on both tiles, read as a copy slip.
 - Copy: "Years of online neurofeedback experience." is now "Years of neurofeedback experience." (`src/data/site.ts`). No hyphenation, so "neurofeedback" never splits.
 - Checks: eslint, tsc, build clean. Rendered at 1440, 390, 320; no horizontal overflow.
+
+### Phase 3.2: upcoming training cards (done 2026-11-02, Vercel preview)
+
+- Homepage Training section rebuilt as image-led cards (Partiful pattern, Mobbin ec636758). The placeholder `courses` in `src/data/site.ts` are gone; cards now read the next four real dates from `scheduleDates` (`src/data/schedule.ts`), the same source as `/courses`.
+- Card: 5:4 photo with a white date chip top-left (weekday, day, month, same type as the listing's date block), corner arrow top-right, optional urgency chip bottom-right. Body: type eyebrow (+ New badge), title as a stretched link (one tab stop per card), meta rows for start day and time, location and format, language. 4 columns at desktop, 2 below 64rem, 1 below 34rem.
+- Dates follow Europe/Berlin (`berlinNow`, `upcomingDates`, `urgencyFor` in `src/lib/schedule.ts`). A date leaves the list once it has started.
+- Urgency: at most one chip. "Last day to register" when `registrationCloses` equals today, else "Starts tomorrow" when the start is the next Berlin day. `registrationCloses` is a new optional field on `ScheduleItem`; no date carries one yet, so only "Starts tomorrow" can fire until IFEN provides deadlines.
+- Photos by course type (`training.images`); when two cards share a type, the later one takes the next unused photo from `training.imagePool`, so no photo repeats.
+- The homepage is static, so `src/app/page.tsx` sets `revalidate = 3600`: the list and chips refresh hourly.
+- Checks: eslint, tsc, build clean. Rendered at 1440, 390, 320 with both chips injected; no horizontal overflow, long German titles wrap at their hyphens. No chip shows on 2026-11-02 because nothing starts on 3 Nov.
 
 ## Follow-up corrections programme
 
