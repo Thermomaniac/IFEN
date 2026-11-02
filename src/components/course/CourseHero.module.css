@@ -308,7 +308,7 @@
 }
 
 .highlightValue {
-  color: #b8a85e;
+  color: var(--color-gold);
   font-size: 1.25rem;
   line-height: 24px;
   letter-spacing: -0.02em;
@@ -647,51 +647,49 @@
   gap: 20px;
 }
 
-/* Blog: typography-led. A larger title on a wider measure, the label set as plain
-   uppercase text, and a hairline between the intro and the facts. */
+/* Blog (Figma "Blog", node 40001255:38939): the dark hero's type on a white band. 52px
+   title, 14/24 copy, gold facts under a hairline, and the header image as a landscape
+   624×452 frame, top-aligned with the 524 text column. */
 .blog .inner {
   padding-block: clamp(3rem, 6.67vw, 6rem) clamp(2.5rem, 4.44vw, 4rem);
 }
 
 .blog .badge {
-  padding: 0;
-  background: none;
-  color: var(--color-muted);
-  letter-spacing: 0.08em;
-  font-weight: 600;
+  background: var(--color-overlay-soft);
+  color: var(--color-white);
 }
 
-.blog .title {
-  font-size: clamp(2.25rem, 1.1rem + 3.4vw, 3.75rem); /* 60 at 1440 */
-  line-height: 1.06;
-  letter-spacing: -0.025em;
-}
-
-.blog .description {
-  max-width: 40rem;
-  font-size: var(--fs-body);
-  line-height: 26px;
+/* 24 from the title to the copy, 16 between paragraphs. */
+.blog .description + .description {
+  margin-top: 0;
 }
 
 .blog .highlights {
+  width: 100%;
+  max-width: 40rem;
   padding-top: 24px;
   border-top: 1px solid var(--color-border);
 }
 
-@media (min-width: 64rem) {
-  .blog .intro:only-child {
-    flex-basis: 52rem;
-  }
-
-  .blog .description {
-    font-size: 1.125rem;
-    line-height: 30px;
-  }
+.blog .highlightValue,
+.withAside .highlightValue {
+  color: var(--color-gold);
 }
 
-/* The facts rule runs as wide as the description above it, not the whole column. */
-.blog .highlights {
-  max-width: 40rem;
+.blog .highlightLabel,
+.withAside .highlightLabel {
+  color: var(--color-subtle);
+}
+
+@media (min-width: 64rem) {
+  .blog .inner {
+    align-items: flex-start;
+    gap: clamp(3rem, 10.3vw, 9.25rem);
+  }
+
+  .blog .intro {
+    flex: 0 1 32.75rem;
+  }
 }
 
 /* Blog figure: the header image framed on the right, cropped to the brain in the hands. */
@@ -702,7 +700,7 @@
 .figureFrame {
   position: relative;
   overflow: hidden;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 624 / 452;
   border-radius: 4px;
   background: var(--color-mist);
   box-shadow: 0 0 0 1px var(--color-border);
@@ -715,73 +713,45 @@
 
 @media (min-width: 64rem) {
   .figure {
-    flex: 0 1 28rem;
-  }
-
-  .figureFrame {
-    aspect-ratio: 4 / 5;
+    flex: 0 1 39rem;
   }
 }
 
-/* ---------- Therapist list: cream band with the practice map ----------
- * The directory below sits on mist, so the list hero changes ground (cream), scale
- * (bold metrics, a larger title) and shape (the map) instead of repeating a header.
+/* ---------- Therapist list (Figma "Re-design", node 40001254:38637) ----------
+ * A cream-deep band with the line pattern drawn a shade darker, a 632 text column and the
+ * 432 practice map. Tan badge, gold facts with no rule above them.
  */
 .therapist.withAside {
-  background: var(--color-cream);
+  background: var(--color-cream-deep);
   border-bottom: 0;
 }
 
+.withAside .lines {
+  color: #eee7cc;
+}
+
 .therapist.withAside .inner {
-  padding-block: clamp(2.5rem, 5vw, 4.5rem);
+  padding-block: clamp(2.5rem, 6.2vw, 5.5rem);
 }
 
 .therapist.withAside .intro {
   gap: 32px;
 }
 
+/* Figma greys the whole trail on these two bands, the current page included. */
+.blog .crumb [aria-current],
+.withAside .crumb [aria-current] {
+  color: var(--color-subtle);
+}
+
 .therapist.withAside .badge {
-  background: var(--color-white);
+  background: var(--color-tan);
 }
 
-.therapist.withAside .title {
-  font-size: clamp(2rem, 1.2rem + 2.4vw, 3.25rem);
-  line-height: 1.08;
-  letter-spacing: -0.025em;
-}
-
-.therapist.withAside .description {
-  max-width: 34rem;
-  font-size: var(--fs-body);
-  line-height: 26px;
-}
-
-.therapist.withAside .highlights {
-  gap: 16px 32px;
-  padding-top: 28px;
-  border-top: 1px solid var(--color-border-warm);
-}
-
-.therapist.withAside .highlight {
-  gap: 6px;
-}
-
-.therapist.withAside .highlightValue {
-  font-size: clamp(2rem, 1.5rem + 1.4vw, 2.75rem);
-  line-height: 1;
-  letter-spacing: -0.03em;
-  font-weight: 600;
-}
-
-.therapist.withAside .highlightLabel {
-  font-size: var(--fs-small);
-  line-height: 18px;
-  font-weight: 600;
-}
-
-.therapist.withAside .divider {
-  height: 56px;
-  background: var(--color-border-warm);
+@media (min-width: 64rem) {
+  .therapist.withAside .intro {
+    flex: 0 1 39.5rem;
+  }
 }
 
 .aside {

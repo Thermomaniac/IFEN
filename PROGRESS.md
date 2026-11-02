@@ -33,6 +33,15 @@ Decisions from the user (2026-11-01):
 - Mobbin references: Hims provider network (https://mobbin.com/sites/sections/2d518945-9981-4e3b-a795-dba0f88aa814), Mailchimp experts directory (https://mobbin.com/sites/sections/352e5d47-46eb-4892-a186-b739f8c70941), Cloudflare Workers map callouts (https://mobbin.com/sites/sections/812789fa-37f5-4e8c-9bb7-4fbba96331b7), Base stats beside a map (https://mobbin.com/sites/sections/82283dd4-9b04-4dff-b1e9-eedbf7d55a85), Daylight network map (https://mobbin.com/sites/sections/9409f7e7-ec92-477e-9db5-dc4efa0ecdc0), Braintrust map with stats (https://mobbin.com/sites/sections/e5d3f8df-7b64-4c12-9686-50628d40d0a1).
 - Checks: eslint, tsc, build clean. Rendered at 1440, 390, 320; no horizontal overflow, callouts inside the viewport at 320.
 
+### Hero refinement from Figma (done 2026-11-02, Vercel preview)
+
+User asked to use the Figma "Blog sections" frames (node 40001255:39069) as the visual reference for these two heroes, overriding the "Figma is not a visual reference" rule for them only.
+
+- Blog hero (Figma "Blog"): 52px title, dark-overlay badge, 14/24 copy (24 below the title, 16 between paragraphs), gold fact values with subtle labels under a hairline, grey breadcrumb. Text column 524, landscape 624x452 image frame, top-aligned.
+- Therapist list hero (Figma "Re-design"): cream-deep band with the line pattern a shade darker (#eee7cc), tan badge, 52px title, gold facts without a rule. Map: teal practice tiles, cream empty tiles, apricot dense tiles without the ink outline, callout cards without leader lines.
+- New tokens: `--color-teal` #009ba7, `--color-gold` #b8a85e, `--color-tan` #f2e1bb.
+- Kept: existing copy (the Figma copy is slightly reworded), real counts (Countries 9, Figma shows 4), the map legend, and stacked facts below 48rem (the shared rule for every hero). The therapist profile hero is unchanged.
+
 ## Follow-up corrections programme
 
 ### Homepage hero, Paper redesign (done 2026-10-19, user request, pushed to staging)

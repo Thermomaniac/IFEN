@@ -8,7 +8,7 @@ const TILE = 25;
 
 /**
  * Therapist list hero visual: the Paper tile map of Germany, with every tile that holds a
- * registered practice set dark and the three busiest cities called out. Tiles fill in row
+ * registered practice set teal and the three busiest cities called out. Tiles fill in row
  * by row on load, then the practice tiles land (Locations uses the same map and rhythm).
  */
 export function PracticeMap() {

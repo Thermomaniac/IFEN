@@ -20,7 +20,7 @@
   width: 100%;
   height: 100%;
   overflow: visible;
-  fill: var(--color-cream-deep);
+  fill: var(--color-cream);
 }
 
 /* Rows fill in top to bottom, ~30ms apart; practice tiles land once the map is in. */
@@ -33,7 +33,7 @@
 
 .tiles .lit,
 .tiles .dense {
-  fill: var(--color-ink);
+  fill: var(--color-teal);
   animation-name: tile, settle;
   animation-duration: 480ms, 360ms;
   animation-delay: calc(var(--row) * 30ms), calc(700ms + var(--row) * 18ms);
@@ -41,8 +41,6 @@
 
 .tiles .dense {
   fill: var(--color-accent);
-  stroke: var(--color-ink);
-  stroke-width: 3;
 }
 
 @keyframes tile {
@@ -67,7 +65,7 @@
   pointer-events: none;
 }
 
-/* A short leader from the tile to a white card, on the side with more room. */
+/* Figma: a white card laid on the tile's edge, on the side with more room. */
 .callout {
   position: absolute;
   left: var(--x);
@@ -79,16 +77,7 @@
   animation-delay: calc(1100ms + var(--i) * 120ms);
 }
 
-.callout::before {
-  content: "";
-  flex: none;
-  width: clamp(1rem, 6cqi, 2.25rem);
-  height: 1px;
-  background: var(--color-ink);
-}
-
 .callout[data-side="left"] {
-  flex-direction: row-reverse;
   translate: -100% -50%;
 }
 
@@ -147,12 +136,11 @@
   width: 10px;
   height: 10px;
   border-radius: 2px;
-  background: var(--color-ink);
+  background: var(--color-teal);
 }
 
 .swatchDense {
   background: var(--color-accent);
-  box-shadow: inset 0 0 0 1.5px var(--color-ink);
 }
 
 @media (prefers-reduced-motion: reduce) {

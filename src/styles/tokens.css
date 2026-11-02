@@ -9,6 +9,9 @@
   --color-accent: #ffc18c; /* apricot CTA */
   --color-sparkle: #cec075; /* section-label sparkle */
   --color-tint-teal: #94d2bd1f; /* training image wash */
+  --color-teal: #009ba7; /* Figma icon/brand: practice tiles */
+  --color-gold: #b8a85e; /* Figma text/accent-gold: hero fact values */
+  --color-tan: #f2e1bb; /* Figma bg/tan-alt: badge on cream */
 
   /* Neutrals */
   --color-white: #ffffff;

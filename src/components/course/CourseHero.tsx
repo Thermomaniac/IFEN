@@ -40,9 +40,10 @@ const factIcons: Record<CourseFact["icon"], typeof UsersIcon> = {
  * listing photo (Figma "Hero Section").
  *
  * `route` picks the theme from `heroThemes`. The light themes (therapist, blog) are white
- * bands with ink type and carry no ink-faded photo or line pattern; the blog shows its
- * `image` as a framed figure on the right instead. `aside` fills the right column with a
- * page's own visual (the therapist list's practice map) and turns the band cream.
+ * bands with ink type and carry no ink-faded photo; the blog shows its `image` as a framed
+ * figure on the right instead. `aside` fills the right column with a page's own visual
+ * (the therapist list's practice map), turns the band cream and brings the line pattern back
+ * a shade darker than the band.
  */
 export function CourseHero({
   content,
@@ -76,7 +77,7 @@ export function CourseHero({
           <span className={styles.fade} aria-hidden="true" />
         </>
       ) : (
-        !light && <Lines />
+        (!light || aside) && <Lines />
       )}
 
       <div className={styles.inner}>
