@@ -18,4 +18,4 @@ npm run build
 npm start        # honours $PORT
 ```
 
-Deployed on Railway from the `main` branch.
+Deployed on Vercel (project `ifen`) from the CLI: previews from `phase-2`, production from `main` with `vercel deploy --prod`.

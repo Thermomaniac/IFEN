@@ -2,7 +2,7 @@
 
 Five build phases (done), then the correction programme below (phases A to H, one session, each pushed to staging). Five phases, one phase per session. Read `PROGRESS.md` first to see which phase is active, and `DESIGN-SYSTEM.md` before building anything.
 
-Branch: `phase-2` (staging deploy at ifen-staging.up.railway.app). Never push or merge to `main`. At the end of every phase, commit and push `phase-2` to deploy staging (see `CLAUDE.md`).
+Branch: `phase-2` (staging = Vercel preview via `vercel deploy`). Merge to `main` only when the user asks for a production release. At the end of every phase, commit and push `phase-2` and deploy a preview (see `CLAUDE.md`).
 
 Live source site: https://www.neurofeedback-info.de (English paths under `/en`). Scrape sources with Firecrawl; never invent dates, prices, credentials or claims. Content is translated to English like the existing pages, keeping the course language as a fact.
 

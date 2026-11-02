@@ -1,6 +1,6 @@
 # IFEN Remaining Pages Progress
 
-Active phase: UI/UX refinement programme, Phase 3 (sections) done, next up: Phase 4 QA. Blog hero and Phase 3 audit, therapist profile Version 2 (AlphaWave), therapist list Version 2, Our Location V2 behind the V1/V2 switcher, upcoming training cards (Figma states, demo chips seeded) and homepage metrics done 2026-11-02, Phase 2 hero themes done 2026-11-01, all on Vercel preview. Follow-up corrections programme complete (phases 1 to 7, 2026-10-19).
+Active phase: UI/UX refinement programme released to production 2026-11-02 at the user's request (main fast-forwarded to phase-2, Vercel production deploy, demo training chips off). Docs moved from Railway to Vercel. Blog hero and Phase 3 audit, therapist profile Version 2 (AlphaWave), therapist list Version 2, Our Location V2 behind the V1/V2 switcher, upcoming training cards (Figma states, demo chips seeded) and homepage metrics done 2026-11-02, Phase 2 hero themes done 2026-11-01, all on Vercel preview. Follow-up corrections programme complete (phases 1 to 7, 2026-10-19).
 
 ## UI/UX refinement programme (started 2026-11-01)
 

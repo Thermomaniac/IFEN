@@ -35,8 +35,12 @@ Five-phase redesign of the remaining IFEN pages, one phase per session. At sessi
 2. `ROADMAP.md`: phase scope, source URLs, nav plan, per-phase conventions.
 3. `DESIGN-SYSTEM.md`: exact type, color, spacing, radius, breakpoint, component and motion values.
 
-Execute only the active phase. After phase 5 a correction programme (phases A to H, listed in `ROADMAP.md`) runs in one session, each phase pushed to staging before the next starts. Before handoff run `npx eslint .`, `npx tsc --noEmit`, `npm run build`, render at 1440 / 390 / 320, then update `PROGRESS.md`. Work stays on `phase-2`; never push or merge to `main`.
+Execute only the active phase. After phase 5 a correction programme (phases A to H, listed in `ROADMAP.md`) runs in one session, each phase pushed to staging before the next starts. Before handoff run `npx eslint .`, `npx tsc --noEmit`, `npm run build`, render at 1440 / 390 / 320, then update `PROGRESS.md`. Work stays on `phase-2`; merge to `main` only when the user explicitly asks for a production release.
 
 ## Staging deploy after every phase
 
-When a phase is finished and its checks pass, commit the phase's files to `phase-2` and push `phase-2` to `origin`. That push deploys staging (ifen-staging.up.railway.app). This is standing approval from the user; no need to ask each time. Commit only the phase's own files, leave unrelated untracked work (e.g. `Research Document/`) out, and never push to `main`.
+Hosting is Vercel (project `ifen`, linked in `.vercel/`; `.vercel/` and `.env.local` are gitignored). The project has no Git integration, so deploys run from the CLI. When a phase is finished and its checks pass, commit the phase's files to `phase-2`, push `phase-2` to `origin`, then run `vercel deploy --yes` for a preview (staging) URL. This is standing approval from the user; no need to ask each time. Commit only the phase's own files and leave unrelated untracked work (e.g. `Research Document/`) out. Never run `vercel deploy --prod` and never push to `main` for a phase.
+
+## Production release
+
+Only when the user explicitly asks: fast-forward `main` to `phase-2` (`git merge --ff-only`, no force), push `main`, then run `vercel deploy --prod --yes` from `main` and give the user the production URL. Training demo chips (`training.demoStates` in `src/data/site.ts`) must be `null` in production. Never change production environment variables or data.

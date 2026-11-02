@@ -53,10 +53,10 @@ What the form does today:
 
 ## Deployment
 
-- Staging: https://ifen-staging.up.railway.app, deployed by Railway from the `phase-2` branch.
-- Production deploys from `main`. Do not merge or push to `main` for this work.
-- The Railway CLI on this machine is not linked to a project, and the repo has no deploy config of its own. Staging deploys come from Railway's GitHub integration watching `phase-2`, so a push to `phase-2` is the deploy. No hook or script pushes automatically; pushes are manual and reviewed.
-- If automatic staging deploys need to be confirmed or changed, do it in the Railway dashboard (service settings, source branch `phase-2`, staging environment). That needs dashboard access and is not something the repo can set safely.
+- Hosting: Vercel, project `ifen` (linked in `.vercel/`, gitignored). The project has no Git integration; every deploy runs from the Vercel CLI on this machine.
+- Staging: `vercel deploy --yes` from `phase-2` gives a preview URL. Push `phase-2` to `origin` first so the code on GitHub matches.
+- Production: `vercel deploy --prod --yes` from `main`, only after the user confirms staging and asks for the release. `main` is fast-forwarded to `phase-2`, never forced.
+- Environment variables live in the Vercel dashboard. Do not change production variables from this repo.
 
 ## Checks
 

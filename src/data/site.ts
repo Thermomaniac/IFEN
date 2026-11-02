@@ -199,11 +199,11 @@ export const training = {
   /** Flag beside the type badge; the language name is its alt text. */
   flags: { de: "/flags/de.svg", en: "/flags/us.svg", es: "/flags/es.png", it: "/flags/countries/it.png" } satisfies Record<CourseLanguage, string>,
   /**
-   * DEMO, remove before production. IFEN has no registration deadlines or discounts in the
-   * schedule yet, so the first card is forced to "Ends today" and the second to 20% off to
-   * review every Figma state on the preview. Set to null to show real data only.
+   * Preview-only demo chips, off in production. IFEN has no registration deadlines or
+   * discounts in the schedule yet; to review those Figma states on a preview, set e.g.
+   * { endsToday: 0, sale: { index: 1, discount: 20 } }. null shows real data only.
    */
-  demoStates: { endsToday: 0, sale: { index: 1, discount: 20 } } as { endsToday: number; sale: { index: number; discount: number } } | null,
+  demoStates: null as { endsToday: number; sale: { index: number; discount: number } } | null,
   cta: { label: "View All Dates", href: "/courses" },
 };
 
