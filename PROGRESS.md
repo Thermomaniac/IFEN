@@ -1,6 +1,6 @@
 # IFEN Remaining Pages Progress
 
-Active phase: UI/UX refinement programme, Phase 3 (sections), next up: therapist list (remove pricing and availability, rebalance filters). Our Location V2 behind the V1/V2 switcher, upcoming training cards (Figma states, demo chips seeded) and homepage metrics done 2026-11-02, Phase 2 hero themes done 2026-11-01, both on Vercel preview. Follow-up corrections programme complete (phases 1 to 7, 2026-10-19).
+Active phase: UI/UX refinement programme, Phase 3 (sections), next up: therapist profile (Version 2 with AlphaWave content and a single-pin location card). Therapist list Version 2, Our Location V2 behind the V1/V2 switcher, upcoming training cards (Figma states, demo chips seeded) and homepage metrics done 2026-11-02, Phase 2 hero themes done 2026-11-01, both on Vercel preview. Follow-up corrections programme complete (phases 1 to 7, 2026-10-19).
 
 ## UI/UX refinement programme (started 2026-11-01)
 
@@ -73,6 +73,15 @@ User asked to use the Figma "Blog sections" frames (node 40001255:39069) as the 
 - Switcher: `src/lib/version.ts` (`useVersion(area, fallback)`, `useSyncExternalStore`, localStorage `ifen-version:<area>` with an in-memory fallback; server and first paint use the default) and `src/components/ui/VersionSwitcher.tsx` (floating ink pill, bottom centre, z-index 45 under the nav, white thumb slides between "Version 1" and "Version 2", `aria-pressed`, shown only while its `target` section is in view, `inert` when hidden). Built for reuse by the therapist flow (omit `target` to show it page-wide).
 - The header Reveal is keyed by version so the V2 intro, mounted after the once-reveal played, does not stay hidden.
 - Checks: eslint, tsc, build clean. Rendered at 1440 (V1 and V2, choice persists across reload), 390 and 320; no horizontal overflow, switcher hides outside the section, no new console messages.
+
+### Phase 3.4: therapist list, Version 2 default (done 2026-11-02, Vercel preview)
+
+- Version 2 (default) drops the Price Range and Select Availability filters from the directory. Version 1 is the current redesign, unchanged, behind the page-wide switcher (`useVersion("therapists", "v2")`, label "Therapist directory version", no `target`). The same `therapists` area will drive the profile and book flow next.
+- A price or date set in Version 1 is ignored in Version 2 (`applied` filters null both), so no hidden filter narrows the list or shows in the summary.
+- Filters rebalance through the existing flex basis, no CSS change: 1440 search plus four 290px dropdowns on one row; 820 search and Country, then three; 390 and 320 search and Country, then one per row.
+- Cards already showed no price or availability; nothing deleted (the price and date code paths stay for Version 1).
+- The expanded map is a native modal `<dialog>` (top layer), so it covers the switcher.
+- Checks: eslint, tsc, build clean. Rendered at 1440, 820, 390 and 320; no horizontal overflow, no console messages.
 
 ## Follow-up corrections programme
 

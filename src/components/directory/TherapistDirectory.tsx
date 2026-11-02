@@ -5,6 +5,7 @@ import { FilterMulti, type MultiOption } from "@/components/course/FilterMulti";
 import { FilterPopover } from "@/components/course/FilterPopover";
 import { FilterSelect } from "@/components/course/FilterSelect";
 import { ResetIcon, XCircleIcon } from "@/components/icons";
+import { VersionSwitcher } from "@/components/ui/VersionSwitcher";
 import {
   COUNTRIES,
   LEVELS,
@@ -22,6 +23,7 @@ import {
   shortDate,
   type DirectoryFilters,
 } from "@/lib/therapists";
+import { useVersion } from "@/lib/version";
 import { DirectorySearch } from "./DirectorySearch";
 import { LevelIcon } from "./LevelBadge";
 import { MapDialog } from "./MapDialog";
@@ -52,24 +54,34 @@ const DATES_NOTE =
  * Therapist List: the results summary, then one panel with Paper's filter header over
  * the practice cards and the nearby map. Every filter runs on the published directory
  * records; nothing is inferred.
+ *
+ * Two prototype versions behind the floating switcher: Version 2 (default) drops the
+ * price and availability filters, which no practice publishes; Version 1 keeps them.
  */
 export function TherapistDirectory({ therapists }: { therapists: Therapist[] }) {
   const uid = useId();
   const [filters, setFilters] = useState<DirectoryFilters>(EMPTY_DIRECTORY_FILTERS);
   const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
   const [mapOpen, setMapOpen] = useState(false);
+  const [version, setVersion] = useVersion("therapists", "v2");
+  const booking = version === "v1";
 
   const set = <K extends keyof DirectoryFilters>(key: K, value: DirectoryFilters[K]) =>
     setFilters((f) => ({ ...f, [key]: value }));
   const reset = () => setFilters(EMPTY_DIRECTORY_FILTERS);
 
   const options = useMemo(() => buildOptions(therapists), [therapists]);
+  // Version 2 has no price or availability fields, so a value set in Version 1 must not linger.
+  const applied = useMemo(
+    () => (booking ? filters : { ...filters, price: null, dates: null }),
+    [booking, filters],
+  );
   const matching = useMemo(
-    () => therapists.filter((t) => matchesTherapist(t, filters)),
-    [therapists, filters],
+    () => therapists.filter((t) => matchesTherapist(t, applied)),
+    [therapists, applied],
   );
   const shown = pageSize === "all" ? matching : matching.slice(0, Number(pageSize));
-  const active = activeDirectoryFilters(filters);
+  const active = activeDirectoryFilters(applied);
 
   return (
     <div className={styles.directory}>
@@ -92,7 +104,7 @@ export function TherapistDirectory({ therapists }: { therapists: Therapist[] }) 
         </div>
       </div>
 
-      <div className={styles.panel}>
+      <div className={styles.panel} data-version={version}>
         <form className={styles.filters} role="search" onSubmit={(e) => e.preventDefault()}>
           <div className={styles.filterHead}>
             <p className={styles.filterTitle}>Categories</p>
@@ -138,30 +150,34 @@ export function TherapistDirectory({ therapists }: { therapists: Therapist[] }) 
                 options={LECTURER_OPTIONS}
                 onChange={(v) => set("lecturer", v as DirectoryFilters["lecturer"])}
               />
-              <FilterPopover
-                label="Price Range"
-                summary={filters.price ? priceLabel(filters.price.min, filters.price.max) : null}
-                onClear={() => set("price", null)}
-              >
-                <PriceRange
-                  value={filters.price}
-                  onChange={(v) => set("price", v)}
-                  note={options.hasPrices ? undefined : PRICE_NOTE}
-                />
-              </FilterPopover>
-              <FilterPopover
-                label="Select Availability"
-                summary={
-                  filters.dates ? `${shortDate(filters.dates.from)} - ${shortDate(filters.dates.to)}` : null
-                }
-                onClear={() => set("dates", null)}
-              >
-                <RangeCalendar
-                  value={filters.dates}
-                  onChange={(v) => v && set("dates", v)}
-                  note={options.hasDates ? undefined : DATES_NOTE}
-                />
-              </FilterPopover>
+              {booking && (
+                <>
+                  <FilterPopover
+                    label="Price Range"
+                    summary={filters.price ? priceLabel(filters.price.min, filters.price.max) : null}
+                    onClear={() => set("price", null)}
+                  >
+                    <PriceRange
+                      value={filters.price}
+                      onChange={(v) => set("price", v)}
+                      note={options.hasPrices ? undefined : PRICE_NOTE}
+                    />
+                  </FilterPopover>
+                  <FilterPopover
+                    label="Select Availability"
+                    summary={
+                      filters.dates ? `${shortDate(filters.dates.from)} - ${shortDate(filters.dates.to)}` : null
+                    }
+                    onClear={() => set("dates", null)}
+                  >
+                    <RangeCalendar
+                      value={filters.dates}
+                      onChange={(v) => v && set("dates", v)}
+                      note={options.hasDates ? undefined : DATES_NOTE}
+                    />
+                  </FilterPopover>
+                </>
+              )}
             </div>
           </div>
         </form>
@@ -175,7 +191,7 @@ export function TherapistDirectory({ therapists }: { therapists: Therapist[] }) 
 
           <div className={styles.listCol}>
             {matching.length === 0 ? (
-              <Empty onReset={reset} filters={filters} />
+              <Empty onReset={reset} filters={applied} />
             ) : (
               <ul className={styles.cards} aria-labelledby={`${uid}-results`}>
                 {shown.map((t) => (
@@ -190,6 +206,7 @@ export function TherapistDirectory({ therapists }: { therapists: Therapist[] }) 
       </div>
 
       {mapOpen && <MapDialog therapists={matching} onClose={() => setMapOpen(false)} />}
+      <VersionSwitcher label="Therapist directory version" value={version} onChange={setVersion} />
     </div>
   );
 }
