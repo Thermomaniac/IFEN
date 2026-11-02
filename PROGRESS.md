@@ -1,6 +1,6 @@
 # IFEN Remaining Pages Progress
 
-Active phase: UI/UX refinement programme, Phase 3 (sections), next up: blog hero. Therapist profile Version 2 (AlphaWave), therapist list Version 2, Our Location V2 behind the V1/V2 switcher, upcoming training cards (Figma states, demo chips seeded) and homepage metrics done 2026-11-02, Phase 2 hero themes done 2026-11-01, all on Vercel preview. Follow-up corrections programme complete (phases 1 to 7, 2026-10-19).
+Active phase: UI/UX refinement programme, Phase 3 (sections) done, next up: Phase 4 QA. Blog hero and Phase 3 audit, therapist profile Version 2 (AlphaWave), therapist list Version 2, Our Location V2 behind the V1/V2 switcher, upcoming training cards (Figma states, demo chips seeded) and homepage metrics done 2026-11-02, Phase 2 hero themes done 2026-11-01, all on Vercel preview. Follow-up corrections programme complete (phases 1 to 7, 2026-10-19).
 
 ## UI/UX refinement programme (started 2026-11-01)
 
@@ -82,6 +82,15 @@ User asked to use the Figma "Blog sections" frames (node 40001255:39069) as the 
 - Cards already showed no price or availability; nothing deleted (the price and date code paths stay for Version 1).
 - The expanded map is a native modal `<dialog>` (top layer), so it covers the switcher.
 - Checks: eslint, tsc, build clean. Rendered at 1440, 820, 390 and 320; no horizontal overflow, no console messages.
+
+### Phase 3.7: blog hero and Phase 3 audit (done 2026-11-02, Vercel preview)
+
+- Blog hero: no new Figma frame. "Blog sections" (node 40001255:39069) holds only the therapist list ("Re-design") and the blog index ("Blog"); both were built in the hero refinement above. The article hero (`/blog/neurofeedback-evidence-research`) already uses the same `blog` theme: badge, 52px title, intro, gold author / date / reading-time facts under a hairline, post photo in the 624×452 frame. Measured at 1440: 52px title, 517 text column, 616×446 frame (1425 wide viewport with scrollbar); matches Figma.
+- Kept on purpose: the full welcome copy (Figma shortens it; the source text is not trimmed) and the approved 96px top padding (Figma's 150 assumes the shorter copy). No category text links: every translated post is "News" at the source and there are no category pages to link to.
+- Fixed: the `blog` line in `src/data/heroThemes.ts` still said "no media".
+- Audit of every Phase 3 page (home, therapist list, AlphaWave profile, blog, article) at 1440, 390, 320: page scroll width equals the viewport everywhere. The only elements past the edge sit inside their own scrollers (lecturer board, testimonial marquee, the article's "On This Page" chips at 390).
+- Before production: `training.demoStates` in `src/data/site.ts` is still seeded (ends-today on card 1, 20% sale on card 2); set it to `null`.
+- Checks: eslint, tsc, build clean.
 
 ### Phase 3.6: therapist profile hero from Figma (done 2026-11-02, Vercel preview)
 

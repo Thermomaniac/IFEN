@@ -4,7 +4,7 @@
  * - default: ink band with the listing photo (IFEN and neurofeedback pages).
  * - courses: ink band with the line pattern and the booking panel; the listing keeps its photo.
  * - therapist: compact white band with ink type, the portrait kept on the profile.
- * - blog: white, typography-led band with a larger title and a hairline rule, no media.
+ * - blog: white band (Figma "Blog") with gold facts under a hairline and the post or header image framed on the right.
  *
  * The home page has its own hero (`sections/Hero`) and sits under `default`.
  */
