@@ -279,6 +279,8 @@ export type LocationCity = {
 // Hamburg's photo is broken in Paper: placeholder until IFEN supplies one.
 // Paper shows six stamps: Berlin and Munich appear twice, each with a different landmark.
 // Kept as designed (Paper's "Munic" corrected); order is top to bottom for the drop-in stagger.
+export type LegacyCity = { name: string; photo: string; alt: string };
+
 export const locations = {
   label: "Our Locations",
   headingLines: ["Our Training Locations Are", "Across 16 States In Germany"],
@@ -302,6 +304,25 @@ export const locations = {
     [361, 512],
   ] as const,
   cta: { label: "View All Venues", href: "#" },
+  /**
+   * Version 2: the watercolour venue cards from the legacy homepage
+   * (neurofeedback-info.de, "Ausbildungsort …"). Image-to-city pairs follow the
+   * legacy file names and headings; the legacy Münster alt text said "Regensburg".
+   */
+  legacy: {
+    intro: "Courses run in person at seven venues across Germany, alongside our online programme.",
+    cityLabel: "Training location",
+    cities: [
+      { name: "Munich", photo: "/locations/legacy/muenchen.jpg", alt: "Watercolour of Munich's Marienplatz with the Frauenkirche and the New Town Hall" },
+      { name: "Hamburg", photo: "/locations/legacy/hamburg.jpg", alt: "Watercolour of the Elbphilharmonie in Hamburg" },
+      { name: "Berlin", photo: "/locations/legacy/berlin.jpg", alt: "Watercolour of the Brandenburg Gate in Berlin" },
+      { name: "Hannover", photo: "/locations/legacy/hannover.jpg", alt: "Watercolour of the New Town Hall in Hannover reflected in the Maschteich" },
+      { name: "Münster", photo: "/locations/legacy/muenster.jpg", alt: "Watercolour of St. Paulus Cathedral on the Domplatz in Münster" },
+      { name: "Regensburg", photo: "/locations/legacy/regensburg.jpg", alt: "Watercolour of the Regensburg old town and cathedral across the Danube" },
+      { name: "Rotenburg an der Fulda", photo: "/locations/legacy/rotenburg.jpg", alt: "Watercolour of a church and half-timbered houses in Rotenburg an der Fulda" },
+    ] satisfies LegacyCity[],
+    all: { label: "All venues", title: "View all venues", photo: "/locations/legacy/all-venues.png" },
+  },
 };
 
 export type Partner = { name: string; /** Decorative in the card: the visible name already labels the link. */ logo: string; href: string };

@@ -1,6 +1,6 @@
 # IFEN Remaining Pages Progress
 
-Active phase: UI/UX refinement programme, Phase 3 (sections), next up: Our Location V2 behind the V1/V2 switcher. Upcoming training cards (Figma states, demo chips seeded) and homepage metrics done 2026-11-02, Phase 2 hero themes done 2026-11-01, both on Vercel preview. Follow-up corrections programme complete (phases 1 to 7, 2026-10-19).
+Active phase: UI/UX refinement programme, Phase 3 (sections), next up: therapist list (remove pricing and availability, rebalance filters). Our Location V2 behind the V1/V2 switcher, upcoming training cards (Figma states, demo chips seeded) and homepage metrics done 2026-11-02, Phase 2 hero themes done 2026-11-01, both on Vercel preview. Follow-up corrections programme complete (phases 1 to 7, 2026-10-19).
 
 ## UI/UX refinement programme (started 2026-11-01)
 
@@ -63,6 +63,16 @@ User asked to use the Figma "Blog sections" frames (node 40001255:39069) as the 
 - **DEMO, remove before production:** `training.demoStates` in `src/data/site.ts` forces "Ends today" onto card 1 and "20% off" onto card 2 so every state shows on the preview. No real date carries `registrationCloses` or `discount` yet. Set it to `null` (and drop `cardChip`'s demo branch) before merging to `main`.
 - Copy differs slightly from Figma: "Ends Today !" and "20% Off grab now !" render as "Ends today!" and "20% off, grab now!" (uppercase via CSS). Photos stay as shipped; Figma's sample photo is a placeholder.
 - Checks: eslint, tsc, build clean. Rendered at 1440 (all four states plus hover), 390 and 320; no horizontal overflow, the longest chip (157px) fits at 320.
+
+### Phase 3.3: Our Location V2 behind the V1/V2 switcher (done 2026-11-02, Vercel preview)
+
+- V1 (the current tile map, stamps and CtaButton) stays the default and is untouched (`TileMap` in `Locations.tsx`). V2 (`VenueCards`) restores the legacy neurofeedback-info.de image cards, restyled in the IFEN card treatment (warm 1px border, 4px radius, white, shadow-xs, 3:2 photo, xs uppercase label, 18px name). Four columns at 1440, two below 64rem, 12px gap below 34rem.
+- Images: the original watercolours, downloaded from `https://neurofeedback-info.de/images/2024/{city}_500_watercolor.jpg` into `public/locations/legacy/` (Munich, Hamburg, Berlin, Hannover, Münster, Regensburg, Rotenburg an der Fulda) plus the legacy composite `workshoporte_aquarell.png` as `all-venues.png`. Mapping follows the legacy filenames and headings; the legacy Münster alt text wrongly says "Regensburg" and is corrected. No stock imagery.
+- The eighth card, "View all venues", replaces the CtaButton in V2 (stretched link to the same href, arrow chip on hover or focus, photo scale 1.04). City cards are not links: there is no per-city page or filter, and the schedule only lists Hannover, Baldham and Online.
+- Data: `locations.legacy` in `src/data/site.ts` (intro, label, cities with alt text, all-venues card).
+- Switcher: `src/lib/version.ts` (`useVersion(area, fallback)`, `useSyncExternalStore`, localStorage `ifen-version:<area>` with an in-memory fallback; server and first paint use the default) and `src/components/ui/VersionSwitcher.tsx` (floating ink pill, bottom centre, z-index 45 under the nav, white thumb slides between "Version 1" and "Version 2", `aria-pressed`, shown only while its `target` section is in view, `inert` when hidden). Built for reuse by the therapist flow (omit `target` to show it page-wide).
+- The header Reveal is keyed by version so the V2 intro, mounted after the once-reveal played, does not stay hidden.
+- Checks: eslint, tsc, build clean. Rendered at 1440 (V1 and V2, choice persists across reload), 390 and 320; no horizontal overflow, switcher hides outside the section, no new console messages.
 
 ## Follow-up corrections programme
 

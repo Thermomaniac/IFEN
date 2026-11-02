@@ -1,0 +1,88 @@
+/* Floating prototype switch: an ink pill at the bottom centre, above page content
+   and below the sticky nav (50). Enters only while its area is on screen. */
+.switcher {
+  position: fixed;
+  left: 50%;
+  bottom: calc(24px + env(safe-area-inset-bottom));
+  z-index: 45;
+  translate: -50% 12px;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity var(--dur-fast) var(--ease-out),
+    translate var(--dur-base) var(--ease-out);
+}
+
+.switcher[data-shown="true"] {
+  translate: -50% 0;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.track {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 4px;
+  border-radius: var(--radius-pill);
+  background: var(--color-ink);
+  box-shadow:
+    0 8px 24px #0b394133,
+    0 1px 2px #0000001f;
+}
+
+/* White thumb under the active option; slides between the two halves. */
+.thumb {
+  position: absolute;
+  inset: 4px auto 4px 4px;
+  width: calc(50% - 4px);
+  border-radius: var(--radius-pill);
+  background: var(--color-white);
+  transition: translate var(--dur-base) var(--ease-reveal);
+}
+
+.track[data-value="v2"] .thumb {
+  translate: 100% 0;
+}
+
+.option {
+  position: relative;
+  padding: 8px 16px;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: none;
+  color: var(--color-on-dark);
+  font: inherit;
+  font-size: var(--fs-small);
+  line-height: 20px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color var(--dur-fast) var(--ease-out);
+}
+
+.option[aria-pressed="true"] {
+  color: var(--color-ink);
+}
+
+@media (hover: hover) {
+  .option[aria-pressed="false"]:hover {
+    color: var(--color-white);
+  }
+}
+
+.option:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-accent);
+}
+
+.option:active {
+  scale: 0.97;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .switcher,
+  .thumb {
+    transition: none;
+  }
+}
