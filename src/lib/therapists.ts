@@ -116,3 +116,11 @@ export function shortDate(value: string) {
 }
 
 export const websiteLabel = (url: string) => url.replace(/^https?:\/\//, "").replace(/^www\./, "").replace(/\/$/, "");
+
+/** "Plinganserstraße 15", "81369 München": the address lines of a record. */
+export const addressLines = (t: Therapist) =>
+  t.address ? ([t.address.street, [t.address.postalCode, t.address.city].filter(Boolean).join(" ")].filter(Boolean) as string[]) : [];
+
+/** Google Maps route to the practice, as the legacy profile offered ("Get directions"). */
+export const directionsHref = (t: Therapist) =>
+  t.location ? `https://www.google.com/maps/dir/?api=1&destination=${t.location[0]},${t.location[1]}` : undefined;

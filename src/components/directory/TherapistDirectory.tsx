@@ -58,13 +58,19 @@ const DATES_NOTE =
  * Two prototype versions behind the floating switcher: Version 2 (default) drops the
  * price and availability filters, which no practice publishes; Version 1 keeps them.
  */
-export function TherapistDirectory({ therapists }: { therapists: Therapist[] }) {
+export function TherapistDirectory({ therapists: published, demo }: { therapists: Therapist[]; demo: Therapist }) {
   const uid = useId();
   const [filters, setFilters] = useState<DirectoryFilters>(EMPTY_DIRECTORY_FILTERS);
   const [pageSize, setPageSize] = useState(DEFAULT_PAGE_SIZE);
   const [mapOpen, setMapOpen] = useState(false);
   const [version, setVersion] = useVersion("therapists", "v2");
   const booking = version === "v1";
+  // Version 1 leads with the demo mentor, the only profile in that flow; Version 2 lists the
+  // published practices, linking those with a profile page.
+  const therapists = useMemo(
+    () => (booking ? [demo, ...published.map((t) => (t.profileHref ? { ...t, profileHref: undefined } : t))] : published),
+    [booking, demo, published],
+  );
 
   const set = <K extends keyof DirectoryFilters>(key: K, value: DirectoryFilters[K]) =>
     setFilters((f) => ({ ...f, [key]: value }));

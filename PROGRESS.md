@@ -1,6 +1,6 @@
 # IFEN Remaining Pages Progress
 
-Active phase: UI/UX refinement programme, Phase 3 (sections), next up: therapist profile (Version 2 with AlphaWave content and a single-pin location card). Therapist list Version 2, Our Location V2 behind the V1/V2 switcher, upcoming training cards (Figma states, demo chips seeded) and homepage metrics done 2026-11-02, Phase 2 hero themes done 2026-11-01, both on Vercel preview. Follow-up corrections programme complete (phases 1 to 7, 2026-10-19).
+Active phase: UI/UX refinement programme, Phase 3 (sections), next up: blog hero. Therapist profile Version 2 (AlphaWave), therapist list Version 2, Our Location V2 behind the V1/V2 switcher, upcoming training cards (Figma states, demo chips seeded) and homepage metrics done 2026-11-02, Phase 2 hero themes done 2026-11-01, all on Vercel preview. Follow-up corrections programme complete (phases 1 to 7, 2026-10-19).
 
 ## UI/UX refinement programme (started 2026-11-01)
 
@@ -82,6 +82,18 @@ User asked to use the Figma "Blog sections" frames (node 40001255:39069) as the 
 - Cards already showed no price or availability; nothing deleted (the price and date code paths stay for Version 1).
 - The expanded map is a native modal `<dialog>` (top layer), so it covers the switcher.
 - Checks: eslint, tsc, build clean. Rendered at 1440, 820, 390 and 320; no horizontal overflow, no console messages.
+
+### Phase 3.5: therapist profile, Version 2 (done 2026-11-02, Vercel preview)
+
+- Version 2 profile at `/therapists/alphawave-praxis-fuer-ergotherapie-und-neurofeedback`, content only from the legacy AlphaWave page (`src/data/practiceProfile.ts`): Qualifications (7, IconList), Address (rows plus Get Directions to Google Maps, new tab), Contact (person, phone, email, website). No booking, nothing invented.
+- Hero reuses CourseHero with a new optional `panel` prop: breadcrumb, Therapist Profile badge, subline with flag, three highlights, and a Practice Location panel (`PracticeLocation.tsx`) holding the existing TherapistMap in single mode.
+- Single-pin map: exactly one pin at 48.12024, 11.54108. Hover, focus and tap open the existing card on the top side (`CARD_ROOM` 72px headroom via `setPadding`); the card stacks the full address, wraps, and hides the initials at 34rem and below. Expanded MapDialog shows the same single pin.
+- Version gate: `ProfileVersionGate` reads `storedVersion` directly (the hook returns the default during hydration) and redirects: AlphaWave with V1 stored goes to Lena, Lena and the book flow with V2 stored go to AlphaWave. The page-wide switcher flips between them.
+- Directory: V2 lists the published therapists with AlphaWave's View Profile link and no Lena card; V1 restores Lena and strips the other profile links.
+- `addressLines` and `directionsHref` moved to `src/lib/therapists.ts` so the server page can call them.
+- CourseHero: 12px gap between title and subline.
+- Known: MapLibre logs "Expected value to be of type number, but found null instead" (3x) from the style; not investigated.
+- Checks: eslint, tsc, build clean. Rendered at 1440, 390 and 320; no horizontal overflow.
 
 ## Follow-up corrections programme
 

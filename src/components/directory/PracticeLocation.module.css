@@ -1,0 +1,10 @@
+/* The location map inside the profile hero's white panel. */
+.map {
+  height: 25rem;
+}
+
+@media (max-width: 47.99rem) {
+  .map {
+    height: 21.25rem;
+  }
+}

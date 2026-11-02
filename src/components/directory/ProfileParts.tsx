@@ -87,6 +87,27 @@ export function Group({ title, children }: { title: string; children: ReactNode 
   );
 }
 
+/** A list whose items carry their method icon in place of the bullet (practice qualifications). */
+export function IconList({ items }: { items: { label: string; icon?: string }[] }) {
+  return (
+    <RevealItem as="ul" className={styles.iconList}>
+      {items.map((i) => (
+        <li key={i.label}>
+          {i.icon ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={i.icon} alt="" width={20} height={20} />
+          ) : (
+            <span className={styles.tick} aria-hidden="true">
+              <CheckIcon width={12} height={12} />
+            </span>
+          )}
+          {i.label}
+        </li>
+      ))}
+    </RevealItem>
+  );
+}
+
 export function List({ items }: { items: string[] }) {
   return (
     <ul className={styles.list}>

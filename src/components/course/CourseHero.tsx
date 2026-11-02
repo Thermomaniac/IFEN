@@ -43,16 +43,19 @@ const factIcons: Record<CourseFact["icon"], typeof UsersIcon> = {
  * bands with ink type and carry no ink-faded photo; the blog shows its `image` as a framed
  * figure on the right instead. `aside` fills the right column with a page's own visual
  * (the therapist list's practice map), turns the band cream and brings the line pattern back
- * a shade darker than the band.
+ * a shade darker than the band. `panel` puts a page's own content in the booking panel's
+ * white card (a practice profile's location map) and keeps the band as it is.
  */
 export function CourseHero({
   content,
   route,
   aside,
+  panel,
 }: {
   content: CourseHeroContent;
   route: HeroRoute;
   aside?: ReactNode;
+  panel?: { eyebrow: string; children: ReactNode };
 }) {
   const theme = heroThemes[route];
   const light = theme === "therapist" || theme === "blog";
@@ -131,6 +134,7 @@ export function CourseHero({
                 <h1 id="course-title" className={styles.title}>
                   <LineBreaks text={content.title} />
                 </h1>
+                {content.subline && <Subline subline={content.subline} />}
               </RevealItem>
             )}
             {paragraphs.map((text) => (
@@ -156,6 +160,18 @@ export function CourseHero({
         </Reveal>
 
         {booking && <BookingPanel booking={booking} />}
+
+        {panel && (
+          <Reveal className={styles.panel} delay={0.15}>
+            <RevealItem className={styles.panelHead}>
+              <p className={styles.eyebrow}>{panel.eyebrow}</p>
+            </RevealItem>
+            <RevealItem className={styles.rule}>
+              <span />
+            </RevealItem>
+            <RevealItem>{panel.children}</RevealItem>
+          </Reveal>
+        )}
 
         {figure && (
           <Reveal className={styles.figure} delay={0.15}>

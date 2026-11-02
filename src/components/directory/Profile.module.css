@@ -308,6 +308,69 @@
   background: var(--color-ink);
 }
 
+/* Practice qualifications: method icon, then the full label. */
+.iconList {
+  display: flex;
+  flex-direction: column;
+}
+
+.iconList li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding-block: 12px;
+  border-top: 1px solid var(--color-border-soft);
+  font-size: var(--fs-body);
+  line-height: 24px;
+  font-weight: 500;
+  font-variation-settings: var(--fvs-display);
+  overflow-wrap: break-word;
+  hyphens: auto;
+  text-wrap: pretty;
+}
+
+.iconList li:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.iconList li:last-child {
+  padding-bottom: 0;
+}
+
+.iconList img,
+.iconList .tick {
+  flex: none;
+  margin-top: 2px;
+}
+
+.iconList .tick {
+  width: 20px;
+  height: 20px;
+}
+
+/* Contact values and the directions link: ink, underlined, accent on hover. */
+.link {
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  overflow-wrap: anywhere;
+  border-radius: 2px;
+  transition: text-decoration-color var(--dur-fast) var(--ease-out);
+}
+
+@media (hover: hover) {
+  .link:hover {
+    text-decoration-color: var(--color-accent);
+  }
+}
+
+.link:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
 /* ---------- Experience ---------- */
 
 .timeline {

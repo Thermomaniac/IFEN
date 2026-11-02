@@ -23,6 +23,9 @@ function read(area: string): Version | null {
   }
 }
 
+/** The stored choice for an area, or null when none is set. Client only. */
+export const storedVersion = read;
+
 function subscribe(onChange: () => void) {
   window.addEventListener(EVENT, onChange);
   window.addEventListener("storage", onChange);

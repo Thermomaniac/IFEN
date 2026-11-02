@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { ProfileVersionGate } from "@/components/directory/ProfileVersionGate";
 import { RegisterHeader } from "@/components/register/RegisterHeader";
 import { CtaFooter } from "@/components/sections/CtaFooter/CtaFooter";
 import { DEMO_ID, getDemoProfile } from "@/data/demo/demoTherapist";
+import { PRACTICE_PROFILE_IDS, practiceProfilePath } from "@/data/practiceProfile";
 import { bookingCopy, profilePath } from "@/data/therapistProfile";
 
 export const metadata: Metadata = {
@@ -38,6 +40,8 @@ export default async function MentorBookingLayout({
         {children}
       </main>
       <CtaFooter />
+      {/* Booking is Version 1 only; Version 2 has no booking flow. */}
+      <ProfileVersionGate version="v1" other={practiceProfilePath(PRACTICE_PROFILE_IDS[0])} />
     </>
   );
 }

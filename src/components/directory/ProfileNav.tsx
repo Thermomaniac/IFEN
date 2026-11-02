@@ -8,10 +8,10 @@ type Item = { id: string; label: string };
 
 /**
  * "On This Page" nav for the therapist profile. A sticky card on the right on desktop,
- * with an ink header and the booking CTA, and a sticky scrolling strip under the main nav
- * below 64rem. The section in view gets aria-current.
+ * with an ink header and the booking CTA (when the profile takes bookings), and a sticky
+ * scrolling strip under the main nav below 64rem. The section in view gets aria-current.
  */
-export function ProfileNav({ items, book }: { items: Item[]; book: { label: string; href: string } }) {
+export function ProfileNav({ items, book }: { items: Item[]; book?: { label: string; href: string } }) {
   const [current, setCurrent] = useState(items[0]?.id);
 
   useEffect(() => {
@@ -55,9 +55,11 @@ export function ProfileNav({ items, book }: { items: Item[]; book: { label: stri
             </li>
           ))}
         </ul>
-        <CtaButton href={book.href} className={styles.book}>
-          {book.label}
-        </CtaButton>
+        {book && (
+          <CtaButton href={book.href} className={styles.book}>
+            {book.label}
+          </CtaButton>
+        )}
       </div>
     </nav>
   );

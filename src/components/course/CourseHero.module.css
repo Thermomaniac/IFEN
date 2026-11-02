@@ -271,6 +271,15 @@
   font-variation-settings: var(--fvs-display);
 }
 
+/* Under a full-width title (no portrait beside it), the subline needs its own gap. */
+.title + .subline {
+  margin-top: 12px;
+}
+
+.personText > .subline {
+  margin-top: 0;
+}
+
 .sublineDot {
   width: 4px;
   height: 4px;

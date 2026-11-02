@@ -25,6 +25,11 @@
   pointer-events: none;
 }
 
+/* A profile's single pin stays live on the still preview: hover, focus and tap. */
+.root[data-single] .marker {
+  pointer-events: auto;
+}
+
 .state {
   position: absolute;
   inset: 0;
@@ -134,6 +139,15 @@
   right: calc(100% + 16px);
 }
 
+/* Single-practice preview: the card opens above the pin, centred on it. */
+.group[data-side="top"] .card {
+  top: auto;
+  bottom: calc(100% + 16px);
+  left: 50%;
+  translate: -50% 0;
+  max-width: min(368px, calc(100vw - 88px));
+}
+
 .card[data-focus] {
   border-color: #ffba8c;
 }
@@ -151,6 +165,12 @@
 .group[data-side="left"] .card::before {
   right: auto;
   left: 100%;
+}
+
+.group[data-side="top"] .card::before {
+  inset: 100% 0 auto;
+  width: auto;
+  height: 20px;
 }
 
 .practice {
@@ -232,6 +252,29 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+/* A single practice's address is the point of its card: one line each, wrapping rather
+   than truncating. */
+.root[data-single] .meta {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.root[data-single] .sep {
+  display: none;
+}
+
+.root[data-single] .metaText {
+  white-space: normal;
+}
+
+/* On a phone the initials give the address the room it needs. */
+@media (max-width: 34rem) {
+  .root[data-single] .photo {
+    display: none;
+  }
 }
 
 .sep {

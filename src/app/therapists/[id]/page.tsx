@@ -4,9 +4,12 @@ import type { ReactNode } from "react";
 import { CourseHero } from "@/components/course/CourseHero";
 import { Faq } from "@/components/course/Faq";
 import { LevelIcon } from "@/components/directory/LevelBadge";
+import { PracticeLocation } from "@/components/directory/PracticeLocation";
 import { ProfileNav } from "@/components/directory/ProfileNav";
-import { Badges, Box, Group, List, Rows, Stats } from "@/components/directory/ProfileParts";
+import { Badges, Box, Group, IconList, List, Rows, Stats } from "@/components/directory/ProfileParts";
 import { ProfileSection } from "@/components/directory/ProfileSection";
+import { ProfileVersionGate } from "@/components/directory/ProfileVersionGate";
+import { addressLines, directionsHref } from "@/lib/therapists";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { RevealItem } from "@/components/motion/Reveal";
 import { CtaFooter } from "@/components/sections/CtaFooter/CtaFooter";
@@ -19,7 +22,19 @@ import {
   sessionFacts,
 } from "@/data/demo/demoTherapist";
 import {
+  getPractice,
+  PRACTICE_NAV,
+  PRACTICE_PROFILE_IDS,
+  practiceCopy,
+  practiceCta,
+  practiceHeads,
+  practiceMeta,
+  practiceProfilePath,
+  type PracticeSectionId,
+} from "@/data/practiceProfile";
+import {
   bookingPath,
+  profilePath,
   METHOD_GROUPS,
   profileFaq,
   profileHeads,
@@ -27,20 +42,24 @@ import {
   SECTION_NAV,
   type ProfileSectionId,
 } from "@/data/therapistProfile";
-import { COUNTRIES, DIRECTORY_PATH, LEVELS, QUALIFICATIONS } from "@/data/therapists";
+import { COUNTRIES, DIRECTORY_PATH, flagSrc, LEVELS, QUALIFICATIONS, type Therapist } from "@/data/therapists";
 import styles from "@/components/directory/Profile.module.css";
 
 type Props = PageProps<"/therapists/[id]">;
 
-// Only the demo mentor has a profile in this prototype; every other id is a 404.
+// Version 1: the demo mentor with the booking flow. Version 2: directory practices with a
+// profile, from their published record only. Every other id is a 404.
 export const dynamicParams = false;
 
 export function generateStaticParams() {
-  return [{ id: DEMO_ID }];
+  return [{ id: DEMO_ID }, ...PRACTICE_PROFILE_IDS.map((id) => ({ id }))];
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const p = getDemoProfile((await params).id);
+  const id = (await params).id;
+  const practice = getPractice(id);
+  if (practice) return practiceMeta(practice);
+  const p = getDemoProfile(id);
   return p ? profileMeta(p.person, p.practice, p.city) : {};
 }
 
@@ -94,8 +113,15 @@ function Section({ id, children }: { id: ProfileSectionId; children: ReactNode }
 const QUAL_ICONS = new Map(QUALIFICATIONS.map((q) => [q.id, q.icon]));
 
 export default async function TherapistProfilePage({ params }: Props) {
-  if (!getDemoProfile((await params).id)) notFound();
+  const id = (await params).id;
+  const practice = getPractice(id);
+  if (practice) return <PracticeProfile t={practice} />;
+  if (!getDemoProfile(id)) notFound();
+  return <MentorProfile />;
+}
 
+/** Version 1: the demo mentor's profile with the booking panel, extra sections and FAQ. */
+function MentorProfile() {
   const methodGroups = METHOD_GROUPS.map((g) => ({
     ...g,
     items: QUALIFICATIONS.filter((q) => g.methods.includes(q.id) && p.expertise.methods.includes(q.id)),
@@ -192,6 +218,125 @@ export default async function TherapistProfilePage({ params }: Props) {
         <Faq id="faq" tone="white" content={profileFaq} />
       </main>
       <CtaFooter content={cta} />
+      <ProfileVersionGate version="v1" other={practiceProfilePath(PRACTICE_PROFILE_IDS[0])} />
+    </>
+  );
+}
+
+function PracticeSection({ id, children }: { id: PracticeSectionId; children: ReactNode }) {
+  return (
+    <ProfileSection id={id} heading={practiceHeads[id]}>
+      {children}
+    </ProfileSection>
+  );
+}
+
+const QUAL_LABELS = new Map(QUALIFICATIONS.map((q) => [q.id, q]));
+
+/**
+ * Version 2: a directory practice with only what its legacy profile publishes. The hero's
+ * white panel holds the location map in place of booking; no prices, availability or bio.
+ */
+function PracticeProfile({ t }: { t: Therapist }) {
+  const country = t.country ? COUNTRIES[t.country] : undefined;
+  const quals = t.qualifications.map((id) => QUAL_LABELS.get(id)!).filter(Boolean);
+  const directions = directionsHref(t);
+  const { rows } = practiceCopy;
+
+  const hero: CourseHeroContent = {
+    title: t.name,
+    breadcrumb: [{ label: "Therapist List", href: DIRECTORY_PATH }, { label: t.contact ?? t.name }],
+    badge: practiceCopy.badge,
+    subline: {
+      parts: [t.contact, country && `From ${country}`].filter(Boolean) as string[],
+      flag: t.country ? { src: flagSrc(t.country), alt: "" } : undefined,
+    },
+    description: [],
+    highlights: [
+      { value: String(quals.length), label: "Listed Qualifications" },
+      ...(t.address?.city ? [{ value: t.address.city, label: "Practice City" }] : []),
+      ...(t.qualifications.includes("mentoring") ? [{ value: "Yes", label: "Mentoring Provider" }] : []),
+    ],
+  };
+
+  const address = addressLines(t);
+  const contact = [
+    t.contact && { label: rows.person, value: t.contact },
+    t.phone && {
+      label: rows.phone,
+      value: (
+        <a href={`tel:${t.phone.replace(/\s/g, "")}`} className={styles.link}>
+          {t.phone}
+        </a>
+      ),
+    },
+    t.email && {
+      label: rows.email,
+      value: (
+        <a href={`mailto:${t.email}`} className={styles.link}>
+          {t.email}
+        </a>
+      ),
+    },
+    t.website && {
+      label: rows.website,
+      value: (
+        <a href={t.website} className={styles.link} target="_blank" rel="noopener noreferrer">
+          {t.website.replace(/^https?:\/\//, "").replace(/\/$/, "")}
+          <span className="sr-only"> (opens in a new tab)</span>
+        </a>
+      ),
+    },
+  ].filter(Boolean) as { label: string; value: ReactNode }[];
+
+  return (
+    <>
+      <SiteHeader currentHref="" />
+      <main id="main">
+        <CourseHero
+          route="/therapists/[id]"
+          content={hero}
+          panel={t.location ? { eyebrow: practiceCopy.location, children: <PracticeLocation therapist={t} /> } : undefined}
+        />
+
+        <div className={styles.band}>
+          <div className={styles.layout}>
+            <ProfileNav items={PRACTICE_NAV} />
+
+            <div className={styles.sections}>
+              <PracticeSection id="qualifications">
+                <IconList items={quals.map((q) => ({ label: q.label, icon: q.icon }))} />
+              </PracticeSection>
+
+              <PracticeSection id="address">
+                <Rows
+                  items={[
+                    ...(address[0] ? [{ label: rows.street, value: address[0] }] : []),
+                    ...(address[1] ? [{ label: rows.city, value: address[1] }] : []),
+                    ...(country ? [{ label: rows.country, value: country }] : []),
+                  ]}
+                />
+                {directions && (
+                  <RevealItem as="p" className={styles.text}>
+                    <a href={directions} className={styles.link} target="_blank" rel="noopener noreferrer">
+                      {practiceCopy.directions}
+                      <span className="sr-only"> in Google Maps (opens in a new tab)</span>
+                    </a>
+                  </RevealItem>
+                )}
+              </PracticeSection>
+
+              {contact.length > 0 && (
+                <PracticeSection id="contact">
+                  <Rows items={contact} />
+                </PracticeSection>
+              )}
+            </div>
+          </div>
+        </div>
+      </main>
+      <CtaFooter content={practiceCta} />
+      <ProfileVersionGate version="v2" other={profilePath(DEMO_ID)} />
     </>
   );
 }

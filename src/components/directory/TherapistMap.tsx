@@ -8,9 +8,9 @@ import type { GeoJSONSource, Map as MlMap, Marker } from "maplibre-gl";
 import { ArrowCornerIcon, CloseIcon, MapIcon, MinusIcon, PlusIcon, SearchIcon } from "@/components/icons";
 import { EASE } from "@/components/motion/Reveal";
 import { usePrefersReducedMotion } from "@/components/motion/usePrefersReducedMotion";
-import { LEVELS, NEARBY, type Therapist } from "@/data/therapists";
+import { COUNTRIES, LEVELS, NEARBY, type Therapist } from "@/data/therapists";
 import { circlePolygon, loadMaplibre, loadMapStyle, zoomForRadius } from "@/lib/mapStyle";
-import { distanceKm, initials, matchesQuery } from "@/lib/therapists";
+import { addressLines, directionsHref, distanceKm, initials, matchesQuery } from "@/lib/therapists";
 import styles from "./TherapistMap.module.css";
 
 const MAX_ZOOM = 17;
@@ -33,7 +33,7 @@ type Pin = PinData & { el: HTMLDivElement };
 
 type Preview = {
   key: string;
-  side: "right" | "left";
+  side: "right" | "left" | "top";
   focus: boolean;
   list?: Therapist[];
 };
@@ -41,24 +41,38 @@ type Preview = {
 const levelName = (t: Therapist) =>
   t.level ? `${LEVELS.find((l) => l.id === t.level)!.label} Certified` : "";
 
+/** Street zoom for a single practice. */
+const SINGLE_ZOOM = 15;
+/** Room the summary card takes at the foot of the preview, so the pin centres above it. */
+const SUMMARY_ROOM = 120;
+/** Headroom above the single pin for its address card, which opens upwards. */
+const CARD_ROOM = 72;
+
 /**
  * Directory map, MapLibre on OpenFreeMap tiles. `preview` is the still card beside the
  * list (Paper's nearby view with a "View In Map" button); `full` is the expanded map:
  * pan, wheel and pinch zoom, numbered clusters that split as you zoom in, and a preview
  * card per practice. Pins and cards are HTML so they stay keyboard reachable.
+ *
+ * `single` maps one practice (the profile's location card): street zoom on its pin, no
+ * nearby circle or search, and the pin answers hover, focus and tap even in the preview,
+ * with the card showing the address and linking to directions.
  */
 export function TherapistMap({
   therapists,
   mode,
   onExpand,
   onClose,
+  single = false,
 }: {
   therapists: Therapist[];
   mode: "preview" | "full";
   onExpand?: () => void;
   onClose?: () => void;
+  single?: boolean;
 }) {
   const full = mode === "full";
+  const interactive = full || single;
   const uid = useId();
   const reduced = usePrefersReducedMotion();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -106,12 +120,12 @@ export function TherapistMap({
     Promise.all([loadMaplibre(), loadMapStyle()])
       .then(([ml, style]) => {
         if (cancelled || !containerRef.current) return;
-        const [lat, lng] = NEARBY.center;
+        const [lat, lng] = single && mapped[0] ? mapped[0].location! : NEARBY.center;
         map = new ml.Map({
           container: containerRef.current,
           style,
           center: [lng, lat],
-          zoom: zoomForRadius(lat, NEARBY.radiusKm, CIRCLE_PX[mode]),
+          zoom: single ? SINGLE_ZOOM : zoomForRadius(lat, NEARBY.radiusKm, CIRCLE_PX[mode]),
           maxZoom: MAX_ZOOM,
           minZoom: 1,
           interactive: full,
@@ -123,6 +137,8 @@ export function TherapistMap({
         });
         mapRef.current = map;
         map.touchZoomRotate?.disableRotation();
+        // The single pin sits between the summary card and room for its own card above.
+        if (single && !full) map.setPadding({ top: CARD_ROOM, right: 0, bottom: SUMMARY_ROOM, left: 0 });
 
         map.on("error", (e) => {
           // Tile hiccups are not fatal; a style that never loads is.
@@ -131,26 +147,28 @@ export function TherapistMap({
 
         map.on("load", () => {
           if (!map) return;
-          map.addSource("nearby", {
-            type: "geojson",
-            data: circlePolygon(NEARBY.center, NEARBY.radiusKm),
-          });
-          map.addLayer({
-            id: "nearby-fill",
-            type: "fill",
-            source: "nearby",
-            paint: { "fill-color": "#FFFFFF", "fill-opacity": 0.32 },
-          });
-          map.addLayer({
-            id: "nearby-line",
-            type: "line",
-            source: "nearby",
-            paint: {
-              "line-color": "#DDD8D2",
-              "line-width": 2,
-              "line-dasharray": [2, 2],
-            },
-          });
+          if (!single) {
+            map.addSource("nearby", {
+              type: "geojson",
+              data: circlePolygon(NEARBY.center, NEARBY.radiusKm),
+            });
+            map.addLayer({
+              id: "nearby-fill",
+              type: "fill",
+              source: "nearby",
+              paint: { "fill-color": "#FFFFFF", "fill-opacity": 0.32 },
+            });
+            map.addLayer({
+              id: "nearby-line",
+              type: "line",
+              source: "nearby",
+              paint: {
+                "line-color": "#DDD8D2",
+                "line-width": 2,
+                "line-dasharray": [2, 2],
+              },
+            });
+          }
           map.addSource("practices", {
             type: "geojson",
             data: toGeoJSON([]),
@@ -216,7 +234,7 @@ export function TherapistMap({
   const framedNearby = useRef(true);
   useEffect(() => {
     const map = mapRef.current;
-    if (status !== "ready" || !map || mapped.length === 0) return;
+    if (single || status !== "ready" || !map || mapped.length === 0) return;
     const duration = reducedRef.current ? 0 : 600;
     if (nearby > 0) {
       if (framedNearby.current) return;
@@ -240,7 +258,7 @@ export function TherapistMap({
     return () => {
       cancelled = true;
     };
-  }, [status, mapped, nearby, full, mode]);
+  }, [status, mapped, nearby, full, mode, single]);
 
   // The map search frames what it finds, after a short pause in typing.
   useEffect(() => {
@@ -262,6 +280,8 @@ export function TherapistMap({
   // ---------- Previews ----------
   const sideFor = (lngLat: [number, number]): Preview["side"] => {
     const map = mapRef.current;
+    // The profile's location card is too narrow for a side card: it opens above the pin.
+    if (single && !full) return "top";
     if (!map) return "right";
     // Card width cap from the CSS, plus the 16px pin gap, half a pin and a 16px margin.
     const card = Math.min(CARD_WIDTH, window.innerWidth - 112);
@@ -291,6 +311,23 @@ export function TherapistMap({
     window.clearTimeout(hideTimer.current);
     hideTimer.current = window.setTimeout(() => setPreview(null), HIDE_DELAY);
   };
+
+  // The still preview has no map clicks: a tap outside the pin or Escape closes its card.
+  const previewOpen = single && !full && !!preview;
+  useEffect(() => {
+    if (!previewOpen) return;
+    const onDown = (e: PointerEvent) => {
+      const el = [...markersRef.current.values()][0]?.getElement();
+      if (el && !el.contains(e.target as Node)) setPreview(null);
+    };
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setPreview(null);
+    document.addEventListener("pointerdown", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("pointerdown", onDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [previewOpen]);
 
   const openCluster = async (pin: Extract<Pin, { kind: "cluster" }>) => {
     const map = mapRef.current;
@@ -324,7 +361,7 @@ export function TherapistMap({
   const noMatches = full && query.trim() !== "" && shown.length === 0;
 
   return (
-    <div className={styles.root} data-mode={mode} data-status={status}>
+    <div className={styles.root} data-mode={mode} data-status={status} data-single={single || undefined}>
       {status === "loading" && <p className={styles.state}>Loading map…</p>}
       {status === "error" && (
         <p className={styles.state} role="status">
@@ -338,7 +375,8 @@ export function TherapistMap({
             <PinMarker
               key={pin.key}
               pin={pin}
-              interactive={full}
+              interactive={interactive}
+              single={single}
               preview={preview?.key === pin.key ? preview : null}
               therapist={pin.kind === "point" ? byId.get(pin.id) : undefined}
               onEnter={(focus) => show(pin, focus)}
@@ -353,34 +391,36 @@ export function TherapistMap({
 
       {full ? (
         <>
-          <div className={styles.search} role="search">
-            <label className="sr-only" htmlFor={`${uid}-q`}>
-              Search the map
-            </label>
-            <input
-              id={`${uid}-q`}
-              className={styles.searchInput}
-              type="search"
-              autoComplete="off"
-              placeholder="Institution, location or postal code"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
-            {query ? (
-              <button
-                type="button"
-                className={styles.searchClear}
-                aria-label="Clear map search"
-                onClick={() => setQuery("")}
-              >
-                <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false">
-                  <path d="M1 1l6 6M7 1 1 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-                </svg>
-              </button>
-            ) : (
-              <SearchIcon className={styles.searchIcon} aria-hidden />
-            )}
-          </div>
+          {!single && (
+            <div className={styles.search} role="search">
+              <label className="sr-only" htmlFor={`${uid}-q`}>
+                Search the map
+              </label>
+              <input
+                id={`${uid}-q`}
+                className={styles.searchInput}
+                type="search"
+                autoComplete="off"
+                placeholder="Institution, location or postal code"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+              />
+              {query ? (
+                <button
+                  type="button"
+                  className={styles.searchClear}
+                  aria-label="Clear map search"
+                  onClick={() => setQuery("")}
+                >
+                  <svg viewBox="0 0 8 8" aria-hidden="true" focusable="false">
+                    <path d="M1 1l6 6M7 1 1 7" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  </svg>
+                </button>
+              ) : (
+                <SearchIcon className={styles.searchIcon} aria-hidden />
+              )}
+            </div>
+          )}
           {noMatches && (
             <p className={styles.note} role="status">
               No mapped practice matches “{query.trim()}”.
@@ -412,7 +452,9 @@ export function TherapistMap({
       ) : (
         <div className={styles.summary}>
           <p className={styles.summaryText}>
-            {nearby > 0
+            {single && mapped[0]
+              ? [...addressLines(mapped[0]), mapped[0].country && COUNTRIES[mapped[0].country]].filter(Boolean).join(", ")
+              : nearby > 0
               ? `${nearby} ${nearby === 1 ? "practice" : "practices"} around ${NEARBY.label}`
               : mapped.length > 0
                 ? `${mapped.length} matching ${mapped.length === 1 ? "practice" : "practices"} on the map`
@@ -429,7 +471,7 @@ export function TherapistMap({
       )}
 
       {/* After the controls in the DOM so Tab reaches search and zoom before the pins. */}
-      <div ref={containerRef} className={styles.canvas} aria-hidden={!full || undefined} />
+      <div ref={containerRef} className={styles.canvas} aria-hidden={!interactive || undefined} />
     </div>
   );
 }
@@ -437,6 +479,7 @@ export function TherapistMap({
 function PinMarker({
   pin,
   interactive,
+  single,
   preview,
   therapist,
   onEnter,
@@ -446,6 +489,7 @@ function PinMarker({
 }: {
   pin: Pin;
   interactive: boolean;
+  single: boolean;
   preview: Preview | null;
   therapist?: Therapist;
   onEnter: (focus: boolean) => void;
@@ -468,7 +512,9 @@ function PinMarker({
     pin.kind === "cluster"
       ? `${pin.count} practices in this area, zoom in`
       : therapist
-        ? [therapist.name, therapist.contact, levelName(therapist)].filter(Boolean).join(", ")
+        ? [therapist.name, therapist.contact, ...(single ? addressLines(therapist) : [levelName(therapist)])]
+            .filter(Boolean)
+            .join(", ")
         : "Practice";
 
   const mouse = (e: React.PointerEvent) => e.pointerType === "mouse" || e.pointerType === "pen";
@@ -504,9 +550,10 @@ function PinMarker({
             data-focus={focus || undefined}
             initial={{
               opacity: 0,
-              x: reduced ? 0 : preview.side === "right" ? -6 : 6,
+              x: reduced || preview.side === "top" ? 0 : preview.side === "right" ? -6 : 6,
+              y: reduced || preview.side !== "top" ? 0 : 6,
             }}
-            animate={{ opacity: 1, x: 0 }}
+            animate={{ opacity: 1, x: 0, y: 0 }}
             exit={{ opacity: 0 }}
             transition={{ duration: reduced ? 0 : 0.2, ease: EASE }}
             onPointerEnter={(e) => mouse(e) && onEnter(true)}
@@ -524,7 +571,7 @@ function PinMarker({
                 </ul>
               </div>
             ) : (
-              <PracticeLink therapist={therapist!} focus={focus} />
+              <PracticeLink therapist={therapist!} focus={focus} single={single} />
             )}
           </motion.div>
         )}
@@ -536,15 +583,18 @@ function PinMarker({
 /**
  * Paper map card: photo, the therapist (or the practice when no one is named), then the
  * practice and recorded level, as on the directory card. Only a record with a profile
- * page is a link with the arrow; the rest are plain rows.
+ * page is a link with the arrow; the rest are plain rows. On a profile's own map
+ * (`single`) the meta is the address and the card links to directions instead.
  */
-function PracticeLink({ therapist: t, focus }: { therapist: Therapist; focus: boolean }) {
+function PracticeLink({ therapist: t, focus, single = false }: { therapist: Therapist; focus: boolean; single?: boolean }) {
   const level = levelName(t);
   const title = t.contact ?? t.name;
-  const meta = [t.contact ? t.name : undefined, level].filter(Boolean) as string[];
-  const Tag = t.profileHref ? "a" : "div";
+  const meta = (single ? addressLines(t) : [t.contact ? t.name : undefined, level]).filter(Boolean) as string[];
+  const href = single ? directionsHref(t) : t.profileHref;
+  const Tag = href ? "a" : "div";
+  const external = single && href ? { target: "_blank", rel: "noopener noreferrer" } : {};
   return (
-    <Tag href={t.profileHref} className={styles.practice}>
+    <Tag href={href} className={styles.practice} {...external}>
       <span className={styles.photo} aria-hidden="true">
         {initials(title)}
       </span>
@@ -563,7 +613,8 @@ function PracticeLink({ therapist: t, focus }: { therapist: Therapist; focus: bo
           </span>
         )}
       </span>
-      {t.profileHref && (
+      {single && href && <span className="sr-only">Directions in Google Maps (opens in a new tab)</span>}
+      {href && (
         <span className={styles.arrow} data-focus={focus || undefined} aria-hidden="true">
           <ArrowCornerIcon />
         </span>
