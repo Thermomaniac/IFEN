@@ -48,25 +48,28 @@
   width: 100%;
 }
 
-/* Image-led date card (Mobbin Partiful): photo with a date chip, then type, title and facts. */
+/* Figma 40001266:39712: photo with one state chip, type badge and flag, title, facts. */
 .card {
   position: relative;
   display: flex;
   flex-direction: column;
+  border: 1px solid var(--color-border-warm);
   border-radius: 4px;
   background: var(--color-white);
-  box-shadow:
-    inset 0 0 0 1px var(--color-border),
-    0 1px 2px #0000000f;
+  box-shadow: 0 1px 2px #0000000f;
   overflow: hidden;
-  transition:
-    translate var(--dur-reveal) var(--ease-reveal),
-    box-shadow var(--dur-reveal) var(--ease-reveal);
+}
+
+/* Figma gives the sale state Elevation/2. */
+.sale {
+  box-shadow:
+    0 2px 4px #00000008,
+    0 4px 12px -2px #0000000d;
 }
 
 .media {
   position: relative;
-  aspect-ratio: 5 / 4;
+  aspect-ratio: 306 / 245;
   overflow: hidden;
   background: var(--color-border-soft);
 }
@@ -76,92 +79,104 @@
   transition: scale var(--dur-reveal) var(--ease-reveal);
 }
 
-/* Same weekday / day / month stack as the course listing's date block. */
-.date {
+.chip {
   position: absolute;
   top: 12px;
   left: 12px;
+  z-index: 1;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  min-width: 56px;
-  padding: 8px 6px;
-  border-radius: 4px;
-  background: var(--color-white);
-  box-shadow: 0 2px 8px #0b394126;
-  text-align: center;
-}
-
-.weekday,
-.month {
-  color: var(--color-muted);
-  font-size: var(--fs-xs);
-  line-height: 16px;
-  font-weight: 600;
-  text-transform: uppercase;
-}
-
-.day {
-  color: var(--color-ink);
-  font-size: 1.75rem;
-  line-height: 32px;
-  font-weight: 700;
-  letter-spacing: -0.42px;
-  font-variation-settings: var(--fvs-display);
-}
-
-.urgency {
-  position: absolute;
-  right: 12px;
-  bottom: 12px;
-  padding: 6px 10px;
+  gap: 6px;
+  padding: 6px;
   border-radius: var(--radius-button);
-  background: var(--color-accent);
-  color: var(--color-ink);
+  background: var(--color-cream);
+  color: #9f0712;
   font-size: var(--fs-xs);
   line-height: 16px;
   font-weight: 600;
-  letter-spacing: 0.5px;
+  font-variation-settings: var(--fvs-display);
   text-transform: uppercase;
+  white-space: nowrap;
+  filter: drop-shadow(0 1px 3px #ffc18c9e);
 }
 
-/* No position: the stretched link and the arrow anchor to the card. */
+.chip[data-kind="new"] {
+  background: #edf5c4;
+  color: var(--color-ink);
+  letter-spacing: 0.5px;
+  filter: drop-shadow(0 1px 3px #acd47c9e);
+}
+
+.chip img {
+  flex: none;
+}
+
+/* Shown on hover and keyboard focus only, as in the Figma hover state. */
+.arrow {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  padding: 9px;
+  border-radius: var(--radius-button);
+  background: rgb(255 255 255 / 85%);
+  color: var(--color-ink);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  translate: 0 -4px;
+  transition:
+    opacity var(--dur-fast) var(--ease-reveal),
+    translate var(--dur-fast) var(--ease-reveal);
+}
+
+/* No position: the stretched link anchors to the card. */
 .body {
   display: flex;
   flex: 1;
   flex-direction: column;
   gap: 12px;
-  padding: 20px 20px 24px;
+  padding: 20px;
 }
 
-.eyebrow {
+.tags {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   gap: 8px;
-  color: var(--color-muted);
-  font-size: var(--fs-small);
-  line-height: 20px;
 }
 
-.new {
-  padding: 2px 8px;
-  border-radius: 2px;
-  background: #edf5c4;
-  color: var(--color-ink);
+.type {
+  padding: 4px 8px;
+  border-radius: var(--radius-button);
+  background: #02061852;
+  color: var(--color-white);
   font-size: var(--fs-xs);
   line-height: 16px;
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  font-weight: 500;
+  font-variation-settings: var(--fvs-display);
   text-transform: uppercase;
 }
 
+.flag {
+  flex: none;
+  width: 32px;
+  height: 24px;
+  object-fit: cover;
+}
+
+.content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Figma reserves 82px so the facts line up across cards. */
 .title {
+  min-height: 82px;
   color: var(--color-ink);
   font-size: 1.125rem;
-  line-height: 1.35;
-  font-weight: 600;
-  letter-spacing: -0.02em;
+  line-height: normal;
+  font-weight: 500;
   font-variation-settings: var(--fvs-display);
   overflow-wrap: break-word;
   text-wrap: pretty;
@@ -189,7 +204,6 @@
   flex-direction: column;
   gap: 6px;
   margin-top: auto;
-  padding-top: 4px;
   color: var(--color-muted);
   font-size: var(--fs-small);
   line-height: 20px;
@@ -206,40 +220,30 @@
   width: 18px;
   height: 18px;
   margin-top: 1px;
-  color: var(--color-subtle);
-}
-
-.arrow {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  display: flex;
-  padding: 10px;
-  border-radius: var(--radius-button);
-  background: rgb(255 255 255 / 85%);
-  color: var(--color-ink);
-  transition: background-color var(--dur-fast) var(--ease-reveal);
+  color: var(--color-muted);
 }
 
 @media (hover: hover) {
-  .card:hover {
-    translate: 0 -4px;
-    box-shadow:
-      inset 0 0 0 1px var(--color-border),
-      0 12px 28px #0b394126;
-  }
-
   .card:hover .photo {
     scale: 1.04;
   }
 
   .card:hover .arrow {
-    background: var(--color-accent);
+    opacity: 1;
+    translate: 0 0;
   }
 }
 
 .card:focus-within .arrow {
-  background: var(--color-accent);
+  opacity: 1;
+  translate: 0 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo,
+  .arrow {
+    transition: none;
+  }
 }
 
 @media (max-width: 63.99rem) {

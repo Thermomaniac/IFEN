@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { ArrowCornerIcon, ClockIcon, GlobeIcon, MonitorIcon, PinIcon } from "@/components/icons";
+import { ArrowCornerIcon, ClockIcon, MonitorIcon, PinIcon } from "@/components/icons";
 import { Reveal, RevealItem } from "@/components/motion/Reveal";
 import { Container } from "@/components/ui/Container";
 import { CtaButton } from "@/components/ui/CtaButton";
@@ -7,7 +7,7 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { training, type TrainingImage } from "@/data/site";
 import { FORMAT_LABELS, LANGUAGE_LABELS, TYPE_LABELS, scheduleDates, type ScheduleItem } from "@/data/schedule";
-import { berlinNow, dateParts, formatDay, upcomingDates, urgencyFor, type Urgency } from "@/lib/schedule";
+import { berlinNow, chipFor, dateParts, formatDay, upcomingDates, type CardChip } from "@/lib/schedule";
 import styles from "./Training.module.css";
 
 type Dated = ScheduleItem & { start: string };
@@ -23,56 +23,79 @@ function pickImages(items: Dated[]): TrainingImage[] {
   });
 }
 
-function DateCard({ item, image, urgency }: { item: Dated; image: TrainingImage; urgency: Urgency | null }) {
+/** Real chip, unless the preview-only demo forces one onto this position. */
+function cardChip(item: Dated, index: number, now: string): CardChip | null {
+  const demo = training.demoStates;
+  if (demo?.endsToday === index) return { kind: "ends-today" };
+  if (demo?.sale.index === index) return { kind: "sale", discount: demo.sale.discount };
+  return chipFor(item, now);
+}
+
+const CHIP_ICONS = {
+  "ends-today": "/training/chip-clock.svg",
+  sale: "/training/chip-sale.svg",
+  new: "/training/chip-fire.svg",
+} as const;
+
+function Chip({ chip }: { chip: CardChip }) {
+  const label =
+    chip.kind === "ends-today"
+      ? training.chips.endsToday
+      : chip.kind === "sale"
+        ? `${chip.discount}${training.chips.sale}`
+        : training.chips.new;
+  return (
+    <span className={styles.chip} data-kind={chip.kind}>
+      {/* eslint-disable-next-line @next/next/no-img-element -- 16px decorative SVG */}
+      <img src={CHIP_ICONS[chip.kind]} alt="" width={16} height={16} />
+      {label}
+    </span>
+  );
+}
+
+function DateCard({ item, image, chip }: { item: Dated; image: TrainingImage; chip: CardChip | null }) {
   const date = dateParts(item.start);
   const format = FORMAT_LABELS[item.format];
   return (
-    <RevealItem as="li" className={styles.card}>
+    <RevealItem as="li" className={chip?.kind === "sale" ? `${styles.card} ${styles.sale}` : styles.card}>
       <div className={styles.media}>
         <Image src={image.src} alt={image.alt} fill sizes="(min-width: 64rem) 306px, (min-width: 34rem) 45vw, 90vw" className={styles.photo} />
-        {/* The full date is in the meta list below; the chip repeats it visually. */}
-        <span className={styles.date} aria-hidden="true">
-          <span className={styles.weekday}>{date.weekday}</span>
-          <span className={styles.day}>{date.day}</span>
-          <span className={styles.month}>{date.month}</span>
-        </span>
-        {urgency && <span className={styles.urgency}>{urgency}</span>}
-      </div>
-      <div className={styles.body}>
-        <p className={styles.eyebrow}>
-          {TYPE_LABELS[item.type]}
-          {item.isNew && <span className={styles.new}>New</span>}
-        </p>
-        <h3 className={styles.title}>
-          {/* Stretched link: the whole card is one tab stop. */}
-          <a href={item.href} className={styles.link}>
-            {item.title}
-          </a>
-        </h3>
-        <ul className={styles.meta}>
-          <li>
-            <ClockIcon aria-hidden="true" />
-            <span>
-              {formatDay(item.start)}, {date.time}
-            </span>
-          </li>
-          <li>
-            {item.format === "online" ? <MonitorIcon aria-hidden="true" /> : <PinIcon aria-hidden="true" />}
-            <span>
-              {item.location}
-              {format !== item.location && <> · {format}</>}
-            </span>
-          </li>
-          {item.language && (
-            <li>
-              <GlobeIcon aria-hidden="true" />
-              <span>{LANGUAGE_LABELS[item.language]}</span>
-            </li>
-          )}
-        </ul>
+        {chip && <Chip chip={chip} />}
         <span className={styles.arrow} aria-hidden="true">
           <ArrowCornerIcon />
         </span>
+      </div>
+      <div className={styles.body}>
+        <div className={styles.tags}>
+          <span className={styles.type}>{TYPE_LABELS[item.type]}</span>
+          {item.language && (
+            // eslint-disable-next-line @next/next/no-img-element -- small flag SVG
+            <img className={styles.flag} src={training.flags[item.language]} alt={LANGUAGE_LABELS[item.language]} width={32} height={24} />
+          )}
+        </div>
+        <div className={styles.content}>
+          <h3 className={styles.title}>
+            {/* Stretched link: the whole card is one tab stop. */}
+            <a href={item.href} className={styles.link}>
+              {item.title}
+            </a>
+          </h3>
+          <ul className={styles.meta}>
+            <li>
+              <ClockIcon aria-hidden="true" />
+              <span>
+                {formatDay(item.start)}, {date.time}
+              </span>
+            </li>
+            <li>
+              {item.format === "online" ? <MonitorIcon aria-hidden="true" /> : <PinIcon aria-hidden="true" />}
+              <span>
+                {item.location}
+                {format !== item.location && <> · {format}</>}
+              </span>
+            </li>
+          </ul>
+        </div>
       </div>
     </RevealItem>
   );
@@ -101,7 +124,7 @@ export function Training() {
           {dates.length > 0 && (
             <Reveal as="ul" className={styles.grid} stagger={0.1}>
               {dates.map((item, i) => (
-                <DateCard key={item.code} item={item} image={images[i]} urgency={urgencyFor(item, now)} />
+                <DateCard key={item.code} item={item} image={images[i]} chip={cardChip(item, i, now)} />
               ))}
             </Reveal>
           )}

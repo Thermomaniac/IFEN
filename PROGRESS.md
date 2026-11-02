@@ -1,6 +1,6 @@
 # IFEN Remaining Pages Progress
 
-Active phase: UI/UX refinement programme, Phase 3 (sections), next up: Our Location V2 behind the V1/V2 switcher. Upcoming training cards and homepage metrics done 2026-11-02, Phase 2 hero themes done 2026-11-01, both on Vercel preview. Follow-up corrections programme complete (phases 1 to 7, 2026-10-19).
+Active phase: UI/UX refinement programme, Phase 3 (sections), next up: Our Location V2 behind the V1/V2 switcher. Upcoming training cards (Figma states, demo chips seeded) and homepage metrics done 2026-11-02, Phase 2 hero themes done 2026-11-01, both on Vercel preview. Follow-up corrections programme complete (phases 1 to 7, 2026-10-19).
 
 ## UI/UX refinement programme (started 2026-11-01)
 
@@ -54,13 +54,13 @@ User asked to use the Figma "Blog sections" frames (node 40001255:39069) as the 
 
 ### Phase 3.2: upcoming training cards (done 2026-11-02, Vercel preview)
 
-- Homepage Training section rebuilt as image-led cards (Partiful pattern, Mobbin ec636758). The placeholder `courses` in `src/data/site.ts` are gone; cards now read the next four real dates from `scheduleDates` (`src/data/schedule.ts`), the same source as `/courses`.
-- Card: 5:4 photo with a white date chip top-left (weekday, day, month, same type as the listing's date block), corner arrow top-right, optional urgency chip bottom-right. Body: type eyebrow (+ New badge), title as a stretched link (one tab stop per card), meta rows for start day and time, location and format, language. 4 columns at desktop, 2 below 64rem, 1 below 34rem.
-- Dates follow Europe/Berlin (`berlinNow`, `upcomingDates`, `urgencyFor` in `src/lib/schedule.ts`). A date leaves the list once it has started.
-- Urgency: at most one chip. "Last day to register" when `registrationCloses` equals today, else "Starts tomorrow" when the start is the next Berlin day. `registrationCloses` is a new optional field on `ScheduleItem`; no date carries one yet, so only "Starts tomorrow" can fire until IFEN provides deadlines.
-- Photos by course type (`training.images`); when two cards share a type, the later one takes the next unused photo from `training.imagePool`, so no photo repeats.
-- The homepage is static, so `src/app/page.tsx` sets `revalidate = 3600`: the list and chips refresh hourly.
-- Checks: eslint, tsc, build clean. Rendered at 1440, 390, 320 with both chips injected; no horizontal overflow, long German titles wrap at their hyphens. No chip shows on 2026-11-02 because nothing starts on 3 Nov.
+- Homepage Training section reads the next four real dates from `scheduleDates` (`src/data/schedule.ts`), the same source as `/courses`. A date leaves the list once it has started (Europe/Berlin, `berlinNow`, `upcomingDates`). `src/app/page.tsx` sets `revalidate = 3600`, so the list and chips refresh hourly.
+- Card styles rebuilt from Figma node 40001266:39712 (user request, replaces the earlier Partiful-based pass). Card: 1px warm border, 4px radius, shadow-xs, photo at 306:245. Body (20px padding, 12px gap): dark-overlay type badge plus a 32x24 language flag, 18px medium title as a stretched link (one tab stop), meta rows for start day and time and for location or "Online". The date chip, "Starts tomorrow" and the language row are gone (not in Figma; the flag carries the language).
+- Four states, at most one chip, top-left on the photo (`chipFor` in `src/lib/schedule.ts`): "Ends today!" when `registrationCloses` is today, else "X% off, grab now!" when the date has a `discount`, else "New" from `isNew`, else none. Ends today and Sale use cream with a red label and a warm glow; New uses pale green with ink text. The Sale card uses Elevation/2 instead of shadow-xs. Hover (pointer devices) scales the photo to 1.04 and fades in a 42px frosted arrow box top-right; keyboard focus shows the arrow too. No card lift, as in Figma.
+- Flags: `public/flags/de.svg` and `us.svg` from Figma; es and it reuse the existing PNG flags. Chip icons: `public/training/chip-*.svg` from Figma.
+- **DEMO, remove before production:** `training.demoStates` in `src/data/site.ts` forces "Ends today" onto card 1 and "20% off" onto card 2 so every state shows on the preview. No real date carries `registrationCloses` or `discount` yet. Set it to `null` (and drop `cardChip`'s demo branch) before merging to `main`.
+- Copy differs slightly from Figma: "Ends Today !" and "20% Off grab now !" render as "Ends today!" and "20% off, grab now!" (uppercase via CSS). Photos stay as shipped; Figma's sample photo is a placeholder.
+- Checks: eslint, tsc, build clean. Rendered at 1440 (all four states plus hover), 390 and 320; no horizontal overflow, the longest chip (157px) fits at 320.
 
 ## Follow-up corrections programme
 

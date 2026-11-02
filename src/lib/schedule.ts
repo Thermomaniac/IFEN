@@ -144,12 +144,6 @@ export function berlinNow(now: Date = new Date()) {
   return `${p.year}-${p.month}-${p.day}T${p.hour}:${p.minute}`;
 }
 
-/** Calendar day after a "YYYY-MM-DD" date. */
-function nextDay(day: string) {
-  const [y, m, d] = day.split("-").map(Number);
-  return new Date(Date.UTC(y, m - 1, d + 1)).toISOString().slice(0, 10);
-}
-
 /** The next `count` dated offers that have not started yet, soonest first. */
 export function upcomingDates(items: ScheduleItem[], count: number, now: string) {
   return items
@@ -158,12 +152,12 @@ export function upcomingDates(items: ScheduleItem[], count: number, now: string)
     .slice(0, count);
 }
 
-export type Urgency = "Last day to register" | "Starts tomorrow";
+export type CardChip = { kind: "ends-today" } | { kind: "sale"; discount: number } | { kind: "new" };
 
-/** At most one chip, and only from the item's own dates. */
-export function urgencyFor(item: ScheduleItem, now: string): Urgency | null {
-  const today = now.slice(0, 10);
-  if (item.registrationCloses === today) return "Last day to register";
-  if (item.start?.slice(0, 10) === nextDay(today)) return "Starts tomorrow";
+/** At most one chip per card: a closing registration beats a discount, a discount beats "New". */
+export function chipFor(item: ScheduleItem, now: string): CardChip | null {
+  if (item.registrationCloses === now.slice(0, 10)) return { kind: "ends-today" };
+  if (item.discount) return { kind: "sale", discount: item.discount };
+  if (item.isNew) return { kind: "new" };
   return null;
 }
