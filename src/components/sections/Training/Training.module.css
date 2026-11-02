@@ -112,16 +112,6 @@
   overflow: visible;
 }
 
-/* Origins for the hover motion in ChipIcon: hands and seal turn on the centre, the flame grows from its base. */
-.chipIcon [data-part] {
-  transform-box: view-box;
-  transform-origin: 8px 8px;
-}
-
-.chipIcon [data-part="flame"] {
-  transform-origin: 8px 14px;
-}
-
 /*
  * Caps-only label: trim the line box to cap height and baseline so the caps sit on the
  * icon's centre line. Without the trim the empty descender space pushes them up.
