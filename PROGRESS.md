@@ -44,10 +44,12 @@ User asked to use the Figma "Blog sections" frames (node 40001255:39069) as the 
 
 ### Phase 3.1: homepage metrics (done 2026-11-02, Vercel preview)
 
-- About stat cards: the number now dominates the card (120px italic bold at 1440, 72px floor) and the label sits directly below it on an ink hairline, 24px bold at 1440 (20px floor). Tones, icon tile, dotted brain, photo card and Reveal stagger are unchanged.
-- Copy: "Years of online neurofeedback experience." is now "Years of neurofeedback experience." (`src/data/site.ts`). "Workshops and webinars delivered worldwide." kept. No new stats.
-- Labels use `text-wrap: pretty` with no auto hyphenation, so "neurofeedback" never splits.
-- Reference: Mobbin Instrument (https://mobbin.com/sites/sections/10b3f9ff-98d3-4526-b4e3-bc5efeb5724c), via the brief. Mobbin MCP search did not return that exact section, so the Craft Agency stat cards (https://mobbin.com/sites/sections/6433b6c6-aa48-43a5-9802-c5e92860c4f5) and HoneyBook stats with a rule (https://mobbin.com/sites/sections/002b28fe-7dd0-4869-b963-d4427fcf9d0d) were used to check the pattern.
+- About stat cards rebuilt from Figma node 40001263:39139 (user request, replaces the earlier Mobbin-based pass). Each stat tile is a photo (`public/about/metric-workshops.jpg`, `metric-experience.jpg`, from Figma) under a progressive blur, a toned radial shade (teal for workshops, brown for experience), the dotted brain at 10% white, a white icon tile, a 92px italic bold number and a 24px semibold label on a white hairline.
+- Progressive blur: four stacked `backdrop-filter` layers (2, 4, 8, 16px), each faded in by a `mask-image` gradient that starts lower than the last (35%, 45%, 58%, 72%). The top half of the photo stays sharp as in Figma and the blur peaks behind the label. No seams because each band overlaps the next.
+- Photo `sizes` is 932px at desktop because cover draws the landscape photo wider than the tile; a smaller hint served a soft 1080w image.
+- Below 40rem the experience photo is lifted (`object-position: 50% 40%`) so the face stays above the blur in the wide single-column crop.
+- Tile 3 keeps the timer icon; Figma shows the users icon on both tiles, read as a copy slip.
+- Copy: "Years of online neurofeedback experience." is now "Years of neurofeedback experience." (`src/data/site.ts`). No hyphenation, so "neurofeedback" never splits.
 - Checks: eslint, tsc, build clean. Rendered at 1440, 390, 320; no horizontal overflow.
 
 ## Follow-up corrections programme

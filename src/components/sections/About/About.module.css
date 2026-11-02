@@ -44,40 +44,123 @@
   padding: 32px;
   border-radius: 4px;
   overflow: clip;
-  color: var(--color-ink);
+  isolation: isolate;
+  color: var(--color-mist);
 }
 
+/* Stat tiles follow Figma node 40001263:39139: photo, progressive blur, toned radial shade, dots, content. */
 .lime {
   --tile-bg: #edf5c4;
-  --brain: #e3eab8;
+  /* Figma radial: ellipse 560.73 x 708 from top centre of the 415 x 524 tile = 135.1% on both axes. */
+  --shade: radial-gradient(
+    135.1% 135.1% at 50% 0%,
+    rgb(255 255 255 / 0) 28.446%,
+    rgb(152 167 169 / 0.41355) 43.125%,
+    rgb(101 123 127 / 0.62032) 50.465%,
+    rgb(76 101 105 / 0.72371) 54.135%,
+    rgb(50 79 84 / 0.82709) 57.805%,
+    rgb(29 61 66 / 0.91226) 67.65%,
+    rgb(7 42 48 / 1) 82.84%
+  );
   background: var(--tile-bg);
 }
 
 .sand {
-  --tile-bg: #fbecca;
-  --brain: #f2e1bb;
+  --tile-bg: #edf5c4;
+  --shade: radial-gradient(
+    135.1% 135.1% at 50% 0%,
+    rgb(255 255 255 / 0) 28.446%,
+    rgb(184 166 152 / 0.415) 47.415%,
+    rgb(148 122 100 / 0.6225) 56.9%,
+    rgb(130 99 74 / 0.72625) 61.642%,
+    rgb(112 77 48 / 0.83) 66.384%,
+    rgb(112 77 48 / 0.91226) 80.226%,
+    rgb(112 77 48 / 1) 94.35%
+  );
   background: var(--tile-bg);
 }
 
-/* Dotted brain illustration; masked so each tone can tint it. Offsets are Paper's, as % of the 415px card. */
+.statPhoto {
+  z-index: -3;
+  object-fit: cover;
+}
+
+/* Figma: 932px-wide frame at left -211.5px inside the 415px tile, i.e. 40.9% across. */
+.lime .statPhoto {
+  object-position: 40.9% 50%;
+}
+
+.sand .statPhoto {
+  object-position: 50% 0%;
+}
+
+/* Progressive blur. The top half stays sharp as in Figma; stacked layers add 2, 4, 8 and 16px
+   over successively lower bands, each faded in with a mask so there is no seam. */
+.blur,
+.blur > span {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.blur {
+  z-index: -2;
+}
+
+.blur > span:nth-child(1) {
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 35%, #000 50%);
+  mask-image: linear-gradient(to bottom, transparent 35%, #000 50%);
+}
+
+.blur > span:nth-child(2) {
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 45%, #000 62%);
+  mask-image: linear-gradient(to bottom, transparent 45%, #000 62%);
+}
+
+.blur > span:nth-child(3) {
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 58%, #000 75%);
+  mask-image: linear-gradient(to bottom, transparent 58%, #000 75%);
+}
+
+.blur > span:nth-child(4) {
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 72%, #000 90%);
+  mask-image: linear-gradient(to bottom, transparent 72%, #000 90%);
+}
+
+.tint {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--shade);
+  pointer-events: none;
+}
+
+/* Dotted brain at 10% white, 400px rotated 180deg and pinned to the bottom edge. */
 .brain {
   position: absolute;
-  width: 144.6%; /* 600px */
+  bottom: 0;
+  width: 96.4%; /* 400px */
   aspect-ratio: 1;
-  background: var(--brain);
+  background: rgb(255 255 255 / 0.1);
   mask: url("/svg/dotted-brain.svg") center / contain no-repeat;
+  rotate: 180deg;
   pointer-events: none;
 }
 
 .lime .brain {
-  left: 43.9%; /* 182px */
-  top: -15.6%; /* -82px of 524 */
+  left: 64.3%; /* 267px */
 }
 
 .sand .brain {
-  left: -88.2%; /* -366px */
-  top: -20.6%; /* -108px */
-  rotate: 180deg;
+  right: 51.8%; /* 215px */
 }
 
 .iconTile {
@@ -86,34 +169,36 @@
   align-self: flex-start;
   padding: 20px;
   background: var(--color-white);
+  color: var(--color-ink);
 }
 
 .body {
   position: relative;
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
 }
 
-/* Instrument-style metric: the number dominates the card, the label sits on a rule directly under it. */
 .value {
-  font-size: clamp(4.5rem, 2.75rem + 5.4vw, 7.5rem); /* 120px at 1440 */
-  line-height: 0.9;
+  font-size: clamp(4rem, 2.6rem + 3.5vw, 5.75rem); /* 92px at 1440 */
+  line-height: 0.9565; /* 88px */
   font-weight: 700;
   font-style: italic;
-  letter-spacing: -0.03em;
-  text-transform: uppercase;
+  letter-spacing: -0.0217em; /* -2px at 92px */
   font-variation-settings: var(--fvs-display);
+  overflow-wrap: break-word;
 }
 
+/* Hairline sits in the 16px gaps between value and label (white at 10%). */
 .text {
-  max-width: 22rem;
-  padding-top: 20px;
-  border-top: 1px solid color-mix(in srgb, var(--color-ink) 20%, transparent);
+  max-width: none;
+  padding-top: 16px;
+  border-top: 1px solid rgb(255 255 255 / 0.1);
+  color: var(--color-on-dark);
   font-size: clamp(1.25rem, 1.1rem + 0.45vw, 1.5rem); /* 24px at 1440 */
-  font-weight: 700;
-  line-height: 1.25;
-  letter-spacing: -0.01em;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -0.0208em; /* -0.5px at 24px */
   text-wrap: pretty;
   overflow-wrap: break-word;
   font-variation-settings: var(--fvs-display);
@@ -160,6 +245,11 @@
   .card {
     min-height: 20rem;
     padding: 24px;
+  }
+
+  /* The single column crops the portrait photo wide; lift it so the face stays above the blur. */
+  .sand .statPhoto {
+    object-position: 50% 40%;
   }
 
   .media {

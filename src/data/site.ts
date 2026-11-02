@@ -115,7 +115,14 @@ export const hero = {
   ],
 };
 
-export type AboutStat = { value: string; text: string; icon: "users" | "timer"; tone: "lime" | "sand" };
+export type AboutStat = {
+  value: string;
+  text: string;
+  icon: "users" | "timer";
+  tone: "lime" | "sand";
+  /** Decorative photo behind the metric (Figma node 40001263:39139). */
+  image: string;
+};
 
 export const about = {
   label: "About Us",
@@ -123,8 +130,20 @@ export const about = {
     "We train physicians, therapists and researchers in a method that is scientifically grounded, clinically proven and still far too little known.",
   // Paper repeats "Workshops and webinars delivered" after each sentence; trimmed as a copy slip.
   stats: [
-    { value: "300+", text: "Workshops and webinars delivered worldwide.", icon: "users", tone: "lime" },
-    { value: "25+", text: "Years of neurofeedback experience.", icon: "timer", tone: "sand" },
+    {
+      value: "300+",
+      text: "Workshops and webinars delivered worldwide.",
+      icon: "users",
+      tone: "lime",
+      image: "/about/metric-workshops.jpg",
+    },
+    {
+      value: "25+",
+      text: "Years of neurofeedback experience.",
+      icon: "timer",
+      tone: "sand",
+      image: "/about/metric-experience.jpg",
+    },
   ] satisfies AboutStat[],
   image: {
     src: "/about/metric-tile.jpg",

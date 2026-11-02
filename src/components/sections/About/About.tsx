@@ -14,6 +14,23 @@ function StatCard({ stat }: { stat: AboutStat }) {
   const Icon = icons[stat.icon];
   return (
     <RevealItem as="li" className={`${styles.card} ${styles[stat.tone]}`}>
+      <Image
+        src={stat.image}
+        alt=""
+        fill
+        // The workshop photo is landscape, so cover draws it 932px wide inside the 415px tile.
+        sizes="(min-width: 64rem) 932px, 100vw"
+        quality={85}
+        className={styles.statPhoto}
+      />
+      {/* Progressive blur: each layer adds blur over a lower band, so the photo stays sharp at the top. */}
+      <span className={styles.blur} aria-hidden="true">
+        <span />
+        <span />
+        <span />
+        <span />
+      </span>
+      <span className={styles.tint} aria-hidden="true" />
       <span className={styles.brain} aria-hidden="true" />
       <span className={styles.iconTile}>
         <Icon />
