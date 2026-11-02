@@ -44,7 +44,7 @@ const levelName = (t: Therapist) =>
 /** Street zoom for a single practice. */
 const SINGLE_ZOOM = 15;
 /** Room the summary card takes at the foot of the preview, so the pin centres above it. */
-const SUMMARY_ROOM = 120;
+const SUMMARY_ROOM = 132;
 /** Headroom above the single pin for its address card, which opens upwards. */
 const CARD_ROOM = 72;
 

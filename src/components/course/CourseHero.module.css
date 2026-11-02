@@ -776,3 +776,78 @@
     margin-inline: 0 2rem;
   }
 }
+
+/* ---------- Practice profile (Figma "Therapist Profile", node 40001270:40146) ----------
+ * The therapist list's cream band and darker line pattern, padding 80 / 72. A 552 text
+ * column (24 between the trail and the title block, 32 to the facts) and the 462×370 map
+ * card. Translucent badge, grey trail, gold facts on #4A5565 labels split by warm rules.
+ */
+.therapist.profile {
+  background: var(--color-cream-deep);
+  border-bottom: 0;
+}
+
+.profile .lines {
+  color: #eee7cc;
+}
+
+.therapist.profile .inner {
+  padding-block: clamp(2.5rem, 5.56vw, 5rem);
+}
+
+.therapist.profile .intro {
+  gap: 24px;
+}
+
+.profile .breadcrumb,
+.profile .crumb [aria-current] {
+  color: var(--color-subtle);
+}
+
+.profile .titleBlock {
+  gap: 24px;
+}
+
+.profile .badge {
+  background: var(--color-overlay-soft);
+  color: var(--color-white);
+}
+
+.profile .title + .subline {
+  margin-top: 6px;
+}
+
+.profile .highlights {
+  margin-top: 8px;
+}
+
+.profile .highlightValue {
+  color: var(--color-gold);
+  line-height: normal;
+}
+
+.profile .highlightLabel {
+  color: var(--color-heading);
+}
+
+.profile .divider {
+  background: var(--color-border-warm);
+}
+
+/* Elevation/3, no border: the map runs to the card's edge. */
+.mapCard {
+  width: 100%;
+  min-width: 0;
+  overflow: clip;
+  border-radius: 4px;
+  box-shadow:
+    0 12px 32px -4px #00000014,
+    0 4px 8px #0000000a;
+}
+
+@media (min-width: 64rem) {
+  .mapCard {
+    flex: 0 1 28.875rem; /* 462 */
+    min-width: 24rem;
+  }
+}

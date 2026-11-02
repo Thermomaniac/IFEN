@@ -44,7 +44,8 @@ const factIcons: Record<CourseFact["icon"], typeof UsersIcon> = {
  * figure on the right instead. `aside` fills the right column with a page's own visual
  * (the therapist list's practice map), turns the band cream and brings the line pattern back
  * a shade darker than the band. `panel` puts a page's own content in the booking panel's
- * white card (a practice profile's location map) and keeps the band as it is.
+ * white card and keeps the band as it is; without an eyebrow it is the practice profile's
+ * bare map card on the cream, patterned band of the therapist list.
  */
 export function CourseHero({
   content,
@@ -55,7 +56,7 @@ export function CourseHero({
   content: CourseHeroContent;
   route: HeroRoute;
   aside?: ReactNode;
-  panel?: { eyebrow: string; children: ReactNode };
+  panel?: { eyebrow?: string; children: ReactNode };
 }) {
   const theme = heroThemes[route];
   const light = theme === "therapist" || theme === "blog";
@@ -63,10 +64,12 @@ export function CourseHero({
   const paragraphs = Array.isArray(content.description) ? content.description : [content.description];
   const photo = light ? undefined : (content.image ?? (!booking && !content.portrait ? HERO_PHOTO : undefined));
   const figure = theme === "blog" ? content.image : undefined;
+  // A panel without an eyebrow is the practice profile's map card (Figma 40001270:40146).
+  const profile = panel && !panel.eyebrow;
 
   return (
     <section
-      className={[styles.hero, styles[theme], light && styles.light, photo && styles.photoHero, aside && styles.withAside]
+      className={[styles.hero, styles[theme], light && styles.light, photo && styles.photoHero, aside && styles.withAside, profile && styles.profile]
         .filter(Boolean)
         .join(" ")}
       data-theme={theme}
@@ -80,7 +83,7 @@ export function CourseHero({
           <span className={styles.fade} aria-hidden="true" />
         </>
       ) : (
-        (!light || aside) && <Lines />
+        (!light || aside || profile) && <Lines />
       )}
 
       <div className={styles.inner}>
@@ -161,7 +164,13 @@ export function CourseHero({
 
         {booking && <BookingPanel booking={booking} />}
 
-        {panel && (
+        {panel && profile && (
+          <Reveal className={styles.mapCard} delay={0.15}>
+            <RevealItem>{panel.children}</RevealItem>
+          </Reveal>
+        )}
+
+        {panel && !profile && (
           <Reveal className={styles.panel} delay={0.15}>
             <RevealItem className={styles.panelHead}>
               <p className={styles.eyebrow}>{panel.eyebrow}</p>

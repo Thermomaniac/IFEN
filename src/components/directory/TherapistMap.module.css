@@ -592,3 +592,35 @@
     padding: 12px;
   }
 }
+
+/* ---------- Practice profile hero (Figma 40001270:40146) ----------
+ * One practice: a white pin with a gold dot and no ink ring, and a wider address card
+ * 24 from the bottom.
+ */
+.root[data-single][data-mode="preview"] .pin {
+  outline: 0;
+  box-shadow: 0 1px 1px #0000001a;
+}
+
+/* The open address card still marks its pin. */
+.root[data-single][data-mode="preview"] .pin[data-focus] {
+  outline: 2px solid #ffba8c;
+  outline-offset: -2px;
+}
+
+.root[data-single][data-mode="preview"] .pin:focus-visible {
+  box-shadow: var(--focus-ring);
+}
+
+.root[data-single][data-mode="preview"] .dot {
+  background: var(--color-gold);
+}
+
+.root[data-single][data-mode="preview"] .summary {
+  bottom: 24px;
+  width: min(414px, calc(100% - 48px));
+}
+
+.root[data-single][data-mode="preview"] .summaryText {
+  line-height: normal;
+}

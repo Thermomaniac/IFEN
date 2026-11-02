@@ -1,6 +1,6 @@
-/* The location map inside the profile hero's white panel. */
+/* The location map filling the profile hero's 462×370 card. */
 .map {
-  height: 25rem;
+  height: 23.125rem;
 }
 
 @media (max-width: 47.99rem) {

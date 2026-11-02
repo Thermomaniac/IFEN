@@ -296,7 +296,7 @@ function PracticeProfile({ t }: { t: Therapist }) {
         <CourseHero
           route="/therapists/[id]"
           content={hero}
-          panel={t.location ? { eyebrow: practiceCopy.location, children: <PracticeLocation therapist={t} /> } : undefined}
+          panel={t.location ? { children: <PracticeLocation therapist={t} /> } : undefined}
         />
 
         <div className={styles.band}>

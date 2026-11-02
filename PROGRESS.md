@@ -83,6 +83,14 @@ User asked to use the Figma "Blog sections" frames (node 40001255:39069) as the 
 - The expanded map is a native modal `<dialog>` (top layer), so it covers the switcher.
 - Checks: eslint, tsc, build clean. Rendered at 1440, 820, 390 and 320; no horizontal overflow, no console messages.
 
+### Phase 3.6: therapist profile hero from Figma (done 2026-11-02, Vercel preview)
+
+- Matches Figma node 40001270:40146 (user asked for Figma explicitly). CourseHero `panel` without an eyebrow now renders the `.profile` variant: cream-deep band with the #EEE7CC line pattern, padding 80 / 72, 552 text column (24 trail to title block, 24 badge to title, 6 title to subline, 32 to facts), translucent white-text badge, grey trail, gold facts on #4A5565 labels with warm dividers.
+- Map card: bare 462x370, radius 4, Elevation/3 shadow, no white panel or "Practice Location" eyebrow. Live MapLibre map kept instead of Figma's static illustration.
+- Single-pin preview (`.root[data-single][data-mode="preview"]`): white pin with gold dot, no ink ring (ring returns while the address card is open), summary 414 wide and 24 from the bottom, `SUMMARY_ROOM` 132. Expanded map and therapist list unchanged.
+- Not matched, flagged to the user: Figma breadcrumb reads "Course Booking" (kept "Therapist List"); Figma subline reads "Alphawave" (kept the contact person, no short-name field in the data).
+- Checks: eslint, tsc, build clean. Rendered at 1440, 390 and 320; no horizontal overflow.
+
 ### Phase 3.5: therapist profile, Version 2 (done 2026-11-02, Vercel preview)
 
 - Version 2 profile at `/therapists/alphawave-praxis-fuer-ergotherapie-und-neurofeedback`, content only from the legacy AlphaWave page (`src/data/practiceProfile.ts`): Qualifications (7, IconList), Address (rows plus Get Directions to Google Maps, new tab), Contact (person, phone, email, website). No booking, nothing invented.
