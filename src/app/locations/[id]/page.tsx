@@ -62,6 +62,7 @@ function VenueProfile({ v }: { v: Venue }) {
     badge: venueCopy.badge,
     subline: { parts: [v.practice] },
     description: [],
+    image: v.heroImage,
     highlights: [
       { value: v.hotels.length.toString(), label: "Hotels Nearby" },
       { value: v.address[v.address.length - 1] ?? "", label: "City" },
@@ -156,7 +157,7 @@ function VenueProfile({ v }: { v: Venue }) {
               <Section id="hotels">
                 <div className={styles.boxes}>
                   {v.hotels.map((hotel) => (
-                    <Box key={hotel.name} title={hotel.name}>
+                    <Box key={hotel.name} title={hotel.name} className={styles.hotelBox}>
                       <Rows
                         items={[
                           { label: "Address", value: hotel.address.join(", ") },

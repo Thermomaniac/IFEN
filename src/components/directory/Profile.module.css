@@ -256,6 +256,12 @@
   box-shadow: inset 0 0 0 2px var(--color-border);
 }
 
+/* Hotels Nearby cards only (`/locations/[id]`): more breathing room than the shared
+   .box gap between the heading and the address/distance rows below it. */
+.hotelBox {
+  gap: 24px;
+}
+
 .badges {
   display: flex;
   flex-wrap: wrap;

@@ -1,7 +1,8 @@
 /**
  * Hero themes, chosen per route from this table and never from the URL at runtime.
  *
- * - default: ink band with the listing photo (IFEN and neurofeedback pages).
+ * - default: ink band with the listing photo (IFEN and neurofeedback pages; venue pages use
+ *   their own city watercolour via `content.image` in place of the generic listing photo).
  * - courses: ink band with the line pattern and the booking panel; the listing keeps its photo.
  * - therapist: compact white band with ink type, the portrait kept on the profile.
  * - blog: white band (Figma "Blog") with gold facts under a hairline and the post or header image framed on the right.
@@ -41,7 +42,7 @@ export const heroThemes = {
   "/course-booking/webinars": "courses",
   "/therapists": "therapist",
   "/therapists/[id]": "therapist",
-  "/locations/[id]": "therapist",
+  "/locations/[id]": "default",
   "/blog": "blog",
   "/blog/[slug]": "blog",
 } as const satisfies Record<string, HeroTheme>;

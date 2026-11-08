@@ -25,6 +25,8 @@ export type Venue = {
   name: string;
   /** Subline under the title, e.g. "Occupational therapy in Hanover". */
   practice: string;
+  /** The city's existing watercolour, already used for this location in `data/site.ts`'s legacy venue cards. */
+  heroImage: string;
   contact?: string;
   address: string[];
   phone?: string;
@@ -55,6 +57,7 @@ export const venues: Venue[] = [
     id: "hannover",
     name: "Venue Hannover",
     practice: "Occupational therapy in Hanover",
+    heroImage: "/locations/legacy/hannover.jpg",
     contact: "Normen Schack & Frank Hegger",
     address: ["Neue-Land-Str. 7", "30655 Hanover"],
     phone: "0511 / 5 39 73 77",
@@ -156,6 +159,7 @@ export const venues: Venue[] = [
     id: "baldham-munich",
     name: "Venue Baldham, Munich",
     practice: "Institute for EEG Neurofeedback",
+    heroImage: "/locations/legacy/muenchen.jpg",
     address: ["Karl-Böhm-Strasse 50", "85598 Baldham"],
     phone: "+49 (89) 2000 299 66",
     email: "info@neurofeedback-info.de",

@@ -50,9 +50,9 @@ export function Rows({
 }
 
 /** Bordered group with an uppercase title: the expertise boxes. */
-export function Box({ title, children }: { title: string; children: ReactNode }) {
+export function Box({ title, children, className }: { title: string; children: ReactNode; className?: string }) {
   return (
-    <RevealItem className={styles.box}>
+    <RevealItem className={className ? `${styles.box} ${className}` : styles.box}>
       <h3 className={styles.groupTitle}>{title}</h3>
       {children}
     </RevealItem>
