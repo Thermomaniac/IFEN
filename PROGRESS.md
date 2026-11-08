@@ -2,6 +2,13 @@
 
 Active phase: UI/UX refinement programme released to production 2026-11-02 at the user's request (main fast-forwarded to phase-2, Vercel production deploy, demo training chips off). Docs moved from Railway to Vercel. Blog hero and Phase 3 audit, therapist profile Version 2 (AlphaWave), therapist list Version 2, Our Location V2 behind the V1/V2 switcher, upcoming training cards (Figma states, demo chips seeded) and homepage metrics done 2026-11-02, Phase 2 hero themes done 2026-11-01, all on Vercel preview. Follow-up corrections programme complete (phases 1 to 7, 2026-10-19).
 
+### Venue pages: hero image upscale (done 2026-11-08)
+
+- The venue hero photos looked blurred: `hannover.jpg`/`muenchen.jpg` are 498×332 legacy homepage-card thumbnails being stretched into a hero band sized for ~2880×928 images (the `CourseHero` fallback photo), a 6x stretch with no detail to show.
+- No higher-resolution source existed anywhere in the project (checked the repo and the untracked `Research Document/` folder). Per user decision, best-effort upscaled the existing images rather than inventing new photos: `public/locations/legacy/hannover-hero.jpg` and `muenchen-hero.jpg`, generated from the originals via `sharp` (Lanczos3 resize to 1920×1280, light unsharp mask, quality 90). Same photo, same crop, just higher-resolution output.
+- `Venue.heroImage` (`src/data/venues.ts`) repointed to the new `-hero.jpg` files. The original small files are untouched and still used by the homepage legacy venue cards (`src/data/site.ts`).
+- Checks: eslint, tsc, build clean. Rendered both venue pages at 1440/390/320 — visibly sharper tree/building detail under the ink fade, no layout change.
+
 ### Venue pages: hero image treatment and Hotels Nearby spacing (done 2026-11-08)
 
 - Hero (Figma node 40001293:53395): the venue hero is now the existing ink-band `photo`+`fade` treatment (`CourseHero`'s `default` theme) instead of the compact white `therapist` band, so it reads as a layered image composition over ink rather than a plain white hero. `src/data/heroThemes.ts`: `/locations/[id]` moved from `therapist` to `default`. No new component or CSS: the treatment and its mobile bottom-strip fallback already existed in `CourseHero`.

@@ -25,7 +25,12 @@ export type Venue = {
   name: string;
   /** Subline under the title, e.g. "Occupational therapy in Hanover". */
   practice: string;
-  /** The city's existing watercolour, already used for this location in `data/site.ts`'s legacy venue cards. */
+  /**
+   * The city's existing watercolour, already used for this location in `data/site.ts`'s legacy
+   * venue cards, upscaled (Lanczos + sharpen, via `sharp`) from the original 498×332 to 1920×1280
+   * so it holds up at full-bleed hero size instead of the soft, blown-up look a straight 6x CSS
+   * stretch produces. No new imagery: same source photo, same crop, just higher-resolution output.
+   */
   heroImage: string;
   contact?: string;
   address: string[];
@@ -57,7 +62,7 @@ export const venues: Venue[] = [
     id: "hannover",
     name: "Venue Hannover",
     practice: "Occupational therapy in Hanover",
-    heroImage: "/locations/legacy/hannover.jpg",
+    heroImage: "/locations/legacy/hannover-hero.jpg",
     contact: "Normen Schack & Frank Hegger",
     address: ["Neue-Land-Str. 7", "30655 Hanover"],
     phone: "0511 / 5 39 73 77",
@@ -159,7 +164,7 @@ export const venues: Venue[] = [
     id: "baldham-munich",
     name: "Venue Baldham, Munich",
     practice: "Institute for EEG Neurofeedback",
-    heroImage: "/locations/legacy/muenchen.jpg",
+    heroImage: "/locations/legacy/muenchen-hero.jpg",
     address: ["Karl-Böhm-Strasse 50", "85598 Baldham"],
     phone: "+49 (89) 2000 299 66",
     email: "info@neurofeedback-info.de",
