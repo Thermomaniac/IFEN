@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useId, useMemo, useState, type CSSProperties, type KeyboardEvent } from "react";
 import {
   CalendarCheckIcon,
@@ -487,15 +488,26 @@ function Place({ item }: { item: ScheduleItem }) {
   const format = FORMAT_LABELS[item.format];
   return (
     <>
-      {item.locationHref ? (
-        <a href={item.locationHref} className={styles.place} target="_blank" rel="noreferrer">
-          {item.location}
-        </a>
-      ) : (
-        <span className={styles.main}>{item.location}</span>
-      )}
+      {item.locationHref ? <LocationLink item={item} /> : <span className={styles.main}>{item.location}</span>}
       {format !== item.location && <span className={styles.sub}>{format}</span>}
     </>
+  );
+}
+
+/** Internal location links (`/locations/...`) use `Link`; external ones open in a new tab. */
+function LocationLink({ item }: { item: ScheduleItem }) {
+  if (!item.locationHref) return item.location;
+  if (item.locationHref.startsWith("/")) {
+    return (
+      <Link href={item.locationHref} className={styles.place}>
+        {item.location}
+      </Link>
+    );
+  }
+  return (
+    <a href={item.locationHref} className={styles.place} target="_blank" rel="noreferrer">
+      {item.location}
+    </a>
   );
 }
 
@@ -647,13 +659,7 @@ function DateCard({ item, interest = false }: { item: ScheduleItem; interest?: b
           <li>
             {item.format === "online" ? <MonitorIcon aria-hidden /> : <PinIcon aria-hidden />}
             <span>
-              {item.locationHref ? (
-                <a href={item.locationHref} className={styles.place} target="_blank" rel="noreferrer">
-                  {item.location}
-                </a>
-              ) : (
-                item.location
-              )}
+              {item.locationHref ? <LocationLink item={item} /> : item.location}
               {format !== item.location && <> · {format}</>}
             </span>
           </li>

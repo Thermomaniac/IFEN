@@ -41,6 +41,7 @@ export const heroThemes = {
   "/course-booking/webinars": "courses",
   "/therapists": "therapist",
   "/therapists/[id]": "therapist",
+  "/locations/[id]": "therapist",
   "/blog": "blog",
   "/blog/[slug]": "blog",
 } as const satisfies Record<string, HeroTheme>;

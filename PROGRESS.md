@@ -2,6 +2,14 @@
 
 Active phase: UI/UX refinement programme released to production 2026-11-02 at the user's request (main fast-forwarded to phase-2, Vercel production deploy, demo training chips off). Docs moved from Railway to Vercel. Blog hero and Phase 3 audit, therapist profile Version 2 (AlphaWave), therapist list Version 2, Our Location V2 behind the V1/V2 switcher, upcoming training cards (Figma states, demo chips seeded) and homepage metrics done 2026-11-02, Phase 2 hero themes done 2026-11-01, all on Vercel preview. Follow-up corrections programme complete (phases 1 to 7, 2026-10-19).
 
+### Venue pages: Hannover and Baldham/Munich (done 2026-11-08)
+
+- Two venue detail pages at `/locations/[id]` (`hannover`, `baldham-munich`) for the only two physical locations actually linked from the course schedule (`locationHref` in `src/data/schedule.ts`); no other city gets a page, per user scope decision ("just the 2 linked venues"). Static route (`generateStaticParams`, `dynamicParams = false`), reusing `CourseHero`, `ProfileNav`/`ProfileSection`/`Box`/`Rows` from the therapist profile pattern rather than inventing new components.
+- Content (`src/data/venues.ts`) scraped verbatim from the legacy workshoporte pages (neurofeedback-info.de): address, contact, hotels (8 for Hannover, 5 for Baldham), transit/parking/shopping notes, directions. No invented data. "Address", "Getting There" and "Hotels Nearby" sections; "Get Directions" links to Google Maps built from the address.
+- `src/data/heroThemes.ts`: `/locations/[id]` mapped to the `therapist` hero theme (compact white band), matching the therapist profile pattern it reuses.
+- `CourseSchedule.tsx` (`LocationLink` helper) and `src/data/schedule.ts`: the Hannover and Baldham `locationHref` values (10 occurrences) now point to the internal `/locations/...` routes and render as a Next.js `Link` (no `target="_blank"`), keeping the original `.place` CSS class. Every other location value (plain text like "Online"/"Your choice", or external links such as the Berlin Google Maps link) is untouched.
+- Checks: eslint, tsc, build clean. Rendered both venue pages at 1440, 390 and 320 (no horizontal overflow; `ProfileNav` tabs correctly show/hide sections on mobile, with all content still present in the DOM). Verified in both the Table and Cards view of `/courses` that Hannover/Baldham render as internal links with no visual regression, and all other schedule rows are unaffected.
+
 ## UI/UX refinement programme (started 2026-11-01)
 
 Phases: 0 audit (done), 1 Mobbin research (done, approved 2026-11-01), 2 four hero themes, 3 sections in order (homepage metrics, upcoming training cards, Our Location V2, therapist list, therapist profile, blog hero, audit), 4 QA, 5 Vercel preview staging from `phase-2`, 6 production only after the user confirms staging and asks to merge to `main`.
