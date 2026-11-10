@@ -60,13 +60,23 @@
   color: var(--color-white);
   transition:
     background-color var(--dur-fast) var(--ease-out),
-    box-shadow var(--dur-fast) var(--ease-out);
+    box-shadow var(--dur-fast) var(--ease-out),
+    scale 120ms var(--ease-out);
 }
 
+/* The tick settles in from 0.8 rather than popping, so the state change reads as a response. */
 .box svg {
   width: 12px;
   height: 12px;
   opacity: 0;
+  scale: 0.8;
+  transition:
+    opacity var(--dur-fast) var(--ease-out),
+    scale var(--dur-fast) var(--ease-out);
+}
+
+.check:active .box {
+  scale: 0.95;
 }
 
 /* No auto-hyphens here: the English sentence broke mid-word in the panel ("ap-pear"). */
@@ -82,6 +92,7 @@
 
 .input:checked + .box svg {
   opacity: 1;
+  scale: 1;
 }
 
 .input:focus-visible + .box {
@@ -100,9 +111,19 @@
   }
 }
 
+/* Reduced motion: keep the tick's fade, drop the scale on the tick and the press. */
 @media (prefers-reduced-motion: reduce) {
   .check,
   .box {
     transition: none;
+  }
+
+  .box svg {
+    scale: 1;
+    transition: opacity var(--dur-fast) var(--ease-out);
+  }
+
+  .check:active .box {
+    scale: 1;
   }
 }

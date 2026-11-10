@@ -26,8 +26,11 @@
   transition: background-color var(--dur-fast) var(--ease-out);
 }
 
-.topic:hover {
-  background: var(--color-hover-tint);
+/* Gated so a tap on touch screens does not leave the tint stuck on. */
+@media (hover: hover) {
+  .topic:hover {
+    background: var(--color-hover-tint);
+  }
 }
 
 .topic:focus-visible {

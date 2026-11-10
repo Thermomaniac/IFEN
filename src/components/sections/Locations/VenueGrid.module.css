@@ -162,9 +162,18 @@
   }
 }
 
+/* Reduced motion: the arrow still fades in (it signals the link), but nothing moves or zooms. */
 @media (prefers-reduced-motion: reduce) {
-  .photo,
-  .arrow {
+  .photo {
     transition: none;
+  }
+
+  .arrow {
+    translate: 0 0;
+    transition: opacity var(--dur-fast) var(--ease-reveal);
+  }
+
+  .card:hover .photo {
+    scale: 1;
   }
 }
