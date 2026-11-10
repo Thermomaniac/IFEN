@@ -1,9 +1,9 @@
 "use client";
 
-import { useId, useState } from "react";
+import { Fragment, useId, useState } from "react";
 import { ChevronDownIcon } from "@/components/icons";
 import { Reveal, RevealItem } from "@/components/motion/Reveal";
-import type { FaqBlock, FaqContent } from "@/data/coursePage";
+import type { FaqBlock, FaqContent, FaqInline } from "@/data/coursePage";
 import styles from "./Faq.module.css";
 
 /**
@@ -86,11 +86,18 @@ function Answer({ answer, ghost = false }: { answer: FaqContent["items"][number]
 
 function Block({ block, ghost }: { block: FaqBlock; ghost: boolean }) {
   if (typeof block === "string") return <p>{block}</p>;
+  if ("text" in block) {
+    return (
+      <p>
+        <Inline parts={block.text} ghost={ghost} />
+      </p>
+    );
+  }
   if ("list" in block) {
     return (
       <ul className={styles.answerList}>
-        {block.list.map((line) => (
-          <li key={line}>{line}</li>
+        {block.list.map((line, i) => (
+          <li key={i}>{typeof line === "string" ? line : <Inline parts={line} ghost={ghost} />}</li>
         ))}
       </ul>
     );
@@ -114,6 +121,20 @@ function Block({ block, ghost }: { block: FaqBlock; ghost: boolean }) {
       </ul>
     </div>
   );
+}
+
+/** Text with links mid-sentence. The hidden twin renders the labels as plain text. */
+function Inline({ parts, ghost }: { parts: FaqInline[]; ghost: boolean }) {
+  return parts.map((part, i) => {
+    if (typeof part === "string") return <Fragment key={i}>{part}</Fragment>;
+    if (ghost) return <span key={i}>{part.label}</span>;
+    const external = part.href.startsWith("http");
+    return (
+      <a key={i} href={part.href} target={external ? "_blank" : undefined} rel={external ? "noreferrer" : undefined}>
+        {part.label}
+      </a>
+    );
+  });
 }
 
 function Chevron() {

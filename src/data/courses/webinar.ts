@@ -45,6 +45,7 @@ export const webinar = {
         { label: "Location", value: "Online · German", icon: "location" },
       ],
       cta: BOOK,
+      consent: true,
     },
   } satisfies CourseHeroContent,
 

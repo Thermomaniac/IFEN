@@ -21,6 +21,7 @@ import type { SectionHead } from "@/data/coursePage";
 import {
   FORMAT_LABELS,
   LANGUAGE_LABELS,
+  MODULE_GROUPS,
   TYPE_LABELS,
   type CourseFormat,
   type CourseType,
@@ -80,17 +81,23 @@ const PAGE_SIZE_OPTIONS = PAGE_SIZES.map((n) => ({ value: String(n), label: Stri
  * Other pages reuse it for their own dates: `section` replaces the listing's band, and
  * without `interest` the tabs drop away and the filters sit straight above the dates.
  * A filter with fewer than two values in the data is left out.
+ *
+ * `grouped` (the listing only) orders the dates by training module and heads each run with
+ * its module, in the table as a full-width row and above the cards as a small heading.
+ * Filters and "Show more" work on the grouped order; a group's count is all its matches.
  */
 export function CourseSchedule({
   dates,
   interest = [],
   notes = [],
   section = LISTING_BAND,
+  grouped = false,
 }: {
   dates: ScheduleItem[];
   interest?: ScheduleItem[];
   notes?: Note[];
   section?: Band;
+  grouped?: boolean;
 }) {
   const [filters, setFilters] = useState<Filters>(EMPTY_FILTERS);
   const [view, setView] = useState<View>("table");
@@ -121,9 +128,12 @@ export function CourseSchedule({
   const [pages, setPages] = useState(1);
 
   const source = tab === "dates" ? dates : interest;
-  const matching = source.filter((i) => matches(i, filters));
+  const filtered = source.filter((i) => matches(i, filters));
+  const byModule = grouped && tab === "dates";
+  const matching = byModule ? inModuleOrder(filtered) : filtered;
   const limit = pageSize * pages;
   const shown = matching.slice(0, limit);
+  const groups = byModule ? moduleGroups(shown, matching) : null;
   const active = activeFilters(filters);
   // Any change to what is listed starts again from the first page.
   const set = <K extends keyof Filters>(key: K, value: Filters[K]) => {
@@ -330,21 +340,49 @@ export function CourseSchedule({
                           </th>
                         </tr>
                       </thead>
-                      <tbody>
-                        {shown.map((item) => (
-                          <Row key={item.code + item.start} item={item} />
-                        ))}
-                      </tbody>
+                      {groups ? (
+                        groups.map((g) => (
+                          <tbody key={g.heading}>
+                            <tr className={styles.groupRow}>
+                              <th scope="colgroup" colSpan={6}>
+                                <GroupLabel group={g} />
+                              </th>
+                            </tr>
+                            {g.items.map((item) => (
+                              <Row key={item.code + item.start} item={item} />
+                            ))}
+                          </tbody>
+                        ))
+                      ) : (
+                        <tbody>
+                          {shown.map((item) => (
+                            <Row key={item.code + item.start} item={item} />
+                          ))}
+                        </tbody>
+                      )}
                     </table>
                   </div>
                 )}
-                <ul className={`${styles.cards} ${view === "table" ? styles.cardsCompact : ""}`}>
-                  {shown.map((item) => (
-                    <li key={item.code + item.start}>
-                      <DateCard item={item} />
-                    </li>
-                  ))}
-                </ul>
+                {groups ? (
+                  <div className={view === "table" ? styles.cardsCompact : undefined}>
+                    {groups.map((g) => (
+                      <section key={g.heading} aria-labelledby={`${uid}-g${g.index}`}>
+                        <h4 id={`${uid}-g${g.index}`} className={styles.cardGroup}>
+                          <GroupLabel group={g} />
+                        </h4>
+                        <CourseCards items={g.items} />
+                      </section>
+                    ))}
+                  </div>
+                ) : (
+                  <ul className={`${styles.cards} ${view === "table" ? styles.cardsCompact : ""}`}>
+                    {shown.map((item) => (
+                      <li key={item.code + item.start}>
+                        <DateCard item={item} />
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </>
             ) : (
               <>
@@ -398,6 +436,36 @@ export function CourseSchedule({
         </div>
       </div>
     </CourseSection>
+  );
+}
+
+type Group = { index: number; heading: string; total: number; items: ScheduleItem[] };
+
+const inGroup = (item: ScheduleItem, module: (typeof MODULE_GROUPS)[number]["module"]) =>
+  (item.module ?? null) === module;
+
+/** Module 1-4 first, then everything else, each keeping the data's date order. */
+const inModuleOrder = (items: ScheduleItem[]) => MODULE_GROUPS.flatMap((g) => items.filter((i) => inGroup(i, g.module)));
+
+/** The groups with at least one shown row; `total` counts every match, shown or not. */
+function moduleGroups(shown: ScheduleItem[], matching: ScheduleItem[]): Group[] {
+  return MODULE_GROUPS.map((g, index) => ({
+    index,
+    heading: g.heading,
+    total: matching.filter((i) => inGroup(i, g.module)).length,
+    items: shown.filter((i) => inGroup(i, g.module)),
+  })).filter((g) => g.items.length > 0);
+}
+
+function GroupLabel({ group }: { group: Group }) {
+  return (
+    <>
+      <span className={styles.groupTitle}>{group.heading}</span>
+      <span className={styles.groupCount}>
+        {group.total}
+        <span className="sr-only"> {group.total === 1 ? "offer" : "offers"}</span>
+      </span>
+    </>
   );
 }
 

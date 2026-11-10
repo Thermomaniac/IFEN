@@ -42,6 +42,8 @@ export const heroThemes = {
   "/course-booking/webinars": "courses",
   "/therapists": "therapist",
   "/therapists/[id]": "therapist",
+  "/faq": "default",
+  "/locations": "default",
   "/locations/[id]": "default",
   "/blog": "blog",
   "/blog/[slug]": "blog",

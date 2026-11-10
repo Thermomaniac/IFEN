@@ -303,7 +303,7 @@ export const locations = {
     [170, 412],
     [361, 512],
   ] as const,
-  cta: { label: "View All Venues", href: "#" },
+  cta: { label: "View All Venues", href: "/locations" },
   /**
    * Version 2: the watercolour venue cards from the legacy homepage
    * (neurofeedback-info.de, "Ausbildungsort …"). Image-to-city pairs follow the
@@ -413,7 +413,7 @@ export const footer = {
         { label: "Therapist List", href: "/therapists" },
         { label: "Learning Portal", href: "#" },
         { label: "Contact Support", href: "#" },
-        { label: "FAQ - Training Questions", href: "#" },
+        { label: "FAQ - Training Questions", href: "/faq" },
         { label: "Newsletter Signup", href: "#" },
         { label: "Downloads", href: "#" },
       ],
@@ -423,7 +423,7 @@ export const footer = {
       links: [
         { label: "CE Credits & Points", href: "#" },
         { label: "Funding Opportunities", href: "#" },
-        { label: "Workshop Places Germany", href: "/#locations" },
+        { label: "Workshop Places Germany", href: "/locations" },
         { label: "Repeater Discount Details", href: "/#benefits" },
         { label: "Accreditation Guidelines", href: "/#certification" },
       ],

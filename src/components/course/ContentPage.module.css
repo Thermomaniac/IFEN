@@ -2,3 +2,9 @@
 ul.dates {
   padding: 0;
 }
+
+/* Photo consent under a detail page's dates: same column as the cards, a readable measure. */
+.consent {
+  max-width: 40rem;
+  margin-top: 24px;
+}

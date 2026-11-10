@@ -2,6 +2,11 @@
 // neurofeedback-info.de/termine-kursbuchung-seminare/alle-fortbildungen-im-ueberblick.html.
 // Course titles stay as published; labels, places and price names are translated.
 // Each row has the shape a CMS or Shopify product feed would return.
+// Module 1-4 records reconciled 2026-11-10 against
+// neurofeedback-info.de/termine-kursbuchung-seminare/modul-1-4.html: Module 3 renamed from
+// "Supervision" to "Mentoring", M1-070627-DE is three days online and two in Berlin, the BCIA
+// foundation course now starts any time (no fixed dates) with a "Guided Path" price, and
+// "Mentoring-Std" is new there. Rows carry `module` for the grouped listing table.
 
 import type { Metadata } from "next";
 import { COURSE_PATH } from "./course";
@@ -45,7 +50,27 @@ export type ScheduleItem = {
   type: CourseType;
   /** Empty when the offer is free. */
   prices: Price[];
+  /**
+   * The training module (1-4) this offer belongs to, as grouped on the legacy "Ausbildung
+   * MODUL 1-4" page. Offers without one are listed under "Other" in the grouped table.
+   */
+  module?: ModuleNumber;
 };
+
+export type ModuleNumber = 1 | 2 | 3 | 4;
+
+/**
+ * Group headings of the course listing table, in order. Source:
+ * https://www.neurofeedback-info.de/termine-kursbuchung-seminare/modul-1-4.html (fetched
+ * 2026-11-10). "Other" holds everything the module page does not list.
+ */
+export const MODULE_GROUPS: { module: ModuleNumber | null; heading: string }[] = [
+  { module: 1, heading: "Modul 1 · Grundlagen & Intensivkurs" },
+  { module: 2, heading: "Modul 2 · Praktikum" },
+  { module: 3, heading: "Modul 3 · Mentoring" },
+  { module: 4, heading: "Modul 4 · Prüfung & Prüfungsmentoring" },
+  { module: null, heading: "Other" },
+];
 
 export const TYPE_LABELS: Record<CourseType, string> = {
   certification: "IFEN certification",
@@ -109,6 +134,7 @@ export const scheduleDates: ScheduleItem[] = [
   },
   {
     code: "IFEN-100-DE",
+    module: 4,
     title: "IFEN 100 - Schriftliches Prüfungs-Mentoring",
     href: IFEN100_PATH,
     bookHref: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/modul-1-4/ifen-100-pruefungs-mentoring.html#appform",
@@ -119,6 +145,7 @@ export const scheduleDates: ScheduleItem[] = [
   },
   {
     code: "M2-P-IFEN-DE",
+    module: 2,
     title: "Modul 2: Praktikum für Zertifizierung zum/zur IFEN Neurofeedback-Therapeut/in",
     href: MODULE2_PATH,
     bookHref: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/alle-fortbildungen-im-ueberblick/courses/1-modul-2-praktikum-fuer-zertifizierung-zum-zur-ifen-neurofeedback-therapeut-in.html#appform",
@@ -129,7 +156,8 @@ export const scheduleDates: ScheduleItem[] = [
   },
   {
     code: "M3-S",
-    title: "Modul 3: Supervision",
+    module: 3,
+    title: "Modul 3: Mentoring",
     href: MODULE3_PATH,
     bookHref: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/alle-fortbildungen-im-ueberblick/courses/4-modul-3-supervision.html#appform",
     location: "Online",
@@ -139,7 +167,8 @@ export const scheduleDates: ScheduleItem[] = [
   },
   {
     code: "M3-Std",
-    title: "Modul 3: Supervision – Einzelstunde",
+    module: 3,
+    title: "Modul 3: Mentoring – Einzelstunde",
     href: MODULE3_PATH,
     bookHref: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/alle-fortbildungen-im-ueberblick/courses/14-modul-3-supervision-einzelstunde.html#appform",
     location: "Online",
@@ -151,7 +180,21 @@ export const scheduleDates: ScheduleItem[] = [
     ],
   },
   {
+    code: "Mentoring-Std",
+    module: 3,
+    title: "Individuelles Neurofeedback- und QEEG-Mentoring",
+    href: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/modul-1-4/courses/1206-modul-3-supervision-einzelstunde-0.html",
+    location: "Online",
+    format: "online",
+    type: "mentoring",
+    prices: [
+      { label: "Standard Price", amount: 150 },
+      { label: "With Dr. Handwerker or Th. Feiner", amount: 250 },
+    ],
+  },
+  {
     code: "M4-P",
+    module: 4,
     title: "Modul 4: Prüfung",
     href: MODULE4_PATH,
     bookHref: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/alle-fortbildungen-im-ueberblick/courses/60-modul-4-pruefung.html#appform",
@@ -176,7 +219,24 @@ export const scheduleDates: ScheduleItem[] = [
     ],
   },
   {
+    code: "BCIA-011126-EN",
+    module: 1,
+    title: "BCIA Neurofeedback Foundation Course – 36 Hours",
+    href: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/alle-fortbildungen-im-ueberblick/courses/1201-bcia-neurofeedback-foundation-course-36-hours.html",
+    isNew: true,
+    language: "en",
+    location: "Online",
+    format: "online",
+    type: "workshop",
+    prices: [
+      { label: "Standard Price", amount: 995 },
+      { label: "Guided Path", amount: 1395 },
+      { label: "IFEN Instructor", amount: 200 },
+    ],
+  },
+  {
     code: "M1-051026-DE",
+    module: 1,
     title: "Modul 1: Zertifizierte/r Neurofeedback-Therapeut/in",
     href: MODULE1_PATH,
     isNew: true,
@@ -235,6 +295,7 @@ export const scheduleDates: ScheduleItem[] = [
   },
   {
     code: "M1-231026-ES",
+    module: 1,
     title: "Módulo 1: Terapeuta en Neurofeedback",
     href: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/alle-fortbildungen-im-ueberblick/courses/1197-modulo-1-terapeuta-en-neurofeedback-1.html",
     isNew: true,
@@ -263,23 +324,6 @@ export const scheduleDates: ScheduleItem[] = [
     prices: [{ label: "Standard Price", amount: 40 }],
   },
   {
-    code: "BCIA-011126-EN",
-    title: "BCIA Neurofeedback Foundation Course – 36 Hours",
-    href: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/alle-fortbildungen-im-ueberblick/courses/1201-bcia-neurofeedback-foundation-course-36-hours.html",
-    isNew: true,
-    language: "en",
-    start: "2026-11-01T12:00",
-    end: "2026-11-30T23:59",
-    location: "Online",
-    format: "online",
-    type: "workshop",
-    prices: [
-      { label: "Standard Price", amount: 995 },
-      { label: "Module 1 Guided Plan", amount: 1395 },
-      { label: "IFEN Instructor", amount: 200 },
-    ],
-  },
-  {
     code: "WEB-021126-DE",
     title: "Webinar: Neurofeedback bei Kindern: ADHS, Autismus, Angst – Chancen und Grenzen",
     href: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/alle-fortbildungen-im-ueberblick/courses/1188-webinar-neurofeedback-bei-kindern-adhs-autismus-angst-chancen-und-grenzen.html",
@@ -293,6 +337,7 @@ export const scheduleDates: ScheduleItem[] = [
   },
   {
     code: "M1-091126-DE",
+    module: 1,
     title: "Modul 1: Zertifizierter Neurofeedback-Therapeut/in",
     href: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/alle-fortbildungen-im-ueberblick/courses/1069-modul-1-zertifizierter-neurofeedback-therapeut-in-20-0-0-0-0-0.html",
     language: "de",
@@ -435,6 +480,7 @@ export const scheduleDates: ScheduleItem[] = [
   },
   {
     code: "Gruppen-Mentoring -161226-DE",
+    module: 3,
     title: "Gruppen-Mentorings für Neurofeedback-Therapieprotokolle",
     href: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/alle-fortbildungen-im-ueberblick/courses/1055-gruppen-mentorings-fuer-neurofeedback-therapieprotokolle-0-0-0-0-0.html",
     isNew: true,
@@ -487,6 +533,7 @@ export const scheduleDates: ScheduleItem[] = [
   },
   {
     code: "M1-220227-DE",
+    module: 1,
     title: "Modul 1: Zertifizierter Neurofeedback-Therapeut/in",
     href: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/alle-fortbildungen-im-ueberblick/courses/1172-modul-1-zertifizierter-neurofeedback-therapeut-in-20-0-0-0-0-0-1.html",
     language: "de",
@@ -562,13 +609,14 @@ export const scheduleDates: ScheduleItem[] = [
   },
   {
     code: "M1-070627-DE",
+    module: 1,
     title: "Modul 1: Zertifizierte/r Neurofeedback-Therapeut/in",
     href: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/alle-fortbildungen-im-ueberblick/courses/1202-modul-1-zertifizierte-r-neurofeedback-therapeut-in-2-1.html",
     isNew: true,
     language: "de",
     start: "2027-06-07T09:00",
     end: "2027-06-19T16:00",
-    location: "2 days online, 3 days Berlin",
+    location: "3 days online, 2 days in Berlin",
     locationHref: "https://maps.app.goo.gl/Ld6gmtV3Noe5m3gQ6",
     format: "hybrid",
     type: "certification",
@@ -624,6 +672,7 @@ export const scheduleDates: ScheduleItem[] = [
   },
   {
     code: "M1-221127-DE",
+    module: 1,
     title: "Modul 1: Zertifizierter Neurofeedback-Therapeut/in",
     href: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/alle-fortbildungen-im-ueberblick/courses/1173-modul-1-zertifizierter-neurofeedback-therapeut-in-20-0-0-0-0-0-1-0.html",
     language: "de",
@@ -640,6 +689,7 @@ export const scheduleDates: ScheduleItem[] = [
   },
   {
     code: "M1-210228-DE",
+    module: 1,
     title: "Modul 1: Zertifizierter Neurofeedback-Therapeut/in",
     href: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/alle-fortbildungen-im-ueberblick/courses/1175-modul-1-zertifizierter-neurofeedback-therapeut-in-20-0-0-0-0-0-1-0-0.html",
     language: "de",
@@ -684,6 +734,7 @@ export const scheduleDates: ScheduleItem[] = [
   },
   {
     code: "M1-201128-DE",
+    module: 1,
     title: "Modul 1: Zertifizierter Neurofeedback-Therapeut/in",
     href: "https://www.neurofeedback-info.de/termine-kursbuchung-seminare/alle-fortbildungen-im-ueberblick/courses/1176-modul-1-zertifizierter-neurofeedback-therapeut-in-20-0-0-0-0-0-1-0-1.html",
     language: "de",

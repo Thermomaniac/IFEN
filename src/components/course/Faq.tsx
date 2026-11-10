@@ -18,16 +18,18 @@ export function Faq({ id, tone, content }: { id: string; tone: Tone; content: Fa
         <div className={styles.split}>
           <div className={styles.side}>
             <SectionHeader id={id} tone={tone} head={content} />
-            <Reveal>
-              <RevealItem className={styles.help}>
-                <p className={styles.helpHeading}>{content.help.heading}</p>
-                <p className={styles.helpText}>{content.help.text}</p>
-                <a href={`mailto:${content.help.email}`} className={styles.mail}>
-                  <MailIcon width={16} height={16} aria-hidden="true" />
-                  {content.help.email}
-                </a>
-              </RevealItem>
-            </Reveal>
+            {content.help && (
+              <Reveal>
+                <RevealItem className={styles.help}>
+                  <p className={styles.helpHeading}>{content.help.heading}</p>
+                  <p className={styles.helpText}>{content.help.text}</p>
+                  <a href={`mailto:${content.help.email}`} className={styles.mail}>
+                    <MailIcon width={16} height={16} aria-hidden="true" />
+                    {content.help.email}
+                  </a>
+                </RevealItem>
+              </Reveal>
+            )}
           </div>
 
           <FaqAccordion items={content.items} />

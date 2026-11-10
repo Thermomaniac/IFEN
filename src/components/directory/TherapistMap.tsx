@@ -365,7 +365,8 @@ export function TherapistMap({
       {status === "loading" && <p className={styles.state}>Loading map…</p>}
       {status === "error" && (
         <p className={styles.state} role="status">
-          The map could not be loaded. The list shows every practice.
+          {/* A single pin (profile, venue) has no list beside it; its address card still shows. */}
+          The map could not be loaded.{single ? "" : " The list shows every practice."}
         </p>
       )}
 

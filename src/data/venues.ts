@@ -34,6 +34,11 @@ export type Venue = {
   heroImage: string;
   contact?: string;
   address: string[];
+  /**
+   * [lat, lng] of the venue, for the map under the hero. Only set where the coordinates are
+   * verified; venues without one show no map.
+   */
+  location?: [number, number];
   phone?: string;
   fax?: string;
   email?: string;
@@ -65,6 +70,10 @@ export const venues: Venue[] = [
     heroImage: "/locations/legacy/hannover-hero.jpg",
     contact: "Normen Schack & Frank Hegger",
     address: ["Neue-Land-Str. 7", "30655 Hanover"],
+    // OpenStreetMap node 13336193559, "Neue-Land-Straße 7, Hannover" (Nominatim, (c) OSM
+    // contributors, ODbL), checked 2026-11-10. OSM files it under postcode 30625; the address
+    // above keeps the legacy page's 30655 until IFEN confirms which is current.
+    location: [52.3945455, 9.8031229],
     phone: "0511 / 5 39 73 77",
     fax: "0511 / 5 39 73 76",
     email: "ergotherapie-in-hannover@email.de",
@@ -235,6 +244,7 @@ export const venueHeads: Record<VenueSectionId, string> = {
 export const venueCopy = {
   badge: "Workshop Location",
   directions: "Get Directions",
+  mapLabel: "Venue location map",
   rows: {
     street: "Street",
     city: "Postcode and city",

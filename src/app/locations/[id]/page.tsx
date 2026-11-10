@@ -5,6 +5,8 @@ import { CourseHero } from "@/components/course/CourseHero";
 import { Box, Rows } from "@/components/directory/ProfileParts";
 import { ProfileNav } from "@/components/directory/ProfileNav";
 import { ProfileSection } from "@/components/directory/ProfileSection";
+import { VenueMap } from "@/components/directory/VenueMap";
+import mapStyles from "@/components/directory/VenueMap.module.css";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { RevealItem } from "@/components/motion/Reveal";
 import { CtaFooter } from "@/components/sections/CtaFooter/CtaFooter";
@@ -106,7 +108,8 @@ function VenueProfile({ v }: { v: Venue }) {
         <CourseHero route="/locations/[id]" content={hero} />
 
         <div className={styles.band}>
-          <div className={styles.layout}>
+          {v.location && <VenueMap venue={{ ...v, location: v.location }} label={venueCopy.mapLabel} />}
+          <div className={v.location ? `${styles.layout} ${mapStyles.after}` : styles.layout}>
             <ProfileNav items={VENUE_NAV} />
 
             <div className={styles.sections}>

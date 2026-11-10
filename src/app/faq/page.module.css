@@ -1,0 +1,44 @@
+/* Topic jump list inside the hero's white panel. */
+.topics {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.topics li + li {
+  border-top: 1px solid var(--color-border-soft);
+}
+
+.topic {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 8px 4px;
+  border-radius: 4px;
+  color: var(--color-ink);
+  font-size: var(--fs-small);
+  line-height: 20px;
+  font-weight: 500;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: background-color var(--dur-fast) var(--ease-out);
+}
+
+.topic:hover {
+  background: var(--color-hover-tint);
+}
+
+.topic:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.num {
+  flex: none;
+  color: var(--color-muted);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}

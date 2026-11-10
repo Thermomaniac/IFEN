@@ -37,6 +37,8 @@ export type CourseHeroContent = {
     priceNote?: string;
     facts: CourseFact[];
     cta: Link;
+    /** The optional photo and video consent under the CTA (course and webinar detail pages). */
+    consent?: boolean;
   };
 };
 
@@ -183,14 +185,22 @@ export type TeamMember = Omit<InstructorContent, keyof SectionHead>;
 
 export type TeamContent = SectionHead & { people: TeamMember[] };
 
+/** A run of text with inline links, for answers that link mid-sentence. */
+export type FaqInline = string | { label: string; href: string };
+
 /**
- * One block of a longer answer: a paragraph, a bullet list, or a group of links with an
- * optional heading (the source FAQ's reading lists).
+ * One block of a longer answer: a paragraph, a paragraph with inline links, a bullet list,
+ * or a group of links with an optional heading (the source FAQ's reading lists).
  */
-export type FaqBlock = string | { list: string[] } | { heading?: string; links: Link[] };
+export type FaqBlock =
+  | string
+  | { text: FaqInline[] }
+  | { list: (string | FaqInline[])[] }
+  | { heading?: string; links: Link[] };
 
 export type FaqContent = SectionHead & {
   /** A single paragraph, or blocks in reading order. */
   items: { question: string; answer: string | FaqBlock[] }[];
-  help: { heading: string; text: string; email: string };
+  /** The contact card under the heading; a page with many FAQ bands shows it once. */
+  help?: { heading: string; text: string; email: string };
 };

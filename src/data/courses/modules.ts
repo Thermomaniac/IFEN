@@ -218,6 +218,7 @@ export const module2 = {
           "Successful completion earns 5 CPD credits under § 125 SGB V. Subject to change.",
         ],
         items: datesFor("Module 2", ["M2-P-IFEN-DE"]),
+        consent: true,
       },
     },
     {
@@ -330,6 +331,7 @@ export const module3 = {
           "Successful completion earns 5 CPD credits under § 125 SGB V. Subject to change.",
         ],
         items: datesFor("Module 3", ["M3-S", "M3-Std"]),
+        consent: true,
       },
     },
     {
@@ -413,6 +415,7 @@ export const module4 = {
       content: {
         ...DATES_HEAD,
         items: datesFor("Module 4", ["IFEN-100-DE", "M4-P"]),
+        consent: true,
       },
     },
   ],
@@ -533,7 +536,7 @@ export const ifen100 = {
     {
       kind: "dates",
       id: "dates",
-      content: { ...DATES_HEAD, items: datesFor("IFEN 100", ["IFEN-100-DE"]) },
+      content: { ...DATES_HEAD, items: datesFor("IFEN 100", ["IFEN-100-DE"]), consent: true },
     },
   ],
 

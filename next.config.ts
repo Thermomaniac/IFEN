@@ -11,6 +11,11 @@ const nextConfig: NextConfig = {
     return [
       { source: "/neurofeedback/methods", destination: "/neurofeedback/topics", permanent: false },
       { source: "/neurofeedback/applications", destination: "/neurofeedback/areas-of-application", permanent: false },
+      // Legacy URLs from neurofeedback-info.de (2026-11-10).
+      { source: "/faq-fragen-und-antworten.html", destination: "/faq", permanent: false },
+      { source: "/en/faq-fragen-und-antworten.html", destination: "/faq", permanent: false },
+      { source: "/workshoporte.html", destination: "/locations", permanent: false },
+      { source: "/en/workshoporte.html", destination: "/locations", permanent: false },
     ];
   },
 };

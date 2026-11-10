@@ -1,0 +1,26 @@
+/* Venue map strip between the hero and the profile cards, on the profile's mist band. */
+.wrap {
+  max-width: calc(var(--content-max) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding: var(--section-pad-sm) var(--gutter) 24px;
+}
+
+.map {
+  height: 23.125rem;
+  border: 1px solid var(--color-border-soft);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+@media (max-width: 47.99rem) {
+  .map {
+    height: 21.25rem;
+  }
+}
+
+/* The profile layout below the map: the map strip already spaces it from the hero. */
+@media (min-width: 64rem) {
+  .after.after {
+    padding-top: 0;
+  }
+}

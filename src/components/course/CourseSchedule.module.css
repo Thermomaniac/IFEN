@@ -436,6 +436,52 @@
   border-bottom: 0;
 }
 
+/* Grouped listing: a full-width module row heads each tbody, under the column header's tint.
+   The previous group's last row has no hairline, so the header row carries it. */
+.groupRow th {
+  padding: 12px 24px;
+  background: var(--color-mist);
+  border-bottom: 1px solid var(--color-border);
+  text-align: left;
+}
+
+.table tbody + tbody .groupRow th {
+  border-top: 1px solid var(--color-border);
+}
+
+.groupRow th,
+.cardGroup {
+  color: var(--color-ink);
+  font-size: var(--fs-small);
+  line-height: 20px;
+  font-weight: 600;
+}
+
+.cardGroup {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 0;
+  margin: 0;
+  padding: 16px 16px 0;
+}
+
+.groupTitle {
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+.groupCount {
+  margin-left: 8px;
+  padding: 0 8px;
+  border-radius: 999px;
+  background: var(--color-border-soft);
+  color: var(--color-muted);
+  font-size: var(--fs-xs);
+  line-height: 20px;
+  font-weight: 600;
+}
+
 .colDate {
   width: 17.5%;
 }

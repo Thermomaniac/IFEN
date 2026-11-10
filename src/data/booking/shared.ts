@@ -65,6 +65,8 @@ export type DatesContent = SectionHead & {
   interest?: boolean;
   /** The filterable table and cards (`CourseSchedule`) in place of plain cards, for long lists. */
   schedule?: boolean;
+  /** The optional photo and video consent under the dates (detail pages with registration). */
+  consent?: boolean;
 };
 
 /** One band of a category page. Tones alternate mist, cream, white in order. */
