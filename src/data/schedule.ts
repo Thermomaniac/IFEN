@@ -22,6 +22,7 @@ import { QEEG_PATH } from "./courses/qeeg";
 import { QEEG_WORKSHOP_PATH } from "./courses/qeegWorkshop";
 import { WEBINAR_PATH } from "./courses/webinar";
 import { WEBINAR_QEEG_PATH } from "./courses/webinarQeegPsychotherapy";
+import { FAQ_PATH } from "./faq";
 import { interestPath } from "./interestPaths";
 
 export type CourseType = "certification" | "webinar" | "workshop" | "mentoring" | "event";
@@ -112,7 +113,7 @@ export const scheduleIntro = {
       text: "We answer frequently asked questions about the training in our",
       link: {
         label: "FAQ",
-        href: "https://www.neurofeedback-info.de/index.php?option=com_content&view=article&id=32&Itemid=1442&lang=de",
+        href: FAQ_PATH,
       },
     },
   ],

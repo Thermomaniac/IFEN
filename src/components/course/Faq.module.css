@@ -265,6 +265,38 @@
   }
 }
 
+/* Card variant: the column beside "On This Page" is narrower than a band, so the split
+   waits until 80rem and gives the heading side a fixed share. */
+@media (min-width: 64rem) and (max-width: 79.99rem) {
+  .inCard {
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .inCard .side,
+  .inCard .stack {
+    flex: none;
+  }
+
+  .inCard .help {
+    max-width: none;
+  }
+}
+
+@media (min-width: 80rem) {
+  .inCard {
+    gap: 40px;
+  }
+
+  .inCard .side {
+    flex: 0 0 18.5rem;
+  }
+
+  .inCard .stack {
+    flex: 1 1 0;
+  }
+}
+
 @media (max-width: 47.99rem) {
   .trigger {
     padding: 16px 20px;

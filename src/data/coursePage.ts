@@ -37,8 +37,6 @@ export type CourseHeroContent = {
     priceNote?: string;
     facts: CourseFact[];
     cta: Link;
-    /** The optional photo and video consent under the CTA (course and webinar detail pages). */
-    consent?: boolean;
   };
 };
 

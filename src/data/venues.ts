@@ -175,6 +175,9 @@ export const venues: Venue[] = [
     practice: "Institute for EEG Neurofeedback",
     heroImage: "/locations/legacy/muenchen-hero.jpg",
     address: ["Karl-Böhm-Strasse 50", "85598 Baldham"],
+    // OpenStreetMap way 133391453, "50, Karl-Böhm-Straße, Baldham, Vaterstetten, 85598"
+    // (Nominatim, (c) OSM contributors, ODbL), checked 2026-11-10.
+    location: [48.0948121, 11.7853212],
     phone: "+49 (89) 2000 299 66",
     email: "info@neurofeedback-info.de",
     directionsText: [],

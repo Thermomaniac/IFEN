@@ -214,7 +214,6 @@ export const courseHero: CourseHeroContent = {
     prices: plans.map((p) => ({ label: p.label, amount: p.price })),
     facts: course.facts,
     cta: course.cta.action,
-    consent: true,
   },
 };
 

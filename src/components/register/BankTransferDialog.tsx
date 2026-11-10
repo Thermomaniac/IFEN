@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
+import { PhotoConsent } from "@/components/course/PhotoConsent";
 import { CloseIcon, InfoCircleIcon } from "@/components/icons";
 import { bankTransfer, course } from "@/data/course";
 import {
@@ -54,9 +55,14 @@ export type TransferBooking = {
 export function BankTransferDialog({
   onClose,
   booking,
+  consent,
+  onConsent,
 }: {
   onClose: () => void;
   booking?: TransferBooking;
+  /** The optional photo consent, kept by the booking so it survives closing the modal. */
+  consent?: boolean;
+  onConsent?: (checked: boolean) => void;
 }) {
   const ref = useModal();
   const router = useRouter();
@@ -184,6 +190,8 @@ export function BankTransferDialog({
                 <InfoCircleIcon />
                 {booking?.terms ?? bankTransfer.terms}
               </p>
+
+              <PhotoConsent checked={consent} onChange={onConsent} />
             </div>
 
             <button type="submit" className={styles.button} data-wide="">

@@ -64,12 +64,15 @@ export function TherapistMap({
   onExpand,
   onClose,
   single = false,
+  summaryAlign = "center",
 }: {
   therapists: Therapist[];
   mode: "preview" | "full";
   onExpand?: () => void;
   onClose?: () => void;
   single?: boolean;
+  /** Where the preview's "View In Map" card sits: centred under the pin, or bottom right. */
+  summaryAlign?: "center" | "end";
 }) {
   const full = mode === "full";
   const interactive = full || single;
@@ -361,7 +364,13 @@ export function TherapistMap({
   const noMatches = full && query.trim() !== "" && shown.length === 0;
 
   return (
-    <div className={styles.root} data-mode={mode} data-status={status} data-single={single || undefined}>
+    <div
+      className={styles.root}
+      data-mode={mode}
+      data-status={status}
+      data-single={single || undefined}
+      data-summary={summaryAlign === "end" ? "end" : undefined}
+    >
       {status === "loading" && <p className={styles.state}>Loading map…</p>}
       {status === "error" && (
         <p className={styles.state} role="status">

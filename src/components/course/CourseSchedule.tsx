@@ -343,7 +343,7 @@ export function CourseSchedule({
                       {groups ? (
                         groups.map((g) => (
                           <tbody key={g.heading}>
-                            <tr className={styles.groupRow}>
+                            <tr className={styles.groupRow} style={groupTone(g)}>
                               <th scope="colgroup" colSpan={6}>
                                 <GroupLabel group={g} />
                               </th>
@@ -367,7 +367,7 @@ export function CourseSchedule({
                   <div className={view === "table" ? styles.cardsCompact : undefined}>
                     {groups.map((g) => (
                       <section key={g.heading} aria-labelledby={`${uid}-g${g.index}`}>
-                        <h4 id={`${uid}-g${g.index}`} className={styles.cardGroup}>
+                        <h4 id={`${uid}-g${g.index}`} className={styles.cardGroup} style={groupTone(g)}>
                           <GroupLabel group={g} />
                         </h4>
                         <CourseCards items={g.items} />
@@ -456,6 +456,10 @@ function moduleGroups(shown: ScheduleItem[], matching: ScheduleItem[]): Group[] 
     items: shown.filter((i) => inGroup(i, g.module)),
   })).filter((g) => g.items.length > 0);
 }
+
+/** Each module keeps its own tint wherever it sits in the filtered list (tokens.css `--group-N-*`). */
+const groupTone = (g: Group) =>
+  ({ "--g-bg": `var(--group-${g.index + 1}-bg)`, "--g-ink": `var(--group-${g.index + 1}-ink)` }) as CSSProperties;
 
 function GroupLabel({ group }: { group: Group }) {
   return (

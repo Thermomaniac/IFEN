@@ -436,12 +436,13 @@
   border-bottom: 0;
 }
 
-/* Grouped listing: a full-width module row heads each tbody, under the column header's tint.
-   The previous group's last row has no hairline, so the header row carries it. */
+/* Grouped listing: each module opens with a tinted divider, a 6px rule and bold label in the
+   dark shade of the same hue (tokens.css --group-N-*). Rows below stay white. */
 .groupRow th {
-  padding: 12px 24px;
-  background: var(--color-mist);
+  padding: 12px 24px 12px 18px;
+  border-left: 6px solid var(--g-ink);
   border-bottom: 1px solid var(--color-border);
+  background: var(--g-bg);
   text-align: left;
 }
 
@@ -451,19 +452,22 @@
 
 .groupRow th,
 .cardGroup {
-  color: var(--color-ink);
-  font-size: var(--fs-small);
-  line-height: 20px;
-  font-weight: 600;
+  color: var(--g-ink);
+  font-size: var(--fs-body);
+  line-height: 24px;
+  font-weight: 700;
 }
 
 .cardGroup {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
   gap: 4px 0;
-  margin: 0;
-  padding: 16px 16px 0;
+  margin: 16px 16px 0;
+  padding: 8px 16px 8px 10px;
+  border-left: 6px solid var(--g-ink);
+  border-radius: 0 4px 4px 0;
+  background: var(--g-bg);
 }
 
 .groupTitle {
@@ -475,8 +479,8 @@
   margin-left: 8px;
   padding: 0 8px;
   border-radius: 999px;
-  background: var(--color-border-soft);
-  color: var(--color-muted);
+  background: var(--color-white);
+  color: var(--g-ink);
   font-size: var(--fs-xs);
   line-height: 20px;
   font-weight: 600;

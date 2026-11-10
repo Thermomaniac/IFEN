@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 import { BankTransferDialog } from "@/components/register/BankTransferDialog";
+import { ConfirmPaymentDialog } from "@/components/register/ConfirmPaymentDialog";
 import { OptionGroup, PaymentMark } from "@/components/register/BillingForm";
 import { CheckboxField, ErrorSummary, SelectField, TextAreaField, TextField } from "@/components/register/Fields";
 import { ProcessingDialog, type BookingOutcome } from "@/components/register/ProcessingDialog";
@@ -213,11 +214,14 @@ function DetailsStep({ store, defaults, steps, step }: StepProps) {
 }
 
 function ReviewForm({ profile, store, defaults, steps, step }: StepProps) {
-  const [paying, setPaying] = useState(false);
+  // A valid submit asks first ("asked"): online methods show the confirm modal, bank transfer
+  // its own modal with the same photo consent. Confirm moves on to "paying".
+  const [stage, setStage] = useState<"review" | "asked" | "paying">("review");
+  const [consent, setConsent] = useState(false);
   const { values, errors, onChange, onSubmit, summaryRef } = useStepForm(
     store,
     RULES.review,
-    () => setPaying(true),
+    () => setStage("asked"),
     defaults,
   );
   const router = useRouter();
@@ -226,6 +230,7 @@ function ReviewForm({ profile, store, defaults, steps, step }: StepProps) {
   const format = values.format ? FORMAT_LABELS[values.format as MeetingFormat] : undefined;
   const price = formatPrice(session.price);
   const isTransfer = method?.id === "transfer";
+  const paying = stage === "paying";
   const choose = steps.some((s) => s.slug === "format");
 
   // Clear the booking once the visitor has left for the directory, not before: clearing on
@@ -316,10 +321,20 @@ function ReviewForm({ profile, store, defaults, steps, step }: StepProps) {
       </form>
 
       {/* Outside the form: the transfer dialog has a form of its own. */}
-      {paying &&
+      {stage === "asked" && !isTransfer && (
+        <ConfirmPaymentDialog
+          consent={consent}
+          onConsent={setConsent}
+          onConfirm={() => setStage("paying")}
+          onCancel={() => setStage("review")}
+        />
+      )}
+      {stage !== "review" &&
         (isTransfer ? (
           <BankTransferDialog
-            onClose={() => setPaying(false)}
+            consent={consent}
+            onConsent={setConsent}
+            onClose={() => setStage("review")}
             booking={{
               contact: {
                 firstName: values.firstName,
@@ -332,7 +347,7 @@ function ReviewForm({ profile, store, defaults, steps, step }: StepProps) {
             }}
           />
         ) : (
-          <ProcessingDialog method={method?.id ?? ""} outcome={outcome} />
+          paying && <ProcessingDialog method={method?.id ?? ""} outcome={outcome} />
         ))}
     </>
   );

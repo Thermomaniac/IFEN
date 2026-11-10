@@ -54,7 +54,6 @@ export const module1 = {
         { label: "Location", value: "Baldham · German", icon: "location" },
       ],
       cta: BOOK,
-      consent: true,
     },
   } satisfies CourseHeroContent,
 

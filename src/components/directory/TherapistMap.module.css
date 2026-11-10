@@ -624,3 +624,19 @@
 .root[data-single][data-mode="preview"] .summaryText {
   line-height: normal;
 }
+
+/* Venue map: the card moves to the bottom right, 24 in from both edges, so the pin keeps
+   the middle of the strip. Below 48rem the card spans the width anyway. */
+.root[data-summary="end"][data-mode="preview"] .summary {
+  right: 24px;
+  left: auto;
+  translate: none;
+}
+
+@media (max-width: 47.99rem) {
+  .root[data-summary="end"][data-mode="preview"] .summary {
+    right: 16px;
+    bottom: 16px;
+    width: calc(100% - 32px);
+  }
+}

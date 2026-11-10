@@ -29,6 +29,19 @@
   --color-overlay: #020618a3; /* hero scrim */
   --color-overlay-soft: #02061852;
 
+  /* Course listing group dividers: a light brand tint with a dark shade of the same hue for
+     the 6px left rule and the label (each label pair passes WCAG AA on its tint). */
+  --group-1-bg: #dff4f5; /* teal */
+  --group-1-ink: #0b4750;
+  --group-2-bg: #ffecdc; /* apricot */
+  --group-2-ink: #704d30;
+  --group-3-bg: #f5efd3; /* gold */
+  --group-3-ink: #5e5220;
+  --group-4-bg: #e3f2ea; /* sage */
+  --group-4-ink: #2c5a45;
+  --group-5-bg: var(--color-border-soft); /* other: neutral */
+  --group-5-ink: var(--color-heading);
+
   /* Type */
   --font-sans: var(--font-inter), system-ui, sans-serif;
   /* Inter Display is Inter's 32pt optical size; Inter text is 14pt. */

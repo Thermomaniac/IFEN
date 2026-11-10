@@ -11,7 +11,6 @@ import { CourseSection, type Tone } from "./CourseSection";
 import { Faq } from "./Faq";
 import { FeatureGrid } from "./FeatureGrid";
 import { Mentors } from "./Mentors";
-import { PhotoConsent } from "./PhotoConsent";
 import styles from "./ContentPage.module.css";
 
 const TONES: Tone[] = ["mist", "cream", "white"];
@@ -65,11 +64,6 @@ export function DatesBand({ id, tone, content }: { id: string; tone: Tone; conte
         <RevealItem>
           <CourseCards items={content.items} interest={content.interest} className={styles.dates} />
         </RevealItem>
-        {content.consent && (
-          <RevealItem>
-            <PhotoConsent className={styles.consent} />
-          </RevealItem>
-        )}
       </Reveal>
     </CourseSection>
   );

@@ -4,6 +4,7 @@ import type { FaqContent } from "@/data/coursePage";
 import { SectionHeader, type Tone } from "./CourseSection";
 import sectionStyles from "./CourseSection.module.css";
 import { FaqAccordion } from "./FaqAccordion";
+import layout from "@/components/directory/Profile.module.css";
 import styles from "./Faq.module.css";
 
 /**
@@ -11,30 +12,56 @@ import styles from "./Faq.module.css";
  * Figma the first answer starts open. The split lives on its own element so the band's
  * column layout can never override it, whatever order the stylesheets load in.
  */
-export function Faq({ id, tone, content }: { id: string; tone: Tone; content: FaqContent }) {
-  return (
-    <section id={id} className={`${sectionStyles.section} ${sectionStyles[tone]}`} aria-labelledby={`${id}-title`}>
-      <div className={sectionStyles.inner}>
-        <div className={styles.split}>
-          <div className={styles.side}>
-            <SectionHeader id={id} tone={tone} head={content} />
-            {content.help && (
-              <Reveal>
-                <RevealItem className={styles.help}>
-                  <p className={styles.helpHeading}>{content.help.heading}</p>
-                  <p className={styles.helpText}>{content.help.text}</p>
-                  <a href={`mailto:${content.help.email}`} className={styles.mail}>
-                    <MailIcon width={16} height={16} aria-hidden="true" />
-                    {content.help.email}
-                  </a>
-                </RevealItem>
-              </Reveal>
-            )}
-          </div>
-
-          <FaqAccordion items={content.items} />
-        </div>
+export function Faq({
+  id,
+  tone,
+  content,
+  card = false,
+}: {
+  id: string;
+  tone: Tone;
+  content: FaqContent;
+  /** One white card in the "On This Page" layout (Profile.module.css) instead of a full band. */
+  card?: boolean;
+}) {
+  const split = (
+    <div className={card ? `${styles.split} ${styles.inCard}` : styles.split}>
+      <div className={styles.side}>
+        <SectionHeader id={id} tone={tone} head={content} />
+        {content.help && (
+          <Reveal>
+            <RevealItem className={styles.help}>
+              <p className={styles.helpHeading}>{content.help.heading}</p>
+              <p className={styles.helpText}>{content.help.text}</p>
+              <a href={`mailto:${content.help.email}`} className={styles.mail}>
+                <MailIcon width={16} height={16} aria-hidden="true" />
+                {content.help.email}
+              </a>
+            </RevealItem>
+          </Reveal>
+        )}
       </div>
+
+      <FaqAccordion items={content.items} />
+    </div>
+  );
+  if (card)
+    return (
+      <section
+        id={id}
+        className={`${layout.section} ${layout.card}`}
+        aria-labelledby={`${id}-title`}
+      >
+        {split}
+      </section>
+    );
+  return (
+    <section
+      id={id}
+      className={`${sectionStyles.section} ${sectionStyles[tone]}`}
+      aria-labelledby={`${id}-title`}
+    >
+      <div className={sectionStyles.inner}>{split}</div>
     </section>
   );
 }

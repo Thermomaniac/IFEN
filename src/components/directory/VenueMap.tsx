@@ -27,7 +27,7 @@ export function VenueMap({ venue, label }: { venue: Venue & { location: [number,
   return (
     <section className={styles.wrap} aria-label={label}>
       <div className={styles.map}>
-        <TherapistMap therapists={[pin]} mode="preview" single onExpand={() => setOpen(true)} />
+        <TherapistMap therapists={[pin]} mode="preview" single summaryAlign="end" onExpand={() => setOpen(true)} />
       </div>
       {open && <MapDialog therapists={[pin]} single onClose={() => setOpen(false)} />}
     </section>

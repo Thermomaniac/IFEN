@@ -31,9 +31,6 @@ export const faqPage = {
     ],
   } satisfies CourseHeroContent,
 
-  /** Eyebrow of the hero's topic list. */
-  topicsLabel: "Jump to a Topic",
-
   /** Shown once, on the first band. */
   help: {
     heading: "Still Have Questions?",

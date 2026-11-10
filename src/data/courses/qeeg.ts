@@ -55,7 +55,6 @@ export const qeeg = {
         { label: "Location", value: "Online · English", icon: "location" },
       ],
       cta: BOOK,
-      consent: true,
     },
   } satisfies CourseHeroContent,
 

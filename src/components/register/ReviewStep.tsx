@@ -13,6 +13,7 @@ import {
 import { useRegistration } from "@/lib/registration";
 import { billingDefaults } from "@/lib/registrationForm";
 import { BankTransferDialog } from "./BankTransferDialog";
+import { ConfirmPaymentDialog } from "./ConfirmPaymentDialog";
 import { ProcessingDialog } from "./ProcessingDialog";
 import { markStepNavigation } from "./StepLayout";
 import { SubmitButton } from "./SubmitButton";
@@ -66,9 +67,12 @@ export function ReviewStep() {
   const plan = getPlan(b.plan);
   const method = getPaymentMethod(b.payment);
   const price = plan?.price ?? 0;
-  const [paying, setPaying] = useState(false);
-  // Bank transfer opens the account details and terms; the other methods pay online.
+  // Pay asks first (confirm), then pays online; bank transfer goes straight to its own modal,
+  // which carries the same photo consent.
+  const [stage, setStage] = useState<"review" | "confirm" | "paying">("review");
+  const [consent, setConsent] = useState(false);
   const isTransfer = method?.id === "transfer";
+  const paying = stage === "paying";
 
   const contact = [p.salutation, p.firstName, p.lastName].filter(Boolean).join(" ");
   const street = [b.street, b.houseNo].filter(Boolean).join(" ");
@@ -110,15 +114,25 @@ export function ReviewStep() {
         <Link href={`${REGISTER_PATH}/billing`} className={styles.back} onClick={markStepNavigation}>
           Go Back
         </Link>
-        <SubmitButton type="button" onClick={() => setPaying(true)} disabled={paying && !isTransfer}>
+        <SubmitButton type="button" onClick={() => setStage(isTransfer ? "paying" : "confirm")}
+          disabled={paying && !isTransfer}
+        >
           Pay {formatAmount(price)}
           {method && ` With ${method.label}`}
         </SubmitButton>
       </div>
 
+      {stage === "confirm" && (
+        <ConfirmPaymentDialog
+          consent={consent}
+          onConsent={setConsent}
+          onConfirm={() => setStage("paying")}
+          onCancel={() => setStage("review")}
+        />
+      )}
       {paying &&
         (isTransfer ? (
-          <BankTransferDialog onClose={() => setPaying(false)} />
+          <BankTransferDialog consent={consent} onConsent={setConsent} onClose={() => setStage("review")} />
         ) : (
           <ProcessingDialog method={method?.id ?? ""} />
         ))}

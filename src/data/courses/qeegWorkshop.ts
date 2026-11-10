@@ -55,7 +55,6 @@ export const qeegWorkshop = {
         { label: "Location", value: "Online · Italian", icon: "location" },
       ],
       cta: BOOK,
-      consent: true,
     },
   } satisfies CourseHeroContent,
 

@@ -15,7 +15,6 @@ import { LineBreaks } from "@/components/ui/LineBreaks";
 import { formatPrice, type CourseFact } from "@/data/course";
 import type { CourseHeroContent } from "@/data/coursePage";
 import { heroThemes, type HeroRoute } from "@/data/heroThemes";
-import { PhotoConsent } from "./PhotoConsent";
 import styles from "./CourseHero.module.css";
 
 /** Figma "Hero Section" photo (node 40001128-108319): the listing hero photo, kept local. */
@@ -331,11 +330,6 @@ function BookingPanel({ booking }: { booking: NonNullable<CourseHeroContent["boo
         </CtaButton>
       </RevealItem>
 
-      {booking.consent && (
-        <RevealItem>
-          <PhotoConsent />
-        </RevealItem>
-      )}
     </Reveal>
   );
 }
