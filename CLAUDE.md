@@ -39,8 +39,17 @@ Execute only the active phase. After phase 5 a correction programme (phases A to
 
 ## Staging deploy after every phase
 
-Hosting is Vercel (project `ifen`, linked in `.vercel/`; `.vercel/` and `.env.local` are gitignored). The project has no Git integration, so deploys run from the CLI. When a phase is finished and its checks pass, commit the phase's files to `phase-2`, push `phase-2` to `origin`, then run `vercel deploy --yes` for a preview (staging) URL. This is standing approval from the user; no need to ask each time. Commit only the phase's own files and leave unrelated untracked work (e.g. `Research Document/`) out. Never run `vercel deploy --prod` and never push to `main` for a phase.
+Hosting is Vercel: project `web` in team scope `shahariarritul120-2552s-projects`, connected through Git integration to `Thermomaniac/IFEN` on GitHub. Production branch is `main`. There is no local `.vercel/` link (it is gitignored, as is `.env.local`), and the Vercel CLI is not installed globally: use `npx vercel@latest ... --scope shahariarritul120-2552s-projects` when a CLI call is needed.
+
+Deploys are triggered by `git push`. Every push to `phase-2` builds a preview automatically, so no `vercel deploy` is needed. When a phase is finished and its checks pass, commit the phase's files to `phase-2` and push `phase-2` to `origin`. This is standing approval from the user; no need to ask each time. Commit only the phase's own files and leave unrelated untracked work (e.g. `Research Document/`) out. Never run `vercel deploy --prod` and never push to `main` for a phase: a push to `main` is a production deploy.
+
+After pushing, confirm the build with `npx vercel@latest list web --scope shahariarritul120-2552s-projects` (newest Preview row, state Ready). Staging URLs:
+
+- Per deployment: the `web-<hash>-shahariarritul120-2552s-projects.vercel.app` URL from that list.
+- Branch alias, always the latest `phase-2` build: `https://web-git-phase-2-shahariarritul120-2552s-projects.vercel.app`.
+
+Previews are behind Vercel Deployment Protection. For automated checks, send the `x-vercel-protection-bypass` header, read from the project's `protectionBypass` (automation-bypass scope) via `npx vercel@latest api` straight into an env variable. Never print the secret or the project JSON, and only attach the header to requests for the preview origin. A successful build does not complete validation: check the affected routes and interactions on the preview.
 
 ## Production release
 
-Only when the user explicitly asks: fast-forward `main` to `phase-2` (`git merge --ff-only`, no force), push `main`, then run `vercel deploy --prod --yes` from `main` and give the user the production URL. Training demo chips (`training.demoStates` in `src/data/site.ts`) must be `null` in production. Never change production environment variables or data.
+Only when the user explicitly asks: fast-forward `main` to `phase-2` (`git merge --ff-only`, no force) and push `main`. The push itself triggers the production deploy through Git integration; do not also run `vercel deploy --prod`. Confirm the newest Production row is Ready with `npx vercel@latest list web --scope shahariarritul120-2552s-projects`, then give the user the production URL. Training demo chips (`training.demoStates` in `src/data/site.ts`) must be `null` in production. Never change production environment variables or data.
